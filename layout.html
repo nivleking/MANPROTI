@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Tugas UTS</title>
+
+	<link rel="stylesheet" type="text/css" href="bootstrap-5.2.0-dist/css/bootstrap.css">
+  	<link rel="stylesheet" type="text/css" href="
+  	css/layoutcss.css">
+
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<script src="jquery-3.6.1.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+
+ 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
+
+</head>
+<style>
+        .transition{ 
+            border:  solid 1px red;
+            border-radius: 10px;
+            -ms-transform:  scale(1.5);
+            -webkit-transform:  scale(1.5);
+            transform:  scale(1.5);
+
+        }
+</style>
+<body background="asset/background.jpg">
+<script>
+	$('#profile').on('mouseenter','card-img',function(){
+                $(this).addClass('transition');
+            });	
+</script>
+	<div id = "wrapper">
+		<div id = "mainTitle">
+			<h1 style="margin-left: 10px">Curiculum Vitae</h1>
+		</div>
+	
+		
+
+    			<div id = "contentLeft">
+    			
+    				<div id = "profile">
+    					<img src="asset/profile.jpg" class = "card-img">
+    					<hr style="margin-left: 10px;border-style: solid;border-width: 1px; color: black;background: black;margin-top: 30px;">
+    				</div>
+
+
+    				<div class="row">
+					  
+					    <div id="menu" class="d-flex flex-column gap-2 simple-list-example-scrollspy text-center">
+					    	<!-- Seperti hyper link textnya bs diclick lalu pindah sesuai titlenya -->
+
+						      <a class="p-1 rounded" href="#titleProfile" style="color: black;">Profile</a>
+						      <a class="p-1 rounded" href="#titleAboutMe" style="color: black;">About Me</a>
+						      <a class="p-1 rounded" href="#titleSkill" style="color: black;">Skill</a>
+						      <a class="p-1 rounded" href="#titleHobbies" style="color: black;">Hobbies</a>
+						      <a class="p-1 rounded" href="#titleContact" style="color: black;">Contact Info</a>
+						      
+
+					    </div>
+					 	
+					</div>
+
+					<hr style="margin-left: 10px;border-style: solid;border-width: 1px; color: black;background: black;margin-top: 50px;">
+
+					<div id = "titleContact">
+    					<h3>Contact Info</h3>
+    					<ul>
+    						<li>
+    							<span class="icon"><i class="fa fa-whatsapp" aria-hidden = "true"></i></span>
+    							<span class="text">081-959-4117-005</span>
+    						</li>
+    						<li>
+    							<span class="icon"><i class="fa fa-envelope-o" aria-hidden = "true"></i></span>
+    							<span class="text">sam1211.sss@gmail.com</span>
+    						</li>
+    						<li>
+    							<span class="icon"><i class="fa fa-instagram" aria-hidden = "true"></i></span>
+    							<span class="text">samuel_sutjipto</span>
+    						</li>
+    						
+    					</ul>
+
+
+
+
+    					
+
+    					
+    				</div>
+    				
+
+					
+
+
+
+
+
+
+    			
+
+    			</div> 
+
+
+
+
+
+
+
+    			<div id="contentRight">
+
+    				<h1> Samuel Sutjipto Soesanto</h1>
+    			
+
+    			<div id = "titleProfile">
+
+    				Profile
+
+    				<hr style="margin-left: 300px;margin-right: 300px; border-width: 2px; color: black;margin-top: -1px; outline-color: black;">
+    					
+    					<p style="text-align: center;">Nama Saya Samuel Sutjipto Soesanto dan saat ini berusia 19 tahun. Saya memiliki kondisi kesehatan yang sangat baik. Dengan sifat yang disiplin, jujur, bertanggung jawab, pekerja keras baik individu maupun kelompok. Saya yakin dapat berkontribusi dengan pekerjaan ini dengan sangat baik</p>
+    				</div>
+    				
+    					 
+    				
+
+    				<div id = "titleAboutMe">
+    					About Me
+    					<hr style="margin-left: 300px;margin-right: 300px; border-width: 2px; color: black;margin-top: -1px; outline-color: black;">
+
+    					<p><strong>TT</strong> 			: Surabay, 12 November 2003</p>
+    					<p><strong>Gender</strong> 		: Laki-Laki</p>
+    					<p><strong>Status</strong> 		: Single</p>
+    					<p><strong>Agama</strong> 		: Kristen</p>
+    					<p><strong>Alamat</strong> 		: Jalan Klampis Semolo Barat X L/53</p>
+    				</div>
+
+    				<div id = "titleSkill">
+    					Profesional Skills
+    					<hr style="margin-left: 300px;margin-right: 300px; border-width: 2px; color: black;margin-top: -1px; outline-color: black;">
+    					
+    					<div class = "box">
+    						<h4>HTML</h4>
+    						<div class = "percent"></div>
+    					</div>
+    					<div class = "box">
+    						<h4>CSS</h4>
+    						<div class = "percent"></div>
+    					</div>
+    					<div class = "box">
+    						<h4>JavaScript</h4>
+    						<div class = "percent"></div>
+    					</div>
+    					<div class = "box">
+    						<h4>Python</h4>
+    						<div class = "percent"></div>
+    					</div>
+
+
+    				</div>
+    				<div id = "titleHobbies">
+    					Hobbies
+    					<hr style="margin-left: 300px;margin-right: 300px; border-width: 2px; color: black;margin-top: -1px; outline-color: black;">
+
+    					
+    						<div class="container">
+							  <div class="row row-cols-2">
+							  	
+							    <div class="col"><li>Membaca Buku</li></div>
+							    <div class="col"style="text-align: left;"><li>Mencoba Hal Baru</li></div>
+							    <div class="col">Berolahraga</div>
+							    <div class="col"style="text-align: left;">Travelling</div>
+						
+							  </div>
+							</div>
+
+    					
+    				</div>
+    				
+
+
+    			
+    			</div>
+  	
+	</div>	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
