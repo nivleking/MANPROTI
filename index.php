@@ -4,7 +4,6 @@
     </head>
 
     <body>
-        <h1>Kelvin Sidharta Sie
-        </h1>
+        <h1>Kelvin Sidharta Sie</h1>
     </body>
 </html>
