@@ -1,8 +1,8 @@
 matrix = [
     # bay 1
     [#[0][2][1]
-        [1,2,3],
-        [4,5,6],
+        [0,0,3],
+        [4,1,6],
         [7,8,9]
     ],
     # bay 2
@@ -19,15 +19,16 @@ def checkAtas(matrix, i, j, k):
     if (i < 0) or (j < 0) or (k < 0) or (len(matrix)<=i) or (len(matrix[i])<=j) or (len(matrix[i][j]) <= k):
         return False
     else:
-        if (j-1 == -1):
-            print(matrix[i][j][k], "bisa di bongkar")
-            return True
-    
-        if matrix[i][j-1][k] == 0:
-            print(matrix[i][j-1][k], "bisa di bongkar")
-            return True
-        else:
-            return False
+        if (matrix[i][j][k] != 0):
+            if (j-1 == -1):
+                print(matrix[i][j][k], "bisa di bongkar")
+                return True
+        
+            if matrix[i][j-1][k] == 0:
+                print(matrix[i][j-1][k], "bisa di bongkar")
+                return True
+            else:
+                return False
 
 def checkSpace(matrix,i,j,k):
     if (i < 0) or (j < 0) or (k < 0) or (len(matrix)<=i) or (len(matrix[i])<=j) or (len(matrix[i][j]) <= k):
@@ -75,7 +76,7 @@ while (True):
             temp.append(matrix[bay][baris][kolom])
             matrix[bay][baris][kolom] = 0
         else:
-            print("Ada tumpukan di atas container yang kamu pilih")
+            print("Ada tumpukan / container yang dipilih tidak ada")
         
     elif pilihan == 2:
         print("Susun")
