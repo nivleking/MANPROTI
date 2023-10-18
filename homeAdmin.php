@@ -13,7 +13,14 @@
             <h1>Welcome 
             <?php 
             session_start();
-            echo $_SESSION["username"];
+            require 'connect.php';
+            $admin = $_SESSION["username"];
+            $sql = "SELECT * FROM admin WHERE id_admin = '$admin'";
+            $result= mysqli_query($con,$sql);
+            $row = mysqli_fetch_array($result);
+
+            echo $row[1]; 
+
             ?>
             </h1>
             <div>

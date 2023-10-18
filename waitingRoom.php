@@ -21,7 +21,7 @@
                     </tr>
                 </thead> 
                 <tbody>
-                    <?php                                           
+                    <?php                                          
                     require 'connect.php';
                     $room = $_SESSION['roomID'];
                     $sql = "SELECT * FROM user WHERE id_room = '$room' ";
