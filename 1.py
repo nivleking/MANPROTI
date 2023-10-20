@@ -28,13 +28,25 @@ def checkAtas(matrix, i, j, k):
                 print(matrix[i][j-1][k], "bisa di bongkar")
                 return True
             else:
+                print("Ada container di atasnya")
                 return False
+        else:
+            print("Kosong")
+            return
 
 def checkSpace(matrix,i,j,k):
     if (i < 0) or (j < 0) or (k < 0) or (len(matrix)<=i) or (len(matrix[i])<=j) or (len(matrix[i][j]) <= k):
+        print()
         return False
     else:
         if matrix[i][j][k] == 0:
+            if ((j < len(matrix[i]) - 1) and matrix[i][j+1][k] == 0):
+                print("Melayang")
+                return False
+            # if (j > len(matrix[i][j])):
+            #     print("Batas bawah")
+            #     return False
+            print("Berhasil")
             return True
         print("Sudah ada kontainer")
         return False
@@ -75,24 +87,25 @@ while (True):
         if (checkAtas(matrix,bay,baris,kolom)):    
             temp.append(matrix[bay][baris][kolom])
             matrix[bay][baris][kolom] = 0
-        else:
-            print("Ada tumpukan / container yang dipilih tidak ada")
         
     elif pilihan == 2:
         print("Susun")
-        bay = int(input("Input bay berapa: "))
-        baris = int(input("Input baris berapa: "))
-        kolom = int(input("Input kolom berapa: "))
-        if checkSpace(matrix,bay,baris,kolom):
-            while (True):
-                print(len(temp))
-                container = int(input("Input container apa: "))
-                if container in temp and len(temp) != 0:
-                    matrix[bay][baris][kolom] = container
-                    temp.remove(container)
+        if (len(temp) != 0):
+            bay = int(input("Input bay berapa: "))
+            baris = int(input("Input baris berapa: "))
+            kolom = int(input("Input kolom berapa: "))
+            if checkSpace(matrix,bay,baris,kolom):
+                while (True):
+                    print(len(temp))
+                    container = int(input("Input container apa: "))
+                    if container in temp and len(temp) != 0:
+                        matrix[bay][baris][kolom] = container
+                        temp.remove(container)
+                        break
+                    print("Pilih container yang terdapat dalam temp")
                     break
-                print("Pilih container yang terdapat dalam temp")
-                break
+        else:
+            print("Bongkar container dulu / terima sales call")
     print()
 
 # matrix[0][1][1] -> 5
