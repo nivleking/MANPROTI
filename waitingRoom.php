@@ -49,22 +49,23 @@
                 </tbody>
                 </table>
                 
-                <?php
+                
+                <?php 
                     require 'connect.php';
-                    $sql = "SELECT status FROM room where id_room =?";
+                    $sql = "SELECT status FROM room WHERE id_room = ?";
                     $stmt = $con->prepare($sql);
                     $stmt->bind_param("i",$_SESSION["roomID"]);
                     $stmt->execute();
-                    $result = $stmt->get_result();      
-                    $result2 = mysqli_fetch_array($result);
-                    echo $result2;
-                    // if($res[0] == 1){
-                    //     echo "Asu";
-                    // }
-                    // else{
-                    //     echo "<h2> Waiting for the host to satrt the game </h2>";
-                    // }
-                    // exit();
+                    $result = $stmt->get_result();
+                    if (mysqli_fetch_array($result)[0] == 1) {
+                        header("Location: game.php");
+                    }
+                    else {
+                        echo '<h2>Waiting for Host To Start The Game</h2>';
+                    }
+                    exit()
+                
+                
                 ?>
         
 </body>
