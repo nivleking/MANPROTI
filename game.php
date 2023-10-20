@@ -9,45 +9,8 @@
 
 </head>
 <body>
-    <div>
-        <table class="table">
-            <thead>
-                <tr>
-                <th scope="col">Team Name</th>
-                <th scope="col">Status</th>
-                </tr>
-            </thead> 
-            <tbody>
-                <?php
-                require 'connect.php';
-                $sql = "SELECT * FROM user";
-                $result= mysqli_query($con,$sql);
-                
-                while($row = mysqli_fetch_array($result)){
-                    if($row[4] == 0){
-                        $val = 'Disconnected';
-                    }
-                    else{
-                        $val = 'Connected';
-                    }
-                    
-                    echo "<tr>
-                        <td>$row[1]</td>
-                        <td>$val</td>
-                        </tr>
-                    ";
-                }
-                        
-                                
-                ?>
-                
-            </tbody>
-            </table>			
-            
-    </div>
-    <div>
-        
-    </div>
+    <h1>TEST</h1>
+    
 
     
     
