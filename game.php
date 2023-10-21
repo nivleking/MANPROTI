@@ -9,7 +9,7 @@
 
 </head>
 <body>
-    ASU AKTO
+    <h2>Game Start</h2>
 
     
     
