@@ -50,7 +50,18 @@
                     
                 </tbody>
                 </table>
-    <button>Start</button>
+    <form method="POST">
+        <button name="adminStart">Start</button>
+    </form>
+    <?php
+        if (isset($_POST['adminStart'])) {
+            require 'connect.php';
+            require 'adminSetRoomStatus.php';
+            session_start();
+            setRoomStatus(1,$_SESSION['roomID_admin']);
+            
+        }
+    ?>
     
 </body>
 </html>
