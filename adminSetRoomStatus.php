@@ -6,4 +6,8 @@
         $stmt->bind_param("ii",$value,$roomID);
         $stmt->execute();
     }
+<<<<<<< Updated upstream
 ?>  
+=======
+?>
+>>>>>>> Stashed changes
