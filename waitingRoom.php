@@ -50,18 +50,31 @@
                 </table>
                 <?php 
                     require 'connect.php';
-                    $sql = "SELECT status FROM room WHERE id_room = ?";
+                    $sql = "SELECT id_admin FROM room WHERE id_room= ?";
                     $stmt = $con->prepare($sql);
                     $stmt->bind_param("i",$_SESSION["roomID"]);
                     $stmt->execute();
                     $result = $stmt->get_result();
-                    if (mysqli_fetch_array($result)[0] == 1) {
-                        header("Location: game.php");
+                    if ($_SESSION['username'] == mysqli_fetch_array($result)[0]) {
+                        echo '<form method = "POST"><button name"adminStart">Start</button> </form>';
+                        if (isset($_POST['adminStart'])) {
+                            require 'adminSetRoomStatus.php';
+                            setRoomStatus(1,$_SESSION['roomID_admin']);
+                        }
+                    } else {
+                        $sql = "SELECT status FROM room WHERE id_room = ?";
+                        $stmt = $con->prepare($sql);
+                        $stmt->bind_param("i",$_SESSION["roomID"]);
+                        $stmt->execute();
+                        $result = $stmt->get_result();
+                        if (mysqli_fetch_array($result)[0] == 1) {
+                            header("Location: game.php");
+                        }
+                        else {
+                            echo '<h2>Waiting for Host To Start The Game</h2>';
+                        }
+                        exit();
                     }
-                    else {
-                        echo '<h2>Waiting for Host To Start The Game</h2>';
-                    }
-                    exit()
                 
                 
                 ?>

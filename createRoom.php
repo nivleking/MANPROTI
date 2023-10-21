@@ -57,7 +57,6 @@
         if (isset($_POST['adminStart'])) {
             require 'connect.php';
             require 'adminSetRoomStatus.php';
-            session_start();
             setRoomStatus(1,$_SESSION['roomID_admin']);
             
         }
