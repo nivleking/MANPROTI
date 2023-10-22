@@ -19,9 +19,9 @@
 				    </div>
 				    <form action="adminDoLogin.php" method="post">
 				    	<label>Username</label>
-				    	<input type="text" class = "form-control" name="username">
+				    	<input type="text" class = "form-control" name="usernameADM">
 				    	<label>Password</label>
-				    	<input type="password" class = "form-control" name="password">
+				    	<input type="password" class = "form-control" name="passwordADM">
 				    	<br>
 				    	<br>
 				    	<button type="submit" name = "save">Login</button>
