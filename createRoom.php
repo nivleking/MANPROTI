@@ -50,7 +50,13 @@
                     
                 </tbody>
                 </table>
-    <button>Start</button>
+    <form method = "POST">
+    <button name = "start">Start</button>
+    </form>
+    <?php
+    
+
+    ?>
     
 </body>
 </html>
