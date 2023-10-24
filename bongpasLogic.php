@@ -63,7 +63,8 @@
                     $baris = $_POST['baris'];
                     $kolom = $_POST['kolom'];
                     $kontainer = $_POST['kontainer'];
-                    $sql = "SELECT ship FROM user WHERE team_name = 'AktoBabi'";
+                    $id = $_SESSION['username'];
+                    $sql = "SELECT ship FROM user WHERE team_name = '$id'";
                     $result = mysqli_query($con,$sql);
                     $row = mysqli_fetch_array($result);
                     $arr = json_decode($row['ship']);
