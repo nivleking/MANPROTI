@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 require 'connect.php';
 if(isset($_POST['join'])){
 	$id = $_POST['roomID'];

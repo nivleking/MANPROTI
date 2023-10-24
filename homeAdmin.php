@@ -12,9 +12,9 @@
         <div class="col-3">
             <h1>Welcome 
             <?php 
-            session_start();
+            
             require 'connect.php';
-            $admin = $_SESSION["username"];
+            $admin = $_SESSION["usernameADM"];
             $sql = "SELECT * FROM admin WHERE id_admin = '$admin'";
             $result= mysqli_query($con,$sql);
             $row = mysqli_fetch_array($result);
@@ -46,7 +46,7 @@
             </thead> 
             <tbody>
                 <?php
-                require 'connect.php';
+                
                 $sql = "SELECT * FROM room";
                 $result= mysqli_query($con,$sql);
                 

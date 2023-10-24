@@ -50,7 +50,6 @@
                     
                 </tbody>
                 </table>
-    <button>Start</button>
     
 </body>
 </html>
