@@ -18,7 +18,8 @@
         // // var_dump($_SESSION);
         if (isset($_SESSION['username'])) {
             echo $_SESSION['roomID'];
-        } else {
+        } 
+        else {
             echo $_SESSION['roomID_admin'];
         }
         ?>
@@ -123,14 +124,14 @@
                     //     xhr.send()
                     // });
                     
-                    setTimeout(()=>{
+                    setInterval(()=>{
                         $.ajax({
                         url:'userWaitingRoomLogic.php',
                         method:'POST',
                         success:function(temp) {
                             console.log(temp)
                             if (temp == 'sukses') {
-                                window.location.href='game.php';
+                                window.location.href='game1.php';
                     
                             }
                             else {
