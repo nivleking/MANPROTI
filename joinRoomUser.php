@@ -9,26 +9,23 @@
 
 </head>
 <body>
-<div class = "container">
+	<div class = "container">
 		<div class = "row">
 			<div class = "col-9 mx-auto">
 				<div class="card center" style="width: 25rem;margin-top: 80px">
-				  <div class="card-body">
-				    <div class = "text-center" id = "title">
-				    	<h3>WELCOME!</h3>
-				    </div>
-				    <form action="joinRoomLogic.php" method="post">
-				    	<label>Room ID</label>
-				    	<input type="text" class = "form-control" name="roomID">
-				    	<button type="submit" name = "join">JOIN</button>
-				    </form>
-				  </div>
+					<div class="card-body">
+					<div class = "text-center" id = "title">
+						<h3>WELCOME!</h3>
+					</div>
+					<form action="joinRoomLogic.php" method="post">
+						<label>Room ID</label>
+						<input type="text" class = "form-control" name="roomID">
+						<button type="submit" name = "join">JOIN</button>
+					</form>
+					</div>
 				</div>
 			</div>	
 		</div>
-	</div>
-
-    
-    
+	</div>    
 </body>
 </html>
