@@ -28,6 +28,12 @@
             vertical-align: top;
             text-align: left;
         }
+        input{
+            margin-top: 10px;
+        }
+        #label{
+            margin-top: 10px;
+        }
     </style>
     <!-- <script>
         function allowDrop(ev) {
@@ -53,17 +59,29 @@
     </script> -->
 </head>
 <body>
-   
-    <div style="font-weight: bold; background-color: lightgrey; padding: 15px;">
+    <nav class="navbar navbar-dark bg-primary navbar-expand">
+            <a href="#" class = "navbar-brand disabled" style = "font-style: italic; font-weight:bold; font-size:26px">Cargo Master</a>
+            <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon">A</span>
+            </button> -->
+            <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarSupportedContent" style="text-align:center;display:inline-block; float:none; vertical-align:top; color:aliceblue; font-size:26px; font-weight:bold;">
+                SURABAYA - WEEK 1
+            </div>
+
+            <button class = "btn btn-danger">
+                MARKET INTELLIGENCE
+            </button>
+    </nav>
+    <!-- <div style="font-weight: bold; background-color: lightgrey; padding: 15px;">
         <h1 class="text-center w3-jumbo" style="margin-top: 0PX;">CARGO MASTER</h1>
         <h2 class="text-center" style="font-weight: 550;">SURABAYA - WEEK 1</h2>
-    </div>
+    </div> -->
 
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="position: absolute; top: 10px;right: 10px; background-color: black; color: lightgrey;">
+    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="position: absolute; top: 10px;right: 10px; background-color: black; color: lightgrey;">
         Market Intelligence
-    </button>
+    </button> -->
 
-    <table class="table table-bordered border-secondary text-center">
+    <table class="table table-bordered text-center " style = "margin-top: 10px;">
         <?php
             require 'connect.php';
         ?>
@@ -85,10 +103,26 @@
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
                          if($row_dec[0][0][0] == 0){
-                            echo 'empty';
+                            echo '-';
                          }
                          else{
-                            echo $row_dec[0][0][0];
+                            $container = $row_dec[0][0][0];
+                            $sql = "SELECT * FROM container WHERE id_container='$container'";
+                            $result = mysqli_query($con,$sql);
+                            $row = mysqli_fetch_array($result);
+                            if($row[2]=='SBY'){
+                                echo "<div style='color: red'>$row[0]</div>";
+                            }
+                            if($row[2]=='MKS'){
+                                echo "<div style='color: blue'>$row[0]</div>";
+                            }
+                            if($row[2]=='BPP'){
+                                echo "<div style='color: brown'>$row[0]</div>";
+                            }
+                            if($row[2]=='JKT'){
+                                echo "<div style='color: green'>$row[0]</div>";
+                            }
+
 
                          }
                     ?>
@@ -104,10 +138,25 @@
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
                          if($row_dec[0][0][1] == 0){
-                            echo 'empty';
+                            echo '-';
                          }
                          else{
-                            echo $row_dec[0][0][1];
+                            $container = $row_dec[0][0][1];
+                            $sql = "SELECT * FROM container WHERE id_container='$container'";
+                            $result = mysqli_query($con,$sql);
+                            $row = mysqli_fetch_array($result);
+                            if($row[2]=='SBY'){
+                                echo "<div style='color: red'>$row[0]</div>";
+                            }
+                            if($row[2]=='MKS'){
+                                echo "<div style='color: blue'>$row[0]</div>";
+                            }
+                            if($row[2]=='BPP'){
+                                echo "<div style='color: brown'>$row[0]</div>";
+                            }
+                            if($row[2]=='JKT'){
+                                echo "<div style='color: green'>$row[0]</div>";
+                            }
 
                          }
                     ?>
@@ -123,10 +172,25 @@
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
                          if($row_dec[0][0][2] == 0){
-                            echo 'empty';
+                            echo '-';
                          }
                          else{
-                            echo $row_dec[0][0][2];
+                            $container = $row_dec[0][0][2];
+                            $sql = "SELECT * FROM container WHERE id_container='$container'";
+                            $result = mysqli_query($con,$sql);
+                            $row = mysqli_fetch_array($result);
+                            if($row[2]=='SBY'){
+                                echo "<div style='color: red'>$row[0]</div>";
+                            }
+                            if($row[2]=='MKS'){
+                                echo "<div style='color: blue'>$row[0]</div>";
+                            }
+                            if($row[2]=='BPP'){
+                                echo "<div style='color: brown'>$row[0]</div>";
+                            }
+                            if($row[2]=='JKT'){
+                                echo "<div style='color: green'>$row[0]</div>";
+                            }
 
                          }
                     ?>
@@ -143,10 +207,25 @@
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
                          if($row_dec[1][0][0] == 0){
-                            echo 'empty';
+                            echo '-';
                          }
                          else{
-                            echo $row_dec[1][0][0];
+                            $container = $row_dec[1][0][0];
+                            $sql = "SELECT * FROM container WHERE id_container='$container'";
+                            $result = mysqli_query($con,$sql);
+                            $row = mysqli_fetch_array($result);
+                            if($row[2]=='SBY'){
+                                echo "<div style='color: red'>$row[0]</div>";
+                            }
+                            if($row[2]=='MKS'){
+                                echo "<div style='color: blue'>$row[0]</div>";
+                            }
+                            if($row[2]=='BPP'){
+                                echo "<div style='color: brown'>$row[0]</div>";
+                            }
+                            if($row[2]=='JKT'){
+                                echo "<div style='color: green'>$row[0]</div>";
+                            }
 
                          }
                     ?>
@@ -162,10 +241,25 @@
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
                          if($row_dec[1][0][1] == 0){
-                            echo 'empty';
+                            echo '-';
                          }
                          else{
-                            echo $row_dec[1][0][1];
+                            $container = $row_dec[1][0][1];
+                            $sql = "SELECT * FROM container WHERE id_container='$container'";
+                            $result = mysqli_query($con,$sql);
+                            $row = mysqli_fetch_array($result);
+                            if($row[2]=='SBY'){
+                                echo "<div style='color: red'>$row[0]</div>";
+                            }
+                            if($row[2]=='MKS'){
+                                echo "<div style='color: blue'>$row[0]</div>";
+                            }
+                            if($row[2]=='BPP'){
+                                echo "<div style='color: brown'>$row[0]</div>";
+                            }
+                            if($row[2]=='JKT'){
+                                echo "<div style='color: green'>$row[0]</div>";
+                            }
 
                          }
                     ?>
@@ -181,10 +275,25 @@
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
                          if($row_dec[1][0][2] == 0){
-                            echo 'empty';
+                            echo '-';
                          }
                          else{
-                            echo $row_dec[1][0][2];
+                            $container = $row_dec[1][0][2];
+                            $sql = "SELECT * FROM container WHERE id_container='$container'";
+                            $result = mysqli_query($con,$sql);
+                            $row = mysqli_fetch_array($result);
+                            if($row[2]=='SBY'){
+                                echo "<div style='color: red'>$row[0]</div>";
+                            }
+                            if($row[2]=='MKS'){
+                                echo "<div style='color: blue'>$row[0]</div>";
+                            }
+                            if($row[2]=='BPP'){
+                                echo "<div style='color: brown'>$row[0]</div>";
+                            }
+                            if($row[2]=='JKT'){
+                                echo "<div style='color: green'>$row[0]</div>";
+                            }
 
                          }
                     ?>
@@ -201,10 +310,25 @@
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
                          if($row_dec[2][0][0] == 0){
-                            echo 'empty';
+                            echo '-';
                          }
                          else{
-                            echo $row_dec[2][0][0];
+                            $container = $row_dec[2][0][0];
+                            $sql = "SELECT * FROM container WHERE id_container='$container'";
+                            $result = mysqli_query($con,$sql);
+                            $row = mysqli_fetch_array($result);
+                            if($row[2]=='SBY'){
+                                echo "<div style='color: red'>$row[0]</div>";
+                            }
+                            if($row[2]=='MKS'){
+                                echo "<div style='color: blue'>$row[0]</div>";
+                            }
+                            if($row[2]=='BPP'){
+                                echo "<div style='color: brown'>$row[0]</div>";
+                            }
+                            if($row[2]=='JKT'){
+                                echo "<div style='color: green'>$row[0]</div>";
+                            }
 
                          }
                     ?>
@@ -220,10 +344,25 @@
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
                          if($row_dec[2][0][1] == 0){
-                            echo 'empty';
+                            echo '-';
                          }
                          else{
-                            echo $row_dec[2][0][1];
+                            $container = $row_dec[2][0][1];
+                            $sql = "SELECT * FROM container WHERE id_container='$container'";
+                            $result = mysqli_query($con,$sql);
+                            $row = mysqli_fetch_array($result);
+                            if($row[2]=='SBY'){
+                                echo "<div style='color: red'>$row[0]</div>";
+                            }
+                            if($row[2]=='MKS'){
+                                echo "<div style='color: blue'>$row[0]</div>";
+                            }
+                            if($row[2]=='BPP'){
+                                echo "<div style='color: brown'>$row[0]</div>";
+                            }
+                            if($row[2]=='JKT'){
+                                echo "<div style='color: green'>$row[0]</div>";
+                            }
 
                          }
                     ?>
@@ -239,10 +378,25 @@
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
                          if($row_dec[2][0][2] == 0){
-                            echo 'empty';
+                            echo '-';
                          }
                          else{
-                            echo $row_dec[2][0][2];
+                            $container = $row_dec[2][0][2];
+                            $sql = "SELECT * FROM container WHERE id_container='$container'";
+                            $result = mysqli_query($con,$sql);
+                            $row = mysqli_fetch_array($result);
+                            if($row[2]=='SBY'){
+                                echo "<div style='color: red'>$row[0]</div>";
+                            }
+                            if($row[2]=='MKS'){
+                                echo "<div style='color: blue'>$row[0]</div>";
+                            }
+                            if($row[2]=='BPP'){
+                                echo "<div style='color: brown'>$row[0]</div>";
+                            }
+                            if($row[2]=='JKT'){
+                                echo "<div style='color: green'>$row[0]</div>";
+                            }
 
                          }
                     ?>
@@ -260,10 +414,25 @@
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
                          if($row_dec[0][1][0] == 0){
-                            echo 'empty';
+                            echo '-';
                          }
                          else{
-                            echo $row_dec[0][1][0];
+                            $container = $row_dec[0][1][0];
+                            $sql = "SELECT * FROM container WHERE id_container='$container'";
+                            $result = mysqli_query($con,$sql);
+                            $row = mysqli_fetch_array($result);
+                            if($row[2]=='SBY'){
+                                echo "<div style='color: red'>$row[0]</div>";
+                            }
+                            if($row[2]=='MKS'){
+                                echo "<div style='color: blue'>$row[0]</div>";
+                            }
+                            if($row[2]=='BPP'){
+                                echo "<div style='color: brown'>$row[0]</div>";
+                            }
+                            if($row[2]=='JKT'){
+                                echo "<div style='color: green'>$row[0]</div>";
+                            }
 
                          }
                 ?>
@@ -279,10 +448,25 @@
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
                          if($row_dec[0][1][1] == 0){
-                            echo 'empty';
+                            echo '-';
                          }
                          else{
-                            echo $row_dec[0][1][1];
+                            $container = $row_dec[0][1][1];
+                            $sql = "SELECT * FROM container WHERE id_container='$container'";
+                            $result = mysqli_query($con,$sql);
+                            $row = mysqli_fetch_array($result);
+                            if($row[2]=='SBY'){
+                                echo "<div style='color: red'>$row[0]</div>";
+                            }
+                            if($row[2]=='MKS'){
+                                echo "<div style='color: blue'>$row[0]</div>";
+                            }
+                            if($row[2]=='BPP'){
+                                echo "<div style='color: brown'>$row[0]</div>";
+                            }
+                            if($row[2]=='JKT'){
+                                echo "<div style='color: green'>$row[0]</div>";
+                            }
 
                          }
                     ?>
@@ -298,10 +482,25 @@
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
                          if($row_dec[0][1][2] == 0){
-                            echo 'empty';
+                            echo '-';
                          }
                          else{
-                            echo $row_dec[0][1][2];
+                            $container = $row_dec[0][1][2];
+                            $sql = "SELECT * FROM container WHERE id_container='$container'";
+                            $result = mysqli_query($con,$sql);
+                            $row = mysqli_fetch_array($result);
+                            if($row[2]=='SBY'){
+                                echo "<div style='color: red'>$row[0]</div>";
+                            }
+                            if($row[2]=='MKS'){
+                                echo "<div style='color: blue'>$row[0]</div>";
+                            }
+                            if($row[2]=='BPP'){
+                                echo "<div style='color: brown'>$row[0]</div>";
+                            }
+                            if($row[2]=='JKT'){
+                                echo "<div style='color: green'>$row[0]</div>";
+                            }
 
                          }
                     ?>
@@ -318,10 +517,25 @@
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
                          if($row_dec[1][1][0] == 0){
-                            echo 'empty';
+                            echo '-';
                          }
                          else{
-                            echo $row_dec[1][1][0];
+                            $container = $row_dec[1][1][0];
+                            $sql = "SELECT * FROM container WHERE id_container='$container'";
+                            $result = mysqli_query($con,$sql);
+                            $row = mysqli_fetch_array($result);
+                            if($row[2]=='SBY'){
+                                echo "<div style='color: red'>$row[0]</div>";
+                            }
+                            if($row[2]=='MKS'){
+                                echo "<div style='color: blue'>$row[0]</div>";
+                            }
+                            if($row[2]=='BPP'){
+                                echo "<div style='color: brown'>$row[0]</div>";
+                            }
+                            if($row[2]=='JKT'){
+                                echo "<div style='color: green'>$row[0]</div>";
+                            }
 
                          }
                     ?>
@@ -337,10 +551,25 @@
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
                          if($row_dec[1][1][1] == 0){
-                            echo 'empty';
+                            echo '-';
                          }
                          else{
-                            echo $row_dec[1][1][1];
+                            $container = $row_dec[1][1][1];
+                            $sql = "SELECT * FROM container WHERE id_container='$container'";
+                            $result = mysqli_query($con,$sql);
+                            $row = mysqli_fetch_array($result);
+                            if($row[2]=='SBY'){
+                                echo "<div style='color: red'>$row[0]</div>";
+                            }
+                            if($row[2]=='MKS'){
+                                echo "<div style='color: blue'>$row[0]</div>";
+                            }
+                            if($row[2]=='BPP'){
+                                echo "<div style='color: brown'>$row[0]</div>";
+                            }
+                            if($row[2]=='JKT'){
+                                echo "<div style='color: green'>$row[0]</div>";
+                            }
 
                          }
                     ?>
@@ -356,10 +585,25 @@
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
                          if($row_dec[1][1][2] == 0){
-                            echo 'empty';
+                            echo '-';
                          }
                          else{
-                            echo $row_dec[1][1][2];
+                            $container = $row_dec[1][1][2];
+                            $sql = "SELECT * FROM container WHERE id_container='$container'";
+                            $result = mysqli_query($con,$sql);
+                            $row = mysqli_fetch_array($result);
+                            if($row[2]=='SBY'){
+                                echo "<div style='color: red'>$row[0]</div>";
+                            }
+                            if($row[2]=='MKS'){
+                                echo "<div style='color: blue'>$row[0]</div>";
+                            }
+                            if($row[2]=='BPP'){
+                                echo "<div style='color: brown'>$row[0]</div>";
+                            }
+                            if($row[2]=='JKT'){
+                                echo "<div style='color: green'>$row[0]</div>";
+                            }
 
                          }
                     ?>
@@ -376,10 +620,25 @@
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
                          if($row_dec[2][1][0] == 0){
-                            echo 'empty';
+                            echo '-';
                          }
                          else{
-                            echo $row_dec[2][1][0];
+                            $container = $row_dec[2][1][0];
+                            $sql = "SELECT * FROM container WHERE id_container='$container'";
+                            $result = mysqli_query($con,$sql);
+                            $row = mysqli_fetch_array($result);
+                            if($row[2]=='SBY'){
+                                echo "<div style='color: red'>$row[0]</div>";
+                            }
+                            if($row[2]=='MKS'){
+                                echo "<div style='color: blue'>$row[0]</div>";
+                            }
+                            if($row[2]=='BPP'){
+                                echo "<div style='color: brown'>$row[0]</div>";
+                            }
+                            if($row[2]=='JKT'){
+                                echo "<div style='color: green'>$row[0]</div>";
+                            }
 
                          }
                     ?>
@@ -395,10 +654,25 @@
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
                          if($row_dec[2][1][1] == 0){
-                            echo 'empty';
+                            echo '-';
                          }
                          else{
-                            echo $row_dec[2][1][1];
+                            $container = $row_dec[2][1][1];
+                            $sql = "SELECT * FROM container WHERE id_container='$container'";
+                            $result = mysqli_query($con,$sql);
+                            $row = mysqli_fetch_array($result);
+                            if($row[2]=='SBY'){
+                                echo "<div style='color: red'>$row[0]</div>";
+                            }
+                            if($row[2]=='MKS'){
+                                echo "<div style='color: blue'>$row[0]</div>";
+                            }
+                            if($row[2]=='BPP'){
+                                echo "<div style='color: brown'>$row[0]</div>";
+                            }
+                            if($row[2]=='JKT'){
+                                echo "<div style='color: green'>$row[0]</div>";
+                            }
 
                          }
                     ?>
@@ -414,10 +688,25 @@
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
                          if($row_dec[2][1][2] == 0){
-                            echo 'empty';
+                            echo '-';
                          }
                          else{
-                            echo $row_dec[2][1][2];
+                            $container = $row_dec[2][1][2];
+                            $sql = "SELECT * FROM container WHERE id_container='$container'";
+                            $result = mysqli_query($con,$sql);
+                            $row = mysqli_fetch_array($result);
+                            if($row[2]=='SBY'){
+                                echo "<div style='color: red'>$row[0]</div>";
+                            }
+                            if($row[2]=='MKS'){
+                                echo "<div style='color: blue'>$row[0]</div>";
+                            }
+                            if($row[2]=='BPP'){
+                                echo "<div style='color: brown'>$row[0]</div>";
+                            }
+                            if($row[2]=='JKT'){
+                                echo "<div style='color: green'>$row[0]</div>";
+                            }
 
                          }
                     ?>
@@ -436,10 +725,25 @@
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
                          if($row_dec[0][2][0] == 0){
-                            echo 'empty';
+                            echo '-';
                          }
                          else{
-                            echo $row_dec[0][2][0];
+                            $container = $row_dec[0][2][0];
+                            $sql = "SELECT * FROM container WHERE id_container='$container'";
+                            $result = mysqli_query($con,$sql);
+                            $row = mysqli_fetch_array($result);
+                            if($row[2]=='SBY'){
+                                echo "<div style='color: red'>$row[0]</div>";
+                            }
+                            if($row[2]=='MKS'){
+                                echo "<div style='color: blue'>$row[0]</div>";
+                            }
+                            if($row[2]=='BPP'){
+                                echo "<div style='color: brown'>$row[0]</div>";
+                            }
+                            if($row[2]=='JKT'){
+                                echo "<div style='color: green'>$row[0]</div>";
+                            }
 
                          }
                     ?>
@@ -455,10 +759,25 @@
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
                          if($row_dec[0][2][1] == 0){
-                            echo 'empty';
+                            echo '-';
                          }
                          else{
-                            echo $row_dec[0][2][1];
+                            $container = $row_dec[0][2][1];
+                            $sql = "SELECT * FROM container WHERE id_container='$container'";
+                            $result = mysqli_query($con,$sql);
+                            $row = mysqli_fetch_array($result);
+                            if($row[2]=='SBY'){
+                                echo "<div style='color: red'>$row[0]</div>";
+                            }
+                            if($row[2]=='MKS'){
+                                echo "<div style='color: blue'>$row[0]</div>";
+                            }
+                            if($row[2]=='BPP'){
+                                echo "<div style='color: brown'>$row[0]</div>";
+                            }
+                            if($row[2]=='JKT'){
+                                echo "<div style='color: green'>$row[0]</div>";
+                            }
 
                          }
                     ?>
@@ -474,10 +793,25 @@
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
                          if($row_dec[0][2][2] == 0){
-                            echo 'empty';
+                            echo '-';
                          }
                          else{
-                            echo $row_dec[0][2][2];
+                            $container = $row_dec[0][2][2];
+                            $sql = "SELECT * FROM container WHERE id_container='$container'";
+                            $result = mysqli_query($con,$sql);
+                            $row = mysqli_fetch_array($result);
+                            if($row[2]=='SBY'){
+                                echo "<div style='color: red'>$row[0]</div>";
+                            }
+                            if($row[2]=='MKS'){
+                                echo "<div style='color: blue'>$row[0]</div>";
+                            }
+                            if($row[2]=='BPP'){
+                                echo "<div style='color: brown'>$row[0]</div>";
+                            }
+                            if($row[2]=='JKT'){
+                                echo "<div style='color: green'>$row[0]</div>";
+                            }
 
                          }
                     ?>
@@ -494,10 +828,25 @@
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
                          if($row_dec[1][2][0] == 0){
-                            echo 'empty';
+                            echo '-';
                          }
                          else{
-                            echo $row_dec[1][2][0];
+                            $container = $row_dec[1][2][0];
+                            $sql = "SELECT * FROM container WHERE id_container='$container'";
+                            $result = mysqli_query($con,$sql);
+                            $row = mysqli_fetch_array($result);
+                            if($row[2]=='SBY'){
+                                echo "<div style='color: red'>$row[0]</div>";
+                            }
+                            if($row[2]=='MKS'){
+                                echo "<div style='color: blue'>$row[0]</div>";
+                            }
+                            if($row[2]=='BPP'){
+                                echo "<div style='color: brown'>$row[0]</div>";
+                            }
+                            if($row[2]=='JKT'){
+                                echo "<div style='color: green'>$row[0]</div>";
+                            }
 
                          }
                     ?>
@@ -513,10 +862,25 @@
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
                          if($row_dec[1][2][1] == 0){
-                            echo 'empty';
+                            echo '-';
                          }
                          else{
-                            echo $row_dec[1][2][1];
+                            $container = $row_dec[1][2][1];
+                            $sql = "SELECT * FROM container WHERE id_container='$container'";
+                            $result = mysqli_query($con,$sql);
+                            $row = mysqli_fetch_array($result);
+                            if($row[2]=='SBY'){
+                                echo "<div style='color: red'>$row[0]</div>";
+                            }
+                            if($row[2]=='MKS'){
+                                echo "<div style='color: blue'>$row[0]</div>";
+                            }
+                            if($row[2]=='BPP'){
+                                echo "<div style='color: brown'>$row[0]</div>";
+                            }
+                            if($row[2]=='JKT'){
+                                echo "<div style='color: green'>$row[0]</div>";
+                            }
 
                          }
                     ?>
@@ -532,10 +896,25 @@
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
                          if($row_dec[1][2][2] == 0){
-                            echo 'empty';
+                            echo '-';
                          }
                          else{
-                            echo $row_dec[1][2][2];
+                            $container = $row_dec[1][2][2];
+                            $sql = "SELECT * FROM container WHERE id_container='$container'";
+                            $result = mysqli_query($con,$sql);
+                            $row = mysqli_fetch_array($result);
+                            if($row[2]=='SBY'){
+                                echo "<div style='color: red'>$row[0]</div>";
+                            }
+                            if($row[2]=='MKS'){
+                                echo "<div style='color: blue'>$row[0]</div>";
+                            }
+                            if($row[2]=='BPP'){
+                                echo "<div style='color: brown'>$row[0]</div>";
+                            }
+                            if($row[2]=='JKT'){
+                                echo "<div style='color: green'>$row[0]</div>";
+                            }
 
                          }
                     ?>
@@ -552,10 +931,25 @@
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
                          if($row_dec[2][2][0] == 0){
-                            echo 'empty';
+                            echo '-';
                          }
                          else{
-                            echo $row_dec[2][2][0];
+                            $container = $row_dec[2][2][0];
+                            $sql = "SELECT * FROM container WHERE id_container='$container'";
+                            $result = mysqli_query($con,$sql);
+                            $row = mysqli_fetch_array($result);
+                            if($row[2]=='SBY'){
+                                echo "<div style='color: red'>$row[0]</div>";
+                            }
+                            if($row[2]=='MKS'){
+                                echo "<div style='color: blue'>$row[0]</div>";
+                            }
+                            if($row[2]=='BPP'){
+                                echo "<div style='color: brown'>$row[0]</div>";
+                            }
+                            if($row[2]=='JKT'){
+                                echo "<div style='color: green'>$row[0]</div>";
+                            }
 
                          }
                     ?>
@@ -571,10 +965,25 @@
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
                          if($row_dec[2][2][1] == 0){
-                            echo 'empty';
+                            echo '-';
                          }
                          else{
-                            echo $row_dec[2][2][1];
+                            $container = $row_dec[2][2][1];
+                            $sql = "SELECT * FROM container WHERE id_container='$container'";
+                            $result = mysqli_query($con,$sql);
+                            $row = mysqli_fetch_array($result);
+                            if($row[2]=='SBY'){
+                                echo "<div style='color: red'>$row[0]</div>";
+                            }
+                            if($row[2]=='MKS'){
+                                echo "<div style='color: blue'>$row[0]</div>";
+                            }
+                            if($row[2]=='BPP'){
+                                echo "<div style='color: brown'>$row[0]</div>";
+                            }
+                            if($row[2]=='JKT'){
+                                echo "<div style='color: green'>$row[0]</div>";
+                            }
 
                          }
                     ?>
@@ -590,10 +999,25 @@
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
                          if($row_dec[2][2][2] == 0){
-                            echo 'empty';
+                            echo '-';
                          }
                          else{
-                            echo $row_dec[2][2][2];
+                            $container = $row_dec[2][2][2];
+                            $sql = "SELECT * FROM container WHERE id_container='$container'";
+                            $result = mysqli_query($con,$sql);
+                            $row = mysqli_fetch_array($result);
+                            if($row[2]=='SBY'){
+                                echo "<div style='color: red'>$row[0]</div>";
+                            }
+                            if($row[2]=='MKS'){
+                                echo "<div style='color: blue'>$row[0]</div>";
+                            }
+                            if($row[2]=='BPP'){
+                                echo "<div style='color: brown'>$row[0]</div>";
+                            }
+                            if($row[2]=='JKT'){
+                                echo "<div style='color: green'>$row[0]</div>";
+                            }
 
                          }
                     ?>
@@ -602,72 +1026,85 @@
         </thead>
     </table>
     <div class="row">
-        <div class="col-3">
+        <div class="card col-6">
+            <h2 style = "margin-top: 10px; text-align: center">Sales Card</h2>
+                
 
         </div>
-        <div class="col-6">
-                <form class = "mx-auto" method = "POST" action = "bongpasLogic.php">
-                        <label>Bay</label>
-                        <input type="text" class = "form-control" name="bay">
-                        <label>Baris</label>
-                        <input type="text" class = "form-control" name="baris">
-                        <label>Kolom</label>
-                        <input type="text" class = "form-control" name="kolom">
-                        <label>Kontainer</label>
-                        <input type="text" class = "form-control" name="kontainer">
-                        <br>
-                        <br>
-                        <button class = "btn btn-danger" type="submit" name = "bongkar">Bongkar</button>
-                        <button class = "btn btn-danger" type="submit" name = "pasang">Pasang</button>
+        <div class="card col-3">
+            <h2 style = "margin-top: 10px; text-align: center">Controller</h2>
+                <form class = "mx-auto" method = "POST" action = "bongpasLogic.php" style = "width: 110%;">
+                        <div class = "row" style = "margin-left: 100px">
+                            <div class="col-7">
+                                <div class="row" style="margin-top:10px">
+                                    <div class="col-8 " style = "margin-top: 15px">Bay</div>
+                                    <input type="text" class = "form-control col-4" name="bay">
+                                </div>
+                                <div class="row" style="margin-top:5px">
+                                    <div class="col-8" style = "margin-top: 15px">Baris</div>
+                                    <input type="text" class = "form-control col-4" name="baris">
+                                </div>
+                                <div class="row" style="margin-top:5px">
+                                    <div class="col-8 " style = "margin-top: 15px">Kolom</div>
+                                    <input type="text" class = "form-control col-4" name="kolom">
+                                </div>
+                                <div class="row" style="margin-top:5px">
+                                    <div class="col-8 " style = "margin-top: 15px">Kontainer</div>  
+                                    <input type="text" class = "form-control col-4" name="kontainer">
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                        <div class = "mx-auto" style = "margin-top: 20px">
+                                    <button class = "btn btn-danger" type="submit" name = "pasang" style = "margin-left: 105px">Pasang</button>
+                                    <button class = "btn btn-danger" type="submit" name = "bongkar" style = "margin-left: 5px">Bongkar</button>
+                                    <button class = "btn btn-success" type="submit" name = "done" style = "margin-left: 5px">Done</button>
+                            </div>
+                        
                 </form>
-        </div>
-        <div class="col-3">
-            <?php
-            $id = $_SESSION['username'];
+                        </div>
+        <div class="card col-3">
+            <h2 style = "margin-top: 10px; text-align: center">Container Yang Tersedia</h2>
+            <div class = "text-center" style = "display: inline-block">
+                <?php
+                $id = $_SESSION['username'];
 
-            $sql = "SELECT * FROM temp_kontainer WHERE id_user = '$id'";
-            $result = mysqli_query($con,$sql);
-            // $row = mysqli_fetch_array($result);
-            
-            if(mysqli_num_rows($result) > 0){
-                while( $row = mysqli_fetch_array($result)){
-                    echo $row[0]."<br>";
+                $sql = "SELECT * FROM temp_container WHERE id_user = '$id'";
+                $result = mysqli_query($con,$sql);
+                // $row = mysqli_fetch_array($result);
+                
+                if(mysqli_num_rows($result) > 0){
+                    while( $row = mysqli_fetch_array($result)){
+                    echo "
+                    <div class='card text-left' style='width: 9 rem;margin-top: 10px;display: inline-block;'>
+                        <div class='card-body'>
+                            <h5 class='card-title' style = 'border-bottom: 1px solid'> CON-$row[0]";
+                    $id = $row[0];
+                    $sql = "SELECT * FROM container where id_container = '$id'";
+                    $result2 = mysqli_query($con,$sql);
+                    $row2 = mysqli_fetch_array($result2);
+                        
+                    
+                    echo "</h5>
+                            <h6 class='card-subtitle mb-2 text-muted'>Detail</h6>
+                            <p class='card-text'>Tujuan : $row2[1] </p>
+                            <p class='card-text' style='margin-top: -15px'>Asal : $row2[2]</p>
+                        </div>
+                    </div>";
+                    }
                 }
-            }
-            else{
-                echo "Kosong";
-            }
-            
+                else{
+                    echo "Kosong";
+                }
+                
 
-            ?>
+                ?>
+            </div>
         </div>
             
     </div>
-    <!-- <div class="container text-center col-4" style="background-color: lightgrey; padding: 20px;">
-        <div class="Header">SALES CALL</div>
-            <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
-                <p  draggable="true" ondragstart="drag(event)" id="container123">123</p>
-            </div>
-            <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)">
-                <p  draggable="true" ondragstart="drag(event)" id="container122">122</p>
-            </div>
-            <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
-                <p  draggable="true" ondragstart="drag(event)" id="container121">121</p>
-            </div>
-            <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)">
-                <p  draggable="true" ondragstart="drag(event)" id="container120">120</p>
-            </div>
-            <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
-                <p  draggable="true" ondragstart="drag(event)" id="container133">133</p>
-            </div>
-            <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)">
-                <p  draggable="true" ondragstart="drag(event)" id="container132">132</p>
-            </div>
-
-        </div>
-    </div> -->
 
 </body>
     
 </html>
-
