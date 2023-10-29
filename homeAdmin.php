@@ -33,6 +33,14 @@
                 </form>
 
             </div>
+            <form action="setSalesCard.php" style="margin-top: 20px;">
+                <button type="submit" class="btn btn-primary">Sales Card</button>
+                
+            </form>
+            <form action="viewSalesCard.php" style="margin-top: 20px;">
+                <button type="submit" class="btn btn-primary">View Sales</button>
+            </form>
+            
         </div>
         <div class="col-9">
             <h1> List room </h1>

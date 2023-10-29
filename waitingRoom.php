@@ -101,7 +101,7 @@
                     //     xhr.send()
                     // });
                     
-                    setTimeout(()=>{
+                    setInterval(()=>{
                         $.ajax({
                         url:'userWaitingRoomLogic.php',
                         method:'POST',
