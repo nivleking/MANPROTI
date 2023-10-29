@@ -640,8 +640,8 @@
         </div>
         <div class="card col-3">
             <h2 style = "margin-top: 10px; text-align: center">Controller</h2>
-                <form class = "mx-auto" method = "POST" action = "bongpasLogic.php" style = "width: 110%;">
-                        <div class = "row" style = "margin-left: 100px">
+                <form class = "" method = "POST" action = "bongpasLogic.php" style = "width: 110%;">
+                        <div class = "row" style = "margin-left: 90px">
                             <div class="col-7">
                                 <div class="row" style="margin-top:10px">
                                     <div class="col-8 " style = "margin-top: 15px">Bay</div>
@@ -663,7 +663,7 @@
                             </div>
                             
                         </div>
-                        <div class = "mx-auto" style = "margin-top: 20px">
+                        <div class = "mx-auto" style = "margin-top: 20px; margin-bottom:20px;">
                                     <button class = "btn btn-danger" type="submit" name = "pasang" style = "margin-left: 105px">Pasang</button>
                                     <button class = "btn btn-danger" type="submit" name = "bongkar" style = "margin-left: 5px">Bongkar</button>
                                     <button class = "btn btn-success" type="submit" name = "done" style = "margin-left: 5px">Done</button>
