@@ -17,10 +17,12 @@
             padding: 10px;
             border: 1px solid black;
         }
+
         form{
             width: 25%;
             position: auto;
         }
+
         .id{
             margin-top: -8px;
             margin-left: -3px;
@@ -28,9 +30,11 @@
             vertical-align: top;
             text-align: left;
         }
+
         input{
             margin-top: 10px;
         }
+
         #label{
             margin-top: 10px;
         }
@@ -59,15 +63,27 @@
     </script> -->
 </head>
 <body>
-   
-    <div style="font-weight: bold; background-color: lightgrey; padding: 15px;">
+    <nav class="navbar navbar-dark bg-primary navbar-expand">
+            <a href="#" class = "navbar-brand disabled" style = "font-style: italic; font-weight:bold; font-size:26px">Cargo Master</a>
+            <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon">A</span>
+            </button> -->
+            <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarSupportedContent" style="text-align:center;display:inline-block; float:none; vertical-align:top; color:aliceblue; font-size:26px; font-weight:bold;">
+                SURABAYA - WEEK 1
+            </div>
+
+            <button class = "btn btn-danger">
+                MARKET INTELLIGENCE
+            </button>
+    </nav>
+    <!-- <div style="font-weight: bold; background-color: lightgrey; padding: 15px;">
         <h1 class="text-center w3-jumbo" style="margin-top: 0PX;">CARGO MASTER</h1>
         <h2 class="text-center" style="font-weight: 550;">SURABAYA - WEEK 1</h2>
-    </div>
+    </div> -->
 
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="position: absolute; top: 10px;right: 10px; background-color: black; color: lightgrey;">
+    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="position: absolute; top: 10px;right: 10px; background-color: black; color: lightgrey;">
         Market Intelligence
-    </button>
+    </button> -->
 
     <table class="table table-bordered border-secondary text-center">
         <?php

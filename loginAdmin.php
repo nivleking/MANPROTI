@@ -15,7 +15,10 @@
 
 				<form style="width: 23rem;" method = "POST" action = "adminDoLogin.php" class = "">
 
-					<h3 class="fw-normal m-3 d-flex justify-content-center" style="letter-spacing: 0.5px; font-style:italic; font-size:38px;">Cargo Master</h3>
+					<h3 class="fw-normal mt-3 d-flex justify-content-center" style="letter-spacing: 0.5px; font-style:italic; font-size:38px;">
+						Cargo Master<br>
+						<h4 class = "d-flex justify-content-center" style="font-style: italic;">Admin</h4>
+					</h3>
 
 					<div class="form-outline mb-4">
 						<label class="form-label" for="form2Example18">Username</label>

@@ -5,27 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-
 </head>
 <body>
-	<div class = "container">
-		<div class = "row">
-			<div class = "col-9 mx-auto">
-				<div class="card center" style="width: 25rem;margin-top: 80px">
-					<div class="card-body">
-					<div class = "text-center" id = "title">
-						<h3>WELCOME!</h3>
+	<div class="vh-100">
+		<div class = "container-fluid mx-auto">
+			<div class = "row">
+				<div class = "col-sm-12 mx-auto">
+					<div class="d-flex justify-content-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
+						<form action="joinRoomLogic.php" method="post">
+							<h3 class = "fw-normal m-3 d-flex justify-content-center" style="letter-spacing: 0.5px; font-style:italic; font-size:38px;">Welcome!</h3>
+						
+							<div class="form-outline mb-4">
+								<label>Room ID</label>
+								<input type="text" class = "form-control" name="roomID">
+							</div>
+							
+							<div class="pt-1 mb-4">
+								<button type="submit" name = "join" class="btn btn-danger btn-lg btn-block">Join</button>
+							</div>
+						</form>
 					</div>
-					<form action="joinRoomLogic.php" method="post">
-						<label>Room ID</label>
-						<input type="text" class = "form-control" name="roomID">
-						<button type="submit" name = "join">JOIN</button>
-					</form>
-					</div>
-				</div>
-			</div>	
-		</div>
-	</div>    
+				</div>	
+			</div>
+		</div>    
+	</div>
 </body>
 </html>

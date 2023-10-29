@@ -123,7 +123,7 @@
                 success:function(temp) {
                     console.log(temp)
                     if (temp == 'sukses') {
-                        window.location.href='game.php';
+                        window.location.href='game1.php';
             
                     }
                     else {
