@@ -1,11 +1,29 @@
 matrix = [
-    # bay 1
+    # bay 1 dry
     [#[0][2][1]
         [0,0,3],
         [4,1,6],
         [7,8,9]
     ],
-    # bay 2
+    # bay 2 reef
+    [
+        [0,0,0],
+        [0,0,0],
+        [0,0,0]
+    ],
+    # bay 3 reef
+    [   
+        [0,0,0],
+        [0,0,0],
+        [0,0,0]
+    ],
+    # bay 4 dry
+    [
+        [0,0,0],
+        [0,0,0],
+        [0,0,0]
+    ],
+    # bay 5 dry
     [
         [0,0,0],
         [0,0,0],
@@ -14,6 +32,8 @@ matrix = [
 ]
 
 temp = []
+# denda = 0
+biaya = 0
 
 def checkAtas(matrix, i, j, k):
     if (i < 0) or (j < 0) or (k < 0) or (len(matrix)<=i) or (len(matrix[i])<=j) or (len(matrix[i][j]) <= k):
@@ -54,6 +74,7 @@ def checkSpace(matrix,i,j,k):
 while (True):
     print("STATE KAPAL")
     
+    print(f"Biaya: {biaya}")
     for i in range(len(matrix)):
         print(f"BAY {i+1}")
         for j in range(len(matrix[i])):
@@ -86,6 +107,7 @@ while (True):
         
         if (checkAtas(matrix,bay,baris,kolom)):    
             temp.append(matrix[bay][baris][kolom])
+            biaya+=10
             matrix[bay][baris][kolom] = 0
         
     elif pilihan == 2:
@@ -99,6 +121,7 @@ while (True):
                     print(len(temp))
                     container = int(input("Input container apa: "))
                     if container in temp and len(temp) != 0:
+                        biaya+=50
                         matrix[bay][baris][kolom] = container
                         temp.remove(container)
                         break

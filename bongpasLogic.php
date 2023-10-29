@@ -4,7 +4,8 @@
                     $bay = $_POST['bay'];
                     $baris = $_POST['baris'];
                     $kolom = $_POST['kolom'];
-                    $sql = "SELECT ship FROM user WHERE team_name = 'AktoBabi'";
+                    $id = $_SESSION['username'];
+                    $sql = "SELECT ship FROM user WHERE team_name = '$id'";
                     $result = mysqli_query($con,$sql);
                     $row = mysqli_fetch_array($result);
                     $arr = json_decode($row['ship']);
@@ -20,7 +21,8 @@
                             if($baris-1 == -1){
                                 $arr[$bay][$baris][$kolom] = 0;
                                 $arr_enc = json_encode($arr);
-                                $sql = "UPDATE user SET ship = '$arr_enc' WHERE team_name = 'AktoBabi'";
+                                $id = $_SESSION['username'];
+                                $sql = "UPDATE user SET ship = '$arr_enc' WHERE team_name = '$id'";
                                 $result = mysqli_query($con,$sql);
                                 echo ("<script LANGUAGE='JavaScript'>
                                 window.alert('Berhasil Dibongkar');
@@ -30,7 +32,8 @@
                             if($arr[$bay][$baris-1][$kolom]==0){
                                 $arr[$bay][$baris][$kolom] = 0;
                                 $arr_enc = json_encode($arr);
-                                $sql = "UPDATE user SET ship = '$arr_enc' WHERE team_name = 'AktoBabi'";
+                                $id = $_SESSION['username'];
+                                $sql = "UPDATE user SET ship = '$arr_enc' WHERE team_name = '$id'";
                                 $result = mysqli_query($con,$sql);
                                 echo ("<script LANGUAGE='JavaScript'>
                                 window.alert('Berhasil Dibongkar');
@@ -60,7 +63,8 @@
                     $baris = $_POST['baris'];
                     $kolom = $_POST['kolom'];
                     $kontainer = $_POST['kontainer'];
-                    $sql = "SELECT ship FROM user WHERE team_name = 'AktoBabi'";
+                    $id = $_SESSION['username'];
+                    $sql = "SELECT ship FROM user WHERE team_name = '$id'";
                     $result = mysqli_query($con,$sql);
                     $row = mysqli_fetch_array($result);
                     $arr = json_decode($row['ship']);
@@ -88,7 +92,8 @@
                                 else{
                                     $arr[$bay][$baris][$kolom] = $kontainer;
                                     $arr_enc = json_encode($arr);
-                                    $sql = "UPDATE user SET ship = '$arr_enc' WHERE team_name = 'AktoBabi'";
+                                    $id = $_SESSION['username'];
+                                    $sql = "UPDATE user SET ship = '$arr_enc' WHERE team_name = '$id'";
                                     $result = mysqli_query($con,$sql);
                                     echo ("<script LANGUAGE='JavaScript'>
                                     window.alert('Kontainer Berhasil Dimasukan !');

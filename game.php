@@ -53,6 +53,7 @@
     </script> -->
 </head>
 <body>
+   
     <div style="font-weight: bold; background-color: lightgrey; padding: 15px;">
         <h1 class="text-center w3-jumbo" style="margin-top: 0PX;">CARGO MASTER</h1>
         <h2 class="text-center" style="font-weight: 550;">SURABAYA - WEEK 1</h2>
@@ -78,7 +79,8 @@
                     
                     </div>  
                     <?php
-                         $sql = "SELECT ship FROM user WHERE team_name = 'AktoBabi'";
+                        $id = $_SESSION['username'];
+                         $sql = "SELECT ship FROM user WHERE team_name = '$id'";
                          $result = mysqli_query($con,$sql);
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
@@ -96,7 +98,8 @@
                     
                     </div> 
                     <?php
-                         $sql = "SELECT ship FROM user WHERE team_name = 'AktoBabi'";
+                         $id = $_SESSION['username'];
+                         $sql = "SELECT ship FROM user WHERE team_name = '$id'";
                          $result = mysqli_query($con,$sql);
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
@@ -114,7 +117,8 @@
                     
                     </div> 
                     <?php
-                         $sql = "SELECT ship FROM user WHERE team_name = 'AktoBabi'";
+                         $id = $_SESSION['username'];
+                         $sql = "SELECT ship FROM user WHERE team_name = '$id'";
                          $result = mysqli_query($con,$sql);
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
@@ -133,7 +137,8 @@
                     
                     </div> 
                     <?php
-                         $sql = "SELECT ship FROM user WHERE team_name = 'AktoBabi'";
+                         $id = $_SESSION['username'];
+                         $sql = "SELECT ship FROM user WHERE team_name = '$id'";
                          $result = mysqli_query($con,$sql);
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
@@ -151,7 +156,8 @@
                     
                     </div> 
                     <?php
-                         $sql = "SELECT ship FROM user WHERE team_name = 'AktoBabi'";
+                         $id = $_SESSION['username'];
+                         $sql = "SELECT ship FROM user WHERE team_name = '$id'";
                          $result = mysqli_query($con,$sql);
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
@@ -169,7 +175,8 @@
                     
                     </div> 
                     <?php
-                         $sql = "SELECT ship FROM user WHERE team_name = 'AktoBabi'";
+                         $id = $_SESSION['username'];
+                         $sql = "SELECT ship FROM user WHERE team_name = '$id'";
                          $result = mysqli_query($con,$sql);
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
@@ -188,7 +195,8 @@
                     
                     </div> 
                     <?php
-                         $sql = "SELECT ship FROM user WHERE team_name = 'AktoBabi'";
+                         $id = $_SESSION['username'];
+                         $sql = "SELECT ship FROM user WHERE team_name = '$id'";
                          $result = mysqli_query($con,$sql);
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
@@ -206,7 +214,8 @@
                     
                     </div> 
                     <?php
-                         $sql = "SELECT ship FROM user WHERE team_name = 'AktoBabi'";
+                         $id = $_SESSION['username'];
+                         $sql = "SELECT ship FROM user WHERE team_name = '$id'";
                          $result = mysqli_query($con,$sql);
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
@@ -224,7 +233,8 @@
                     
                     </div> 
                     <?php
-                         $sql = "SELECT ship FROM user WHERE team_name = 'AktoBabi'";
+                         $id = $_SESSION['username'];
+                         $sql = "SELECT ship FROM user WHERE team_name = '$id'";
                          $result = mysqli_query($con,$sql);
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
@@ -244,7 +254,8 @@
                     
                     </div> 
                     <?php
-                         $sql = "SELECT ship FROM user WHERE team_name = 'AktoBabi'";
+                         $id = $_SESSION['username'];
+                         $sql = "SELECT ship FROM user WHERE team_name = '$id'";
                          $result = mysqli_query($con,$sql);
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
@@ -262,7 +273,8 @@
                     
                     </div> 
                     <?php
-                         $sql = "SELECT ship FROM user WHERE team_name = 'AktoBabi'";
+                         $id = $_SESSION['username'];
+                         $sql = "SELECT ship FROM user WHERE team_name = '$id'";
                          $result = mysqli_query($con,$sql);
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
@@ -280,7 +292,8 @@
                     
                     </div> 
                     <?php
-                         $sql = "SELECT ship FROM user WHERE team_name = 'AktoBabi'";
+                         $id = $_SESSION['username'];
+                         $sql = "SELECT ship FROM user WHERE team_name = '$id'";
                          $result = mysqli_query($con,$sql);
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
@@ -299,7 +312,8 @@
                     
                     </div> 
                     <?php
-                         $sql = "SELECT ship FROM user WHERE team_name = 'AktoBabi'";
+                         $id = $_SESSION['username'];
+                         $sql = "SELECT ship FROM user WHERE team_name = '$id'";
                          $result = mysqli_query($con,$sql);
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
@@ -317,7 +331,8 @@
                     
                     </div> 
                     <?php
-                         $sql = "SELECT ship FROM user WHERE team_name = 'AktoBabi'";
+                         $id = $_SESSION['username'];
+                         $sql = "SELECT ship FROM user WHERE team_name = '$id'";
                          $result = mysqli_query($con,$sql);
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
@@ -335,7 +350,8 @@
                     
                     </div> 
                     <?php
-                         $sql = "SELECT ship FROM user WHERE team_name = 'AktoBabi'";
+                         $id = $_SESSION['username'];
+                         $sql = "SELECT ship FROM user WHERE team_name = '$id'";
                          $result = mysqli_query($con,$sql);
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
@@ -354,7 +370,8 @@
                     
                     </div> 
                     <?php
-                         $sql = "SELECT ship FROM user WHERE team_name = 'AktoBabi'";
+                         $id = $_SESSION['username'];
+                         $sql = "SELECT ship FROM user WHERE team_name = '$id'";
                          $result = mysqli_query($con,$sql);
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
@@ -372,7 +389,8 @@
                     
                     </div> 
                     <?php
-                         $sql = "SELECT ship FROM user WHERE team_name = 'AktoBabi'";
+                         $id = $_SESSION['username'];
+                         $sql = "SELECT ship FROM user WHERE team_name = '$id'";
                          $result = mysqli_query($con,$sql);
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
@@ -390,7 +408,8 @@
                     
                     </div> 
                     <?php
-                         $sql = "SELECT ship FROM user WHERE team_name = 'AktoBabi'";
+                         $id = $_SESSION['username'];
+                         $sql = "SELECT ship FROM user WHERE team_name = '$id'";
                          $result = mysqli_query($con,$sql);
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
@@ -411,7 +430,8 @@
                     
                     </div> 
                     <?php
-                         $sql = "SELECT ship FROM user WHERE team_name = 'AktoBabi'";
+                         $id = $_SESSION['username'];
+                         $sql = "SELECT ship FROM user WHERE team_name = '$id'";
                          $result = mysqli_query($con,$sql);
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
@@ -429,7 +449,8 @@
                     
                     </div> 
                     <?php
-                         $sql = "SELECT ship FROM user WHERE team_name = 'AktoBabi'";
+                         $id = $_SESSION['username'];
+                         $sql = "SELECT ship FROM user WHERE team_name = '$id'";
                          $result = mysqli_query($con,$sql);
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
@@ -447,7 +468,8 @@
                     
                     </div> 
                     <?php
-                         $sql = "SELECT ship FROM user WHERE team_name = 'AktoBabi'";
+                         $id = $_SESSION['username'];
+                         $sql = "SELECT ship FROM user WHERE team_name = '$id'";
                          $result = mysqli_query($con,$sql);
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
@@ -466,7 +488,8 @@
                     
                     </div> 
                     <?php
-                         $sql = "SELECT ship FROM user WHERE team_name = 'AktoBabi'";
+                         $id = $_SESSION['username'];
+                         $sql = "SELECT ship FROM user WHERE team_name = '$id'";
                          $result = mysqli_query($con,$sql);
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
@@ -484,7 +507,8 @@
                     
                     </div> 
                     <?php
-                         $sql = "SELECT ship FROM user WHERE team_name = 'AktoBabi'";
+                         $id = $_SESSION['username'];
+                         $sql = "SELECT ship FROM user WHERE team_name = '$id'";
                          $result = mysqli_query($con,$sql);
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
@@ -502,7 +526,8 @@
                     
                     </div> 
                     <?php
-                         $sql = "SELECT ship FROM user WHERE team_name = 'AktoBabi'";
+                         $id = $_SESSION['username'];
+                         $sql = "SELECT ship FROM user WHERE team_name = '$id'";
                          $result = mysqli_query($con,$sql);
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
@@ -521,7 +546,8 @@
                     
                     </div> 
                     <?php
-                         $sql = "SELECT ship FROM user WHERE team_name = 'AktoBabi'";
+                         $id = $_SESSION['username'];
+                         $sql = "SELECT ship FROM user WHERE team_name = '$id'";
                          $result = mysqli_query($con,$sql);
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
@@ -539,7 +565,8 @@
                     
                     </div> 
                     <?php
-                         $sql = "SELECT ship FROM user WHERE team_name = 'AktoBabi'";
+                         $id = $_SESSION['username'];
+                         $sql = "SELECT ship FROM user WHERE team_name = '$id'";
                          $result = mysqli_query($con,$sql);
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
@@ -557,7 +584,8 @@
                     
                     </div> 
                     <?php
-                         $sql = "SELECT ship FROM user WHERE team_name = 'AktoBabi'";
+                         $id = $_SESSION['username'];
+                         $sql = "SELECT ship FROM user WHERE team_name = '$id'";
                          $result = mysqli_query($con,$sql);
                          $row = mysqli_fetch_array($result);
                          $row_dec = json_decode($row['ship']);
