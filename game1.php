@@ -28,10 +28,11 @@
             vertical-align: top;
             text-align: left;
         }
-        .card {
-            width: 10rem;
+        input{
             margin-top: 10px;
-            display: inline-block;
+        }
+        #label{
+            margin-top: 10px;
         }
     </style>
     <!-- <script>
@@ -101,7 +102,7 @@
                                 echo "<div style='color: red'>$row[0]</div>";
                             }
                             else{
-                                echo $row[2];   
+                                echo $row[0];   
                             }
 
                          }
@@ -616,97 +617,81 @@
         </thead>
     </table>
     <div class="row">
-        <div class="card col-4">
+        <div class="card col-6">
             <h2 style = "margin-top: 10px; text-align: center">Sales Card</h2>
-
+                
 
         </div>
-        <div class="card col-5">
+        <div class="card col-3">
             <h2 style = "margin-top: 10px; text-align: center">Controller</h2>
-                <form class = "mx-auto" method = "POST" action = "bongpasLogic.php" style = "margin-top: 20px">
-                        <div class = "row">
-                            <div class="col-6">
+                <form class = "mx-auto" method = "POST" action = "bongpasLogic.php" style = "width: 110%;">
+                        <div class = "row" style = "margin-left: 100px">
+                            <div class="col-7">
                                 <div class="row" style="margin-top:10px">
-                                    <div class="col-6">Bay</div>
-                                    <input type="text" class = "form-control col-6" name="bay">
+                                    <div class="col-8 " style = "margin-top: 15px">Bay</div>
+                                    <input type="text" class = "form-control col-4" name="bay">
                                 </div>
                                 <div class="row" style="margin-top:5px">
-                                    <div class="col-6">Baris</div>
-                                    <input type="text" class = "form-control col-6" name="baris">
+                                    <div class="col-8" style = "margin-top: 15px">Baris</div>
+                                    <input type="text" class = "form-control col-4" name="baris">
                                 </div>
                                 <div class="row" style="margin-top:5px">
-                                    <div class="col-6">Kolom</div>
-                                    <input type="text" class = "form-control col-6" name="kolom">
+                                    <div class="col-8 " style = "margin-top: 15px">Kolom</div>
+                                    <input type="text" class = "form-control col-4" name="kolom">
                                 </div>
                                 <div class="row" style="margin-top:5px">
-                                    <div class="col-6">Kontainer</div>  
-                                    <input type="text" class = "form-control col-6" name="kontainer">
+                                    <div class="col-8 " style = "margin-top: 15px">Kontainer</div>  
+                                    <input type="text" class = "form-control col-4" name="kontainer">
                                 </div>
-
-                            </div>
-                            <div class="col-6">
-                                <div class="row" style = "margin-bottom: 20px">
-                                    <div class = "col-4" style = "margin-top: 10px">  
-                                        <button class = "btn btn-danger" type="submit" name = "bongkar">Bongkar</button>
-                                    </div>
-                                    <div class = "col-4" style = "margin-top: 10px;margin-left: 20px">
-                                        <button class = "btn btn-danger" type="submit" name = "pasang">Pasang</button>  
-                                    </div>
-                                    <div class = "col-4" style = "margin-top: 10px">
-                                        <button class = "btn btn-success" type="submit" name = "done">Selesai</button>
-                                    </div>
                                 
-                                </div>
                             </div>
                             
                         </div>
+                        <div class = "mx-auto" style = "margin-top: 20px">
+                                    <button class = "btn btn-danger" type="submit" name = "pasang" style = "margin-left: 105px">Pasang</button>
+                                    <button class = "btn btn-danger" type="submit" name = "bongkar" style = "margin-left: 5px">Bongkar</button>
+                                    <button class = "btn btn-success" type="submit" name = "done" style = "margin-left: 5px">Done</button>
+                            </div>
                         
                 </form>
-        </div>
+                        </div>
         <div class="card col-3">
             <h2 style = "margin-top: 10px; text-align: center">Container Yang Tersedia</h2>
-            <?php
-            $id = $_SESSION['username'];
+            <div class = "text-center" style = "display: inline-block">
+                <?php
+                $id = $_SESSION['username'];
 
-            $sql = "SELECT * FROM temp_container WHERE id_user = '$id'";
-            $result = mysqli_query($con,$sql);
-            // $row = mysqli_fetch_array($result);
-            
-            if(mysqli_num_rows($result) > 0){
-                while( $row = mysqli_fetch_array($result)){
-                echo "
-                <div class='card' style='width: 10rem;margin-left: 35px'>
-                    <div class='card-body'>
-                        <h5 class='card-title'>";
+                $sql = "SELECT * FROM temp_container WHERE id_user = '$id'";
+                $result = mysqli_query($con,$sql);
+                // $row = mysqli_fetch_array($result);
                 
-                echo $row[0];
-                $id = $row[0];
-                $sql = "SELECT * FROM container where id_container = '$id'";
-                $result2 = mysqli_query($con,$sql);
-                $row2 = mysqli_fetch_array($result2);
-                    
-                
-                echo "</h5>
-                        <h6 class='card-subtitle mb-2 text-muted'>
+                if(mysqli_num_rows($result) > 0){
+                    while( $row = mysqli_fetch_array($result)){
+                    echo "
+                    <div class='card text-left' style='width: 9 rem;margin-top: 10px;display: inline-block;'>
+                        <div class='card-body'>
+                            <h5 class='card-title' style = 'border-bottom: 1px solid'> CON-$row[0]";
+                    $id = $row[0];
+                    $sql = "SELECT * FROM container where id_container = '$id'";
+                    $result2 = mysqli_query($con,$sql);
+                    $row2 = mysqli_fetch_array($result2);
                         
-                    </h6>
-                        <p class='card-text'>Tujuan : ";
                     
-                echo $row2[1];
-                echo "</p><p class='card-text' style='margin-top: -15px'>Asal : ";
-                echo $row2[2];
-                echo "</p>
-                    </div>
-                </div>";
-                // echo $row[0]."<br>";
+                    echo "</h5>
+                            <h6 class='card-subtitle mb-2 text-muted'>Detail</h6>
+                            <p class='card-text'>Tujuan : $row2[1] </p>
+                            <p class='card-text' style='margin-top: -15px'>Asal : $row2[2]</p>
+                        </div>
+                    </div>";
+                    }
                 }
-            }
-            else{
-                echo "Kosong";
-            }
-            
+                else{
+                    echo "Kosong";
+                }
+                
 
-            ?>
+                ?>
+            </div>
         </div>
             
     </div>
