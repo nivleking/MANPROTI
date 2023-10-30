@@ -23,7 +23,7 @@
                 ?>
                 </h1>
             </div>
-            <div class="d-flex justify-content-center">
+            <div class="justify-content-center" style = "margin-left: 340px;margin-top: 20px">
                 <form method="POST" action="createRoomLogic.php" style = "width: 15rem">
                 <div class="mb-3">
                     <label for="roomCode" class="form-label d-flex just">Room Code</label>
@@ -31,7 +31,15 @@
                 </div>
                 <button type="submit" class="btn btn-primary" name= "create" style="width: 15rem;">Create</button>
                 </form>
+
+                <form action="setSalesCard.php" style="margin-top: 20px;">
+                    <button type="submit" class="btn btn-primary" style = "width: 15rem">Sales Card</button>                
+                </form>
+                <form action="viewSalesCard.php" style="margin-top: 20px;">
+                    <button type="submit" class="btn btn-primary" style = "width: 15rem">View Sales</button>
+                </form>
             </div>
+
         </div>
 
 
