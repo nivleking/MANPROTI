@@ -158,7 +158,7 @@
                                 if($row[2]== 'MKS'){
                                     echo ("<script LANGUAGE='JavaScript'>
                                     window.alert('Masih ada kontainer yang perlu dibongkar !');
-                                    window.location.href='game2.php';
+                                    window.location.href='game1.php';
                                     </script>");
                                 }
                             }

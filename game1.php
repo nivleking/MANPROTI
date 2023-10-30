@@ -1051,7 +1051,7 @@
                             </div>
                             
                         </div>
-                        <div class = "mx-auto" style = "margin-top: 20px;">
+                        <div class = "mx-auto" style = "margin-top: 20px; margin-bottom:20px;">
                                     <button class = "btn btn-danger" type="submit" name = "pasang" style = "margin-left: 105px">Pasang</button>
                                     <button class = "btn btn-danger" type="submit" name = "bongkar" style = "margin-left: 5px">Bongkar</button>
                                     <button class = "btn btn-success" type="submit" name = "done" style = "margin-left: 200px">Done</button>
