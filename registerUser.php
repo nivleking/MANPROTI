@@ -47,7 +47,7 @@
 					</p> -->
 					<p class="d-flex justify-content-center">
 						Already have an account?&nbsp
-						<a href="loginAdmin.php" class="link-info"> Login here</a>
+						<a href="loginUser.php" class="link-info"> Login here</a>
 					</p>
 				</form>
 				</div>

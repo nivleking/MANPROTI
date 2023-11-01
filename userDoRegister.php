@@ -11,26 +11,26 @@
             exit();
         }
         else {
-            // $layout = [
-            //     [
-            //         [0,0,0],
-            //         [0,0,0],
-            //         [0,0,0]
-            //     ],
-            //     [
-            //         [0,0,0],
-            //         [0,0,0],
-            //         [0,0,0]
-            //     ],
-            //     [
-            //         [0,0,0],
-            //         [0,0,0],
-            //         [0,0,0]
-            //     ]
-            // ];
+            $layout = [
+                [
+                    [0,0,0],
+                    [0,0,0],
+                    [0,0,0]
+                ],
+                [
+                    [0,0,0],
+                    [0,0,0],
+                    [0,0,0]
+                ],
+                [
+                    [0,0,0],
+                    [0,0,0],
+                    [0,0,0]
+                ]
+            ];
 
-            // $layout = json_decode($layout);
-            $query = "INSERT INTO user VALUES('$username', '$password', 'null', '1', '0')";
+            $layout = json_encode($layout);
+            $query = "INSERT INTO user VALUES('$username', '$password', '$layout', 0, 0)";
             $result = mysqli_query($con, $query);
             header("Location: loginUser.php");
         }
