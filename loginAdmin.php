@@ -22,12 +22,12 @@
 
 					<div class="form-outline mb-4">
 						<label class="form-label" for="form2Example18">Username</label>
-						<input type="text" id="form2Example18" class="form-control form-control-lg" name = "usernameADM" />
+						<input type="text" id="form2Example18" class="form-control form-control-lg" name = "usernameADM" required/>
 					</div>
 
 					<div class="form-outline mb-4">
 						<label class="form-label" for="form2Example28">Password</label>
-						<input type="password" id="form2Example28" class="form-control form-control-lg" name = "passwordADM"/>
+						<input type="password" id="form2Example28" class="form-control form-control-lg" name = "passwordADM" required/>
 					</div>
 
 					<div class="pt-1 mb-4">
