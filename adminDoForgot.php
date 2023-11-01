@@ -9,7 +9,7 @@
         $newConfirmPassword = $_POST['newPasswordConfirmADM'];
 
         if ($password !== $confirmPassword || $newPassword !== $newConfirmPassword) {
-            header("Location: registerAdmin.php?error=Your old / new confirm password is incorrect");
+            header("Location: forgotPasswordAdmin.php?error=Your old / new confirm password is incorrect");
             exit();
         }
         else {
