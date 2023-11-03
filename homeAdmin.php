@@ -14,6 +14,7 @@
             <?php 
             
             require 'connect.php';
+            var_dump($_SESSION);
             $admin = $_SESSION["usernameADM"];
             $sql = "SELECT * FROM admin WHERE id_admin = '$admin'";
             $result= mysqli_query($con,$sql);
@@ -39,6 +40,9 @@
             </form>
             <form action="viewSalesCard.php" style="margin-top: 20px;">
                 <button type="submit" class="btn btn-primary">View Sales</button>
+            </form>
+            <form action="createDeck.php" style="margin-top: 20px;">
+                <button type="submit" class="btn btn-primary">Create Deck</button>
             </form>
             
         </div>
