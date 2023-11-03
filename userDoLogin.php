@@ -10,17 +10,20 @@ if(isset($_POST['save'])){
     {
         $_SESSION["username"]=$row['team_name'];
         $name = $_SESSION['username'];
+        
         $_SESSION["password"]=$row['password'];
         $sql = mysqli_query($con,"UPDATE user SET status = '1' WHERE team_name = '$name'"); 
+
         header("Location: joinRoomUser.php");
         
     }
     else
-    {
-        echo ("<script LANGUAGE='JavaScript'>
-        window.alert('Invalid Username/Password');
-        window.location.href='loginAdmin.php';
-        </script>");
+    {   
+        header("Location: loginUser.php?error=Invalid username or password");
+        // echo ("<script LANGUAGE='JavaScript'>
+        // window.alert('Invalid Username/Password');
+        // window.location.href='loginAdmin.php';
+        // </script>");
     }
 }
 ?>

@@ -11,7 +11,7 @@
     <div class="container mt-5">
         <h1>Input Data Penjualan</h1>
         <form method="POST">
-        <div class="form-group">
+            <div class="form-group">
                 <label for="id_sales">ID Deck </label>
                 <input type="number" class="form-control" name="id_deck" required>
             </div>
