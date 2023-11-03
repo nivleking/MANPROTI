@@ -116,15 +116,16 @@
             //     xhr.open('GET','userWaitingRoomLogic.php',true);
             //     xhr.send()
             // });
-            setTimeout(()=>{
+
+            setInterval(()=>{
                 $.ajax({
                 url:'userWaitingRoomLogic.php',
                 method:'POST',
                 success:function(temp) {
                     console.log(temp)
                     if (temp == 'sukses') {
-                        window.location.href='game1.php';
-            
+                        window.location.href='game.php';
+
                     }
                     else {
                         $('#userCont').html('<h2>Waiting for Host To Start The Game</h2>');
