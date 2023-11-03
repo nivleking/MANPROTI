@@ -39,7 +39,6 @@
                     <button type="submit" class="btn btn-primary" style = "width: 15rem">View Sales</button>
                 </form>
             </div>
-
         </div>
 
 
