@@ -32,18 +32,15 @@ $row = mysqli_fetch_array($result);
       margin-bottom: 12px
     }
 
-    /* Set the width of the sidebar to 120px */
     .w3-sidebar {
       width: 120px;
       background: #222;
     }
 
-    /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
     #main {
       margin-left: 120px
     }
 
-    /* Remove margins from "page content" on small screens */
     @media only screen and (max-width: 600px) {
       #main {
         margin-left: 0
@@ -54,19 +51,21 @@ $row = mysqli_fetch_array($result);
 
 <body class="w3">
 
-  <!-- Icon Bar (Sidebar - hidden on small screens) -->
   <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
     <a href="#" class="w3-bar-item w3-button w3-padding-large w3-black">
-      <i class="fa fa-home w3-xxlarge d-flex justify-content-center mt-2"></i>
-      <p>HOME</p>
+      <i class="fa fa-dashboard w3-xxlarge d-flex justify-content-center mt-2"></i>
+      <p>Home</p>
     </a>
     <a href="#activity" class="w3-bar-item w3-button w3-padding-large w3-black w3-center">
-      <i class="fa fa-bars w3-xxlarge d-flex justify-content-center mt-2"></i>
-      <p>ACTIVITY</p>
+      <i class="fa fa-ellipsis-h w3-xxlarge d-flex justify-content-center mt-2"></i>
+      <p>Activity</p>
+    </a>
+    <a href="accounts.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center">
+      <i class="fa fa-group w3-xxlarge d-flex justify-content-center mt-2"></i>
+      <p>Accounts</p>
     </a>
   </nav>
 
-  <!-- Page Content -->
   <div class="w3-padding-large" id="main">
     <!-- Header/Home -->
     <div class=" w3-padding-16 w3-center" id="home">
