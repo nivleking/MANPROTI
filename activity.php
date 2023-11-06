@@ -51,20 +51,25 @@ $row = mysqli_fetch_array($result);
 
 <body class="w3">
 
-  <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
-    <a href="#" class="w3-bar-item w3-button w3-padding-large w3-black">
-      <i class="fa fa-dashboard w3-xxlarge d-flex justify-content-center mt-2"></i>
-      <p>Home</p>
-    </a>
-    <a href="#activity" class="w3-bar-item w3-button w3-padding-large w3-black w3-center">
-      <i class="fa fa-ellipsis-h w3-xxlarge d-flex justify-content-center mt-2"></i>
-      <p>Activity</p>
-    </a>
-    <a href="accounts.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center">
-      <i class="fa fa-group w3-xxlarge d-flex justify-content-center mt-2"></i>
-      <p>Accounts</p>
-    </a>
-  </nav>
+<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+		<a href="activity.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+			<i class="fa fa-dashboard w3-xxlarge d-flex justify-content-center mt-2"></i>
+			<p>Home</p>
+		</a>
+		<a href="activity.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center">
+			<i class="fa fa-ellipsis-h w3-xxlarge d-flex justify-content-center mt-2"></i>
+			<p>Activity</p>
+		</a>
+		<a href="accounts.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center">
+			<i class="fa fa-group w3-xxlarge d-flex justify-content-center mt-2"></i>
+			<p>Accounts</p>
+		</a>
+
+		<a href="logoutAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center p-2 ml-auto">
+			<i class="fa fa-sign-out w3-xxlarge d-flex justify-content-center mt-2"></i>
+			<p>Log Out</p>
+		</a>
+	</nav>
 
   <div class="w3-padding-large" id="main">
     <!-- Header/Home -->
@@ -184,9 +189,9 @@ $row = mysqli_fetch_array($result);
         </div>
       </div>
 
-      <div class=" w3-row-padding w3-center" id="activity">
+      <div class=" w3-row-padding w3-center">
         <div class="w3-padding-32">
-          <h2 class="w3-jumbo mb-5" >Your Activity</h2>
+          <h2 class="w3-jumbo mb-5" id="activity">Your Activity</h2>
           <table class="table ActivityList mx-auto table-responsive-lg">
             <thead>
               <tr>

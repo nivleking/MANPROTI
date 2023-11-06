@@ -51,20 +51,25 @@
 
 <body class="w3">
 
-    <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
-        <a href="activity.php" class="w3-bar-item w3-button w3-padding-large w3-black">
-            <i class="fa fa-dashboard w3-xxlarge d-flex justify-content-center mt-2"></i>
-            <p>Home</p>
-        </a>
-        <a href="activity.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center">
-            <i class="fa fa-ellipsis-h w3-xxlarge d-flex justify-content-center mt-2"></i>
-            <p>Activity</p>
-        </a>
-        <a href="accounts.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center">
-            <i class="fa fa-group w3-xxlarge d-flex justify-content-center mt-2"></i>
-            <p>Accounts</p>
-        </a>
-    </nav>
+<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+		<a href="activity.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+			<i class="fa fa-dashboard w3-xxlarge d-flex justify-content-center mt-2"></i>
+			<p>Home</p>
+		</a>
+		<a href="activity.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center">
+			<i class="fa fa-ellipsis-h w3-xxlarge d-flex justify-content-center mt-2"></i>
+			<p>Activity</p>
+		</a>
+		<a href="accounts.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center">
+			<i class="fa fa-group w3-xxlarge d-flex justify-content-center mt-2"></i>
+			<p>Accounts</p>
+		</a>
+
+		<a href="logoutAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center p-2 ml-auto">
+			<i class="fa fa-sign-out w3-xxlarge d-flex justify-content-center mt-2"></i>
+			<p>Log Out</p>
+		</a>
+	</nav>
 
     <div class="w3-padding-large" id="main">
         <!-- Header/Home -->
@@ -99,8 +104,8 @@
                         <div class="card-body">
                             <h3 class="card-title" style="font-weight:bold;">Edit User Accounts</h3>
                             <image src = "" alt="User"></image>
-                            <form action="setSalesCard.php">
-                                <button type="submit" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#moda-createcards" style="margin-top: 10px; width: 10rem;">Edit Users</button>
+                            <form action="registerUser.php">
+                                <button type="submit" class="btn btn-dark" style="margin-top: 10px; width: 10rem;">Edit Users</button>
                             </form>
                         </div>
                     </div>
