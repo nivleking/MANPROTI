@@ -200,7 +200,7 @@ $row = mysqli_fetch_array($result);
                 <th scope="col">Admin</th>
                 <th scope="col">Status</th>
                 <th scope="col">Date</th>
-                <th scope="col">Score</th>
+                <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -222,6 +222,15 @@ $row = mysqli_fetch_array($result);
                         <td>$row[1]</td>
                         <td>$val</td>
                         <td>$row[3]</td>
+                        <td>
+                          <form method='post' action='viewRoomDetails.php'>
+                            <input type='hidden' name='roomID' value='$row[0]'>
+                            <input type='hidden' name='supervisor' value='$row[1]'>
+                            <input type='hidden' name='statusRoom' value='$row[2]'>
+                            <input type='hidden' name='dateRoom' value='$row[3]'>
+                            <button type='submit' class='btn btn-link' name='viewButton'>View</button>
+                          </form>
+                        </td>
                         </tr>
                     ";
                 $i += 1;

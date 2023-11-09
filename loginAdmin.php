@@ -22,9 +22,12 @@
 							<h3 class="fw-normal mt-3 d-flex justify-content-center" style="letter-spacing: 0.5px; font-style:italic; font-size:38px;">
 								Cargo Master<br>
 								<h4 class="d-flex justify-content-center" style="font-style: italic;">Admin Login</h4>
-								<?php //if (isset($_GET['error'])) { ?>
-									<!-- <p class="d-flex justify-content-center" style="color:red; font-weight:bold;"><?php //echo $_GET['error']; ?></p> -->
-								<?php //} ?>
+								<?php //if (isset($_GET['error'])) { 
+								?>
+								<!-- <p class="d-flex justify-content-center" style="color:red; font-weight:bold;"><?php //echo $_GET['error']; 
+																													?></p> -->
+								<?php //} 
+								?>
 							</h3>
 
 							<div class="form-outline mb-4">
