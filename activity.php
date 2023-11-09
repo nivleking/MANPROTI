@@ -16,7 +16,7 @@ $row = mysqli_fetch_array($result);
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   <style>
     body,
     h1,
@@ -32,18 +32,15 @@ $row = mysqli_fetch_array($result);
       margin-bottom: 12px
     }
 
-    /* Set the width of the sidebar to 120px */
     .w3-sidebar {
       width: 120px;
       background: #222;
     }
 
-    /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
     #main {
       margin-left: 120px
     }
 
-    /* Remove margins from "page content" on small screens */
     @media only screen and (max-width: 600px) {
       #main {
         margin-left: 0
@@ -54,19 +51,26 @@ $row = mysqli_fetch_array($result);
 
 <body class="w3">
 
-  <!-- Icon Bar (Sidebar - hidden on small screens) -->
-  <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
-    <a href="#" class="w3-bar-item w3-button w3-padding-large w3-black">
-      <i class="fa fa-home w3-xxlarge"></i>
-      <p>HOME</p>
-    </a>
-    <a href="#activity" class="w3-bar-item w3-button w3-padding-large w3-black w3-center">
-      <i class="fa fa-bars w3-xxlarge"></i>
-      <p>ACTIVITY</p>
-    </a>
-  </nav>
+<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+		<a href="activity.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+			<i class="fa fa-dashboard w3-xxlarge d-flex justify-content-center mt-2"></i>
+			<p>Home</p>
+		</a>
+		<a href="activity.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center">
+			<i class="fa fa-ellipsis-h w3-xxlarge d-flex justify-content-center mt-2"></i>
+			<p>Activity</p>
+		</a>
+		<a href="accounts.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center">
+			<i class="fa fa-group w3-xxlarge d-flex justify-content-center mt-2"></i>
+			<p>Accounts</p>
+		</a>
 
-  <!-- Page Content -->
+		<a href="logoutAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center p-2 ml-auto">
+			<i class="fa fa-sign-out w3-xxlarge d-flex justify-content-center mt-2"></i>
+			<p>Log Out</p>
+		</a>
+	</nav>
+
   <div class="w3-padding-large" id="main">
     <!-- Header/Home -->
     <div class=" w3-padding-16 w3-center" id="home">
@@ -82,39 +86,37 @@ $row = mysqli_fetch_array($result);
         <div class="w3-white w3-center w3-opacity w3-hover-opacity-off">
           <div class="card" style="width:w3">
             <div class="card-body">
-              <h3 class="card-title" style="font-weight:bold;">NEW GAME</h3>
+              <h3 class="card-title" style="font-weight:bold; font-style:italic;">NEW GAME</h3>
               <img class="object-fit-md-cover border rounded" src="https://clipart-library.com/images/6Tp5kxo6c.jpg" alt="Admin">
-              <p class="w3-light-grey w3-padding-8">
-                <a href="" class="btn btn-dark" role="button" data-bs-target="#modalCreateRoom">Create</a>
-              </p>
+              <div class="row d-flex justify-content-center">
+                <div class="col-3">
+                  <button type = "button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modal-createroom" style="margin-top: 10px; width: 10rem;">Create</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="modal fade" id="modalCreateRoom" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="modal-createroom">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
+              <h1 class="modal-title fs-3" style="font-weight:bold;"id="exampleModalLabel">Create Room</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-              <form>
-                <div class="mb-3">
-                  <label for="recipient-name" class="col-form-label">Recipient:</label>
-                  <input type="text" class="form-control" id="recipient-name">
-                </div>
-                <div class="mb-3">
-                  <label for="message-text" class="col-form-label">Message:</label>
-                  <textarea class="form-control" id="message-text"></textarea>
-                </div>
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Send message</button>
-            </div>
+            <form method="POST" action="createRoomLogic.php">
+              <div class="modal-body">
+                  <div class="mb-3">
+                    <label for="roomCode" class="col-form-label">Room Code</label>
+                    <input type="text" class="form-control" id="roomCode" name="roomCode">
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" name="create">Finish</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -123,11 +125,20 @@ $row = mysqli_fetch_array($result);
         <div class="w3-white w3-center w3-opacity w3-hover-opacity-off">
           <div class="card" style="width:w3">
             <div class="card-body">
-              <h3 class="card-title" style="font-weight:bold;">CARDS</h3>
+              <h3 class="card-title" style="font-weight:bold;font-style:italic;">CARDS</h3>
               <img class="object-fit-md-cover border rounded" src="https://clipart-library.com/images/6Tp5kxo6c.jpg" alt="Admin">
-              <p class="w3-light-grey w3-padding-8">
-                <a href="#activity" class="btn btn btn-dark" role="button" data-bs-toggle="button">Create</a>
-              </p>
+              <div class="row d-flex justify-content-center">
+                <div class="col-3">
+                  <form action="setSalesCard.php">
+                    <button type = "submit" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#moda-createcards" style="margin-top: 10px; width: 10rem;">Create</button>
+                  </form>
+                </div>
+                <div class="col-3">
+                  <form action="viewSalesCard.php">
+                    <button type = "submit" class="btn btn-danger" style="margin-top: 10px; width: 10rem;">View</button>
+                  </form>
+                </div>
+              </div>
             </div>
           </div>
           <div>
@@ -135,10 +146,53 @@ $row = mysqli_fetch_array($result);
         </div>
       </div>
 
-      <div class=" w3-row-padding w3-center" id="activity">
-        <div class="w3-padding-32" style="margin-top: 8px;">
-          <h2 class="w3-jumbo">Your Activity</h2>
-          <table class="table ActivityList">
+      <div class="modal fade" id="modal-createcards">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-3" style="font-weight:bold;"id="exampleModalLabel">Input Data Penjualan</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="mb-3">
+                  <label for="deck-id" class="col-form-label">ID Deck</label>
+                  <input type="text" class="form-control" id="deck-id">
+                </div>
+                <div class="mb-3">
+                  <label for="deck-id-sales" class="col-form-label">ID Sales</label>
+                  <input type="text" class="form-control" id="deck-id-sales">
+                </div>
+                <div class="mb-3">
+                  <label for="priority" class="col-form-label">Priority</label>
+                  <input type="text" class="form-control" id="priority">
+                </div>
+                <div class="mb-3">
+                  <label for="origin" class="col-form-label">Origin</label>
+                  <input type="text" class="form-control" id="origin">
+                </div>
+                <div class="mb-3">
+                  <label for="destination" class="col-form-label">Destination</label>
+                  <input type="text" class="form-control" id="destination">
+                </div>
+                <div class="mb-3">
+                  <label for="revenue" class="col-form-label">Revenue</label>
+                  <input type="text" class="form-control" id="revenue">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Finish</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class=" w3-row-padding w3-center">
+        <div class="w3-padding-32">
+          <h2 class="w3-jumbo mb-5" id="activity">Your Activity</h2>
+          <table class="table ActivityList mx-auto table-responsive-lg">
             <thead>
               <tr>
                 <th scope="col">No.</th>
@@ -178,7 +232,8 @@ $row = mysqli_fetch_array($result);
         </div>
       </div>
     </div>
-
+    
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 
 </html>

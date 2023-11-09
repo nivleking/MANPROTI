@@ -80,7 +80,13 @@
     <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="position: absolute; top: 10px;right: 10px; background-color: black; color: lightgrey;">
         Market Intelligence
     </button> -->
-
+    <div class = "d-flex justify-content-center mt-2">
+        <p style="color:red; font-weight:bold;">
+            <?php if (isset($_GET['error'])) {?>    
+                <?php echo $_GET['error'] ?>
+            <?php } ?>
+        </p>
+    </div>
     <table class="table table-bordered text-center " style = "margin-top: 10px;">
         <?php
             require 'connect.php';
