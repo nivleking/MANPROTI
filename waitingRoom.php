@@ -32,6 +32,7 @@
             <tr>
             <th scope="col">Team Name</th>
             <th scope="col">Status</th>
+            <th scope="col">Origin</th>
             </tr>
         </thead> 
         <tbody>
@@ -56,6 +57,7 @@
                 echo "<tr>
                     <td>$row[0]</td>
                     <td>$val</td>
+                    <td></td>
                     </tr>
                 ";
             }              

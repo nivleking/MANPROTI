@@ -23,8 +23,34 @@
                 <label for="priority">Nama Deck</label>
                 <input type="text" class="form-control" name="nama_deck" required>
             </div>
-            <button type="submit" class="btn btn-primary" name="addDeck">Submit</button>
-            <button class="btn btn-primary" name="backtoHome" >Back to Home</button>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#isiDataBay">
+            Submit
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="isiDataBay" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Detail Bay</h1>
+                </div>
+                <div class="modal-body">
+                    <?php
+                       for ($i = 0; $i < $_POST['qty_bay']; $i++) {
+                        echo '<label for="id_sales">Bay'.$i.'</label>
+                            <input type="number" class="form-control" name="namaBay'.$i.'" required>
+                            <label for="id_sales">Detail Nama</label>
+                            <input type="number" class="form-control" name="detailBay'.$i.'" required>';
+                        } 
+                    ?>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" name="addDeck">Save changes</button>
+                </div>
+                </div>
+            </div>
+            </div>
         </form>
 
         <?php
