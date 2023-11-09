@@ -1,5 +1,5 @@
 <?php
-	require 'connect.php';
+require 'connect.php';
 ?>
 
 <!DOCTYPE html>
@@ -15,6 +15,7 @@
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" id="theme-styles" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 	<style>
 		body,
@@ -101,7 +102,7 @@
 						</div>
 
 						<div class="pt-1 mb-4">
-							<button class="btn btn-info btn-lg btn-block" type="submit" name="register">Add Admin</button>
+							<button class="btn btn-info btn-lg btn-block" type="submit" name="register" id="register">Add Admin</button>
 						</div>
 
 						<!-- <p class="small d-flex justify-content-center">
@@ -117,7 +118,7 @@
 
 			<div class="col-6 mt-5">
 				<h4 class="d-flex justify-content-center">Admin List</h4>
-				<table class="table">
+				<table class="table" id="adminTable">
 					<thead>
 						<tr>
 							<th scope="col">ID</th>
@@ -126,7 +127,7 @@
 						</tr>
 					</thead>
 
-					<tbody>
+					<tbody id="listAdmin">
 						<?php
 						$sql = "SELECT * FROM admin";
 						$result = mysqli_query($con, $sql);
@@ -136,13 +137,11 @@
 								<td>$row[0]</td>
 								<td>$row[1]</td>
 								<td>
-									<form method='POST' action='#'>
-										<input type='hidden' name='#' value='$row[0]'>
-										<button type = 'submit' name='editAdmin' class='btn btn-link'>Edit</button> |
-
-										<input type='hidden' name='id_admin' value='$row[0]'>
-										<button type = 'submit' name='deleteAdmin' class='btn btn-link'>Delete</button>
-									</form>
+								<form method='POST' action=''>
+									<button type='submit' name='editAdmin' class='btn btn-link'>Edit</button> |
+									
+									<button type='submit' name='deleteAdmin' class='btn btn-link admin-del' id='' value='$row[0]'>Delete</button>
+								</form>
 								</td>
 								</tr>
 							";
@@ -153,81 +152,112 @@
 			</div>
 		</div>
 	</section>
+	<script>
+		$(document).ready(function() {
+			$(".admin-del").click(function(e) {
+				e.preventDefault()
+				// console.log("test")
 
-	<?php
-	if (isset($_POST['deleteAdmin'])) {
-		if (isset($_POST['id_admin'])) {
-			$id = $_POST['id_admin'];
-			$query = "DELETE FROM admin WHERE id_admin = '$id'";
-			$result = mysqli_query($con, $query);
-			if (mysqli_affected_rows($con) > 0 ) {
-				echo "<script>
-					Swal.fire({
-						icon: 'success',
-						title: 'Admin Deleted',
-						text: 'The admin has been successfully deleted.'
-					});
-				</script>";
-				exit();
-				// header("Refresh: 3");
-			}
-			else {
-				echo "<script>
-					Swal.fire({
-						icon: 'error',
-						title: 'Delete Failed',
-						text: 'Error ID Admin'
-					});
-				</script>";
-			}
-		}
-	}
+				let id_admin = $(this).val();
 
-	if (isset($_POST['register'])) {
-		$username = $_POST['usernameADM'];
-		$name = $_POST['nameADM'];
-		$password = $_POST['passwordADM'];
-		$confirmPassword = $_POST['passwordConfirmADM'];
-		$resultAll = mysqli_query($con, "SELECT * FROM admin");
+				$.ajax({
+					url: "adminExtension.php",
+					type: 'POST',
+					data: {
+						"deleteAdmin": 1,
+						"id_admin": id_admin
+					},
+					success: function(response) {
+						if (response === "1") {
+							console.log("sukes")
+							// location.reload()
+							// refreshTable();
+							$("#listAdmin").find(`[value='${id_admin}']`).closest('tr').remove();
 
-		while ($row = mysqli_fetch_assoc($resultAll)) {
-			// echo $row['id_admin'];
-			if ($row['id_admin'] === $username) {
-				echo "<script>
-						Swal.fire({
-							icon: 'error',
-							title: 'Register Failed',
-							text: 'ID Admin already exists'
-						});
-					</script>";
-				exit();
-			}
-		}
+							Swal.fire({
+								icon: 'success',
+								title: 'Admin Deleted',
+								text: 'The admin has been successfully deleted.'
+							});
 
-		if ($password !== $confirmPassword) {
-			// header("Location: registerAdmin.php?error=Your confirm password is incorrect");
-			echo "<script>
-					Swal.fire({
-						icon: 'error',
-						title: 'Register Failed',
-						text: 'Invalid confirm password'
-					});
-				</script>";
-			exit();
-		} else {
-			$query = "INSERT INTO admin VALUES('$username', '$name','$password', '0')";
-			$result = mysqli_query($con, $query);
-			echo "<script>
-					Swal.fire({
-						icon: 'success',
-						title: 'Admin Added',
-						text: 'The admin has been successfully added.'
-					});
-				</script>";
-			exit();
-		}
-	}
-	?>
+						} else if (response === "2") {
+							// console.log("sukess")
+							Swal.fire({
+								icon: 'error',
+								title: 'Delete Failed',
+								text: 'Error ID Admin'
+							});
+						}
+					},
+					error: function(err) {
+						console.log("sukes")
+						console.log(err)
+					}
+				});
+			});
+
+			$("#register").click(function(e) {
+				e.preventDefault()
+				let username = $('#form2Example18').val()
+				let name = $('#form2Example48').val()
+				let password = $('#form2Example28').val()
+				let confirmPassword = $("#form2Example38").val()
+				console.log("tes/")
+
+				$.ajax({
+					url: "adminExtension.php",
+					type: 'POST',
+					data: {
+						"register": 1,
+						'usernameADM': username,
+						"nameADM": name,
+						"passwordADM": password,
+						"passwordConfirmADM": confirmPassword
+					},
+					success: function(response) {
+						if (response === "1") {
+							Swal.fire({
+								icon: 'error',
+								title: 'Register Failed',
+								text: 'ID Admin already exists'
+							});
+						} else if (response === "2") {
+							Swal.fire({
+								icon: 'error',
+								title: 'Register Failed',
+								text: 'Invalid confirm password'
+							});
+						} else if (response === "3") {
+							$('#listAdmin').append(
+								`<tr>
+								<td>` + username + `</td>
+								<td>` + name + `</td>
+								<td>
+									<form method='POST' action='#'>
+										<input type='hidden' name='#' value='` + response.id_admin + `'>
+										<button type = 'submit' name='editAdmin' class='btn btn-link'>Edit</button> |
+
+										<input type='hidden' name='id_admin' value='` + response.id_admin + `'>
+										<button type = 'submit' name='deleteAdmin' class='btn btn-link admin-del' id='' data-id='<?php echo $row[0];?>'>Delete</button>
+									</form>
+								</td>
+								</tr>`
+							);
+
+							Swal.fire({
+								icon: 'success',
+								title: 'Admin Added',
+								text: 'The admin has been successfully added.'
+							});
+						}
+					},
+					error: function(err) {
+						console.log(err)
+					}
+				});
+			});
+		});
+	</script>
 </body>
 
 </html>
