@@ -56,6 +56,7 @@
                     echo "<tr>
                     <td>$row[0]</td>
                     <td>$val</td>
+                    <td></td>
                     </tr>
                 ";
                 }
