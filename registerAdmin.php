@@ -137,11 +137,7 @@ require 'connect.php';
 								<td>$row[0]</td>
 								<td>$row[1]</td>
 								<td>
-								<form method='POST' action=''>
-									<button type='submit' name='editAdmin' class='btn btn-link'>Edit</button> |
-									
-									<button type='submit' name='deleteAdmin' class='btn btn-link admin-del' id='' value='$row[0]'>Delete</button>
-								</form>
+									<button type='submit' name='deleteAdmin' class='btn btn-danger admin-del' id='' value='$row[0]'>Delete</button>
 								</td>
 								</tr>
 							";
@@ -233,22 +229,20 @@ require 'connect.php';
 								<td>` + username + `</td>
 								<td>` + name + `</td>
 								<td>
-									<form method='POST' action='#'>
-										<input type='hidden' name='#' value='` + response.id_admin + `'>
-										<button type = 'submit' name='editAdmin' class='btn btn-link'>Edit</button> |
-
-										<input type='hidden' name='id_admin' value='` + response.id_admin + `'>
-										<button type = 'submit' name='deleteAdmin' class='btn btn-link admin-del' id='' data-id='<?php echo $row[0];?>'>Delete</button>
-									</form>
+									<button type = 'submit' name='deleteAdmin' class='btn btn-danger admin-del' data-id='<?php echo $row[0]; ?>'>Delete</button>
 								</td>
 								</tr>`
 							);
 
-							Swal.fire({
-								icon: 'success',
-								title: 'Admin Added',
-								text: 'The admin has been successfully added.'
-							});
+							setTimeout(
+								Swal.fire({
+									icon: 'success',
+									title: 'Admin Added',
+									text: 'The admin has been successfully added.'
+								}),
+								5000)
+
+							// location.reload()	
 						}
 					},
 					error: function(err) {
