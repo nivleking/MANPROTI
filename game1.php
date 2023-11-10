@@ -79,9 +79,9 @@
         Market Intelligence
     </button> -->
 
-    <div class = "d-flex justify-content-center mt-2">
+    <div class="d-flex justify-content-center mt-2">
         <p style="color:red; font-weight:bold;">
-            <?php if (isset($_GET['error'])) {?>    
+            <?php if (isset($_GET['error'])) { ?>
                 <?php echo $_GET['error'] ?>
             <?php } ?>
         </p>
