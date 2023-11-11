@@ -30,6 +30,20 @@ if (isset($_POST['bongkar'])) {
                 $arr_enc = json_encode($arr);
                 $sql = "UPDATE user SET ship = '$arr_enc' WHERE team_name = '$id'";
                 $result = mysqli_query($con, $sql);
+
+                $pay = 2000;
+                
+                $sql = "SELECT * FROM user WHERE team_name = '$id'";
+                $result = mysqli_query($con,$sql);
+                $row = mysqli_fetch_array($result);
+                
+                $revenue = $row[6];
+                $revenue = $revenue - $pay;
+
+                $sql = "UPDATE user SET revenue = '$revenue' WHERE team_name = '$id'";
+                $result = mysqli_query($con,$sql);
+
+                header("Location: game1.php?error=Berhasil dibongkar");
                 
 
                 // echo ("<script LANGUAGE='JavaScript'>
@@ -46,6 +60,18 @@ if (isset($_POST['bongkar'])) {
                 $arr_enc = json_encode($arr);
                 $sql = "UPDATE user SET ship = '$arr_enc' WHERE team_name = '$id'";
                 $result = mysqli_query($con, $sql);
+
+                $pay = 2000;
+                
+                $sql = "SELECT * FROM user WHERE team_name = '$id'";
+                $result = mysqli_query($con,$sql);
+                $row = mysqli_fetch_array($result);
+                
+                $revenue = $row[6];
+                $revenue = $revenue - $pay;
+
+                $sql = "UPDATE user SET revenue = '$revenue' WHERE team_name = '$id'";
+                $result = mysqli_query($con,$sql);
                 header("Location: game1.php?error=Berhasil dibongkar");
                 // echo ("<script LANGUAGE='JavaScript'>
                 //                 window.alert('Berhasil Dibongkar');
@@ -59,7 +85,7 @@ if (isset($_POST['bongkar'])) {
                 //                     </script>");
             }
         }
-        if ($arr[$bay][$baris][$kolom] == 0) {
+        elseif ($arr[$bay][$baris][$kolom] == 0) {
             header("Location: game1.php?error=Tidak ada kontainer yang dapat dibongkar");
             // echo ("<script LANGUAGE='JavaScript'>
             //                         window.alert('Tidak ada kontainer yang dibongkar');
@@ -95,7 +121,6 @@ if (isset($_POST['pasang'])) {
                 //                 window.location.href='game1.php';
                 //                 </script>");
             } else {
-                echo "Berhasil";
                 $sql = "SELECT * FROM temp_container WHERE id_container = '$kontainer'";
                 $result = mysqli_query($con, $sql);
                 // Tidak ada kontainer pada stack
@@ -114,6 +139,18 @@ if (isset($_POST['pasang'])) {
                     $id = $_SESSION['username'];
                     $sql = "UPDATE user SET ship = '$arr_enc' WHERE team_name = '$id'";
                     $result = mysqli_query($con, $sql);
+
+                    $pay = 2000;
+                
+                    $sql = "SELECT * FROM user WHERE team_name = '$id'";
+                    $result = mysqli_query($con,$sql);
+                    $row = mysqli_fetch_array($result);
+                    
+                    $revenue = $row[6];
+                    $revenue = $revenue - $pay;
+
+                    $sql = "UPDATE user SET revenue = '$revenue' WHERE team_name = '$id'";
+                    $result = mysqli_query($con,$sql);
                     header("Location: game1.php?error=Kontainer berhasil dimasukkan");
                     // echo ("<script LANGUAGE='JavaScript'>
                     //                 window.alert('Kontainer Berhasil Dimasukan !');
@@ -161,11 +198,16 @@ if (isset($_POST['done'])) {
             }
         }
     }
+    // Clearing Container
+    $id = $_SESSION['username'];
+    $sql = "DELETE FROM temp_container WHERE id_user = '$id'";
+    $result = mysqli_query($con,$sql);
 
     echo ("<script LANGUAGE='JavaScript'>
                         window.alert('Section 1 Selesai !');
                         window.location.href='game2.php';
                         </script>");
+    
 }
 
 ?>

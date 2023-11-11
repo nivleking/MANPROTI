@@ -31,6 +31,18 @@
                                 $sql = "UPDATE user SET ship = '$arr_enc' WHERE team_name = '$id'";
                                 $result = mysqli_query($con,$sql);
 
+                                $pay = 2000;
+                
+                                $sql = "SELECT * FROM user WHERE team_name = '$id'";
+                                $result = mysqli_query($con,$sql);
+                                $row = mysqli_fetch_array($result);
+                                
+                                $revenue = $row[6];
+                                $revenue = $revenue - $pay;
+
+                                $sql = "UPDATE user SET revenue = '$revenue' WHERE team_name = '$id'";
+                                $result = mysqli_query($con,$sql);
+
                                 echo ("<script LANGUAGE='JavaScript'>
                                 window.alert('Berhasil Dibongkar');
                                 window.location.href='game2.php';
@@ -45,6 +57,18 @@
                                 $arr[$bay][$baris][$kolom] = 0;
                                 $arr_enc = json_encode($arr);
                                 $sql = "UPDATE user SET ship = '$arr_enc' WHERE team_name = '$id'";
+                                $result = mysqli_query($con,$sql);
+
+                                $pay = 2000;
+                
+                                $sql = "SELECT * FROM user WHERE team_name = '$id'";
+                                $result = mysqli_query($con,$sql);
+                                $row = mysqli_fetch_array($result);
+                                
+                                $revenue = $row[6];
+                                $revenue = $revenue - $pay;
+
+                                $sql = "UPDATE user SET revenue = '$revenue' WHERE team_name = '$id'";
                                 $result = mysqli_query($con,$sql);
 
                                 echo ("<script LANGUAGE='JavaScript'>
@@ -116,6 +140,19 @@
                                     $id = $_SESSION['username'];
                                     $sql = "UPDATE user SET ship = '$arr_enc' WHERE team_name = '$id'";
                                     $result = mysqli_query($con,$sql);
+
+                                    $pay = 2000;
+                
+                                    $sql = "SELECT * FROM user WHERE team_name = '$id'";
+                                    $result = mysqli_query($con,$sql);
+                                    $row = mysqli_fetch_array($result);
+                                    
+                                    $revenue = $row[6];
+                                    $revenue = $revenue - $pay;
+
+                                    $sql = "UPDATE user SET revenue = '$revenue' WHERE team_name = '$id'";
+                                    $result = mysqli_query($con,$sql);
+                                    
                                     echo ("<script LANGUAGE='JavaScript'>
                                     window.alert('Kontainer Berhasil Dimasukan !');
                                     window.location.href='game2.php';

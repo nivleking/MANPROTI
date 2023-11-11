@@ -976,6 +976,19 @@
             </tr>
         </thead>
     </table>
+    <!-- Menampilkan Pendapatan -->
+    <div class = text-center>
+        RP. <?php
+            $id = $_SESSION['username'];
+            $sql = "SELECT * FROM user WHERE team_name = '$id'";
+            $result = mysqli_query($con,$sql);
+            $row = mysqli_fetch_array($result);
+            
+            echo $row[6];
+
+            
+        ?>
+    </div>
     <div class="row" style="border: 0.25px solid">
         <div class="card col-5" style="border: 0.25px solid">
             <h2 style="margin-top: 10px; text-align: center">Sales Card</h2>
@@ -1004,12 +1017,14 @@
                     array_push($rows, $row);
                     $count = $count + 1;
                 }
-                $rand = $rows[random_int(0, $count - 1)];
+                $rand = $rows[random_int(0, $count-1)];
+
                 ?>
 
                 <div class="card mx-auto" style="text-align: center; width: 17rem;margin-top: 10px; border-width: 2px; border: 0.35px solid">
                     <div style="text-align: center;margin-top: 10px; font-weight: 950; font-size: 20px">
-                        SUB - <?php echo $rand[0] ?>
+                        SUB - <?php echo $rand[0];
+                        $_SESSION['rand'] = $rand[0];?>
                     </div>
 
                     <hr class="mx-auto" style="border-width: 2px; border: 0.25px solid; width: 90%; margin-top: 10px">
@@ -1068,7 +1083,7 @@
                             if ($rand[1] == "N-COMMIT") {
                                 echo "
                             <div class='col-6' style = 'text-align: right'>
-                                <button class = 'btn btn-success'>Accept</button>
+                                <button class = 'btn btn-success' name = 'accept'   >Accept</button>
                             </div>
                             <div class='col-6'>
                                 <button class = 'btn btn-danger' name = 'refuse'>Refuse</button>
@@ -1086,6 +1101,8 @@
 
                         </div>
                     </form>
+
+                    
 
                 </div>
 
