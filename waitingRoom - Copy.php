@@ -6,11 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-<h1>Room ID 
+    <h1>Room ID 
         <?php
         session_start();
         require 'connect.php';
-        echo $_SESSION['roomID_admin'];
+        echo $_SESSION['roomID'];
         ?>
     </h1>
     <table class="table">
@@ -21,13 +21,11 @@
                     </tr>
                 </thead> 
                 <tbody>
-                    <?php                                           
+                    <?php                                          
                     require 'connect.php';
-                    $room = $_SESSION['roomID_admin'];
-                    $stmt = $con->prepare("SELECT * FROM user WHERE id_room = ?");
-                    $stmt->bind_param("i", $room);
-                    $stmt->execute();
-                    $result = $stmt->get_result();
+                    $room = $_SESSION['roomID'];
+                    $sql = "SELECT * FROM user WHERE id_room = '$room' ";
+                    $result= mysqli_query($con,$sql);
                     
                     while($row = mysqli_fetch_array($result)){
                         if($row[3] == 1){
@@ -49,6 +47,26 @@
                     ?>
                     
                 </tbody>
-        </table>
+                </table>
+                
+                
+                <?php 
+                    require 'connect.php';
+                    $sql = "SELECT status FROM room WHERE id_room = ?";
+                    $stmt = $con->prepare($sql);
+                    $stmt->bind_param("i",$_SESSION["roomID"]);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    if (mysqli_fetch_array($result)[0] == 1) {
+                        header("Location: game.php");
+                    }
+                    else {
+                        echo '<h2>Waiting for Host To Start The Game</h2>';
+                    }
+                    exit()
+                
+                
+                ?>
+        
 </body>
 </html>

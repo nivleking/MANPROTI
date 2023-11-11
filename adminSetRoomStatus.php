@@ -7,5 +7,4 @@
     $stmt->bind_param("ii",$values,$room);
     $stmt->execute();
     header('Location : waitingRoom.php');
-
 ?>  

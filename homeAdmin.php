@@ -9,6 +9,7 @@
 </head>
 <body>
     <div class="row">
+
         <div class="col-6">
             <div class = "mt-3 d-flex justify-content-center ">
                 <h1>Welcome, 
@@ -85,6 +86,7 @@
                     }
                     else{
                         $val = 'Ongoing';
+
                     }
                     
                     echo "<tr>
@@ -100,10 +102,6 @@
             </table>		
         </div>
     </div>
-    <!-- Button trigger modal -->
-
-
-<!-- Modal -->
     
 </body>
 </html>
