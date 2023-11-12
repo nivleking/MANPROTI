@@ -1,5 +1,4 @@
 <?php
-
 	require 'connect.php';
 	if (isset($_POST['save'])) {
 		$username = $_POST['usernameADM'];
@@ -18,11 +17,10 @@
                     showConfirmButton: false,
                     timer: 3000
                 }).then(function() {
-                    window.location.href = 'activity.php';
+                    window.location.href = 'homeAdmin.php';
                 });
             </script>";
 		} else {
-			// header("Location: loginAdmin.php?error=Invalid username or password");
 			echo "<script>
 			    Swal.fire({
 			        icon: 'error',
@@ -30,10 +28,6 @@
 			        text: 'Invalid username or password'
 			    });
 			</script>";
-			// echo ("<script LANGUAGE='JavaScript'>
-			// window.alert('Invalid Username/Password');
-			// window.location.href='loginAdmin.php';
-			// </script>");
 		}
 	}
 	?>

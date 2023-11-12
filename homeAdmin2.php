@@ -9,7 +9,6 @@
 </head>
 <body>
     <div class="row">
-
         <div class="col-6">
             <div class = "mt-3 d-flex justify-content-center ">
                 <h1>Welcome, 
@@ -29,7 +28,8 @@
                     <div class="mb-3">
                         <label for="roomCode" class="form-label d-flex just">Room Code</label>
                         <input type="text" class="form-control" id="roomCode" name = "roomCode" placeholder="Input a room code">
-                        <select class="custom-select" aria-label="Default select example" name="idDeck" style="width: 15rem;margin-top: 20px;">
+                        <label for="idDeck" class="form-label d-flex just" style="margin-top: 10px;">Deck</label>
+                        <select class="custom-select" aria-label="Default select example" name="idDeck" style="width: 15rem;">
                             <?php 
                                 $sql = "SELECT id_deck FROM deck";
                                 $result = mysqli_query($con,$sql);
@@ -86,7 +86,6 @@
                     }
                     else{
                         $val = 'Ongoing';
-
                     }
                     
                     echo "<tr>
@@ -102,6 +101,10 @@
             </table>		
         </div>
     </div>
+    <!-- Button trigger modal -->
+
+
+<!-- Modal -->
     
 </body>
 </html>

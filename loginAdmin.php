@@ -71,7 +71,7 @@
                     showConfirmButton: false,
                     timer: 2500
                 }).then(function() {
-                    window.location.href = 'activity.php';
+                    window.location.href = 'homeAdmin.php';
                 });
             </script>";
 		} else {
