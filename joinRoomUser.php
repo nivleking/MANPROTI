@@ -41,11 +41,6 @@
         $row  = mysqli_fetch_array($sql); 
         if(!is_array($row))
         {
-            // echo ("<script LANGUAGE='JavaScript'>
-            // window.alert('Room ID tidak terdaftar');
-            // window.location.href='joinRoomUser.php';
-            // </script>");
-
 			echo "<script>
 			    Swal.fire({
 			        icon: 'error',

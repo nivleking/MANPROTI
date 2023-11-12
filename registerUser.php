@@ -48,11 +48,11 @@ require 'connect.php';
 
 <body class="w3">
 	<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
-		<a href="activity.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+		<a href="homeAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black">
 			<i class="fa fa-dashboard w3-xxlarge d-flex justify-content-center mt-2"></i>
 			<p>Home</p>
 		</a>
-		<a href="activity.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center">
+		<a href="homeAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center">
 			<i class="fa fa-ellipsis-h w3-xxlarge d-flex justify-content-center mt-2"></i>
 			<p>Activity</p>
 		</a>
