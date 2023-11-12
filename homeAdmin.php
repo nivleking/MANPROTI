@@ -100,16 +100,38 @@ $row = mysqli_fetch_array($result);
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
+            <div class="justify-content-center" style = "margin-left: 340px;margin-top: 20px">
+                <form method="POST" action="createRoomLogic.php" style = "width: 15rem">
+                    <div class="mb-3">
+                        <label for="roomCode" class="form-label d-flex just">Room Code</label>
+                        <input type="text" class="form-control" id="roomCode" name = "roomCode" placeholder="Input a room code">
+                        <label for="idDeck" class="form-label d-flex just" style="margin-top: 10px;">Deck</label>
+                        <select class="custom-select" aria-label="Default select example" name="idDeck" style="width: 15rem;">
+                            <?php 
+                                $sql = "SELECT id_deck FROM deck";
+                                $result = mysqli_query($con,$sql);
+                                while($row = mysqli_fetch_array($result)) {
+                                    echo "<option value=$row[0]>$row[0]</option>";
+                                }
+                            
+                            ?>
+                        </select>
+                    </div>
+                <button type="submit" class="btn btn-primary" name= "create" style="width: 15rem;">Create</button>
+                </form>
 
-      <div class="modal fade" id="modal-createroom">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-3" style="font-weight:bold;" id="exampleModalLabel">Create Room</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <form action="setSalesCard.php" style="margin-top: 20px;">
+                    <button type="submit" class="btn btn-primary" style = "width: 15rem">Sales Card</button>                
+                </form>
+                <form action="viewSalesCard.php" style="margin-top: 20px;">
+                    <button type="submit" class="btn btn-primary" style = "width: 15rem">View Sales</button>
+                </form>
+                <form action="createDeck.php" style="margin-top: 20px;">
+                    <button type="submit" class="btn btn-primary" style = "width: 15rem">Create Deck</button>
+                </form>
+                <form action="viewDeck.php" style="margin-top: 20px;">
+                    <button type="submit" class="btn btn-primary" style = "width: 15rem">View Deck</button>
+                </form>
             </div>
             <form method="POST" action="createRoomLogic.php">
               <div class="modal-body">
