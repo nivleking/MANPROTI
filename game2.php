@@ -1165,7 +1165,7 @@
                     <?php
                     $id = $_SESSION['username'];
 
-                    $sql = "SELECT * FROM temp_container WHERE id_user = '$id'";
+                    $sql = "SELECT * FROM temp_container2 WHERE id_user = '$id'";
                     $result = mysqli_query($con, $sql);
                     // $row = mysqli_fetch_array($result);
 
