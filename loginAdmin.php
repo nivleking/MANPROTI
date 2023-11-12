@@ -5,7 +5,11 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Admin Login</title>
+
+	<!-- Bootstrap -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<!-- Swal2 -->
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" id="theme-styles" />
 </head>
@@ -22,12 +26,6 @@
 							<h3 class="fw-normal mt-3 d-flex justify-content-center" style="letter-spacing: 0.5px; font-style:italic; font-size:38px;">
 								Cargo Master<br>
 								<h4 class="d-flex justify-content-center" style="font-style: italic;">Admin Login</h4>
-								<?php //if (isset($_GET['error'])) { 
-								?>
-								<!-- <p class="d-flex justify-content-center" style="color:red; font-weight:bold;"><?php //echo $_GET['error']; 
-																													?></p> -->
-								<?php //} 
-								?>
 							</h3>
 
 							<div class="form-outline mb-4">
@@ -47,38 +45,12 @@
 							<p class="small d-flex justify-content-center">
 								<a class="text-muted" href="forgotPasswordAdmin.php">Forgot password?</a>
 							</p>
-							<!-- <p class="d-flex justify-content-center">
-						Don't have an account?&nbsp
-						<a href="registerAdmin.php" class="link-info"> Register here</a>
-					</p> -->
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-	<!-- <div class = "container">
-		<div class = "row">
-			<div class = "col-9 mx-auto">
-				<div class="card center" style="width: 25rem;margin-top: 80px">
-				  <div class="card-body">
-				    <div class = "text-center" id = "title">
-				    	<h3>WELCOME!</h3>
-				    </div>
-				    <form action="adminDoLogin.php" method="post">
-				    	<label>Username</label>
-				    	<input type="text" class = "form-control" name="username">
-				    	<label>Password</label>
-				    	<input type="password" class = "form-control" name="password">
-				    	<br>
-				    	<br>
-				    	<button type="submit" name = "save">Login</button>
-				    </form>
-				  </div>
-				</div>
-			</div>	
-		</div>
-	</div> -->
 	<?php
 
 	require 'connect.php';
@@ -103,7 +75,6 @@
                 });
             </script>";
 		} else {
-			// header("Location: loginAdmin.php?error=Invalid username or password");
 			echo "<script>
 			    Swal.fire({
 			        icon: 'error',
@@ -111,10 +82,6 @@
 			        text: 'Invalid username or password'
 			    });
 			</script>";
-			// echo ("<script LANGUAGE='JavaScript'>
-			// window.alert('Invalid Username/Password');
-			// window.location.href='loginAdmin.php';
-			// </script>");
 		}
 	}
 	?>

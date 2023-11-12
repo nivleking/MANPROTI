@@ -79,9 +79,9 @@
         Market Intelligence
     </button> -->
 
-    <div class = "d-flex justify-content-center mt-2">
+    <div class="d-flex justify-content-center mt-2">
         <p style="color:red; font-weight:bold;">
-            <?php if (isset($_GET['error'])) {?>    
+            <?php if (isset($_GET['error'])) { ?>
                 <?php echo $_GET['error'] ?>
             <?php } ?>
         </p>
@@ -979,6 +979,18 @@
             </tr>
         </thead>
     </table>
+    <!-- Menampilkan Pendapatan -->
+    <div class = text-center>
+        RP. <?php
+            $id = $_SESSION['username'];
+            $sql = "SELECT * FROM user WHERE team_name = '$id'";
+            $result = mysqli_query($con,$sql);
+            $row = mysqli_fetch_array($result);
+            
+            echo $row[6];
+
+            
+        ?> 
     <div class="row">
         <div class="card col-6" style="border: 0.35px solid">
             <h2 style="margin-top: 10px; text-align: center">Controller</h2>
@@ -1020,14 +1032,14 @@
                     </div>
                 </div>
                 <div class="row" style="margin-top: 20px;margin-bottom: 20px;margin-left: 293px">
-                    <div class="col-2 text-right" style="margin-left: -15px">
-                        <button class="btn btn-success" type="submit" name="pasang">Pasang</button>
+                    <div class="col-2 text-right" style="margin-left: -20px">
+                        <button class="btn btn-success" type="submit" name="pasang">Load</button>
                     </div>
                     <div class="col-2 text-center">
-                        <button class="btn btn-danger" type="submit" name="bongkar" style="margin-left: 7px">Bongkar</button>
+                        <button class="btn btn-danger" type="submit" name="bongkar" style="margin-left: 8px">Unload</button>
                     </div>
                     <div class="col-2 text-left">
-                        <button class="btn btn-success" type="submit" name="done" style="margin-left: 20px">Done</button>
+                        <button class="btn btn-success" type="submit" name="done" style="margin-left: 25px">Done</button>
                     </div>
                 </div>
 
