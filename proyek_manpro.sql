@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 01, 2023 at 04:59 AM
+-- Generation Time: Nov 09, 2023 at 06:59 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -40,7 +40,7 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`id_admin`, `name_admin`, `password`, `status`) VALUES
 ('sam1', 'Samuel', '123', 0),
-('sam2', 'Samuel Ganteng', '123', 1);
+('sam2', '123', '123', 0);
 
 -- --------------------------------------------------------
 
@@ -84,6 +84,18 @@ INSERT INTO `container` (`id_container`, `asal_container`, `tujuan_container`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `deck`
+--
+
+CREATE TABLE `deck` (
+  `id_deck` int(11) NOT NULL,
+  `qty_bay` int(11) NOT NULL,
+  `nama_deck` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `room`
 --
 
@@ -99,11 +111,6 @@ CREATE TABLE `room` (
 --
 
 INSERT INTO `room` (`id_room`, `id_admin`, `status`, `tanggal`) VALUES
-(0, 'sam1', 0, '2023-10-30'),
-(13, 'sam1', 0, NULL),
-(15, 'sam1', 0, NULL),
-(115, 'sam1', 1, NULL),
-(123, 'sam1', 0, NULL),
 (124, 'sam1', 0, '2023-10-29'),
 (125, 'sam1', 0, '2023-10-29'),
 (126, 'sam1', 1, '2023-10-29'),
@@ -115,26 +122,18 @@ INSERT INTO `room` (`id_room`, `id_admin`, `status`, `tanggal`) VALUES
 (132, 'sam1', 1, '2023-10-30'),
 (133, 'sam1', 1, '2023-10-30'),
 (134, 'sam1', 1, '2023-10-30'),
+(135, 'sam1', 0, '2023-11-03'),
 (136, 'sam1', 1, '2023-10-30'),
-(157, 'sam1', 0, NULL),
+(137, 'sam1', 0, '2023-11-03'),
+(138, 'sam1', 0, '2023-11-05'),
+(139, 'sam1', 1, '2023-11-05'),
+(140, 'sam1', 1, '2023-11-07'),
+(141, 'sam1', 1, '2023-11-08'),
+(142, 'sam1', 1, '2023-11-09'),
+(150, 'sam1', 0, '2023-11-09'),
+(151, 'sam1', 0, '2023-11-09'),
 (174, 'sam1', 1, '2023-10-30'),
-(178, 'sam1', 0, NULL),
-(179, 'sam1', 0, NULL),
-(180, 'sam1', 0, '2023-10-29'),
-(181, 'sam1', 1, '2023-10-29'),
-(317, 'sam1', 1, NULL),
-(431, 'sam1', 0, NULL),
-(456, 'sam1', 1, NULL),
-(500, 'sam1', 0, NULL),
-(501, 'sam1', 0, NULL),
-(600, 'sam1', 0, NULL),
-(601, 'sam1', 1, NULL),
-(602, 'sam1', 0, NULL),
-(603, 'sam1', 1, NULL),
-(765, 'Akto', 0, NULL),
-(999, 'Akto', 0, NULL),
-(1111, 'sam1', 0, NULL),
-(11111, 'sam1', 1, NULL);
+(182, 'sam1', 1, '2023-11-06');
 
 -- --------------------------------------------------------
 
@@ -176,13 +175,12 @@ CREATE TABLE `temp_container` (
 INSERT INTO `temp_container` (`id_container`, `id_user`) VALUES
 (110, 'Vincentius'),
 (111, 'Vincentius'),
-(112, 'Vincen'),
-(112, 'Vincentius'),
 (113, 'Vincentius'),
 (115, 'Vincentius'),
 (103, 'Vincentius'),
 (114, 'Vincentius'),
-(100, 'Vincentius');
+(100, 'Vincentius'),
+(107, 'Vincentius');
 
 -- --------------------------------------------------------
 
@@ -195,16 +193,17 @@ CREATE TABLE `user` (
   `password` varchar(5) NOT NULL,
   `ship` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`ship`)),
   `status` int(1) DEFAULT NULL,
-  `id_room` int(4) NOT NULL
+  `id_room` int(4) NOT NULL,
+  `origin` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`team_name`, `password`, `ship`, `status`, `id_room`) VALUES
-('Aktonoi', '12345', '[[[\"109\",0,0],[\"100\",\"101\",\"107\"],[\"102\",\"105\",\"103\"]],[[0,0,0],[\"104\",0,0],[\"106\",0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 1, 132),
-('Vincentius', '12345', '[[[\"107\",0,0],[\"109\",\"101\",0],[\"102\",\"105\",0]],[[0,0,0],[\"104\",0,0],[\"106\",0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 1, 174);
+INSERT INTO `user` (`team_name`, `password`, `ship`, `status`, `id_room`, `origin`) VALUES
+('Aktonoi', '12345', '[[[\"109\",0,0],[\"100\",\"101\",\"107\"],[\"102\",\"105\",\"103\"]],[[0,0,0],[\"104\",0,0],[\"106\",0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 1, 132, ''),
+('Vincentius', '12345', '[[[\"112\",0,0],[\"109\",\"101\",0],[\"102\",\"105\",0]],[[0,0,0],[\"104\",0,0],[\"106\",0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 1, 142, '');
 
 --
 -- Indexes for dumped tables
@@ -221,6 +220,12 @@ ALTER TABLE `admin`
 --
 ALTER TABLE `container`
   ADD PRIMARY KEY (`id_container`);
+
+--
+-- Indexes for table `deck`
+--
+ALTER TABLE `deck`
+  ADD PRIMARY KEY (`id_deck`);
 
 --
 -- Indexes for table `room`

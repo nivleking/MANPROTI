@@ -55,11 +55,11 @@
                 $deck = $_POST['id_deck'];
                 $id = $_POST['id_sales'];
                 $priority = $_POST['priority'];
-                var_dump($_POST['priority']);
+                // var_dump($_POST['priority']);
                 $origin = $_POST['origin'];
-                var_dump($_POST['origin']);
+                // var_dump($_POST['origin']);
                 $dest = $_POST['destination'];
-                var_dump($_POST['destination']);
+                // var_dump($_POST['destination']);
                 $qty = random_int($_POST['quantity_lower'], $_POST['quantity_upper']);
                 $revenue = $_POST['revenue'];
                 $sql = "INSERT INTO sales VALUES (?,?,?,?,?,?,?)";
