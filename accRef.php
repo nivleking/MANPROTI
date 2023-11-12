@@ -9,7 +9,7 @@ if(isset($_POST['accept'])){
 
     while($row = mysqli_fetch_array($result)){
         $val = $row[0];
-        $sql = "INSERT INTO temp_container VALUES ('$val','$id')";
+        $sql = "INSERT INTO temp_container2 VALUES ('$val','$id')";
         $result2 = mysqli_query($con,$sql);    
     }
 

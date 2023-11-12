@@ -188,7 +188,7 @@ if (isset($_POST['done'])) {
                     $sql = "SELECT * FROM container where id_container = '$id_con'";
                     $result = mysqli_query($con, $sql);
                     $row = mysqli_fetch_array($result);
-                    if ($row[2] == 'MKS') {
+                    if ($row[2] == 'SUB') {
                         echo ("<script LANGUAGE='JavaScript'>
                                     window.alert('Masih ada kontainer yang perlu dibongkar !');
                                     window.location.href='game1.php';
@@ -198,15 +198,39 @@ if (isset($_POST['done'])) {
             }
         }
     }
-    // Clearing Container
-    $id = $_SESSION['username'];
-    $sql = "DELETE FROM temp_container WHERE id_user = '$id'";
-    $result = mysqli_query($con,$sql);
 
-    echo ("<script LANGUAGE='JavaScript'>
-                        window.alert('Section 1 Selesai !');
-                        window.location.href='game2.php';
+    // Checking Container Apakah Container yang seharusnya diturunkan merup
+    $sql = "SELECT * FROM temp_container WHERE id_user = '$id'";
+    $result = mysqli_query($con,$sql);
+    $fatal = 0;
+    while($row = mysqli_fetch_array($result)){
+        $cont = $row[0];
+        $sql = "SELECT * FROM container WHERE id_container = '$cont'";
+        $result2 = mysqli_query($con,$sql);
+        $row2 = mysqli_fetch_array($result2);
+        
+        if($row2[2] != "SUB"){
+            $fatal = $fatal + 1;
+        }
+    }
+    if ($fatal > 0){
+        echo ("<script LANGUAGE='JavaScript'>
+                        window.alert('Check lagi apakah Container yang diturunkan sudah sesuai semua !');
+                        window.location.href='game1.php';
                         </script>");
+    }
+    else{
+         // Clearing Container
+        $id = $_SESSION['username'];
+        $sql = "DELETE FROM temp_container WHERE id_user = '$id'";
+        $result = mysqli_query($con,$sql);
+
+        echo ("<script LANGUAGE='JavaScript'>
+                            window.alert('Section 1 Selesai !');
+                            window.location.href='game2.php';
+                            </script>");
+
+    }
     
 }
 
