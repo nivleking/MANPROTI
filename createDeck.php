@@ -76,7 +76,6 @@
                         </div>
                         <div class="modal-body">
                             <?php
-                            if (isset($_POST['qty_bay'])) {
                                 for ($i = 0; $i < $_POST['qty_bay']; $i++) {
                                     echo '
                                     <label for="id_sales">Bay' . $i . '</label>
@@ -84,7 +83,6 @@
                                     <label for="id_sales">Detail Nama</label>
                                     <input type="number" class="form-control" name="detailBay' . $i . '" required>';
                                 }    
-                            }
                             ?>
                         </div>
                         <div class="modal-footer">
