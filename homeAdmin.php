@@ -28,7 +28,8 @@
                     <div class="mb-3">
                         <label for="roomCode" class="form-label d-flex just">Room Code</label>
                         <input type="text" class="form-control" id="roomCode" name = "roomCode" placeholder="Input a room code">
-                        <select class="custom-select" aria-label="Default select example" name="idDeck" style="width: 15rem;margin-top: 20px;">
+                        <label for="idDeck" class="form-label d-flex just" style="margin-top: 10px;">Deck</label>
+                        <select class="custom-select" aria-label="Default select example" name="idDeck" style="width: 15rem;">
                             <?php 
                                 $sql = "SELECT id_deck FROM deck";
                                 $result = mysqli_query($con,$sql);

@@ -8,6 +8,49 @@
     <title>Waiting Room</title>
 </head>
 <body>
+    <!-- Button trigger modal -->
+    
+
+    <!-- Modal -->
+    <div class="modal fade" id="#SetGame" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST">
+                    <?php
+                        $roomAdmin = $_SESSION['roomID_admin'];
+                        $sql = "SELECT bay.id_bay, bay.nama_bay, bay.detail_bay FROM bay INNER JOIN room ON bay.id_deck=room.id_deck WHERE id_room = '$roomAdmin'";
+                        $listBay = mysqli_query($con,$sql);
+                        
+
+                        $sql = "SELECT * FROM user WHERE id_room = '$room'";
+                        $listUser = mysqli_query($con,$sql);
+                        while($user = mysqli_fetch_array($listUser)){
+                            echo "<label for='origin".$user[0]."' class='form-label d-flex just' style='margin-top: 10px;width: 30rem'>".$user[0]."</label>";
+                            echo "<select class='custom-select' aria-label='Default select example' name='origin".$user[0]."' style='width: 30rem;'>";
+                                while($row = mysqli_fetch_array($listBay)){
+                                    echo "<option value=$row[0]>$row[1]</option>";
+                                }
+                            echo "</select>";
+                        }
+                    ?>
+                    <label for="roomCode" class="form-label d-flex just">Jumlah Ronde</label>
+                    <input type="number" class="form-control" id="roomCode" name = "ronde" placeholder="Jumlah ronde">    
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" name="adminStart">Save changes</button>
+            </div>
+            </div>
+        </div>
+    </div>
     <div class="row m-5">
     <h1>
         Room ID 
@@ -27,6 +70,7 @@
         ?>
 
     </h1>
+    
     <table class="table">
         <thead>
             <tr>
@@ -72,15 +116,25 @@
             $result = $stmt->get_result();
             if (isset($_SESSION['usernameADM'])) {
                 if ($_SESSION['usernameADM'] == mysqli_fetch_array($result)[0]) {
-                    echo '<form method = "POST"><button name="adminStart" id="adminStart" class="btn btn-primary">Start</button>
+                    echo '<form method = "POST"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#SetGame">Start</button>
                     <button name="swap" id="swap" class="btn btn-danger">Swap</button></form>';
                     if (isset($_POST['adminStart'])) {
                         $room = $_SESSION['roomID_admin'];
+                        while($row = mysqli_fetch_array($listUser)){
+                            $origin = $_SESSION['origin'.$row[0].''];
+                            $team_name = $row[0];
+                            $sql = "UPDATE user SET origin=$origin WHERE team_name = $team_name";
+                            mysqli_query($con,$sql);
+                        }
+                        
                         $value = 1;
-                        $sql = "UPDATE room SET status=? WHERE id_room =?";
+                        $ronde = $_SESSION['ronde'];
+                        $sql = "UPDATE room SET status=?, ronde=? WHERE id_room =?";
                         $stmt = $con->prepare($sql);
-                        $stmt->bind_param("ii",$value,$room);
-                        $stmt->execute();                
+                        $stmt->bind_param("iii",$value,$ronde,$room);
+                        $stmt->execute(); 
+                        
+                        
                     }
                     if (isset($_POST['swap'])) {
                         $sql = "SELECT ship FRom user WHERE team_name = 'Actonoi'";
