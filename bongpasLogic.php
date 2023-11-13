@@ -188,7 +188,7 @@ if (isset($_POST['done'])) {
                     $sql = "SELECT * FROM container where id_container = '$id_con'";
                     $result = mysqli_query($con, $sql);
                     $row = mysqli_fetch_array($result);
-                    if ($row[2] == 'SUB') {
+                    if ($row[2] == 'SBY') {
                         echo ("<script LANGUAGE='JavaScript'>
                                     window.alert('Masih ada kontainer yang perlu dibongkar !');
                                     window.location.href='game1.php';
@@ -208,14 +208,13 @@ if (isset($_POST['done'])) {
         $sql = "SELECT * FROM container WHERE id_container = '$cont'";
         $result2 = mysqli_query($con,$sql);
         $row2 = mysqli_fetch_array($result2);
-        
-        if($row2[2] != "SUB"){
+        if($row2[2] != "SBY"){
             $fatal = $fatal + 1;
         }
     }
     if ($fatal > 0){
         echo ("<script LANGUAGE='JavaScript'>
-                        window.alert('Check lagi apakah Container yang diturunkan sudah sesuai semua !');
+                        window.alert('$fatal Check lagi apakah Container yang diturunkan sudah sesuai semua !');
                         window.location.href='game1.php';
                         </script>");
     }

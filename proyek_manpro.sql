@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 09, 2023 at 06:59 AM
+-- Generation Time: Nov 12, 2023 at 05:48 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -45,6 +45,29 @@ INSERT INTO `admin` (`id_admin`, `name_admin`, `password`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `bay`
+--
+
+CREATE TABLE `bay` (
+  `id_bay` int(11) NOT NULL,
+  `nama_bay` text NOT NULL,
+  `detail_bay` text NOT NULL,
+  `id_deck` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `bay`
+--
+
+INSERT INTO `bay` (`id_bay`, `nama_bay`, `detail_bay`, `id_deck`) VALUES
+(1, 'SUB', 'Surabaya', 1),
+(2, 'MDN', 'Medan', 1),
+(3, 'JYP', 'Jayapura', 1),
+(4, 'MKS', 'Makassar', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `container`
 --
 
@@ -70,16 +93,16 @@ INSERT INTO `container` (`id_container`, `asal_container`, `tujuan_container`, `
 (107, 'BPP', 'SBY', 3),
 (108, 'BPP', 'JKT', 5),
 (109, 'JKT', 'SBY', 4),
-(110, 'SUB', 'MDN', 5),
-(111, 'SUB', 'MDN', 5),
-(112, 'SUB', 'MDN', 5),
-(113, 'SUB', 'MDN', 5),
-(114, 'SUB', 'MDN', 5),
-(115, 'SUB', 'MDN', 5),
-(116, 'SUB', 'MDN', 5),
-(117, 'SUB', 'MDN', 5),
-(118, 'SUB', 'MDN', 5),
-(119, 'SUB', 'MDN', 5);
+(110, 'SBY', 'MDN', 5),
+(111, 'SBY', 'MDN', 5),
+(112, 'SBY', 'MDN', 5),
+(113, 'SBY', 'MDN', 5),
+(114, 'SBY', 'MDN', 5),
+(115, 'SBY', 'MDN', 5),
+(116, 'SBY', 'MDN', 5),
+(117, 'SBY', 'MDN', 5),
+(118, 'SBY', 'MDN', 5),
+(119, 'SBY', 'MDN', 5);
 
 -- --------------------------------------------------------
 
@@ -103,37 +126,43 @@ CREATE TABLE `room` (
   `id_room` int(4) NOT NULL,
   `id_admin` varchar(4) NOT NULL,
   `status` int(1) NOT NULL,
-  `tanggal` date DEFAULT NULL
+  `tanggal` date DEFAULT NULL,
+  `id_deck` int(11) NOT NULL,
+  `ronde` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `room`
 --
 
-INSERT INTO `room` (`id_room`, `id_admin`, `status`, `tanggal`) VALUES
-(124, 'sam1', 0, '2023-10-29'),
-(125, 'sam1', 0, '2023-10-29'),
-(126, 'sam1', 1, '2023-10-29'),
-(127, 'sam1', 1, '2023-10-29'),
-(128, 'sam1', 1, '2023-10-29'),
-(129, 'sam1', 1, '2023-10-29'),
-(130, 'sam1', 1, '2023-10-29'),
-(131, 'sam1', 1, '2023-10-30'),
-(132, 'sam1', 1, '2023-10-30'),
-(133, 'sam1', 1, '2023-10-30'),
-(134, 'sam1', 1, '2023-10-30'),
-(135, 'sam1', 0, '2023-11-03'),
-(136, 'sam1', 1, '2023-10-30'),
-(137, 'sam1', 0, '2023-11-03'),
-(138, 'sam1', 0, '2023-11-05'),
-(139, 'sam1', 1, '2023-11-05'),
-(140, 'sam1', 1, '2023-11-07'),
-(141, 'sam1', 1, '2023-11-08'),
-(142, 'sam1', 1, '2023-11-09'),
-(150, 'sam1', 0, '2023-11-09'),
-(151, 'sam1', 0, '2023-11-09'),
-(174, 'sam1', 1, '2023-10-30'),
-(182, 'sam1', 1, '2023-11-06');
+INSERT INTO `room` (`id_room`, `id_admin`, `status`, `tanggal`, `id_deck`, `ronde`) VALUES
+(0, 'sam1', 0, '2023-11-12', 0, 0),
+(124, 'sam1', 0, '2023-10-29', 0, 0),
+(125, 'sam1', 0, '2023-10-29', 0, 0),
+(126, 'sam1', 1, '2023-10-29', 0, 0),
+(127, 'sam1', 1, '2023-10-29', 0, 0),
+(128, 'sam1', 1, '2023-10-29', 0, 0),
+(129, 'sam1', 1, '2023-10-29', 0, 0),
+(130, 'sam1', 1, '2023-10-29', 0, 0),
+(131, 'sam1', 1, '2023-10-30', 0, 0),
+(132, 'sam1', 1, '2023-10-30', 0, 0),
+(133, 'sam1', 1, '2023-10-30', 0, 0),
+(134, 'sam1', 1, '2023-10-30', 0, 0),
+(135, 'sam1', 0, '2023-11-03', 0, 0),
+(136, 'sam1', 1, '2023-10-30', 0, 0),
+(137, 'sam1', 0, '2023-11-03', 0, 0),
+(138, 'sam1', 0, '2023-11-05', 0, 0),
+(139, 'sam1', 1, '2023-11-05', 0, 0),
+(140, 'sam1', 1, '2023-11-07', 0, 0),
+(141, 'sam1', 1, '2023-11-08', 0, 0),
+(142, 'sam1', 1, '2023-11-09', 0, 0),
+(150, 'sam1', 0, '2023-11-09', 0, 0),
+(151, 'sam1', 0, '2023-11-09', 0, 0),
+(152, 'sam1', 0, '2023-11-12', 0, 0),
+(174, 'sam1', 1, '2023-10-30', 0, 0),
+(182, 'sam1', 1, '2023-11-06', 0, 0),
+(500, 'sam1', 1, '2023-11-12', 0, 0),
+(502, 'sam1', 1, '2023-11-12', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -155,7 +184,7 @@ CREATE TABLE `sales` (
 --
 
 INSERT INTO `sales` (`id_sales`, `priority`, `origin`, `destination`, `quantity`, `revenue`) VALUES
-(5, 'COMMIT', 'SUB', 'MDN', 10, 10000);
+(5, 'COMMIT', 'SBY', 'MDN', 10, 10000);
 
 -- --------------------------------------------------------
 
@@ -168,19 +197,16 @@ CREATE TABLE `temp_container` (
   `id_user` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `temp_container`
+-- Table structure for table `temp_container2`
 --
 
-INSERT INTO `temp_container` (`id_container`, `id_user`) VALUES
-(110, 'Vincentius'),
-(111, 'Vincentius'),
-(113, 'Vincentius'),
-(115, 'Vincentius'),
-(103, 'Vincentius'),
-(114, 'Vincentius'),
-(100, 'Vincentius'),
-(107, 'Vincentius');
+CREATE TABLE `temp_container2` (
+  `id_container` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -194,16 +220,16 @@ CREATE TABLE `user` (
   `ship` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`ship`)),
   `status` int(1) DEFAULT NULL,
   `id_room` int(4) NOT NULL,
-  `origin` varchar(255) NOT NULL
+  `origin` text NOT NULL,
+  `revenue` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`team_name`, `password`, `ship`, `status`, `id_room`, `origin`) VALUES
-('Aktonoi', '12345', '[[[\"109\",0,0],[\"100\",\"101\",\"107\"],[\"102\",\"105\",\"103\"]],[[0,0,0],[\"104\",0,0],[\"106\",0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 1, 132, ''),
-('Vincentius', '12345', '[[[\"112\",0,0],[\"109\",\"101\",0],[\"102\",\"105\",0]],[[0,0,0],[\"104\",0,0],[\"106\",0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 1, 142, '');
+INSERT INTO `user` (`team_name`, `password`, `ship`, `status`, `id_room`, `origin`, `revenue`) VALUES
+('Vincentius', '123', '[[[\"113\",\"115\",\"100\"],[\"111\",101,\"114\"],[\"110\",105,\"103\"]],[[\"112\",0,0],[104,0,0],[106,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 1, 502, 'SBY', 380000);
 
 --
 -- Indexes for dumped tables
@@ -214,6 +240,12 @@ INSERT INTO `user` (`team_name`, `password`, `ship`, `status`, `id_room`, `origi
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id_admin`);
+
+--
+-- Indexes for table `bay`
+--
+ALTER TABLE `bay`
+  ADD PRIMARY KEY (`id_bay`);
 
 --
 -- Indexes for table `container`
@@ -248,6 +280,12 @@ ALTER TABLE `user`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `bay`
+--
+ALTER TABLE `bay`
+  MODIFY `id_bay` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `container`

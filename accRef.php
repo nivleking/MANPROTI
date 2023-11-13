@@ -31,8 +31,8 @@ if(isset($_POST['accept'])){
     $result = mysqli_query($con,$sql);
 
 
-    // $sql = "DELETE FROM sales WHERE id_sales = '$sales'";
-    // $result = mysqli_query($con,$sql);
+    $sql = "DELETE FROM sales WHERE id_sales = '$sales'";
+    $result = mysqli_query($con,$sql);
     echo ("<script LANGUAGE='JavaScript'>
                 window.location.href='game2.php';
             </script>");
