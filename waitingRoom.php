@@ -126,84 +126,43 @@
             }              
             ?>
         </tbody>
-        </table>
-        <?php 
-            $sql = "SELECT id_admin FROM room WHERE id_room= ?";
-            $stmt = $con->prepare($sql);
-            $stmt->bind_param("i",$_SESSION["roomID_admin"]);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            if (isset($_SESSION['usernameADM'])) {
-                if ($_SESSION['usernameADM'] == mysqli_fetch_array($result)[0]) {
-                    echo '<form method = "POST"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#SetGame">Start</button>
-                    <button name="swap" id="swap" class="btn btn-danger">Swap</button></form>';
-                    if (isset($_POST['adminStart'])) {
-                        $room = $_SESSION['roomID_admin'];
-                        while($row = mysqli_fetch_array($listUser)){
-                            $origin = $_SESSION['origin'.$row[0].''];
-                            $team_name = $row[0];
-                            $sql = "UPDATE user SET origin=$origin WHERE team_name = $team_name";
-                            mysqli_query($con,$sql);
-                        }
-                        
-                        $value = 1;
-                        $ronde = $_SESSION['ronde'];
-                        $sql = "UPDATE room SET status=?, ronde=? WHERE id_room =?";
-                        $stmt = $con->prepare($sql);
-                        $stmt->bind_param("iii",$value,$ronde,$room);
-                        $stmt->execute(); 
-                        
-                        
-                    }
-                    if (isset($_POST['swap'])) {
-                        $sql = "SELECT ship FRom user WHERE team_name = 'Actonoi'";
-                        $result = mysqli_query($con,$sql);
-                        $row = mysqli_fetch_array($result);
-                        $hasil1 = json_decode($row['ship']);
-
-                        $sql2 = "SELECT ship FRom user WHERE team_name = 'Vincentius'";
-                        $result2 = mysqli_query($con,$sql2);
-                        $row2 = mysqli_fetch_array($result2);
-                        $hasil2 = json_decode($row2['ship']);
-
-                        $swap1 = json_encode($hasil2);
-                        $swap2 = json_encode($hasil1);
-                        $sql3 = "UPDATE user SET ship = '$swap1' WHERE team_name = 'Actonoi'";
-                        $sql4 = "UPDATE user SET ship = '$swap2' WHERE team_name = 'Vincentius'";
-                        $result3 = mysqli_query($con,$sql3);
-                        $result4 = mysqli_query($con,$sql4);
-                    }                    
-                }
-            }
-            ?>
-            </tbody>
-        </table>
-        <?php
+    </table>
+    <?php 
         $sql = "SELECT id_admin FROM room WHERE id_room= ?";
         $stmt = $con->prepare($sql);
-        $stmt->bind_param("i", $_SESSION["roomID_admin"]);
+        $stmt->bind_param("i",$_SESSION["roomID_admin"]);
         $stmt->execute();
         $result = $stmt->get_result();
         if (isset($_SESSION['usernameADM'])) {
             if ($_SESSION['usernameADM'] == mysqli_fetch_array($result)[0]) {
-                echo '<form method = "POST"><button name="adminStart" id="adminStart" class="btn btn-primary">Start</button>
-                    <button name="swap" id="swap" class="btn btn-danger">Swap</button></form>';
+                echo '<form method = "POST"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#SetGame">Start</button>
+                <button name="swap" id="swap" class="btn btn-danger">Swap</button></form>';
                 if (isset($_POST['adminStart'])) {
                     $room = $_SESSION['roomID_admin'];
+                    while($row = mysqli_fetch_array($listUser)){
+                        $origin = $_POST['origin'.$row[0].''];
+                        $team_name = $row[0];
+                        $sql = "UPDATE user SET origin=$origin WHERE team_name = $team_name";
+                        mysqli_query($con,$sql);
+                    }
+                    
                     $value = 1;
-                    $sql = "UPDATE room SET status=? WHERE id_room =?";
+                    $ronde = $_POST['ronde'];
+                    $sql = "UPDATE room SET status=?, ronde=? WHERE id_room =?";
                     $stmt = $con->prepare($sql);
-                    $stmt->bind_param("ii", $value, $room);
-                    $stmt->execute();
+                    $stmt->bind_param("iii",$value,$ronde,$room);
+                    $stmt->execute(); 
+                    
+                    
                 }
                 if (isset($_POST['swap'])) {
                     $sql = "SELECT ship FRom user WHERE team_name = 'Actonoi'";
-                    $result = mysqli_query($con, $sql);
+                    $result = mysqli_query($con,$sql);
                     $row = mysqli_fetch_array($result);
                     $hasil1 = json_decode($row['ship']);
 
                     $sql2 = "SELECT ship FRom user WHERE team_name = 'Vincentius'";
-                    $result2 = mysqli_query($con, $sql2);
+                    $result2 = mysqli_query($con,$sql2);
                     $row2 = mysqli_fetch_array($result2);
                     $hasil2 = json_decode($row2['ship']);
 
@@ -211,46 +170,43 @@
                     $swap2 = json_encode($hasil1);
                     $sql3 = "UPDATE user SET ship = '$swap1' WHERE team_name = 'Actonoi'";
                     $sql4 = "UPDATE user SET ship = '$swap2' WHERE team_name = 'Vincentius'";
-                    $result3 = mysqli_query($con, $sql3);
-                    $result4 = mysqli_query($con, $sql4);
-                }
+                    $result3 = mysqli_query($con,$sql3);
+                    $result4 = mysqli_query($con,$sql4);
+                }                    
             }
-        } else {
-            echo '<div class="userCont" id="userCont"></div>';
         }
-        ?>
-        <script>
-            // var userCont = document.getElementById('userCont');
-            // adminStart.addEventListener('click', function() {
-            //     var xhr = new XMLHttpRequest();
-            //     xhr.onreadystatechange = function() {
-            //         if (xhr.readyState  == 4 && xhr.status == 200) {
-            //             userCont.innerHTML = xhr.responseText;
-            //         }
-            //     }
+    ?>
+    <script>
+        // var userCont = document.getElementById('userCont');
+        // adminStart.addEventListener('click', function() {
+        //     var xhr = new XMLHttpRequest();
+        //     xhr.onreadystatechange = function() {
+        //         if (xhr.readyState  == 4 && xhr.status == 200) {
+        //             userCont.innerHTML = xhr.responseText;
+        //         }
+        //     }
 
-            //     xhr.open('GET','userWaitingRoomLogic.php',true);
-            //     xhr.send()
-            // });
+        //     xhr.open('GET','userWaitingRoomLogic.php',true);
+        //     xhr.send()
+        // });
 
-            setInterval(() => {
-                $.ajax({
-                    url: 'userWaitingRoomLogic.php',
-                    method: 'POST',
-                    success: function(temp) {
-                        console.log(temp)
-                        if (temp == 'sukses') {
-                            window.location.href = 'game1.php';
+        setInterval(() => {
+            $.ajax({
+                url: 'userWaitingRoomLogic.php',
+                method: 'POST',
+                success: function(temp) {
+                    console.log(temp)
+                    if (temp == 'sukses') {
+                        window.location.href = 'game1.php';
 
-                        } else {
-                            $('#userCont').html('<h2>Waiting for Host To Start The Game</h2>');
-                        }
+                    } else {
+                        $('#userCont').html('<h2>Waiting for Host To Start The Game</h2>');
                     }
+                }
 
-                });
-            }, 1000);
-        </script>
-    </div>
+            });
+        }, 1000);
+    </script>
 </body>
 
 </html>
