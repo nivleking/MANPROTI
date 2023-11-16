@@ -1352,11 +1352,12 @@
             });
             
             $("#bongkar").click(function(e) {
+                e.preventDefault()
                 let bay = $('#bay').val()
                 let baris = $('#baris').val()
                 let kolom = $('#kolom').val()
                 let kontainer = $('#kontainer').val()
-                console.log("tes")
+                // console.log("tes")
                 $.ajax({
                     url: "bongpasLogic2.php",
                     type: 'POST',
