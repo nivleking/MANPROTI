@@ -1065,7 +1065,6 @@
                         ?>
                     </td>
                 </tr>
-
             </tbody>
         </table>
         <!-- </div> -->
@@ -1169,8 +1168,8 @@
                     ?>
                 </div>
             </div>
-
         </div>
+    </div>
     <script>
         $(document).ready(function() {
             $("#pasang").click(function(e) {
@@ -1178,7 +1177,7 @@
                 let bay = $('#bay').val()
                 let baris = $('#baris').val()
                 let kolom = $('#kolom').val()
-                // let kontainer = $('#kontainer').val()
+                let kontainer = $('#kontainer').val()
 
                 $.ajax({
                     url: "bongpasLogic.php",
@@ -1187,8 +1186,8 @@
                         "pasang": 1,
                         "bay": bay,
                         "baris": baris,
-                        "kolom": kolom
-                        // "kontainer": kontainer
+                        "kolom": kolom,
+                        "kontainer": kontainer
                     },
                     success: function(response) {
                         if (response === "1") {
@@ -1204,7 +1203,7 @@
                             Swal.fire({
                                 position: "top-end",
                                 icon: "error",
-                                title: "Pemasangan kontainer melayang (tidak ada kontainer di bawahnya)",
+                                title: "Pemasangan kontainer melayang!",
                                 showConfirmButton: false,
                                 timer: 1000
                             });
@@ -1213,7 +1212,7 @@
                             Swal.fire({
                                 position: "top-end",
                                 icon: "error",
-                                title: "Sudah terdapat kontainer",
+                                title: "Sudah terdapat kontainer!",
                                 showConfirmButton: false,
                                 timer: 1000
                             });
@@ -1222,11 +1221,20 @@
                             Swal.fire({
                                 // position: "top-end",
                                 icon: "success",
-                                title: "Kontainer berhasil dimasukkan",
+                                title: "Kontainer berhasil dimasukkan!",
                                 showConfirmButton: false,
                                 timer: 1000
                             }).then(function() {
                                 location.reload()
+                            });
+                        }
+                        else if (response === "5") {
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "error",
+                                title: "Kontainer ID tidak terdaftar!",
+                                showConfirmButton: false,
+                                timer: 1000
                             });
                         }
                     },
@@ -1267,7 +1275,7 @@
                             Swal.fire({
                                 position: "top-end",
                                 icon: "error",
-                                title: "Pembongkaran kontainer menumpuk (terdapat kontainer di atasnya)",
+                                title: "Pembongkaran kontainer menumpuk!",
                                 showConfirmButton: false,
                                 timer: 1000
                             });
@@ -1276,7 +1284,7 @@
                             Swal.fire({
                                 position: "top-end",
                                 icon: "error",
-                                title: "Tidak ada kontainer yang dapat dibongkar",
+                                title: "Tidak ada kontainer yang dapat dibongkar!",
                                 showConfirmButton: false,
                                 timer: 1000
                             });
@@ -1285,7 +1293,7 @@
                             Swal.fire({
                                 // position: "top-end",
                                 icon: "success",
-                                title: "Kontainer berhasil dibongkar",
+                                title: "Kontainer berhasil dibongkar!",
                                 showConfirmButton: false,
                                 timer: 1000
                             }).then(function() {
