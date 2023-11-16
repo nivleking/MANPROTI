@@ -24,6 +24,11 @@ require 'connect.php';
 	<!-- JQUERY -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
+	<!-- DATATABLES -->
+	<link rel="stylesheet" type="" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+	<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+
 	<style>
 		.w3-row-padding img {
 			margin-bottom: 12px
@@ -35,7 +40,7 @@ require 'connect.php';
 		}
 
 		#main {
-			margin-left: 120px
+			margin-left: 100px
 		}
 
 		@media only screen and (max-width: 600px) {
@@ -48,27 +53,30 @@ require 'connect.php';
 
 <body class="w3">
 	<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
-		<a href="homeAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black">
-			<i class="fa fa-dashboard w3-xxlarge d-flex justify-content-center mt-2"></i>
-			<p>Home</p>
-		</a>
-		<a href="homeAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center">
-			<i class="fa fa-ellipsis-h w3-xxlarge d-flex justify-content-center mt-2"></i>
-			<p>Activity</p>
-		</a>
-		<a href="accounts.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center">
-			<i class="fa fa-group w3-xxlarge d-flex justify-content-center mt-2"></i>
-			<p>Accounts</p>
-		</a>
+		<div class="flex-column">
+			<a href="homeAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+				<i class="fa fa-dashboard w3-xxlarge d-flex justify-content-center mt-2"></i>
+				<p>Home</p>
+			</a>
+			<a href="homeAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center">
+				<i class="fa fa-ellipsis-h w3-xxlarge d-flex justify-content-center mt-2"></i>
+				<p>Activity</p>
+			</a>
+			<a href="accounts.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center">
+				<i class="fa fa-group w3-xxlarge d-flex justify-content-center mt-2"></i>
+				<p>Accounts</p>
+			</a>
 
-		<a href="logoutAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center p-2 ml-auto">
-			<i class="fa fa-sign-out w3-xxlarge d-flex justify-content-center mt-1"></i>
-			<p>Log Out</p>
-		</a>
+			<a href="logoutAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center p-2 ml-auto">
+				<i class="fa fa-sign-out w3-xxlarge d-flex justify-content-center mt-1"></i>
+				<p>Log Out</p>
+			</a>
+		</div>
 	</nav>
-	<section class="w3-padding-large">
-		<div class="w3-padding-16 w3-center">
-			<div class="d-flex justify-content-center">
+
+	<siv class="w3-padding-large" id="main">
+		<div class="w3-padding-16 d-flex justify-content-center">
+			<div class="w3-row-padding">
 				<form style="width: 23rem;" method="POST" action="" class="">
 					<h4 class="d-flex justify-content-center">Add User</h4>
 					<div class="form-outline mb-4">
@@ -86,39 +94,44 @@ require 'connect.php';
 						<input type="password" id="form2Example38" class="form-control form-control-lg" name="teamPasswordConfirm" required />
 					</div>
 
-					<div class="pt-1 mb-4">
+					<div class="pt-1 mb-4 d-flex justify-content-center">
 						<button class="btn btn-primary btn-lg btn-block" type="submit" name="register" id='register'>Add User</button>
 					</div>
 				</form>
 			</div>
-			<h4 class="d-flex justify-content-center">User List</h4>
-			<table class="table">
-				<thead>
-					<tr>
-						<th scope="col">ID</th>
-						<th scope="col">Actions</th>
-					</tr>
-				</thead>
 
-				<tbody id="listUser">
-					<?php
-					$sql = "SELECT * FROM user";
-					$result = mysqli_query($con, $sql);
+			<div class="w3-row-padding">
+				<div class="w3-padding-16 ps-5">
+					<table class="table table-striped table-bordered table-responsive" id="userTable" style="width: 100vh;">
+						<thead>
+							<tr>
+								<th scope="col">ID</th>
+								<th scope="col">Actions</th>
+							</tr>
+						</thead>
 
-					while ($row = mysqli_fetch_array($result)) {
-						echo "<tr>
+						<tbody id="listUser">
+							<?php
+							$sql = "SELECT * FROM user";
+							$result = mysqli_query($con, $sql);
+
+							while ($row = mysqli_fetch_array($result)) {
+								echo "<tr>
 								<td>$row[0]</td>
 								<td>
 									<button type='submit' name='deleteUser' class='btn btn-danger user-del' id='' value='$row[0]'>Delete</button>
 								</td>
 								</tr>
 							";
-					}
-					?>
-				</tbody>
-			</table>
+							}
+							?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
 		</div>
-	</section>
+	</siv>
 
 	<script>
 		$(document).ready(function() {
@@ -140,7 +153,7 @@ require 'connect.php';
 							// location.reload()
 							// refreshTable();
 							$("#listUser").find(`[value='${id_user}']`).closest('tr').remove();
-							
+
 							Swal.fire({
 								icon: 'success',
 								title: 'User Deleted',
@@ -162,6 +175,8 @@ require 'connect.php';
 				});
 			})
 
+			let table = $('#userTable').DataTable()
+
 			$("#register").click(function(e) {
 				e.preventDefault()
 
@@ -174,7 +189,7 @@ require 'connect.php';
 					url: "userExtension.php",
 					type: 'POST',
 					data: {
-						"register":1,
+						"register": 1,
 						"teamUserName": username,
 						"teamPassword": password,
 						"teamPasswordConfirm": confirmPassword
@@ -187,31 +202,32 @@ require 'connect.php';
 								title: 'Register Failed',
 								text: 'ID Team User already exists'
 							});
-						}
-						else if (response == "2") {
+						} else if (response == "2") {
 							console.log("halow")
 							Swal.fire({
 								icon: 'error',
 								title: 'Register Failed',
 								text: 'Invalid confirm password'
 							});
-						}
-						else if (response == "3") {
-							console.log("halo")
+						} else if (response == "3") {
+							// console.log("halo")
+							table.destroy()
 							$('#listUser').append(
 								`<tr>
-									<td>`+ username + `</td>
+									<td>` + username + `</td>
 									<td>
-										<button type='submit' name='deleteUser' class='btn btn-danger user-del' data-id='<?php echo $row[0];  ?>'>Delete</button>
+										<button type='submit' name='deleteUser' class='btn btn-danger user-del' value='` + username + `'>Delete</button>
 									</td>
 								</tr>`
 							);
-							
+
 							Swal.fire({
 								icon: 'success',
 								title: 'User Added',
 								text: 'The user has been successfully added.'
 							});
+
+							table = $("#userTable").DataTable().draw()
 						}
 					},
 					error: function(err) {

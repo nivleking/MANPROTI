@@ -29,6 +29,11 @@ $row = mysqli_fetch_array($result);
     <!-- JQUERY -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
+    <!-- DATATABLES -->
+    <link rel="stylesheet" type="" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+
     <style>
         .w3-row-padding img {
             margin-bottom: 12px
@@ -49,6 +54,12 @@ $row = mysqli_fetch_array($result);
             }
         }
     </style>
+
+    <script>
+        $(document).ready(function() {
+            $('#tableRoom').DataTable()
+        })
+    </script>
 </head>
 
 <body class="w3">
@@ -213,7 +224,7 @@ $row = mysqli_fetch_array($result);
             <div class=" w3-row-padding w3-center">
                 <div class="w3-padding-32">
                     <h2 class="w3-jumbo mb-5" id="activity">Your Activity</h2>
-                    <table class="table ActivityList mx-auto table-responsive-lg">
+                    <table class="table table-striped" id="tableRoom">
                         <thead>
                             <tr>
                                 <th scope="col">No.</th>

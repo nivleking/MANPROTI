@@ -25,6 +25,11 @@ require 'connect.php';
 	<!-- JQUERY -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
+	<!-- DATATABLES -->
+	<link rel="stylesheet" type="" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+	<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+
 	<style>
 		.w3-row-padding img {
 			margin-bottom: 12px
@@ -36,7 +41,7 @@ require 'connect.php';
 		}
 
 		#main {
-			margin-left: 120px
+			margin-left: 100px;
 		}
 
 		@media only screen and (max-width: 600px) {
@@ -49,29 +54,31 @@ require 'connect.php';
 
 <body class="w3">
 	<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
-		<a href="homeAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black">
-			<i class="fa fa-dashboard w3-xxlarge d-flex justify-content-center mt-2"></i>
-			<p>Home</p>
-		</a>
-		<a href="homeAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center">
-			<i class="fa fa-ellipsis-h w3-xxlarge d-flex justify-content-center mt-2"></i>
-			<p>Activity</p>
-		</a>
-		<a href="accounts.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center">
-			<i class="fa fa-group w3-xxlarge d-flex justify-content-center mt-2"></i>
-			<p>Accounts</p>
-		</a>
+		<div class="flex-column">
+			<a href="homeAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+				<i class="fa fa-dashboard w3-xxlarge d-flex justify-content-center mt-2"></i>
+				<p>Home</p>
+			</a>
+			<a href="homeAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center">
+				<i class="fa fa-ellipsis-h w3-xxlarge d-flex justify-content-center mt-2"></i>
+				<p>Activity</p>
+			</a>
+			<a href="accounts.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center">
+				<i class="fa fa-group w3-xxlarge d-flex justify-content-center mt-2"></i>
+				<p>Accounts</p>
+			</a>
 
-		<a href="logoutAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center p-2 ml-auto">
-			<i class="fa fa-sign-out w3-xxlarge d-flex justify-content-center mt-1"></i>
-			<p>Log Out</p>
-		</a>
+			<a href="logoutAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center p-2 ml-auto">
+				<i class="fa fa-sign-out w3-xxlarge d-flex justify-content-center mt-1"></i>
+				<p>Log Out</p>
+			</a>
+		</div>
 	</nav>
-	<section class="w3-padding-large">
-		<div class="w3-padding-16 w3-center">
-			<div class="d-flex justify-content-center">
-				<form style="width: 23rem;" method="POST" action="" class="">
 
+	<div class="w3-padding-large" id="main">
+		<div class="w3-padding-16 d-flex justify-content-center">
+			<div class="w3-row-padding">
+				<form style="width: 23rem;" method="POST" action="" class="">
 					<h4 class="d-flex justify-content-center">Add Admin</h4>
 					<?php if (isset($_GET['error'])) { ?>
 						<p class="d-flex justify-content-center" style="color:red; font-weight:bold;"><?php echo $_GET['error']; ?></p>
@@ -103,43 +110,47 @@ require 'connect.php';
 				</form>
 			</div>
 
-			<h4 class="d-flex justify-content-center">Admin List</h4>
-			<table class="table" id="adminTable" class="w3-">
-				<thead>
-					<tr>
-						<th scope="col">ID</th>
-						<th scope="col">Name</th>
-						<th scope="col">Actions</th>
-					</tr>
-				</thead>
+			<div class="w3-row-padding">
+				<div class="w3-padding-16 ps-5">
+					<!-- <h4 class="d-flex justify-content-center"></h4> -->
+					<table class="table table-bordered table-responsive table-striped" id="adminTable" style="width:100vh;">
+						<thead>
+							<tr>
+								<th scope="col">ID</th>
+								<th scope="col">Actions</th>
+							</tr>
+						</thead>
 
-				<tbody id="listAdmin">
-					<?php
-					$sql = "SELECT * FROM admin";
-					$result = mysqli_query($con, $sql);
+						<tbody id="listAdmin">
+							<?php
+							$sql = "SELECT * FROM admin";
+							$result = mysqli_query($con, $sql);
 
-					while ($row = mysqli_fetch_array($result)) {
-						echo "<tr>
+							while ($row = mysqli_fetch_array($result)) {
+								echo "<tr>
 								<td>$row[0]</td>
-								<td>$row[1]</td>
 								<td>
 									<button type='submit' name='deleteAdmin' class='btn btn-danger admin-del' id='' value='$row[0]'>Delete</button>
 								</td>
 								</tr>
 							";
-					}
-					?>
-				</tbody>
-			</table>
+							}
+							?>
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
-	</section>
+	</div>
 	<script>
 		$(document).ready(function() {
-			$(".admin-del").click(function(e) {
+			let table = $('#adminTable').DataTable()
+
+			$(document.body).on('click', '.admin-del', function(e) {
 				e.preventDefault()
 				// console.log("test")
-
 				let id_admin = $(this).val();
+				console.log(id_admin)
 
 				$.ajax({
 					url: "adminExtension.php",
@@ -150,16 +161,18 @@ require 'connect.php';
 					},
 					success: function(response) {
 						if (response === "1") {
-							console.log("sukes")
+							// console.log("sukes")
 							// location.reload()
 							// refreshTable();
+							// table.destroy()
 							$("#listAdmin").find(`[value='${id_admin}']`).closest('tr').remove();
-
+							// table = $("#adminTable").DataTable().draw()
 							Swal.fire({
 								icon: 'success',
 								title: 'Admin Deleted',
 								text: 'The admin has been successfully deleted.'
 							});
+							
 
 						} else if (response === "2") {
 							// console.log("sukess")
@@ -176,6 +189,7 @@ require 'connect.php';
 					}
 				});
 			});
+
 
 			$("#register").click(function(e) {
 				e.preventDefault()
@@ -209,12 +223,12 @@ require 'connect.php';
 								text: 'Invalid confirm password'
 							});
 						} else if (response === "3") {
+							table.destroy()
 							$('#listAdmin').append(
 								`<tr>
 								<td>` + username + `</td>
-								<td>` + name + `</td>
 								<td>
-									<button type = 'submit' name='deleteAdmin' class='btn btn-danger admin-del' data-id='<?php echo $row[0]; ?>'>Delete</button>
+									<button type = 'submit' name='deleteAdmin' class='btn btn-danger admin-del' value='` + username + `'>Delete</button>
 								</td>
 								</tr>`
 							);
@@ -226,9 +240,11 @@ require 'connect.php';
 									text: 'The admin has been successfully added.'
 								}),
 								5000)
-
-							// location.reload()	
+							table = $("#adminTable").DataTable().draw()
+							// location.reload()
 						}
+
+						// table.reload()	
 					},
 					error: function(err) {
 						console.log(err)

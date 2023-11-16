@@ -11,6 +11,7 @@ if (isset($_POST['bongkar'])) {
     $arr = json_decode($row['ship']);
 
     if ($bay < 0 || $baris < 0 || $kolom < 0 || count($arr) <= $bay || count($arr[$bay]) <= $baris || count($arr[$bay][$baris]) <= $kolom) {
+        // Pakai sweetalert
         header("Location: game1.php?error=Pembongkaran Kontainer melebihi koordinat");
         // echo ("<script LANGUAGE='JavaScript'>
         //                 window.alert('Melebihi koordinat');
@@ -43,6 +44,7 @@ if (isset($_POST['bongkar'])) {
                 $sql = "UPDATE user SET revenue = '$revenue' WHERE team_name = '$id'";
                 $result = mysqli_query($con,$sql);
 
+                // Pakai sweetalert
                 header("Location: game1.php?error=Berhasil dibongkar");
                 
 
@@ -72,6 +74,7 @@ if (isset($_POST['bongkar'])) {
 
                 $sql = "UPDATE user SET revenue = '$revenue' WHERE team_name = '$id'";
                 $result = mysqli_query($con,$sql);
+                // Pakai sweetalert
                 header("Location: game1.php?error=Berhasil dibongkar");
                 // echo ("<script LANGUAGE='JavaScript'>
                 //                 window.alert('Berhasil Dibongkar');
@@ -86,6 +89,7 @@ if (isset($_POST['bongkar'])) {
             }
         }
         elseif ($arr[$bay][$baris][$kolom] == 0) {
+            // Pakai sweetalert
             header("Location: game1.php?error=Tidak ada kontainer yang dapat dibongkar");
             // echo ("<script LANGUAGE='JavaScript'>
             //                         window.alert('Tidak ada kontainer yang dibongkar');
@@ -106,6 +110,7 @@ if (isset($_POST['pasang'])) {
     $row = mysqli_fetch_array($result);
     $arr = json_decode($row['ship']);
     if ($bay < 0 || $baris < 0 || $kolom < 0 || count($arr) <= $bay || count($arr[$bay]) <= $baris || count($arr[$bay][$baris]) <= $kolom) {
+        // Pakai sweetalert
         header("Location: game1.php?error=Pemasangan Kontainer melebihi koordinat");
         // echo ("<script LANGUAGE='JavaScript'>
         //                         window.alert('Melebihi Koordinat');
@@ -115,6 +120,7 @@ if (isset($_POST['pasang'])) {
         // Mengecek apakah koordinat tersebut masih kosong
         if ($arr[$bay][$baris][$kolom] == 0) {
             if (($baris < count($arr[$bay]) - 1) && $arr[$bay][$baris + 1][$kolom] == 0) {
+                // Pakai sweetalert
                 header("Location: game1.php?error=Pemasangan Kontainer melayang (tidak ada kontainer di bawahnya)");
                 // echo ("<script LANGUAGE='JavaScript'>
                 //                 window.alert('Melayang, coba di cek kembali');
@@ -125,6 +131,7 @@ if (isset($_POST['pasang'])) {
                 $result = mysqli_query($con, $sql);
                 // Tidak ada kontainer pada stack
                 if (mysqli_num_rows($result) == 0) {
+                    // Pakai sweetalert
                     header("Location: game1.php?error=Kontainer ID tidak terdaftar");
                     // echo ("<script LANGUAGE='JavaScript'>
                     //                     window.alert('Kontainer ID tidak terdaftar');
@@ -151,6 +158,8 @@ if (isset($_POST['pasang'])) {
 
                     $sql = "UPDATE user SET revenue = '$revenue' WHERE team_name = '$id'";
                     $result = mysqli_query($con,$sql);
+                    
+                    // Pakai sweetalert
                     header("Location: game1.php?error=Kontainer berhasil dimasukkan");
                     // echo ("<script LANGUAGE='JavaScript'>
                     //                 window.alert('Kontainer Berhasil Dimasukan !');
@@ -159,6 +168,7 @@ if (isset($_POST['pasang'])) {
                 }
             }
         } else {
+            // Pakai sweetalert
             header("Location: game1.php?error=Sudah terdapat kontainer");
             // echo ("<script LANGUAGE='JavaScript'>
             //                         window.alert('Sudah ada kontainer !');
@@ -174,14 +184,10 @@ if (isset($_POST['done'])) {
     $result = mysqli_query($con, $sql);
     $row = mysqli_fetch_array($result);
     $arr = json_decode($row['ship']);
-
-
     for ($i = 0; $i < count($arr); $i++) {
         for ($j = 0; $j < count($arr[$i]); $j++) {
             for ($k = 0; $k < count($arr[$i][$j]); $k++) {
-
                 // // Mengecek yang ada kontainernya saja
-
                 if ($arr[$i][$j][$k] > 0) {
 
                     $id_con = $arr[$i][$j][$k];
@@ -189,6 +195,7 @@ if (isset($_POST['done'])) {
                     $result = mysqli_query($con, $sql);
                     $row = mysqli_fetch_array($result);
                     if ($row[2] == 'SBY') {
+                        // Pakai sweetalert
                         echo ("<script LANGUAGE='JavaScript'>
                                     window.alert('Masih ada kontainer yang perlu dibongkar !');
                                     window.location.href='game1.php';
@@ -213,6 +220,7 @@ if (isset($_POST['done'])) {
         }
     }
     if ($fatal > 0){
+        // Pakai sweetalert
         echo ("<script LANGUAGE='JavaScript'>
                         window.alert('$fatal Check lagi apakah Container yang diturunkan sudah sesuai semua !');
                         window.location.href='game1.php';
@@ -220,6 +228,7 @@ if (isset($_POST['done'])) {
     }
     else{
          // Clearing Container
+         // Pakai sweetalert
         $id = $_SESSION['username'];
         $sql = "DELETE FROM temp_container WHERE id_user = '$id'";
         $result = mysqli_query($con,$sql);

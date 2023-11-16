@@ -73,12 +73,12 @@
                 echo '<form method = "POST">
                         <button name="adminStart" id="adminStart" class="btn btn-primary">Start</button>
                         <button name="swap" id="swap" class="btn btn-danger">Swap</button>
-                    </form>
-                        <script>
-                            setInterval(function(){
-                            location.reload();
-                            }, 6000);
-                        </script>';
+                    </form>';
+                        // <script>
+                        //     setInterval(function(){
+                        //     location.reload();
+                        //     }, 6000);
+                        // </script>';
                 if (isset($_POST['adminStart'])) {
                     $room = $_SESSION['roomID_admin'];
                     $value = 1;
@@ -106,14 +106,14 @@
                     $result4 = mysqli_query($con, $sql4);
                     
                     
-                    $sql = "SELECT * FROM temp_container WHERE id_user = 'Vincentius'";
+                    $sql = "SELECT * FROM temp_container2 WHERE id_user = 'Vincentius'";
                     $result = mysqli_query($con,$sql);
                     
                     $count = 0;
                     while($row = mysqli_fetch_array($result)){
                         $count = $count + 1;
                     }
-                    
+                    echo $count;
                     if($count > 0){
                         $pay = $count * 1500;
 
