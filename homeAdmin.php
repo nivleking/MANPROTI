@@ -224,7 +224,7 @@ $row = mysqli_fetch_array($result);
             <div class=" w3-row-padding w3-center">
                 <div class="w3-padding-32">
                     <h2 class="w3-jumbo mb-5" id="activity">Your Activity</h2>
-                    <table class="table table-striped" id="tableRoom">
+                    <table class="table table-bordered table-striped" id="tableRoom">
                         <thead>
                             <tr>
                                 <th scope="col">No.</th>

@@ -12,7 +12,9 @@ if (isset($_POST['bongkar'])) {
 
     if ($bay < 0 || $baris < 0 || $kolom < 0 || count($arr) <= $bay || count($arr[$bay]) <= $baris || count($arr[$bay][$baris]) <= $kolom) {
         // Pakai sweetalert
-        header("Location: game1.php?error=Pembongkaran Kontainer melebihi koordinat");
+        echo "1";
+        exit();
+        // header("Location: game1.php?error=Pembongkaran Kontainer melebihi koordinat");
         // echo ("<script LANGUAGE='JavaScript'>
         //                 window.alert('Melebihi koordinat');
         //                 window.location.href='game1.php';
@@ -31,21 +33,23 @@ if (isset($_POST['bongkar'])) {
                 $arr_enc = json_encode($arr);
                 $sql = "UPDATE user SET ship = '$arr_enc' WHERE team_name = '$id'";
                 $result = mysqli_query($con, $sql);
-
-                $pay = 2000;
                 
-                $sql = "SELECT * FROM user WHERE team_name = '$id'";
-                $result = mysqli_query($con,$sql);
-                $row = mysqli_fetch_array($result);
+                echo"4";
+                exit();
+                // $pay = 2000;
                 
-                $revenue = $row[6];
-                $revenue = $revenue - $pay;
+                // $sql = "SELECT * FROM user WHERE team_name = '$id'";
+                // $result = mysqli_query($con,$sql);
+                // $row = mysqli_fetch_array($result);
+                
+                // $revenue = $row[6];
+                // $revenue = $revenue - $pay;
 
-                $sql = "UPDATE user SET revenue = '$revenue' WHERE team_name = '$id'";
-                $result = mysqli_query($con,$sql);
+                // $sql = "UPDATE user SET revenue = '$revenue' WHERE team_name = '$id'";
+                // $result = mysqli_query($con,$sql);
 
                 // Pakai sweetalert
-                header("Location: game1.php?error=Berhasil dibongkar");
+                // header("Location: game1.php?error=Berhasil dibongkar");
                 
 
                 // echo ("<script LANGUAGE='JavaScript'>
@@ -63,25 +67,29 @@ if (isset($_POST['bongkar'])) {
                 $sql = "UPDATE user SET ship = '$arr_enc' WHERE team_name = '$id'";
                 $result = mysqli_query($con, $sql);
 
-                $pay = 2000;
+                // $pay = 2000;
                 
-                $sql = "SELECT * FROM user WHERE team_name = '$id'";
-                $result = mysqli_query($con,$sql);
-                $row = mysqli_fetch_array($result);
+                // $sql = "SELECT * FROM user WHERE team_name = '$id'";
+                // $result = mysqli_query($con,$sql);
+                // $row = mysqli_fetch_array($result);
                 
-                $revenue = $row[6];
-                $revenue = $revenue - $pay;
+                // $revenue = $row[6];
+                // $revenue = $revenue - $pay;
 
-                $sql = "UPDATE user SET revenue = '$revenue' WHERE team_name = '$id'";
-                $result = mysqli_query($con,$sql);
+                // $sql = "UPDATE user SET revenue = '$revenue' WHERE team_name = '$id'";
+                // $result = mysqli_query($con,$sql);
                 // Pakai sweetalert
-                header("Location: game1.php?error=Berhasil dibongkar");
+                echo"4";
+                exit();
+                // header("Location: game1.php?error=Berhasil dibongkar");
                 // echo ("<script LANGUAGE='JavaScript'>
                 //                 window.alert('Berhasil Dibongkar');
                 //                 window.location.href='game1.php';
                 //                 </script>");
             } else {
-                header("Location: game1.php?error=ERROR! Ada kontainer di atasnya");
+                echo "2";
+                exit();
+                // header("Location: game1.php?error=ERROR! Ada kontainer di atasnya");
                 // echo ("<script LANGUAGE='JavaScript'>
                 //                     window.alert('Ada Kontainer Diatasnya');
                 //                     window.location.href='game1.php';
@@ -90,12 +98,15 @@ if (isset($_POST['bongkar'])) {
         }
         elseif ($arr[$bay][$baris][$kolom] == 0) {
             // Pakai sweetalert
-            header("Location: game1.php?error=Tidak ada kontainer yang dapat dibongkar");
+            echo "3";
+            exit();
+            // header("Location: game1.php?error=Tidak ada kontainer yang dapat dibongkar");
             // echo ("<script LANGUAGE='JavaScript'>
             //                         window.alert('Tidak ada kontainer yang dibongkar');
             //                         window.location.href='game1.php';
             //                         </script>");
         }
+        exit();
     }
 }
 
@@ -109,9 +120,12 @@ if (isset($_POST['pasang'])) {
     $result = mysqli_query($con, $sql);
     $row = mysqli_fetch_array($result);
     $arr = json_decode($row['ship']);
+
     if ($bay < 0 || $baris < 0 || $kolom < 0 || count($arr) <= $bay || count($arr[$bay]) <= $baris || count($arr[$bay][$baris]) <= $kolom) {
         // Pakai sweetalert
-        header("Location: game1.php?error=Pemasangan Kontainer melebihi koordinat");
+        echo "1";
+        exit();
+        // header("Location: game1.php?error=Pemasangan Kontainer melebihi koordinat");
         // echo ("<script LANGUAGE='JavaScript'>
         //                         window.alert('Melebihi Koordinat');
         //                         window.location.href='game1.php';
@@ -121,60 +135,77 @@ if (isset($_POST['pasang'])) {
         if ($arr[$bay][$baris][$kolom] == 0) {
             if (($baris < count($arr[$bay]) - 1) && $arr[$bay][$baris + 1][$kolom] == 0) {
                 // Pakai sweetalert
-                header("Location: game1.php?error=Pemasangan Kontainer melayang (tidak ada kontainer di bawahnya)");
+                echo "2";
+                // header("Location: game1.php?error=Pemasangan Kontainer melayang (tidak ada kontainer di bawahnya)");
                 // echo ("<script LANGUAGE='JavaScript'>
                 //                 window.alert('Melayang, coba di cek kembali');
                 //                 window.location.href='game1.php';
                 //                 </script>");
-            } else {
-                $sql = "SELECT * FROM temp_container WHERE id_container = '$kontainer'";
+            } 
+            else {
                 $result = mysqli_query($con, $sql);
-                // Tidak ada kontainer pada stack
-                if (mysqli_num_rows($result) == 0) {
-                    // Pakai sweetalert
-                    header("Location: game1.php?error=Kontainer ID tidak terdaftar");
-                    // echo ("<script LANGUAGE='JavaScript'>
-                    //                     window.alert('Kontainer ID tidak terdaftar');
-                    //                     window.location.href='game1.php';
-                    //                     </script>");
-                } else {
-                    $sql = "DELETE FROM temp_container WHERE id_container = '$kontainer'";
-                    $result = mysqli_query($con, $sql);
-                    $arr[$bay][$baris][$kolom] = $kontainer;
+                $arr[$bay][$baris][$kolom] = $kontainer;
 
-                    $arr_enc = json_encode($arr);
-                    $id = $_SESSION['username'];
-                    $sql = "UPDATE user SET ship = '$arr_enc' WHERE team_name = '$id'";
-                    $result = mysqli_query($con, $sql);
+                $arr_enc = json_encode($arr);
+                $id = $_SESSION['username'];
+                $sql = "UPDATE user SET ship = '$arr_enc' WHERE team_name = '$id'";
+                $result = mysqli_query($con, $sql);
 
-                    $pay = 2000;
-                
-                    $sql = "SELECT * FROM user WHERE team_name = '$id'";
-                    $result = mysqli_query($con,$sql);
-                    $row = mysqli_fetch_array($result);
-                    
-                    $revenue = $row[6];
-                    $revenue = $revenue - $pay;
-
-                    $sql = "UPDATE user SET revenue = '$revenue' WHERE team_name = '$id'";
-                    $result = mysqli_query($con,$sql);
-                    
-                    // Pakai sweetalert
-                    header("Location: game1.php?error=Kontainer berhasil dimasukkan");
-                    // echo ("<script LANGUAGE='JavaScript'>
-                    //                 window.alert('Kontainer Berhasil Dimasukan !');
-                    //                 window.location.href='game1.php';
-                    //                 </script>");
-                }
+                echo"4";
+                exit();
             }
+            // else {
+            //     $sql = "SELECT * FROM temp_container WHERE id_container = '$kontainer'";
+            //     $result = mysqli_query($con, $sql);
+            //     // Tidak ada kontainer pada stack
+            //     if (mysqli_num_rows($result) == 0) {
+            //         // Pakai sweetalert
+            //         header("Location: game1.php?error=Kontainer ID tidak terdaftar");
+            //         // echo ("<script LANGUAGE='JavaScript'>
+            //         //                     window.alert('Kontainer ID tidak terdaftar');
+            //         //                     window.location.href='game1.php';
+            //         //                     </script>");
+            //     } else {
+            //         // $sql = "DELETE FROM temp_container WHERE id_container = '$kontainer'";
+            //         // $result = mysqli_query($con, $sql);
+            //         // $arr[$bay][$baris][$kolom] = $kontainer;
+
+            //         // $arr_enc = json_encode($arr);
+            //         // $id = $_SESSION['username'];
+            //         // $sql = "UPDATE user SET ship = '$arr_enc' WHERE team_name = '$id'";
+            //         // $result = mysqli_query($con, $sql);
+
+            //         // $pay = 2000;
+                
+            //         // $sql = "SELECT * FROM user WHERE team_name = '$id'";
+            //         // $result = mysqli_query($con,$sql);
+            //         // $row = mysqli_fetch_array($result);
+                    
+            //         // $revenue = $row[6];
+            //         // $revenue = $revenue - $pay;
+
+            //         // $sql = "UPDATE user SET revenue = '$revenue' WHERE team_name = '$id'";
+            //         // $result = mysqli_query($con,$sql);
+                    
+            //         // Pakai sweetalert
+            //         header("Location: game1.php?error=Kontainer berhasil dimasukkan");
+            //         // echo ("<script LANGUAGE='JavaScript'>
+            //         //                 window.alert('Kontainer Berhasil Dimasukan !');
+            //         //                 window.location.href='game1.php';
+            //         //                 </script>");
+            //     }
+            // }
         } else {
             // Pakai sweetalert
-            header("Location: game1.php?error=Sudah terdapat kontainer");
+            echo "3";
+            exit();
+            // header("Location: game1.php?error=Sudah terdapat kontainer");
             // echo ("<script LANGUAGE='JavaScript'>
             //                         window.alert('Sudah ada kontainer !');
             //                         window.location.href='game1.php';
             //                         </script>");
         }
+        exit();
     }
 }
 
@@ -196,10 +227,12 @@ if (isset($_POST['done'])) {
                     $row = mysqli_fetch_array($result);
                     if ($row[2] == 'SBY') {
                         // Pakai sweetalert
-                        echo ("<script LANGUAGE='JavaScript'>
-                                    window.alert('Masih ada kontainer yang perlu dibongkar !');
-                                    window.location.href='game1.php';
-                                    </script>");
+                        echo"1";
+                        exit();
+                        // echo ("<script LANGUAGE='JavaScript'>
+                        //             window.alert('Masih ada kontainer yang perlu dibongkar !');
+                        //             window.location.href='game1.php';
+                        //             </script>");
                     }
                 }
             }
@@ -221,10 +254,12 @@ if (isset($_POST['done'])) {
     }
     if ($fatal > 0){
         // Pakai sweetalert
-        echo ("<script LANGUAGE='JavaScript'>
-                        window.alert('$fatal Check lagi apakah Container yang diturunkan sudah sesuai semua !');
-                        window.location.href='game1.php';
-                        </script>");
+        echo"2";
+        exit();
+        // echo ("<script LANGUAGE='JavaScript'>
+        //                 window.alert('$fatal Check lagi apakah Container yang diturunkan sudah sesuai semua !');
+        //                 window.location.href='game1.php';
+        //                 </script>");
     }
     else{
          // Clearing Container
@@ -233,13 +268,15 @@ if (isset($_POST['done'])) {
         $sql = "DELETE FROM temp_container WHERE id_user = '$id'";
         $result = mysqli_query($con,$sql);
 
-        echo ("<script LANGUAGE='JavaScript'>
-                            window.alert('Section 1 Selesai !');
-                            window.location.href='game2.php';
-                            </script>");
+        echo"3";
+        exit();
+        // echo ("<script LANGUAGE='JavaScript'>
+        //                     window.alert('Section 1 Selesai !');
+        //                     window.location.href='game2.php';
+        //                     </script>");
 
     }
-    
+    exit();
 }
 
 ?>

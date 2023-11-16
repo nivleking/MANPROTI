@@ -1091,16 +1091,15 @@
                             <h6>Bay</h6>
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" name="bay" style="margin-left: -80px; width: 50%">
+                            <input type="text" class="form-control" name="bay" id="bay" style="margin-left: -80px; width: 50%">
                         </div>
                     </div>
                     <div class="row">
-
                         <div class="col-3" style="text-align: left; margin-top: 16px; margin-left: 295px">
                             <h6>Baris</h6>
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" name="baris" style="margin-left: -80px; width: 50%">
+                            <input type="text" class="form-control" name="baris" id="baris" style="margin-left: -80px; width: 50%">
                         </div>
                     </div>
                     <div class="row">
@@ -1109,7 +1108,7 @@
                             <h6>Kolom</h6>
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" name="kolom" style="margin-left: -80px;width: 50%">
+                            <input type="text" class="form-control" name="kolom" id="kolom" style="margin-left: -80px;width: 50%">
                         </div>
                     </div>
                     <div class="row">
@@ -1118,18 +1117,18 @@
                             <h6>Kontainer</h6>
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" name="kontainer" style="margin-left: -80px; width: 50%">
+                            <input type="text" class="form-control" name="kontainer" id="kontainer" style="margin-left: -80px; width: 50%">
                         </div>
                     </div>
                     <div class="row" style="margin-top: 20px;margin-bottom: 20px;margin-left: 280px">
                         <div class="col-2 text-right" style="margin-left: -20px">
-                            <button class="btn btn-success" type="submit" name="pasang">Load</button>
+                            <button class="btn btn-success" type="submit" name="pasang" id="pasang">Load</button>
                         </div>
                         <div class="col-2 text-center">
-                            <button class="btn btn-danger" type="submit" name="bongkar" style="margin-left: 8px">Unload</button>
+                            <button class="btn btn-danger" type="submit" name="bongkar" style="margin-left: 8px" id="bongkar">Unload</button>
                         </div>
                         <div class="col-2 text-left">
-                            <button class="btn btn-success" type="submit" name="done" style="margin-left: 25px">Done</button>
+                            <button class="btn btn-success" type="submit" name="done" style="margin-left: 25px" id="done">Done</button>
                         </div>
                     </div>
 
@@ -1172,7 +1171,168 @@
             </div>
 
         </div>
+    <script>
+        $(document).ready(function() {
+            $("#pasang").click(function(e) {
+                e.preventDefault()
+                let bay = $('#bay').val()
+                let baris = $('#baris').val()
+                let kolom = $('#kolom').val()
+                // let kontainer = $('#kontainer').val()
 
+                $.ajax({
+                    url: "bongpasLogic.php",
+                    type: 'POST',
+                    data: {
+                        "pasang": 1,
+                        "bay": bay,
+                        "baris": baris,
+                        "kolom": kolom
+                        // "kontainer": kontainer
+                    },
+                    success: function(response) {
+                        if (response === "1") {
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "error",
+                                title: "Pemasangan kontainer melebihi koordinat!",
+                                showConfirmButton: false,
+                                timer: 1000
+                            });
+                        }
+                        else if (response === "2") {
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "error",
+                                title: "Pemasangan kontainer melayang (tidak ada kontainer di bawahnya)",
+                                showConfirmButton: false,
+                                timer: 1000
+                            });
+                        }
+                        else if (response === "3") {
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "error",
+                                title: "Sudah terdapat kontainer",
+                                showConfirmButton: false,
+                                timer: 1000
+                            });
+                        }
+                        else if (response === "4") {
+                            Swal.fire({
+                                // position: "top-end",
+                                icon: "success",
+                                title: "Kontainer berhasil dimasukkan",
+                                showConfirmButton: false,
+                                timer: 1000
+                            }).then(function() {
+                                location.reload()
+                            });
+                        }
+                    },
+                    error:function(err) {
+                        console.log(err)
+                    }
+                });
+            });
+
+            $("#bongkar").click(function(e) {
+                e.preventDefault()
+                let bay = $('#bay').val()
+                let baris = $('#baris').val()
+                let kolom = $('#kolom').val()
+                let kontainer = $('#kontainer').val()
+                
+                $.ajax({
+                    url: "bongpasLogic.php",
+                    type: 'POST',
+                    data: {
+                        "bongkar": 1,
+                        "bay": bay,
+                        "baris": baris,
+                        "kolom": kolom,
+                        "kontainer": kontainer
+                    },
+                    success: function(response) {
+                        if (response === "1") {
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "error",
+                                title: "Pembongkaran kontainer melebihi koordinat!",
+                                showConfirmButton: false,
+                                timer: 1000
+                            });
+                        }
+                        else if (response === "2") {
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "error",
+                                title: "Pembongkaran kontainer menumpuk (terdapat kontainer di atasnya)",
+                                showConfirmButton: false,
+                                timer: 1000
+                            });
+                        }
+                        else if (response === "3") {
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "error",
+                                title: "Tidak ada kontainer yang dapat dibongkar",
+                                showConfirmButton: false,
+                                timer: 1000
+                            });
+                        }
+                        else if (response === "4") {
+                            Swal.fire({
+                                // position: "top-end",
+                                icon: "success",
+                                title: "Kontainer berhasil dibongkar",
+                                showConfirmButton: false,
+                                timer: 1000
+                            }).then(function() {
+                                location.reload()
+                            });
+                        }
+                    },
+                    error:function(err) {
+                        console.log(err)
+                    }
+                });
+            });
+
+            $("#done").click(function(e) {
+                e.preventDefault()
+                $.ajax({
+                    url: "bongpasLogic.php",
+                    type: "POST",
+                    data: {
+                        "done":1
+                    },
+                    success: function(response) {
+                        if (response === "1") {
+                            Swal.fire({
+                                // position: "top-end",
+                                icon: "error",
+                                title: "Masih ada kontainer yang perlu dibongkar!",
+                                showConfirmButton: false,
+                                timer: 1000
+                            });
+                        }
+                        else if (response === "2") {
+                            Swal.fire({
+                                // position: "top-end",
+                                icon: "success",
+                                title: "Section 1 selesai!",
+                                showConfirmButton: false,
+                                timer: 2000
+                            }).then(function() {
+                                window.location = "game2.php"
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
