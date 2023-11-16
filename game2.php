@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Section 2</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -22,7 +22,7 @@
             height: 35px;
             margin: 10px;
             padding: 10px;
-            border: 1px solid black;
+            /* border: 1px solid black; */
         }
 
         .id {
@@ -123,6 +123,8 @@
                         }
                         if ($row[2] == 'JKT') {
                             echo "<div style='color: green'>$row[0]</div>";
+                        } if ($row[2] == 'MDN') {
+                            echo "<div style='color: gray'>$row[0]</div>";
                         }
                     }
                     ?>
@@ -155,6 +157,8 @@
                         }
                         if ($row[2] == 'JKT') {
                             echo "<div style='color: green'>$row[0]</div>";
+                        } if ($row[2] == 'MDN') {
+                            echo "<div style='color: gray'>$row[0]</div>";
                         }
                     }
                     ?>
@@ -187,6 +191,8 @@
                         }
                         if ($row[2] == 'JKT') {
                             echo "<div style='color: green'>$row[0]</div>";
+                        } if ($row[2] == 'MDN') {
+                            echo "<div style='color: gray'>$row[0]</div>";
                         }
                     }
                     ?>
@@ -220,6 +226,8 @@
                         }
                         if ($row[2] == 'JKT') {
                             echo "<div style='color: green'>$row[0]</div>";
+                        } if ($row[2] == 'MDN') {
+                            echo "<div style='color: gray'>$row[0]</div>";
                         }
                     }
                     ?>
@@ -252,6 +260,8 @@
                         }
                         if ($row[2] == 'JKT') {
                             echo "<div style='color: green'>$row[0]</div>";
+                        } if ($row[2] == 'MDN') {
+                            echo "<div style='color: gray'>$row[0]</div>";
                         }
                     }
                     ?>
@@ -284,6 +294,8 @@
                         }
                         if ($row[2] == 'JKT') {
                             echo "<div style='color: green'>$row[0]</div>";
+                        } if ($row[2] == 'MDN') {
+                            echo "<div style='color: gray'>$row[0]</div>";
                         }
                     }
                     ?>
@@ -317,6 +329,8 @@
                         }
                         if ($row[2] == 'JKT') {
                             echo "<div style='color: green'>$row[0]</div>";
+                        } if ($row[2] == 'MDN') {
+                            echo "<div style='color: gray'>$row[0]</div>";
                         }
                     }
                     ?>
@@ -349,6 +363,8 @@
                         }
                         if ($row[2] == 'JKT') {
                             echo "<div style='color: green'>$row[0]</div>";
+                        } if ($row[2] == 'MDN') {
+                            echo "<div style='color: gray'>$row[0]</div>";
                         }
                     }
                     ?>
@@ -381,6 +397,8 @@
                         }
                         if ($row[2] == 'JKT') {
                             echo "<div style='color: green'>$row[0]</div>";
+                        } if ($row[2] == 'MDN') {
+                            echo "<div style='color: gray'>$row[0]</div>";
                         }
                     }
                     ?>
@@ -415,6 +433,8 @@
                         }
                         if ($row[2] == 'JKT') {
                             echo "<div style='color: green'>$row[0]</div>";
+                        } if ($row[2] == 'MDN') {
+                            echo "<div style='color: gray'>$row[0]</div>";
                         }
                     }
                     ?>
@@ -447,6 +467,8 @@
                         }
                         if ($row[2] == 'JKT') {
                             echo "<div style='color: green'>$row[0]</div>";
+                        } if ($row[2] == 'MDN') {
+                            echo "<div style='color: gray'>$row[0]</div>";
                         }
                     }
                     ?>
@@ -479,6 +501,8 @@
                         }
                         if ($row[2] == 'JKT') {
                             echo "<div style='color: green'>$row[0]</div>";
+                        } if ($row[2] == 'MDN') {
+                            echo "<div style='color: gray'>$row[0]</div>";
                         }
                     }
                     ?>
@@ -512,6 +536,8 @@
                         }
                         if ($row[2] == 'JKT') {
                             echo "<div style='color: green'>$row[0]</div>";
+                        } if ($row[2] == 'MDN') {
+                            echo "<div style='color: gray'>$row[0]</div>";
                         }
                     }
                     ?>
@@ -544,6 +570,8 @@
                         }
                         if ($row[2] == 'JKT') {
                             echo "<div style='color: green'>$row[0]</div>";
+                        } if ($row[2] == 'MDN') {
+                            echo "<div style='color: gray'>$row[0]</div>";
                         }
                     }
                     ?>
@@ -576,6 +604,8 @@
                         }
                         if ($row[2] == 'JKT') {
                             echo "<div style='color: green'>$row[0]</div>";
+                        } if ($row[2] == 'MDN') {
+                            echo "<div style='color: gray'>$row[0]</div>";
                         }
                     }
                     ?>
@@ -609,6 +639,8 @@
                         }
                         if ($row[2] == 'JKT') {
                             echo "<div style='color: green'>$row[0]</div>";
+                        } if ($row[2] == 'MDN') {
+                            echo "<div style='color: gray'>$row[0]</div>";
                         }
                     }
                     ?>
@@ -641,6 +673,8 @@
                         }
                         if ($row[2] == 'JKT') {
                             echo "<div style='color: green'>$row[0]</div>";
+                        } if ($row[2] == 'MDN') {
+                            echo "<div style='color: gray'>$row[0]</div>";
                         }
                     }
                     ?>
@@ -673,6 +707,8 @@
                         }
                         if ($row[2] == 'JKT') {
                             echo "<div style='color: green'>$row[0]</div>";
+                        } if ($row[2] == 'MDN') {
+                            echo "<div style='color: gray'>$row[0]</div>";
                         }
                     }
                     ?>
@@ -708,6 +744,8 @@
                         }
                         if ($row[2] == 'JKT') {
                             echo "<div style='color: green'>$row[0]</div>";
+                        } if ($row[2] == 'MDN') {
+                            echo "<div style='color: gray'>$row[0]</div>";
                         }
                     }
                     ?>
@@ -740,6 +778,8 @@
                         }
                         if ($row[2] == 'JKT') {
                             echo "<div style='color: green'>$row[0]</div>";
+                        } if ($row[2] == 'MDN') {
+                            echo "<div style='color: gray'>$row[0]</div>";
                         }
                     }
                     ?>
@@ -772,6 +812,8 @@
                         }
                         if ($row[2] == 'JKT') {
                             echo "<div style='color: green'>$row[0]</div>";
+                        } if ($row[2] == 'MDN') {
+                            echo "<div style='color: gray'>$row[0]</div>";
                         }
                     }
                     ?>
@@ -805,6 +847,8 @@
                         }
                         if ($row[2] == 'JKT') {
                             echo "<div style='color: green'>$row[0]</div>";
+                        } if ($row[2] == 'MDN') {
+                            echo "<div style='color: gray'>$row[0]</div>";
                         }
                     }
                     ?>
@@ -837,6 +881,8 @@
                         }
                         if ($row[2] == 'JKT') {
                             echo "<div style='color: green'>$row[0]</div>";
+                        } if ($row[2] == 'MDN') {
+                            echo "<div style='color: gray'>$row[0]</div>";
                         }
                     }
                     ?>
@@ -869,6 +915,8 @@
                         }
                         if ($row[2] == 'JKT') {
                             echo "<div style='color: green'>$row[0]</div>";
+                        } if ($row[2] == 'MDN') {
+                            echo "<div style='color: gray'>$row[0]</div>";
                         }
                     }
                     ?>
@@ -902,6 +950,8 @@
                         }
                         if ($row[2] == 'JKT') {
                             echo "<div style='color: green'>$row[0]</div>";
+                        } if ($row[2] == 'MDN') {
+                            echo "<div style='color: gray'>$row[0]</div>";
                         }
                     }
                     ?>
@@ -934,6 +984,8 @@
                         }
                         if ($row[2] == 'JKT') {
                             echo "<div style='color: green'>$row[0]</div>";
+                        } if ($row[2] == 'MDN') {
+                            echo "<div style='color: gray'>$row[0]</div>";
                         }
                     }
                     ?>
@@ -966,6 +1018,11 @@
                         }
                         if ($row[2] == 'JKT') {
                             echo "<div style='color: green'>$row[0]</div>";
+                        } if ($row[2] == 'MDN') {
+                            echo "<div style='color: gray'>$row[0]</div>";
+                        }
+                        if ($row[2] == 'MDN') {
+                            echo "<div style='color: green'>$row[0]</div>";
                         }
                     }
                     ?>
@@ -973,6 +1030,19 @@
             </tr>
         </thead>
     </table>
+    <!-- Menampilkan Pendapatan -->
+    <div class = text-center>
+        RP. <?php
+            $id = $_SESSION['username'];
+            $sql = "SELECT * FROM user WHERE team_name = '$id'";
+            $result = mysqli_query($con,$sql);
+            $row = mysqli_fetch_array($result);
+            
+            echo $row[6];
+
+            
+        ?>
+    </div>
     <div class="row" style="border: 0.25px solid">
         <div class="card col-5" style="border: 0.25px solid">
             <h2 style="margin-top: 10px; text-align: center">Sales Card</h2>
@@ -1001,12 +1071,14 @@
                     array_push($rows, $row);
                     $count = $count + 1;
                 }
-                $rand = $rows[random_int(0, $count - 1)];
+                $rand = $rows[random_int(0, $count-1)];
+
                 ?>
 
                 <div class="card mx-auto" style="text-align: center; width: 17rem;margin-top: 10px; border-width: 2px; border: 0.35px solid">
                     <div style="text-align: center;margin-top: 10px; font-weight: 950; font-size: 20px">
-                        SUB - <?php echo $rand[0] ?>
+                        SUB - <?php echo $rand[0];
+                        $_SESSION['rand'] = $rand[0];?>
                     </div>
 
                     <hr class="mx-auto" style="border-width: 2px; border: 0.25px solid; width: 90%; margin-top: 10px">
@@ -1065,7 +1137,7 @@
                             if ($rand[1] == "N-COMMIT") {
                                 echo "
                             <div class='col-6' style = 'text-align: right'>
-                                <button class = 'btn btn-success'>Accept</button>
+                                <button class = 'btn btn-success' name = 'accept'   >Accept</button>
                             </div>
                             <div class='col-6'>
                                 <button class = 'btn btn-danger' name = 'refuse'>Refuse</button>
@@ -1083,6 +1155,8 @@
 
                         </div>
                     </form>
+
+                    
 
                 </div>
 
@@ -1145,7 +1219,7 @@
                     <?php
                     $id = $_SESSION['username'];
 
-                    $sql = "SELECT * FROM temp_container WHERE id_user = '$id'";
+                    $sql = "SELECT * FROM temp_container2 WHERE id_user = '$id'";
                     $result = mysqli_query($con, $sql);
                     // $row = mysqli_fetch_array($result);
 

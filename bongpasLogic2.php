@@ -22,13 +22,25 @@
                                 $id = $_SESSION['username'];
                                 // Memasukan Kontainer Ke Temp
                                 $data = $arr[$bay][$baris][$kolom];
-                                $sql = "INSERT INTO temp_container VALUES ('$data','$id')";
+                                $sql = "INSERT INTO temp_container2 VALUES ('$data','$id')";
                                 $result = mysqli_query($con,$sql);
 
                                 // Menghapus Kontainer
                                 $arr[$bay][$baris][$kolom] = 0;
                                 $arr_enc = json_encode($arr);
                                 $sql = "UPDATE user SET ship = '$arr_enc' WHERE team_name = '$id'";
+                                $result = mysqli_query($con,$sql);
+
+                                $pay = 2000;
+                
+                                $sql = "SELECT * FROM user WHERE team_name = '$id'";
+                                $result = mysqli_query($con,$sql);
+                                $row = mysqli_fetch_array($result);
+                                
+                                $revenue = $row[6];
+                                $revenue = $revenue - $pay;
+
+                                $sql = "UPDATE user SET revenue = '$revenue' WHERE team_name = '$id'";
                                 $result = mysqli_query($con,$sql);
 
                                 echo ("<script LANGUAGE='JavaScript'>
@@ -39,12 +51,24 @@
                             elseif($arr[$bay][$baris-1][$kolom]==0){
                                 $id = $_SESSION['username'];
                                 $data = $arr[$bay][$baris][$kolom];
-                                $sql = "INSERT INTO temp_container VALUES ('$data','$id')";
+                                $sql = "INSERT INTO temp_container2 VALUES ('$data','$id')";
                                 $result = mysqli_query($con,$sql);
 
                                 $arr[$bay][$baris][$kolom] = 0;
                                 $arr_enc = json_encode($arr);
                                 $sql = "UPDATE user SET ship = '$arr_enc' WHERE team_name = '$id'";
+                                $result = mysqli_query($con,$sql);
+
+                                $pay = 2000;
+                
+                                $sql = "SELECT * FROM user WHERE team_name = '$id'";
+                                $result = mysqli_query($con,$sql);
+                                $row = mysqli_fetch_array($result);
+                                
+                                $revenue = $row[6];
+                                $revenue = $revenue - $pay;
+
+                                $sql = "UPDATE user SET revenue = '$revenue' WHERE team_name = '$id'";
                                 $result = mysqli_query($con,$sql);
 
                                 echo ("<script LANGUAGE='JavaScript'>
@@ -98,7 +122,7 @@
                             }
                             else{
                                 echo "Berhasil";
-                                $sql = "SELECT * FROM temp_container WHERE id_container = '$kontainer'";
+                                $sql = "SELECT * FROM temp_container2 WHERE id_container = '$kontainer'";
                                 $result = mysqli_query($con,$sql);
                                 // Tidak ada kontainer pada stack
                                 if(mysqli_num_rows($result)==0){
@@ -108,7 +132,7 @@
                                         </script>");
                                 }
                                 else{
-                                    $sql = "DELETE FROM temp_container WHERE id_container = '$kontainer'";
+                                    $sql = "DELETE FROM temp_container2 WHERE id_container = '$kontainer'";
                                     $result = mysqli_query($con,$sql);
                                     $arr[$bay][$baris][$kolom] = $kontainer;
 
@@ -116,6 +140,19 @@
                                     $id = $_SESSION['username'];
                                     $sql = "UPDATE user SET ship = '$arr_enc' WHERE team_name = '$id'";
                                     $result = mysqli_query($con,$sql);
+
+                                    $pay = 2000;
+                
+                                    $sql = "SELECT * FROM user WHERE team_name = '$id'";
+                                    $result = mysqli_query($con,$sql);
+                                    $row = mysqli_fetch_array($result);
+                                    
+                                    $revenue = $row[6];
+                                    $revenue = $revenue - $pay;
+
+                                    $sql = "UPDATE user SET revenue = '$revenue' WHERE team_name = '$id'";
+                                    $result = mysqli_query($con,$sql);
+                                    
                                     echo ("<script LANGUAGE='JavaScript'>
                                     window.alert('Kontainer Berhasil Dimasukan !');
                                     window.location.href='game2.php';
