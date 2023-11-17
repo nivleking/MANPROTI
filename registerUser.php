@@ -30,24 +30,56 @@ require 'connect.php';
 	<script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
 
 	<style>
+		/* POPPINS FONT */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .wrapper {
+            background: #ececec;
+            padding: 0 20px 0 20px;
+        }
+		
 		.w3-row-padding img {
 			margin-bottom: 12px
 		}
 
-		.w3-sidebar {
-			width: 120px;
-			background: #222;
-		}
-
 		#main {
-			margin-left: 100px
+			margin-left: 120px;
 		}
 
+		/* Sidebar styles */
+		.w3-sidebar {
+			width: 150px;
+			background: #222;
+			position: fixed;
+			height: 100%;
+			overflow: hidden;
+		}
+
+		.w3-sidebar a {
+			padding: 8px;
+			text-align: center;
+			width: 100%;
+			display: block;
+		}
+
+		.w3-sidebar .flex-column {
+			flex-direction: column;
+			align-items: stretch;
+		}
+
+		/* Small */
 		@media only screen and (max-width: 600px) {
-			#main {
-				margin-left: 0
+			main {
+				margin-left: 0px;
 			}
 		}
+
+		/* Medium */
+		@media only screen and (max-width: 991px) and (min-width: 768) {}
 	</style>
 </head>
 
@@ -72,66 +104,98 @@ require 'connect.php';
 				<p>Log Out</p>
 			</a>
 		</div>
+	</nav><!-- Sidebar -->
+	<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+		<div class="flex-column" style="display: flex; flex-direction: column; height: 100%;">
+			<h3 class="text-white navbar-text" style="font-style: italic;font-weight:bold;">BLC</h3>
+		
+			<a href="homeAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+				<i class="fa fa-dashboard w3-xxlarge d-flex justify-content-center mt-2"></i>
+				<p>Home</p>
+			</a>
+			<a href="homeAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center">
+				<i class="fa fa-ellipsis-h w3-xxlarge d-flex justify-content-center mt-2"></i>
+				<p>Activity</p>
+			</a>
+			<a href="accounts.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center">
+				<i class="fa fa-group w3-xxlarge d-flex justify-content-center mt-2"></i>
+				<p>Accounts</p>
+			</a>
+
+			<!-- Profile Dropdown -->
+			<div class="dropdown mt-auto">
+				<a class="btn w3-black dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="margin-top: auto;" id="dropDownUser">
+					<i class="fa fa-user w3-xxlarge d-flex justify-content-center mt-1"></i>
+					Profile
+				</a>
+				<ul class="dropdown-menu text-small shadow" aria-labelledby="dropDownUser" style="width:25px">
+					<!-- <li class="dropdown-item"><a href="#">Profile</a></li> -->
+					<li class="dropdown-item"><a href="logoutAdmin.php">Log Out</a></li>
+				</ul>
+			</div>
+		</div>
 	</nav>
 
-	<siv class="w3-padding-large" id="main">
-		<div class="w3-padding-16 d-flex justify-content-center">
-			<div class="w3-row-padding">
-				<form style="width: 23rem;" method="POST" action="" class="">
-					<h4 class="d-flex justify-content-center">Add User</h4>
-					<div class="form-outline mb-4">
-						<label class="form-label" for="form2Example18">Username</label>
-						<input type="text" id="form2Example18" class="form-control form-control-lg" name="teamUserName" required />
-					</div>
-
-					<div class="form-outline mb-4">
-						<label class="form-label" for="form2Example28">Password</label>
-						<input type="password" id="form2Example28" class="form-control form-control-lg" name="teamPassword" required />
-					</div>
-
-					<div class="form-outline mb-4">
-						<label class="form-label" for="form2Example38">Confirm Password</label>
-						<input type="password" id="form2Example38" class="form-control form-control-lg" name="teamPasswordConfirm" required />
-					</div>
-
-					<div class="pt-1 mb-4 d-flex justify-content-center">
-						<button class="btn btn-primary btn-lg btn-block" type="submit" name="register" id='register'>Add User</button>
-					</div>
-				</form>
-			</div>
-
-			<div class="w3-row-padding">
-				<div class="w3-padding-16 ps-5">
-					<table class="table table-striped table-bordered table-responsive" id="userTable" style="width: 100vh;">
-						<thead>
-							<tr>
-								<th scope="col">ID</th>
-								<th scope="col">Actions</th>
-							</tr>
-						</thead>
-
-						<tbody id="listUser">
-							<?php
-							$sql = "SELECT * FROM user";
-							$result = mysqli_query($con, $sql);
-
-							while ($row = mysqli_fetch_array($result)) {
-								echo "<tr>
-								<td>$row[0]</td>
-								<td>
-									<button type='submit' name='deleteUser' class='btn btn-danger user-del' id='' value='$row[0]'>Delete</button>
-								</td>
+	<div class="w3-padding-large" id="main">
+		<div class="w3-padding-16 ms-5">
+			<div class="row d-flex justify-content-around">
+				<div class="col-lg-5 col-md-5 mt-4">
+					<form method="POST" action="" class="w3-card w3-padding">
+						<h4 class="d-flex justify-content-center" style="font-weight: bold;">Add User</h4>
+						<div class="form-outline mb-4">
+							<label class="form-label" for="form2Example18">Username</label>
+							<input type="text" id="form2Example18" class="form-control form-control-lg" name="teamUserName" required />
+						</div>
+	
+						<div class="form-outline mb-4">
+							<label class="form-label" for="form2Example28">Password</label>
+							<input type="password" id="form2Example28" class="form-control form-control-lg" name="teamPassword" required />
+						</div>
+	
+						<div class="form-outline mb-4">
+							<label class="form-label" for="form2Example38">Confirm Password</label>
+							<input type="password" id="form2Example38" class="form-control form-control-lg" name="teamPasswordConfirm" required />
+						</div>
+	
+						<div class="pt-1 mb-4 d-flex justify-content-center">
+							<button class="btn btn-primary btn-lg btn-block" type="submit" name="register" id='register'>Add User</button>
+						</div>
+					</form>
+				</div>
+				<div class="col-lg-7 col-md-7">
+					<div class="w3-padding-16 ps-4">
+						<table class="display table table-striped table-bordered table-responsive" id="userTable" style="width: 100%;">
+							<thead>
+								<tr>
+									<th scope="col">ID</th>
+									<th scope="col">Actions</th>
 								</tr>
-							";
-							}
-							?>
-						</tbody>
-					</table>
+							</thead>
+	
+							<tbody id="listUser">
+								<?php
+								$sql = "SELECT * FROM user";
+								$result = mysqli_query($con, $sql);
+	
+								while ($row = mysqli_fetch_array($result)) {
+									echo "<tr>
+									<td>$row[0]</td>
+									<td>
+										<button type='submit' name='deleteUser' class='btn btn-danger user-del' id='' value='$row[0]'>Delete</button>
+									</td>
+									</tr>
+								";
+								}
+								?>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 
+
 		</div>
-	</siv>
+	</div>
 
 	<script>
 		$(document).ready(function() {

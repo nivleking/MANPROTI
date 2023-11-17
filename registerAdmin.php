@@ -28,33 +28,68 @@ require 'connect.php';
 	<!-- DATATABLES -->
 	<link rel="stylesheet" type="" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
 	<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-	<script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+	<script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>	
 
 	<style>
+		/* POPPINS FONT */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .wrapper {
+            background: #ececec;
+            padding: 0 20px 0 20px;
+        }
+
 		.w3-row-padding img {
 			margin-bottom: 12px
 		}
 
-		.w3-sidebar {
-			width: 120px;
-			background: #222;
-		}
-
 		#main {
-			margin-left: 100px;
+			margin-left: 120px;
 		}
 
+		/* Sidebar styles */
+		.w3-sidebar {
+			width: 150px;
+			background: #222;
+			position: fixed;
+			height: 100%;
+			overflow: hidden;
+		}
+
+		.w3-sidebar a {
+			padding: 8px;
+			text-align: center;
+			width: 100%;
+			display: block;
+		}
+
+		.w3-sidebar .flex-column {
+			flex-direction: column;
+			align-items: stretch;
+		}
+
+		/* Small */
 		@media only screen and (max-width: 600px) {
-			#main {
-				margin-left: 0
+			main {
+				margin-left: 0px;
 			}
 		}
+
+		/* Medium */
+		@media only screen and (max-width: 991px) and (min-width: 768) {}
 	</style>
 </head>
 
 <body class="w3">
+	<!-- Sidebar -->
 	<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
-		<div class="flex-column">
+		<div class="flex-column" style="display: flex; flex-direction: column; height: 100%;">
+			<h3 class="text-white navbar-text" style="font-style: italic;font-weight:bold;">BLC</h3>
+		
 			<a href="homeAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black">
 				<i class="fa fa-dashboard w3-xxlarge d-flex justify-content-center mt-2"></i>
 				<p>Home</p>
@@ -68,83 +103,103 @@ require 'connect.php';
 				<p>Accounts</p>
 			</a>
 
-			<a href="logoutAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center p-2 ml-auto">
-				<i class="fa fa-sign-out w3-xxlarge d-flex justify-content-center mt-1"></i>
-				<p>Log Out</p>
-			</a>
+			<!-- Profile Dropdown -->
+			<div class="dropdown mt-auto">
+				<a class="btn w3-black dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="margin-top: auto;" id="dropDownUser">
+					<i class="fa fa-user w3-xxlarge d-flex justify-content-center mt-1"></i>
+					Profile
+				</a>
+				<ul class="dropdown-menu text-small shadow" aria-labelledby="dropDownUser" style="width:25px">
+					<!-- <li class="dropdown-item"><a href="#">Profile</a></li> -->
+					<li class="dropdown-item"><a href="logoutAdmin.php">Log Out</a></li>
+				</ul>
+			</div>
 		</div>
 	</nav>
 
 	<div class="w3-padding-large" id="main">
-		<div class="w3-padding-16 d-flex justify-content-center">
-			<div class="w3-row-padding">
-				<form style="width: 23rem;" method="POST" action="" class="">
-					<h4 class="d-flex justify-content-center">Add Admin</h4>
-					<?php if (isset($_GET['error'])) { ?>
-						<p class="d-flex justify-content-center" style="color:red; font-weight:bold;"><?php echo $_GET['error']; ?></p>
-					<?php } ?>
+		<div class="w3-padding-16 ms-5">
+			<div class="row d-flex justify-content-around">
+				<!-- Admin Registration Form -->
+				<div class="col-lg-5 col-md-5 mt-4">
+					<form method="POST" action="" class="w3-card w3-padding">
+						<h4 class="d-flex justify-content-center" style="font-weight: bold;">Add Admin</h4>
+						<?php if (isset($_GET['error'])) { ?>
+							<p class="d-flex justify-content-center" style="color:red; font-weight:bold;"><?php echo $_GET['error']; ?></p>
+						<?php } ?>
 
-					<div class="form-outline mb-4">
-						<label class="form-label" for="form2Example18">Username</label>
-						<input type="text" id="form2Example18" class="form-control form-control-lg" name="usernameADM" required />
-					</div>
+						<div class="form-outline mb-4">
+							<label class="form-label" for="form2Example18">Username</label>
+							<input type="text" id="form2Example18" class="form-control form-control-lg" name="usernameADM" required />
+						</div>
 
-					<div class="form-outline mb-4">
-						<label class="form-label" for="form2Example48">Name</label>
-						<input type="text" id="form2Example48" class="form-control form-control-lg" name="nameADM" required />
-					</div>
+						<div class="form-outline mb-4">
+							<label class="form-label" for="form2Example48">Name</label>
+							<input type="text" id="form2Example48" class="form-control form-control-lg" name="nameADM" required />
+						</div>
 
-					<div class="form-outline mb-4">
-						<label class="form-label" for="form2Example28">Password</label>
-						<input type="password" id="form2Example28" class="form-control form-control-lg" name="passwordADM" required />
-					</div>
+						<div class="form-outline mb-4">
+							<label class="form-label" for="form2Example28">Password</label>
+							<input type="password" id="form2Example28" class="form-control form-control-lg" name="passwordADM" required />
+						</div>
 
-					<div class="form-outline mb-4">
-						<label class="form-label" for="form2Example38">Confirm Password</label>
-						<input type="password" id="form2Example38" class="form-control form-control-lg" name="passwordConfirmADM" required />
-					</div>
+						<div class="form-outline mb-4">
+							<label class="form-label" for="form2Example38">Confirm Password</label>
+							<input type="password" id="form2Example38" class="form-control form-control-lg" name="passwordConfirmADM" required />
+						</div>
 
-					<div class="pt-1 mb-4 d-flex justify-content-center">
-						<button class="btn btn-primary btn-lg btn-block" type="submit" name="register" id="register">Add Admin</button>
-					</div>
-				</form>
-			</div>
+						<div class="pt-1 mb-4 d-flex justify-content-center">
+							<button class="btn btn-primary btn-lg btn-block" type="submit" name="register" id="register">Add Admin</button>
+						</div>
+					</form>
+				</div>
 
-			<div class="w3-row-padding">
-				<div class="w3-padding-16 ps-5">
-					<!-- <h4 class="d-flex justify-content-center"></h4> -->
-					<table class="table table-bordered table-responsive table-striped" id="adminTable" style="width:100vh;">
-						<thead>
-							<tr>
-								<th scope="col">ID</th>
-								<th scope="col">Actions</th>
-							</tr>
-						</thead>
-
-						<tbody id="listAdmin">
-							<?php
-							$sql = "SELECT * FROM admin";
-							$result = mysqli_query($con, $sql);
-
-							while ($row = mysqli_fetch_array($result)) {
-								echo "<tr>
-								<td>$row[0]</td>
-								<td>
-									<button type='submit' name='deleteAdmin' class='btn btn-danger admin-del' id='' value='$row[0]'>Delete</button>
-								</td>
+				<!-- Admin Table -->
+				<div class="col-lg-7 col-md-7">
+					<div class="w3-padding-16 ps-4">
+						<table class="display table table-bordered table-responsive table-striped" id="adminTable" style="width: 100%;">
+							<thead>
+								<tr>
+									<th scope="col">ID</th>
+									<th scope="col">Actions</th>
 								</tr>
-							";
-							}
-							?>
-						</tbody>
-					</table>
+							</thead>
+
+							<tbody id="listAdmin">
+								<?php
+								$sql = "SELECT * FROM admin";
+								$result = mysqli_query($con, $sql);
+
+								while ($row = mysqli_fetch_array($result)) {
+									echo "<tr>
+                                    <td class='col-lg-6'>$row[0]</td>
+                                    <td class='col-lg-6'>
+										<button type='submit' name='editAdmin' class='btn btn-primary admin-edit' id='' value='$row[0]'>Edit</button>
+										|
+                                        <button type='submit' name='deleteAdmin' class='btn btn-danger admin-del' id='' value='$row[0]'>Delete</button>
+                                    </td>
+                                </tr>";
+								}
+								?>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
 	<script>
 		$(document).ready(function() {
-			let table = $('#adminTable').DataTable()
+			let table = $('#adminTable').DataTable({
+				// scrollCollapse: true,
+				// scrollY: '430px'
+			})
+			
+			$(document.body).on('click', 'admin-edit', function(e) {
+				e.preventDefault()
+				console.log("test")
+			})
 
 			$(document.body).on('click', '.admin-del', function(e) {
 				e.preventDefault()
@@ -172,7 +227,7 @@ require 'connect.php';
 								title: 'Admin Deleted',
 								text: 'The admin has been successfully deleted.'
 							});
-							
+
 
 						} else if (response === "2") {
 							// console.log("sukess")
@@ -226,8 +281,10 @@ require 'connect.php';
 							table.destroy()
 							$('#listAdmin').append(
 								`<tr>
-								<td>` + username + `</td>
-								<td>
+								<td class='col-lg-6'>` + username + `</td>
+								<td class='col-lg-6'>
+									<button type = 'submit' name='editAdmin' class='btn btn-primary admin-edit' value='` + username + `'>Edit</button>
+									|
 									<button type = 'submit' name='deleteAdmin' class='btn btn-danger admin-del' value='` + username + `'>Delete</button>
 								</td>
 								</tr>`
@@ -241,10 +298,8 @@ require 'connect.php';
 								}),
 								5000)
 							table = $("#adminTable").DataTable().draw()
-							// location.reload()
 						}
 
-						// table.reload()	
 					},
 					error: function(err) {
 						console.log(err)

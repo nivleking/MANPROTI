@@ -1,9 +1,9 @@
 <?php
-require 'connect.php';
-$admin = $_SESSION["usernameADM"];
-$sql = "SELECT * FROM admin WHERE id_admin = '$admin'";
-$result = mysqli_query($con, $sql);
-$row = mysqli_fetch_array($result);
+    require 'connect.php';
+    $admin = $_SESSION["usernameADM"];
+    $sql = "SELECT * FROM admin WHERE id_admin = '$admin'";
+    $result = mysqli_query($con, $sql);
+    $row = mysqli_fetch_array($result);
 ?>
 
 <!DOCTYPE html>
@@ -35,56 +35,85 @@ $row = mysqli_fetch_array($result);
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
 
     <style>
+        /* POPPINS FONT */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
         .w3-row-padding img {
             margin-bottom: 12px
         }
 
-        .w3-sidebar {
-            width: 120px;
-            background: #222;
-        }
-
         #main {
-            margin-left: 120px
+            margin-left: 120px;
         }
 
+        /* Sidebar styles */
+        .w3-sidebar {
+            width: 150px;
+            background: #222;
+            position: fixed;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .w3-sidebar a {
+            padding: 8px;
+            text-align: center;
+            width: 100%;
+            display: block;
+        }
+
+        .w3-sidebar .flex-column {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        /* Small */
         @media only screen and (max-width: 600px) {
-            #main {
-                margin-left: 0
+            main {
+                margin-left: 0px;
             }
         }
-    </style>
 
-    <script>
-        $(document).ready(function() {
-            $('#tableRoom').DataTable()
-        })
-    </script>
+        /* Medium */
+        @media only screen and (max-width: 991px) and (min-width: 768) {}
+    </style>
 </head>
 
 <body class="w3">
 
+    <!-- Sidebar -->
     <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
-        <div class="flex-column">
-            <div>
-                <a href="homeAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black">
-                    <i class="fa fa-dashboard w3-xxlarge d-flex justify-content-center mt-2"></i>
-                    <p>Home</p>
-                </a>
-                <a href="#activity" class="w3-bar-item w3-button w3-padding-large w3-black w3-center">
-                    <i class="fa fa-ellipsis-h w3-xxlarge d-flex justify-content-center mt-2"></i>
-                    <p>Activity</p>
-                </a>
-                <a href="accounts.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center">
-                    <i class="fa fa-group w3-xxlarge d-flex justify-content-center mt-2"></i>
-                    <p>Accounts</p>
-                </a>
-            </div>
+        <div class="flex-column" style="display: flex; flex-direction: column; height: 100%;">
+            <h3 class="text-white navbar-text" style="font-style: italic;font-weight:bold;">BLC</h3>
 
-            <a href="logoutAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center p-2 ml-auto">
-                <i class="fa fa-sign-out w3-xxlarge d-flex justify-content-center mt-2"></i>
-                <p>Log Out</p>
+            <a href="homeAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+                <i class="fa fa-dashboard w3-xxlarge d-flex justify-content-center mt-2"></i>
+                <p>Home</p>
             </a>
+            <a href="#activity" class="w3-bar-item w3-button w3-padding-large w3-black w3-center">
+                <i class="fa fa-ellipsis-h w3-xxlarge d-flex justify-content-center mt-2"></i>
+                <p>Activity</p>
+            </a>
+            <a href="accounts.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center">
+                <i class="fa fa-group w3-xxlarge d-flex justify-content-center mt-2"></i>
+                <p>Accounts</p>
+            </a>
+
+            <!-- Profile Dropdown -->
+            <div class="dropdown mt-auto">
+                <a class="btn w3-black dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="margin-top: auto;" id="dropDownUser">
+                    <i class="fa fa-user w3-xxlarge d-flex justify-content-center mt-1"></i>
+                    Profile
+                </a>
+                <ul class="dropdown-menu text-small shadow" aria-labelledby="dropDownUser" style="width:25px">
+                    <!-- <li class="dropdown-item"><a href="#">Profile</a></li> -->
+                    <li class="dropdown-item"><a href="logoutAdmin.php">Log Out</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
 
@@ -93,7 +122,7 @@ $row = mysqli_fetch_array($result);
         <div class=" w3-padding-16 w3-center" id="home">
             <h1 class="w3-jumbo"><span class="w3-hide-small">CARGO MASTER</span></h1>
             <h3>Hello,
-                <?php echo $row[1]; ?>
+                <?php echo $row[0]; ?>
             </h3>
         </div>
 
@@ -224,7 +253,7 @@ $row = mysqli_fetch_array($result);
             <div class=" w3-row-padding w3-center">
                 <div class="w3-padding-32">
                     <h2 class="w3-jumbo mb-5" id="activity">Your Activity</h2>
-                    <table class="table table-bordered table-striped" id="tableRoom">
+                    <table class="table table-responsive table-bordered table-striped" id="tableRoom" style="width: 100%;">
                         <thead>
                             <tr>
                                 <th scope="col">No.</th>
@@ -249,12 +278,12 @@ $row = mysqli_fetch_array($result);
                                 }
 
                                 echo "<tr>
-                        <td>$i</td>
-                        <td>$row[0]</td>
-                        <td>$row[1]</td>
-                        <td>$val</td>
-                        <td>$row[3]</td>
-                        <td>
+                        <td class='col-lg-1 text-start'>$i</td>
+                        <td class='col-lg-1 text-start'>$row[0]</td>
+                        <td class='col-lg-2 text-start'>$row[1]</td>
+                        <td class='col-lg-2 text-start'>$val</td>
+                        <td class='col-lg-2 text-start'>$row[3]</td>
+                        <td class='col-lg-2'>
                           <form method='post' action='viewRoomDetails.php'>
                             <input type='hidden' name='roomID' value='$row[0]'>
                             <input type='hidden' name='supervisor' value='$row[1]'>
@@ -273,6 +302,12 @@ $row = mysqli_fetch_array($result);
                 </div>
             </div>
         </div>
+
+        <script>
+            $(document).ready(function() {
+                $('#tableRoom').DataTable()
+            })
+        </script>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>

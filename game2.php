@@ -18,7 +18,7 @@
 
     <style>
         body {
-            overflow: hidden;
+            /* overflow: hidden; */
             margin: 0;
         }
 
@@ -69,7 +69,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-dark bg-primary navbar-expand">
+    <nav class="navbar navbar-dark bg-primary navbar-expand" style="width:100vw;">
         <a href="#" class="navbar-brand disabled" style="font-style: italic; font-weight:bold; font-size:26px">Cargo Master</a>
         <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon">A</span>

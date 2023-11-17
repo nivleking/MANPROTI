@@ -16,6 +16,9 @@
     <!-- JQUERY -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
+    <!-- Currency -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/currencyformatter.js/2.2.0/currencyFormatter.min.js" integrity="sha512-zaNuym1dVrK6sRojJ/9JJlrMIB+8f9IdXGzsBQltqTElXpBHZOKI39OP+bjr8WnrHXZKbJFdOKLpd5RnPd4fdg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <style>
         #div1,
         #div2 {
@@ -1072,14 +1075,16 @@
 
     <!-- Menampilkan Pendapatan -->
     <div class="text-center mb-5">
-        RP. <?php
-            $id = $_SESSION['username'];
-            $sql = "SELECT * FROM user WHERE team_name = '$id'";
-            $result = mysqli_query($con, $sql);
-            $row = mysqli_fetch_array($result);
+        <div class="money" data-ccy='IDR'>
+            <?php
+                $id = $_SESSION['username'];
+                $sql = "SELECT * FROM user WHERE team_name = '$id'";
+                $result = mysqli_query($con, $sql);
+                $row = mysqli_fetch_array($result);
 
-            echo $row[6];
-            ?>
+                echo $row[6];
+                ?>
+        </div>
 
         <div class="row">
             <div class="card col-6" style="border: 0.35px solid">
@@ -1192,7 +1197,7 @@
                     success: function(response) {
                         if (response === "1") {
                             Swal.fire({
-                                position: "top-end",
+                                position: "top",
                                 icon: "error",
                                 title: "Pemasangan kontainer melebihi koordinat!",
                                 showConfirmButton: false,
@@ -1201,7 +1206,7 @@
                         }
                         else if (response === "2") {
                             Swal.fire({
-                                position: "top-end",
+                                position: "top",
                                 icon: "error",
                                 title: "Pemasangan kontainer melayang!",
                                 showConfirmButton: false,
@@ -1210,7 +1215,7 @@
                         }
                         else if (response === "3") {
                             Swal.fire({
-                                position: "top-end",
+                                position: "top",
                                 icon: "error",
                                 title: "Sudah terdapat kontainer!",
                                 showConfirmButton: false,
@@ -1219,7 +1224,7 @@
                         }
                         else if (response === "4") {
                             Swal.fire({
-                                // position: "top-end",
+                                // position: "top",
                                 icon: "success",
                                 title: "Kontainer berhasil dimasukkan!",
                                 showConfirmButton: false,
@@ -1230,7 +1235,7 @@
                         }
                         else if (response === "5") {
                             Swal.fire({
-                                position: "top-end",
+                                position: "top",
                                 icon: "error",
                                 title: "Kontainer ID tidak terdaftar!",
                                 showConfirmButton: false,
@@ -1264,7 +1269,7 @@
                     success: function(response) {
                         if (response === "1") {
                             Swal.fire({
-                                position: "top-end",
+                                position: "top",
                                 icon: "error",
                                 title: "Pembongkaran kontainer melebihi koordinat!",
                                 showConfirmButton: false,
@@ -1273,7 +1278,7 @@
                         }
                         else if (response === "2") {
                             Swal.fire({
-                                position: "top-end",
+                                position: "top",
                                 icon: "error",
                                 title: "Pembongkaran kontainer menumpuk!",
                                 showConfirmButton: false,
@@ -1282,7 +1287,7 @@
                         }
                         else if (response === "3") {
                             Swal.fire({
-                                position: "top-end",
+                                position: "top",
                                 icon: "error",
                                 title: "Tidak ada kontainer yang dapat dibongkar!",
                                 showConfirmButton: false,
@@ -1291,7 +1296,7 @@
                         }
                         else if (response === "4") {
                             Swal.fire({
-                                // position: "top-end",
+                                // position: "top",
                                 icon: "success",
                                 title: "Kontainer berhasil dibongkar!",
                                 showConfirmButton: false,
@@ -1318,7 +1323,7 @@
                     success: function(response) {
                         if (response === "1") {
                             Swal.fire({
-                                // position: "top-end",
+                                // position: "top",
                                 icon: "error",
                                 title: "Masih ada kontainer yang perlu dibongkar!",
                                 showConfirmButton: false,
@@ -1327,7 +1332,7 @@
                         }
                         else if (response === "2") {
                             Swal.fire({
-                                // position: "top-end",
+                                // position: "top",
                                 icon: "success",
                                 title: "Section 1 selesai!",
                                 showConfirmButton: false,
@@ -1340,6 +1345,10 @@
                 });
             });
         });
+    </script>
+
+    <script>
+        OSREC.CurrencyFormatter.formatEach('.money');
     </script>
 </body>
 
