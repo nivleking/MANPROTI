@@ -36,17 +36,29 @@ require 'connect.php';
                         $roomAdmin = $_SESSION['roomID_admin'];
                         $sql = "SELECT bay.id_bay, bay.nama_bay, bay.detail_bay FROM bay INNER JOIN room ON bay.id_deck=room.id_deck WHERE id_room = '$roomAdmin'";
                         $listBay = mysqli_query($con, $sql);
+                        $tempBay = array();
+                        while ($bay = $listBay->fetch_array()) {
+                            $tempBay[$bay[0]] = array($bay[0],$bay[1]);
+                        }
 
-
-                        $sql = "SELECT * FROM user WHERE id_room = '$room'";
+                        $sql = "SELECT * FROM user WHERE id_room = '$roomAdmin'";
                         $listUser = mysqli_query($con, $sql);
-                        while ($user = mysqli_fetch_array($listUser)) {
-                            echo "<label for='origin" . $user[0] . "' class='form-label d-flex just' style='margin-top: 10px;width: 30rem'>" . $user[0] . "</label>";
-                            echo "<select class='custom-select' aria-label='Default select example' name='origin" . $user[0] . "' style='width: 30rem;'>";
-                            while ($row = mysqli_fetch_array($listBay)) {
-                                echo "<option value=$row[0]>$row[1]</option>";
+                        $tempUser = array();
+                        while ($user = $listUser->fetch_array()) {
+                            array_push($tempUser,$user[0]);
+                        }
+                        if ($listUser->num_rows <= 0) {
+                            echo 'Tidak ada user';
+                        }
+                        foreach ($tempUser as $user) {
+                            echo '<form method="POST">';
+                            echo "<label for='origin" . $user . "' class='form-label d-flex just' style='margin-top: 10px;width: 30rem'>" . $user . "</label>";
+                            echo "<select class='custom-select' aria-label='Default select example' name='$user' style='width: 30rem;'>";
+                            foreach ($tempBay as $bay){
+                                echo "<option value='".$bay[0]."'>".$bay[1]."</option>";
                             }
                             echo "</select>";
+                            echo '</form>';
                         }
                         ?>
                         <label for="roomCode" class="form-label d-flex just">Jumlah Ronde</label>
@@ -54,8 +66,10 @@ require 'connect.php';
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" name="adminStart">Save changes</button>
+                    <form method="POST">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" name="adminStart">Save changes</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -82,8 +96,30 @@ require 'connect.php';
                 </tr>
             </thead>
             <tbody>
+                <?php
+                    if (isset($_SESSION['usernameADM'])) {
+                        $room = $_SESSION['roomID_admin'];
+                    } else {
+                        $room = $_SESSION['roomID'];
+                    }
+                    $sql = "SELECT * FROM user WHERE id_room = '$room' ";
+                    $result = mysqli_query($con, $sql);
 
-                </h1>
+                    while ($row = mysqli_fetch_array($result)) {
+                        if ($row[3] == 1) {
+                            $val = 'Connected';
+                        } else {
+                            $val = 'Disconnected';
+                        }
+
+                        echo "<tr>
+                        <td>$row[0]</td>
+                        <td>$val</td>
+                        <td></td>
+                        </tr>
+                    ";
+                    }
+                ?>
             </tbody>
         </table>
         <?php
@@ -94,9 +130,14 @@ require 'connect.php';
         $result = $stmt->get_result();
         if (isset($_SESSION['usernameADM'])) {
             if ($_SESSION['usernameADM'] == mysqli_fetch_array($result)[0]) {
-                echo '<form method = "POST"><button name="adminStart" id="adminStart" class="btn btn-primary">Start</button>
+                echo '<form method = "POST"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#SetGame">Start</button>
                     <button name="swap" id="swap" class="btn btn-danger">Swap</button></form>';
                 if (isset($_POST['adminStart'])) {
+                    foreach ($tempUser as $user) {
+                        $bayUser = $_POST[$user];
+                        $sql = "UPDATE user SET origin = '$bayUser' WHERE team_name = '$user'";
+                        mysqli_query($con,$sql);
+                    }
                     $room = $_SESSION['roomID_admin'];
                     $value = 1;
                     $sql = "UPDATE room SET status=? WHERE id_room =?";

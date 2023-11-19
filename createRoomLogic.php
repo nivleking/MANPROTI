@@ -8,6 +8,6 @@
         $sql = "INSERT INTO room VALUES ('$code','$id',0, '$tanggal','$deck','')";
         $res = mysqli_query($con,$sql);
         $_SESSION['roomID_admin'] = $code;
-        header("Location: waitingRoom.php");
+        header("Location: waitingRoom2.php");
     }
 ?>

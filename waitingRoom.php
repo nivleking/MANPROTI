@@ -58,14 +58,14 @@
                     <td></td>
                     </tr>
                 ";
-                }
-                ?>
-            </tbody>
-        </table>
-        <?php
+                }              
+            ?>
+        </tbody>
+    </table>
+    <?php 
         $sql = "SELECT id_admin FROM room WHERE id_room= ?";
         $stmt = $con->prepare($sql);
-        $stmt->bind_param("i", $_SESSION["roomID_admin"]);
+        $stmt->bind_param("i",$_SESSION["roomID_admin"]);
         $stmt->execute();
         $result = $stmt->get_result();
         if (isset($_SESSION['usernameADM'])) {
@@ -81,11 +81,21 @@
                         // </script>';
                 if (isset($_POST['adminStart'])) {
                     $room = $_SESSION['roomID_admin'];
+                    while($row = mysqli_fetch_array($listUser)){
+                        $origin = $_POST['origin'.$row[0].''];
+                        $team_name = $row[0];
+                        $sql = "UPDATE user SET origin=$origin WHERE team_name = $team_name";
+                        mysqli_query($con,$sql);
+                    }
+                    
                     $value = 1;
-                    $sql = "UPDATE room SET status=? WHERE id_room =?";
+                    $ronde = $_POST['ronde'];
+                    $sql = "UPDATE room SET status=?, ronde=? WHERE id_room =?";
                     $stmt = $con->prepare($sql);
-                    $stmt->bind_param("ii", $value, $room);
-                    $stmt->execute();
+                    $stmt->bind_param("iii",$value,$ronde,$room);
+                    $stmt->execute(); 
+                    
+                    
                 }
                 if (isset($_POST['swap'])) {
                     $sql = "SELECT ship FROM user WHERE team_name = 'Samuel'";
@@ -133,38 +143,37 @@
         else {
             echo '<div class="userCont" id="userCont"></div>';
         }
-        ?>
-        <script>
-            // var userCont = document.getElementById('userCont');
-            // adminStart.addEventListener('click', function() {
-            //     var xhr = new XMLHttpRequest();
-            //     xhr.onreadystatechange = function() {
-            //         if (xhr.readyState  == 4 && xhr.status == 200) {
-            //             userCont.innerHTML = xhr.responseText;
-            //         }
-            //     }
+    ?>
+    <script>
+        // var userCont = document.getElementById('userCont');
+        // adminStart.addEventListener('click', function() {
+        //     var xhr = new XMLHttpRequest();
+        //     xhr.onreadystatechange = function() {
+        //         if (xhr.readyState  == 4 && xhr.status == 200) {
+        //             userCont.innerHTML = xhr.responseText;
+        //         }
+        //     }
 
-            //     xhr.open('GET','userWaitingRoomLogic.php',true);
-            //     xhr.send()
-            // });
+        //     xhr.open('GET','userWaitingRoomLogic.php',true);
+        //     xhr.send()
+        // });
 
-            setInterval(() => {
-                $.ajax({
-                    url: 'userWaitingRoomLogic.php',
-                    method: 'POST',
-                    success: function(temp) {
-                        console.log(temp)
-                        if (temp == 'sukses') {
-                            window.location.href = 'game1.php';
+        setInterval(() => {
+            $.ajax({
+                url: 'userWaitingRoomLogic.php',
+                method: 'POST',
+                success: function(temp) {
+                    console.log(temp)
+                    if (temp == 'sukses') {
+                        window.location.href = 'game1.php';
 
-                        } else {
-                            $('#userCont').html('<h2>Waiting for Host To Start The Game</h2>');
-                        }
+                    } else {
+                        $('#userCont').html('<h2>Waiting for Host To Start The Game</h2>');
                     }
+                }
 
-                });
-            }, 1000);
-        </script>
-    </div>
+            });
+        }, 1000);
+    </script>
 </body>
 </html>
