@@ -1,7 +1,7 @@
 <?php
     if(isset($_POST['create'])){
         require 'connect.php';
-        $code = $_POST["roomCode"];
+        $code = htmlspecialchars($_POST["roomCode"]);
         $id = $_SESSION["usernameADM"];
         // $deck = $_POST["idDeck"];
         $tanggal = date("Y-m-d");

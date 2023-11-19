@@ -1,3 +1,11 @@
+<?php
+    require 'connect.php';
+    if (!isset($_SESSION["loginUser"])) {
+        header("Location: loginUser.php");
+        exit;
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -92,9 +100,6 @@
     </button> -->
 
     <table class="flex-nowrap table table-responsive table-bordered text-center " style="margin-top: 10px;border: 0.35px solid;min-width: 100vw !important;">
-        <?php
-        require 'connect.php';
-        ?>
         <thead>
             <tr class="flex flex-nowrap row" style="margin-left:0;">
                 <th class="col-12">BAY 1 DRY</th>

@@ -4,7 +4,7 @@
     // var_dump($_POST);
 	if (isset($_POST['deleteUser'])) {
 		if (isset($_POST['team_name'])) {
-			$id = $_POST['team_name'];
+			$id = htmlspecialchars($_POST['team_name']);
 			$query = "DELETE FROM user WHERE team_name = '$id'";
 			$result = mysqli_query($con, $query);
 			if (mysqli_affected_rows($con) > 0) {
@@ -19,9 +19,9 @@
 	}
 
 	if (isset($_POST['register'])) {
-		$username = $_POST['teamUserName'];
-		$password = $_POST['teamPassword'];
-		$confirmPassword = $_POST['teamPasswordConfirm'];
+		$username = htmlspecialchars($_POST['teamUserName']);
+		$password = htmlspecialchars($_POST['teamPassword']);
+		$confirmPassword = htmlspecialchars($_POST['teamPasswordConfirm']);
 		$resultAll = mysqli_query($con, "SELECT * FROM user");
 
 		while ($row = mysqli_fetch_assoc($resultAll)) {

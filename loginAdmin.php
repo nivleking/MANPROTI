@@ -1,4 +1,10 @@
-<?php require 'connect.php' ?>
+<?php 
+    require 'connect.php';
+    if (isset($_SESSION["loginADM"])) {
+        header("Location: homeAdmin.php");
+        exit;
+    }
+?>
 
 <!DOCTYPE html>
 <html>
@@ -14,7 +20,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" id="theme-styles" />
 
-    <title>Login</title>
+    <title>Admin Login</title>
 
     <style>
         /* POPPINS FONT */
@@ -57,7 +63,7 @@
 
         .text {
             position: absolute;
-            top: 15%;
+            top: 13%;
             left: 37.7%;
             transform: translate(-50%, -50%);
             width: 500px;
@@ -144,7 +150,7 @@
 
         .input-field .input:focus,
         .input-field .input:valid {
-            border-bottom: 1px solid #743ae1;
+            border-bottom: 1px solid #D2691E;
         }
 
         .submit {
@@ -157,7 +163,7 @@
         }
 
         .submit:hover {
-            background: rgba(37, 95, 156, 0.937);
+            background: #D2691E;
             color: #fff;
         }
 
@@ -268,7 +274,7 @@
                                 <button type="submit" class="submit" name="submit">Log In</button>
                             </div>
                             <div class="forgotPassword">
-                                <span>Forgot your password? <a href="#">Click here</a></span>
+                                <span>Forgot your password? </span><span style="font-weight: bold;">Contact Super Admin</span>
                             </div>
                         </form>
                     </div>
@@ -282,14 +288,16 @@
 
     <?php
     if (isset($_POST['submit'])) {
-        $username = $_POST['usernameADM'];
-        $password = $_POST['passwordADM'];
+        $username = htmlspecialchars($_POST['usernameADM']);
+        $password = htmlspecialchars($_POST['passwordADM']);
         $sql = mysqli_query($con, "SELECT * FROM admin where id_admin='$username' and password='$password'");
         $row  = mysqli_fetch_array($sql);
 
         if (is_array($row)) {
             $_SESSION["usernameADM"] = $row['id_admin'];
             $_SESSION["passwordADM"] = $row['password'];
+            $_SESSION["loginADM"] = true;
+
             echo "<script>
                     Swal.fire({
                         icon: 'success',

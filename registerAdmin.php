@@ -1,5 +1,10 @@
 <?php
-require 'connect.php';
+	require 'connect.php';
+	
+	if (!isset($_SESSION["loginADM"])) {
+        header("Location: loginAdmin.php");
+        exit;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -43,44 +48,60 @@ require 'connect.php';
             padding: 0 20px 0 20px;
         }
 
-		.w3-row-padding img {
-			margin-bottom: 12px
-		}
+        .w3-row-padding img {
+            margin-bottom: 12px
+        }
 
-		#main {
-			margin-left: 120px;
-		}
+        #main {
+            margin-left: 120px;
+            transition: margin-left .5s;
+        }
 
-		/* Sidebar styles */
-		.w3-sidebar {
-			width: 150px;
-			background: #222;
-			position: fixed;
-			height: 100%;
-			overflow: hidden;
-		}
+        .navbar-boots {
+            background: #222;
+            position: fixed;
+            height: 66px;
+        }
 
-		.w3-sidebar a {
-			padding: 8px;
-			text-align: center;
-			width: 100%;
-			display: block;
-		}
+        /* Sidebar styles */
+        .w3-sidebar {
+            width: 150px;
+            background: #222;
+            position: fixed;
+            height: 100%;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            overflow-x: hidden;
+            transition: 0.5s;
+        }
 
-		.w3-sidebar .flex-column {
-			flex-direction: column;
-			align-items: stretch;
-		}
+        .w3-sidebar a {
+            padding: 8px;
+            text-align: center;
+            width: 100%;
+            display: block;
+            transition: 0.3s;
+        }
 
-		/* Small */
-		@media only screen and (max-width: 600px) {
-			main {
-				margin-left: 0px;
-			}
-		}
+        .w3-sidebar .flex-column {
+            flex-direction: column;
+            align-items: stretch;
+        }
 
-		/* Medium */
-		@media only screen and (max-width: 991px) and (min-width: 768) {}
+        /* Small */
+        @media only screen and (max-width: 600px) {
+            #main {
+                margin-left: -40px;
+            }
+
+            #navbarUpper {
+                margin-left: -56px;
+            }
+        }
+
+        /* Medium */
+        @media only screen and (max-width: 991px) and (min-width: 768) {}
 	</style>
 </head>
 
@@ -88,7 +109,7 @@ require 'connect.php';
 	<!-- Sidebar -->
 	<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
 		<div class="flex-column" style="display: flex; flex-direction: column; height: 100%;">
-			<h3 class="text-white navbar-text" style="font-style: italic;font-weight:bold;">BLC</h3>
+			<h3 class="text-white w3-bar-item" style="font-style: italic;font-weight:bold;">BLC</h3>
 		
 			<a href="homeAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black">
 				<i class="fa fa-dashboard w3-xxlarge d-flex justify-content-center mt-2"></i>
@@ -192,6 +213,7 @@ require 'connect.php';
 	<script>
 		$(document).ready(function() {
 			let table = $('#adminTable').DataTable({
+				info: true
 				// scrollCollapse: true,
 				// scrollY: '430px'
 			})
@@ -219,9 +241,9 @@ require 'connect.php';
 							// console.log("sukes")
 							// location.reload()
 							// refreshTable();
-							// table.destroy()
+							table.destroy()
 							$("#listAdmin").find(`[value='${id_admin}']`).closest('tr').remove();
-							// table = $("#adminTable").DataTable().draw()
+							table = $("#adminTable").DataTable().draw()
 							Swal.fire({
 								icon: 'success',
 								title: 'Admin Deleted',

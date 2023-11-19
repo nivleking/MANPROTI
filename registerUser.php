@@ -1,5 +1,10 @@
 <?php
-require 'connect.php';
+	require 'connect.php';
+
+	if (!isset($_SESSION["loginADM"])) {
+        header("Location: loginAdmin.php");
+        exit;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -107,7 +112,7 @@ require 'connect.php';
 	</nav><!-- Sidebar -->
 	<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
 		<div class="flex-column" style="display: flex; flex-direction: column; height: 100%;">
-			<h3 class="text-white navbar-text" style="font-style: italic;font-weight:bold;">BLC</h3>
+			<h3 class="text-white w3-bar-item" style="font-style: italic;font-weight:bold;">BLC</h3>
 		
 			<a href="homeAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black">
 				<i class="fa fa-dashboard w3-xxlarge d-flex justify-content-center mt-2"></i>
@@ -216,13 +221,15 @@ require 'connect.php';
 							console.log("sukes")
 							// location.reload()
 							// refreshTable();
+							table.destroy()
 							$("#listUser").find(`[value='${id_user}']`).closest('tr').remove();
+							table = $("#userTable").DataTable().draw()
 
 							Swal.fire({
 								icon: 'success',
 								title: 'User Deleted',
 								text: 'The User has been successfully deleted.'
-							});
+							})
 						} else if (response == "2") {
 							// console.log("sukess")
 							Swal.fire({
