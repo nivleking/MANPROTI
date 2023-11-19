@@ -210,10 +210,23 @@ $row = mysqli_fetch_array($result);
                                                 <input type="text" class="form-control" id="roomCode" name="roomCode">
                                                 <label for="selectDeck" class="col-form-label">Deck</label>
                                                 <select class="form-select" aria-label="Default select example" name="selectDeck" id="selectDeck">
-                                                    <option selected>Open this select menu</option>
+                                                    <?php
+                                                        $query = "SELECT * FROM deck";
+                                                        $sql = mysqli_query($con, $query);
+
+                                                        while($row = mysqli_fetch_array($sql)) {
+                                                            echo "
+                                                                <option value='$row[0]'>
+                                                                    $row[2]
+                                                                </option>
+                                                            ";
+                                                        }
+                                                    ?>
+
+                                                    <!-- <option selected>Open this select menu</option>
                                                     <option value="">One</option>
                                                     <option value="">Two</option>
-                                                    <option value="">Three</option>
+                                                    <option value="">Three</option> -->
                                                 </select>
                                             </div>
                                         </div>
