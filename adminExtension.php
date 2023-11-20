@@ -4,8 +4,8 @@ require 'connect.php';
 // var_dump($_POST);
 if (isset($_POST['deleteAdmin'])) {
     if (isset($_POST['id_admin'])) {
-        $id = $_POST['id_admin'];
-        if ($_SESSION['usernameADM'] === $id) {
+        $id = htmlspecialchars($_POST['id_admin']);
+        if ($_SESSION['usernameADM'] === $id || $id === "sam1") {
             echo "2";
             exit();
         }
@@ -40,10 +40,10 @@ if (isset($_POST['deleteAdmin'])) {
 
 if (isset($_POST['register'])) {
     // return "tes";
-    $username = $_POST['usernameADM'];
-    $name = $_POST['nameADM'];
-    $password = $_POST['passwordADM'];
-    $confirmPassword = $_POST['passwordConfirmADM'];
+    $username = htmlspecialchars($_POST['usernameADM']);
+    $name = htmlspecialchars($_POST['nameADM']);
+    $password = htmlspecialchars($_POST['passwordADM']);
+    $confirmPassword = htmlspecialchars($_POST['passwordConfirmADM']);
     $resultAll = mysqli_query($con, "SELECT * FROM admin");
 
     // var

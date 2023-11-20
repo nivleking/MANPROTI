@@ -8,39 +8,78 @@
     <div class="container">
         <h1>Deck</h1>
         
-        <?php
-            require 'connect.php';
-            $sql = "SELECT * FROM deck";
-            $result= mysqli_query($con,$sql);
+        <form method="POST">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Choose Deck</label>
+                <select class="form-control" name="idDeck">
+                    <?php
+                        require 'connect.php';
+                        $sql = "SELECT id_deck, nama_deck FROM deck";
+                        $deck = mysqli_query($con,$sql);
+                        if ($deck->num_rows > 0) {
+                            while ($row = $deck->fetch_array()) {
+                                echo '<option value='.$row[0].'>'.$row[1].'</option>';
+                            }
+                        } else {
+                            echo 'No data found in the database.';
+                        }
+                    ?>
+                </select>
+            </div>
+            <div class="form-group">
+            <?php
+                $sql = "SELECT * FROM sales";
+                $result= mysqli_query($con,$sql);
 
-        if ($result->num_rows > 0) {
-            // Use Bootstrap table classes for styling
-            echo '<table class="table">';
-            echo '<thead><tr><th>ID Sales</th><th>Priority</th><th>Origin</th></tr></thead>';
-            echo '<tbody>';
+                if ($result->num_rows > 0) {
+                    // Use Bootstrap table classes for styling
+                    echo '<table class="table">';
+                    echo '<thead><tr><th>ID Sales</th><th>Priority</th><th>Origin</th><th>Destination</th><th>qty</th><th>revenue</th><th>Choose</th></tr></thead>';
+                    echo '<tbody>';
 
-            while ($row = $result->fetch_assoc()) {
-                echo '<tr>';
-                echo '<td>' . $row['id_deck'] . '</td>';
-                echo '<td>' . $row['qty_bay'] . '</td>';
-                echo '<td>' . $row['nama_deck'] . '</td>';
-                echo '</tr>';
-            }
+                    while ($row = $result->fetch_assoc()) {
+                        echo '<tr>';
+                        echo '<td>' . $row['id_sales'] . '</td>';
+                        echo '<td>' . $row['priority'] . '</td>';
+                        echo '<td>' . $row['origin'] . '</td>';
+                        echo '<td>' . $row['destination'] . '</td>';
+                        echo '<td>' . $row['quantity'] . '</td>';
+                        echo '<td>' . $row['revenue'] . '</td>';
+                        echo '<td><input type="checkbox" class="form-check-input" type="submit" name="'.$row['id_sales'].'"></td>';
+                        echo '</tr>';
+                    }
 
-            echo '</tbody>';
-            echo '</table>';
-        } else {
-            echo 'No data found in the database.';
-        }
-
-        // Close the database connection
-        $con->close();
-        ?>
+                    echo '</tbody>';
+                    echo '</table>';
+                } else {
+                    echo 'No data found in the database.';
+                }
+            ?>
+            </div>
+            <button class="btn btn-success" name="updateDeck">Submit</button>
+        </form>
         <form action="homeAdmin.php">
             <button class="btn btn-primary">Back to Home</button>
         </form>
 
     </div>
+    <?php
+        if (isset($_POST['updateDeck'])) {
+            $tempArr = array();
+            $sql = "SELECT id_sales FROM sales";
+            $listSales = mysqli_query($con,$sql);
+            while ($row = $listSales->fetch_array()) {
+                if (isset($_POST[$row[0]])) {
+                    array_push($tempArr,$row[0]);
+                }
+            }
+            $jsonSales = json_encode($tempArr);
+            echo $jsonSales;
+            $idDeck = $_POST['idDeck'];
+            $sql = "UPDATE deck SET list_card = '$jsonSales' WHERE id_deck = '$idDeck'";
+            mysqli_query($con,$sql);
+        }
+    ?>
 
     <!-- Add Bootstrap JS and jQuery (if needed) here -->
     <!-- You can link to a CDN or use local files -->

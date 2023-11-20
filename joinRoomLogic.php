@@ -17,7 +17,7 @@
             $room = $_SESSION['roomID'];
             $name = $_SESSION['username'];
             $sql = mysqli_query($con,"UPDATE user SET id_room = '$room',revenue = '0' WHERE team_name = '$name'");
-            header("Location: waitingRoom.php");
+            header("Location: waitingRoom2.php");
         }
     }
 ?>

@@ -1,123 +1,327 @@
+<?php 
+    require 'connect.php';
+    if (isset($_SESSION["loginADM"])) {
+        header("Location: homeAdmin.php");
+        exit;
+    }
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Admin Login</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" id="theme-styles" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <!-- Swal2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" id="theme-styles" />
+
+    <title>Admin Login</title>
+
+    <style>
+        /* POPPINS FONT */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .wrapper {
+            background: #ececec;
+            padding: 0 20px 0 20px;
+        }
+
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            min-width: 90vw;
+        }
+
+        .side-image {
+            background-image: url("images/login.jpg");
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            border-radius: 10px 0 0 10px;
+            position: relative;
+        }
+
+        #bigImage {
+            width: 1500px;
+            height: 900px;
+            border-radius: 10px;
+            background: #fff;
+            padding: 0px;
+            box-shadow: 5px 5px 10px 1px rgba(0, 0, 0, 0.2);
+        }
+
+        .text {
+            position: absolute;
+            top: 13%;
+            left: 37.7%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+        }
+
+        .text p {
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        i {
+            font-weight: 400;
+            font-size: 15px;
+        }
+
+        .right {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .input-box {
+            width: 330px;
+            box-sizing: border-box;
+        }
+
+        #logopetra {
+            width: 200px;
+            position: absolute;
+            top: -40px;
+        }
+
+        #logoukp {
+            width: 60px;
+            position: absolute;
+            top: 25px;
+            left: 175px;
+        }
+
+        .input-box header {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .input-field {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            padding: 0 10px 0 10px;
+        }
+
+        .input {
+            height: 50px;
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+            outline: none;
+            margin-bottom: 20px;
+            color: #40414a;
+        }
+
+        .input-box .input-field label {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            pointer-events: none;
+            transition: .5s;
+        }
+
+        .input-field input:focus~label {
+            top: -10px;
+            font-size: 13px;
+        }
+
+        .input-field input:valid~label {
+            top: -10px;
+            font-size: 13px;
+            color: #5d5076;
+        }
+
+        .input-field .input:focus,
+        .input-field .input:valid {
+            border-bottom: 1px solid #D2691E;
+        }
+
+        .submit {
+            border: none;
+            outline: none;
+            height: 45px;
+            background: #ececec;
+            border-radius: 5px;
+            transition: .4s;
+        }
+
+        .submit:hover {
+            background: #D2691E;
+            color: #fff;
+        }
+
+        .forgotPassword {
+            text-align: center;
+            font-size: small;
+            margin-top: 25px;
+        }
+
+        span a {
+            text-decoration: none;
+            font-weight: 700;
+            color: #000;
+            transition: .5s;
+        }
+
+        span a:hover {
+            text-decoration: underline;
+            color: #000;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .side-image {
+                /* border-radius: 10px 10px 0 0; */
+                display: none;
+            }
+
+            /* img {
+                width: 35px;
+                position: absolute;
+                top: 20px;
+                left: 47%;
+            } */
+
+            #logopetra {
+                width: 200px;
+                position: absolute;
+                top: -49px;
+            }
+
+            #logoukp {
+                width: 60px;
+                position: absolute;
+                top: 20px;
+                left: 175px;
+            }
+
+            .text {
+                position: absolute;
+                top: 30%;
+                /* text-align:start; */
+                left: 282px;
+
+                /* filter: brightness(); */
+            }
+
+            .text p,
+            i {
+                font-size: 16px;
+            }
+
+            #bigImage {
+                max-width: 420px;
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body>
-	<section class="vh-100 ">
-		<div class="container-fluid mx-auto">
-			<div class="row">
-				<div class="col-sm-12 text-black">
-					<div class="d-flex justify-content-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
+    <div class="wrapper">
+        <div class="container main">
+            <div class="row" id="bigImage">
+                <div class="col-md-6 side-image">
+                    <!-------------      image     ------------->
+                    <img src="images/logopetra.png" alt="" id="logopetra">
+                    <img src="images/logoukp.png" alt="" id="logoukp">
 
-						<form style="width: 23rem;" method="POST" action="#" class="">
+                    <div class="text">
+                        <p>
+                            Business Logistics Competition
+                        </p>
+                    </div>
 
-							<h3 class="fw-normal mt-3 d-flex justify-content-center" style="letter-spacing: 0.5px; font-style:italic; font-size:38px;">
-								Cargo Master<br>
-								<h4 class="d-flex justify-content-center" style="font-style: italic;">Admin Login</h4>
-								<?php //if (isset($_GET['error'])) { 
-								?>
-								<!-- <p class="d-flex justify-content-center" style="color:red; font-weight:bold;"><?php //echo $_GET['error']; 
-																													?></p> -->
-								<?php //} 
-								?>
-							</h3>
+                </div>
 
-							<div class="form-outline mb-4">
-								<label class="form-label" for="form2Example18">Username</label>
-								<input type="text" id="form2Example18" class="form-control form-control-lg" name="usernameADM" required />
-							</div>
+                <div class="col-md-6 right flex-column">
+                    <div class="row mt-auto">
+                        <h1>Welcome to BLC!</h1>
+                    </div>
+                    <div class="row mt-auto" style="margin-bottom: 140px;">
+                        <form class="input-box" action="#" method="post">
 
-							<div class="form-outline mb-4">
-								<label class="form-label" for="form2Example28">Password</label>
-								<input type="password" id="form2Example28" class="form-control form-control-lg" name="passwordADM" required />
-							</div>
+                            <header>
+                                <h3>
+                                    Admin Login
+                                </h3>
+                            </header>
+                            <div class="input-field">
+                                <input type="text" class="input" id="username" name="usernameADM" required>
+                                <label for="username">Username</label>
+                            </div>
+                            <div class="input-field">
+                                <input type="password" class="input" id="pass" name="passwordADM" required>
+                                <label for="pass">Password</label>
+                            </div>
+                            <div class="input-field">
+                                <button type="submit" class="submit" name="submit">Log In</button>
+                            </div>
+                            <div class="forgotPassword">
+                                <span>Forgot your password? </span><span style="font-weight: bold;">Contact Super Admin</span>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row mt-auto">
+                        <h6 style="font-size: 12px;">Copyright @ 2023 MANPRO TI Kelompok 1, All Rights Reserved.</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-							<div class="pt-1 mb-4">
-								<button class="btn btn-info btn-lg btn-block" type="submit" name="save">Login</button>
-							</div>
+    <?php
+    if (isset($_POST['submit'])) {
+        $username = htmlspecialchars($_POST['usernameADM']);
+        $password = htmlspecialchars($_POST['passwordADM']);
+        $sql = mysqli_query($con, "SELECT * FROM admin where id_admin='$username' and password='$password'");
+        $row  = mysqli_fetch_array($sql);
 
-							<p class="small d-flex justify-content-center">
-								<a class="text-muted" href="forgotPasswordAdmin.php">Forgot password?</a>
-							</p>
-							<!-- <p class="d-flex justify-content-center">
-						Don't have an account?&nbsp
-						<a href="registerAdmin.php" class="link-info"> Register here</a>
-					</p> -->
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- <div class = "container">
-		<div class = "row">
-			<div class = "col-9 mx-auto">
-				<div class="card center" style="width: 25rem;margin-top: 80px">
-				  <div class="card-body">
-				    <div class = "text-center" id = "title">
-				    	<h3>WELCOME!</h3>
-				    </div>
-				    <form action="adminDoLogin.php" method="post">
-				    	<label>Username</label>
-				    	<input type="text" class = "form-control" name="username">
-				    	<label>Password</label>
-				    	<input type="password" class = "form-control" name="password">
-				    	<br>
-				    	<br>
-				    	<button type="submit" name = "save">Login</button>
-				    </form>
-				  </div>
-				</div>
-			</div>	
-		</div>
-	</div> -->
-	<?php
+        if (is_array($row)) {
+            $_SESSION["usernameADM"] = $row['id_admin'];
+            $_SESSION["passwordADM"] = $row['password'];
+            $_SESSION["loginADM"] = true;
 
-	require 'connect.php';
-	if (isset($_POST['save'])) {
-		$username = $_POST['usernameADM'];
-		$password = $_POST['passwordADM'];
-		$sql = mysqli_query($con, "SELECT * FROM admin where id_admin='$username' and password='$password'");
-		$row  = mysqli_fetch_array($sql);
+            echo "<script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Login Successful',
+                        text: 'Welcome back, {$row['id_admin']}!',
+                        showConfirmButton: false,
+                        timer: 2500
+                    }).then(function() {
+                        window.location.href = 'homeAdmin.php';
+                    });
+                </script>";
+        } else {
+            echo "<script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Login Failed',
+                        text: 'Invalid username or password'
+                    });
+                </script>";
+        }
+    }
+    ?>
 
-		if (is_array($row)) {
-			$_SESSION["usernameADM"] = $row['id_admin'];
-			$_SESSION["passwordADM"] = $row['password'];
-			echo "<script>
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Login Successful',
-                    text: 'Welcome back, {$row['id_admin']}!',
-                    showConfirmButton: false,
-                    timer: 2500
-                }).then(function() {
-                    window.location.href = 'activity.php';
-                });
-            </script>";
-		} else {
-			// header("Location: loginAdmin.php?error=Invalid username or password");
-			echo "<script>
-			    Swal.fire({
-			        icon: 'error',
-			        title: 'Login Failed',
-			        text: 'Invalid username or password'
-			    });
-			</script>";
-			// echo ("<script LANGUAGE='JavaScript'>
-			// window.alert('Invalid Username/Password');
-			// window.location.href='loginAdmin.php';
-			// </script>");
-		}
-	}
-	?>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 
 </html>
