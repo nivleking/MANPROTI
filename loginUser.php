@@ -295,7 +295,7 @@
         $sql = mysqli_query($con, "SELECT * FROM user WHERE team_name ='$username' AND password='$password'");
 		$row  = mysqli_fetch_array($sql);
 
-        echo ($_POST['username'.$password]);
+        // echo ($_POST['username'.$password]);
 
         if (is_array($row)) {
             $_SESSION["username"] = $row['team_name'];
@@ -315,7 +315,7 @@
 						showConfirmButton: false,
 						timer: 2500
 					}).then(function() {
-						
+						window.location.href = 'joinRoomUser.php'
 					});
 				</script>";
         } else {

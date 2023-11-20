@@ -109,7 +109,7 @@ require 'connect.php';
                     echo "<tr>
                         <td>$row[0]</td>
                         <td>$val</td>
-                        <td></td>
+                        <td>$row[5]</td>
                         </tr>
                     ";
                 }
@@ -144,22 +144,85 @@ require 'connect.php';
                 }
 
                 if (isset($_POST['swap'])) {
-                    $sql = "SELECT ship FRom user WHERE team_name = 'Actonoi'";
+                    $roomID = $_SESSION['roomID_admin'];
+                    $sql = "SELECT * FROM user WHERE id_room = $roomID";
                     $result = mysqli_query($con, $sql);
-                    $row = mysqli_fetch_array($result);
-                    $hasil1 = json_decode($row['ship']);
 
-                    $sql2 = "SELECT ship FRom user WHERE team_name = 'Vincentius'";
-                    $result2 = mysqli_query($con, $sql2);
-                    $row2 = mysqli_fetch_array($result2);
-                    $hasil2 = json_decode($row2['ship']);
+                    // Logic Swap JANGAN DIRUBAH
+                    $tempBay = [];
+                    $tempName = [];
+                    while ($row = mysqli_fetch_array($result)) {
 
-                    $swap1 = json_encode($hasil2);
-                    $swap2 = json_encode($hasil1);
-                    $sql3 = "UPDATE user SET ship = '$swap1' WHERE team_name = 'Actonoi'";
-                    $sql4 = "UPDATE user SET ship = '$swap2' WHERE team_name = 'Vincentius'";
-                    $result3 = mysqli_query($con, $sql3);
-                    $result4 = mysqli_query($con, $sql4);
+                        array_push($tempBay, $row[2]);
+                        array_push($tempName, $row[0]);
+                    }
+
+                    $length = count($tempBay) - 1;
+
+                    $temp = $tempBay[0];
+                    for ($i = 0; $i < $length; $i++) {
+                        $tempBay[$i] = $tempBay[$i + 1];
+                    }
+                    $tempBay[$length] = $temp;
+
+                    //
+
+                    // Testing 
+                    // echo "$tempName[0] ====== $tempBay[0]";
+                    // echo "<br>";
+                    // echo "$tempName[1] ====== $tempBay[1]";
+                    // echo "<br>";
+                    // echo "$tempName[2] ====== $tempBay[2]";
+                    // echo "<br>";
+
+                    // Proses memasukan ship ke user setelah swap
+                    for ($i = 0; $i <= $length; $i++) {
+                        $bay = $tempBay[$i];
+                        $name = $tempName[$i];
+
+                        $sql = "UPDATE user SET ship = '$bay' WHERE team_name = '$name'";
+                        $result = mysqli_query($con, $sql);
+                    }
+
+                    // $sql = "SELECT ship FROM user WHERE team_name = 'Samuel'";
+                    // $result = mysqli_query($con, $sql);
+                    // $row = mysqli_fetch_array($result);
+                    // $hasil1 = json_decode($row['ship']);
+
+                    // $sql2 = "SELECT ship FROM user WHERE team_name = 'Vincentius'";
+                    // $result2 = mysqli_query($con, $sql2);
+                    // $row2 = mysqli_fetch_array($result2);
+                    // $hasil2 = json_decode($row2['ship']);
+
+                    // $swap1 = json_encode($hasil2);
+                    // $swap2 = json_encode($hasil1);
+                    // $sql3 = "UPDATE user SET ship = '$swap1' WHERE team_name = 'Samuel'";
+                    // $sql4 = "UPDATE user SET ship = '$swap2' WHERE team_name = 'Vincentius'";
+                    // $result3 = mysqli_query($con, $sql3);
+                    // $result4 = mysqli_query($con, $sql4);
+
+
+                    // $sql = "SELECT * FROM temp_container WHERE id_user = 'Vincentius'";
+                    // $result = mysqli_query($con,$sql);
+
+                    // $count = 0;
+                    // while($row = mysqli_fetch_array($result)){
+                    //     $count = $count + 1;
+                    // }
+
+                    // if($count > 0){
+                    //     $pay = $count * 1500;
+
+                    //     $sql = "SELECT * FROM user WHERE team_name = 'Vincentius'";
+                    //     $result = mysqli_query($con,$sql);
+                    //     $row = mysqli_fetch_array($result);
+
+                    //     $revenue = $row[6];
+                    //     $revenue = $revenue - $pay;
+
+                    //     $sql = "UPDATE user SET revenue = '$revenue' WHERE team_name = 'Vincentius'";
+                    //     $result = mysqli_query($con,$sql);
+                    // }
                 }
             }
         } else {
