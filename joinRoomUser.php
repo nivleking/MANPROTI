@@ -182,7 +182,7 @@ if (!isset($_SESSION["loginUser"])) {
                     showConfirmButton: false,
                     timer: 2500
                 }).then(function() {
-                    window.location.href = 'waitingRoom.php';
+                    window.location.href = 'waitingRoom2.php';
                 });
             </script>";
 		}
