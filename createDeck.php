@@ -1,19 +1,19 @@
-<?php 
-    require 'connect.php'; 
+<?php
+require 'connect.php';
 
-    if (isset($_POST['addDeck'])) {
-        $id = $_POST['id_deck'];
-        $qty = $_POST['qty_bay'];
-        $nama = $_POST['nama_deck'];
-        
-        $sql = "INSERT INTO deck VALUES (?,?,?)";
-        $stmt = $con->prepare($sql);
-        $stmt->bind_param("iis", $id, $qty, $nama);
-        $stmt->execute();
-    }
-    if (isset($_POST['backtoHome'])) {
-        header('Location:homeAdmin.php');
-    }
+if (isset($_POST['addDeck'])) {
+    $id = $_POST['id_deck'];
+    $qty = $_POST['qty_bay'];
+    $nama = $_POST['nama_deck'];
+
+    $sql = "INSERT INTO deck VALUES (?,?,?)";
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("iis", $id, $qty, $nama);
+    $stmt->execute();
+}
+if (isset($_POST['backtoHome'])) {
+    header('Location:homeAdmin.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -66,7 +66,9 @@
             <button type="button" class="btn btn-danger mt-4" name="backToHome">
                 Back
             </button>
+        </form>
 
+        <form method="post">
             <!-- Modal -->
             <div class="modal fade" id="isiDataBay" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -76,13 +78,14 @@
                         </div>
                         <div class="modal-body">
                             <?php
-                                for ($i = 0; $i < $_POST['qty_bay']; $i++) {
-                                    echo '
+                            $temp = $_POST['qty_bay'];
+                            for ($i = 0; $i < $temp; $i++) {
+                                echo '
                                     <label for="id_sales">Bay' . $i . '</label>
                                     <input type="number" class="form-control" name="namaBay' . $i . '" required>
                                     <label for="id_sales">Detail Nama</label>
                                     <input type="number" class="form-control" name="detailBay' . $i . '" required>';
-                                }    
+                            }
                             ?>
                         </div>
                         <div class="modal-footer">
