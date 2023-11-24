@@ -145,9 +145,6 @@
 				<div class="col-lg-5 col-md-5 mt-4">
 					<form method="POST" action="" class="w3-card w3-padding">
 						<h4 class="d-flex justify-content-center" style="font-weight: bold;">Add Admin</h4>
-						<?php if (isset($_GET['error'])) { ?>
-							<p class="d-flex justify-content-center" style="color:red; font-weight:bold;"><?php echo $_GET['error']; ?></p>
-						<?php } ?>
 
 						<div class="form-outline mb-4">
 							<label class="form-label" for="form2Example18">Username</label>
