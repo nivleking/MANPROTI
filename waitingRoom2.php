@@ -23,9 +23,9 @@ require 'connect.php';
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                    </button>
+                    </button> -->
                 </div>
                 <form method="POST">
                     <div class="modal-body">
@@ -61,7 +61,7 @@ require 'connect.php';
                         <input type="number" class="form-control" id="roomCode" name="ronde" placeholder="Jumlah ronde">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
                         <button type="submit" class="btn btn-primary" name="adminStart">Save changes</button>
                     </div>
                 </form>
@@ -144,7 +144,27 @@ require 'connect.php';
                 }
 
                 if (isset($_POST['swap'])) {
-                    $roomID = $_SESSION['roomID_admin'];
+                    $id = $_SESSION['roomID_admin'];
+                    $sql = "SELECT * FROM user WHERE id_room = '$id'";
+                    $result = mysqli_query($con,$sql);
+                    $tanggal = date("Y-m-d");
+
+                    while ( $row = mysqli_fetch_array($result) ){
+
+                    $team = $row[0];
+                    $ship = $row[2];
+                    $origin = $row[5];
+                    $revenue = $row[6];
+
+                    $sql = "INSERT INTO history VALUES ('$tanggal','$round','$team','$ship','$origin','$revenue')";
+                    $result2 = mysqli_query($con,$sql);
+
+                    }
+                    $round = $row[7] + 1;
+
+                    $sql = "UPDATE user SET round = '$round' WHERE id_room = '$id";
+                    $result = mysqli_query($con,$sql);
+                    
                     $sql = "SELECT * FROM user WHERE id_room = $roomID";
                     $result = mysqli_query($con, $sql);
 
@@ -174,7 +194,6 @@ require 'connect.php';
                     // echo "<br>";
                     // echo "$tempName[2] ====== $tempBay[2]";
                     // echo "<br>";
-
                     // Proses memasukan ship ke user setelah swap
                     for ($i = 0; $i <= $length; $i++) {
                         $bay = $tempBay[$i];
@@ -183,6 +202,8 @@ require 'connect.php';
                         $sql = "UPDATE user SET ship = '$bay' WHERE team_name = '$name'";
                         $result = mysqli_query($con, $sql);
                     }
+
+                    // Memasukan ke tabel history
 
                     // $sql = "SELECT ship FROM user WHERE team_name = 'Samuel'";
                     // $result = mysqli_query($con, $sql);

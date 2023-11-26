@@ -1,3 +1,7 @@
+<?php  
+    require 'connect.php'
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,16 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Input Data Penjualan</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <?php  require 'connect.php'?>
 </head>
 <body>
     <div class="container mt-5">
         <h1>Input Data Penjualan</h1>
         <form method="POST">
-            <div class="form-group">
-                <label for="id_sales">ID Deck </label>
-                <input type="number" class="form-control" name="id_deck" required>
-            </div>
             <div class="form-group">
                 <label for="id_sales">ID Sales </label>
                 <input type="number" class="form-control" name="id_sales" required>
@@ -52,7 +51,8 @@
 
         <?php
             if (isset($_POST['addSales'])) {
-                $deck = $_POST['id_deck'];
+                // $deck = $_POST['id_deck'];
+                
                 $id = $_POST['id_sales'];
                 $priority = $_POST['priority'];
                 // var_dump($_POST['priority']);
@@ -62,9 +62,10 @@
                 // var_dump($_POST['destination']);
                 $qty = random_int($_POST['quantity_lower'], $_POST['quantity_upper']);
                 $revenue = $_POST['revenue'];
-                $sql = "INSERT INTO sales VALUES (?,?,?,?,?,?,?)";
+
+                $sql = "INSERT INTO sales VALUES (?,?,?,?,?,?)";
                 $stmt = $con->prepare($sql);
-                $stmt->bind_param("isssiii",$id,$priority,$origin,$dest,$qty,$revenue,$deck);
+                $stmt->bind_param("isssii",$id,$priority,$origin,$dest,$qty,$revenue);
                 $stmt->execute();
 
                 for ($i = 0; $i < $qty; $i++) {
@@ -77,9 +78,7 @@
             if (isset($_POST['backtoHome'])) {
                 header('Location:homeAdmin.php');
             }
-
         ?>
-
     </div>
 </body>
 </html>
