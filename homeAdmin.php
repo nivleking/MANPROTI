@@ -10,7 +10,7 @@ $row = mysqli_fetch_array($result);
 <html>
 
 <head>
-    <title>Cargo Master</title>
+    <title>BLC Admin</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -120,7 +120,7 @@ $row = mysqli_fetch_array($result);
     <div class="w3-padding-large" id="main">
         <!-- Header/Home -->
         <div class=" w3-padding-16 w3-center" id="home">
-            <h1 class="w3-jumbo"><span class="w3-hide-small">CARGO MASTER</span></h1>
+            <h1 class="w3-jumbo"><span class="w3-hide-small">Business Logistics Competition</span></h1>
             <h3>Hello,
                 <?php echo $row[0]; ?>
             </h3>
