@@ -147,27 +147,6 @@ $row = mysqli_fetch_array($result);
             </div>
         </div>
         <div class="col-11 mx-auto" id="main">
-            <!-- <div class="row my-auto" id="navbarUpper">
-                <nav class="w3-bar navbar-boots min-vw-100">
-                    <h1 class="">
-                        Halo
-                    </h1>
-                    <a class="navbar-brand text-white" href="#">
-                            <?php //echo $_SESSION['usernameADM']
-                            ?>
-                        </a>
-                    <div class="collapse" id="navbarToggleExternalContent" data-bs-theme="dark">
-                            <div class="bg-dark p-4">
-                                <h5 class="text-body-emphasis h4">Collapsed content</h5>
-                                <span class="text-body-secondary">Toggleable via the navbar brand.</span>
-                            </div>
-                        </div>
-                    <button class="navbar-toggler navbar-brand bg-white" onclick="openNav()" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-
-                </nav>
-            </div> -->
             <div class="row my-auto">
                 <div class="w3-padding-large" id="main">
                     <!-- Header/Home -->
@@ -211,16 +190,16 @@ $row = mysqli_fetch_array($result);
                                                 <label for="selectDeck" class="col-form-label">Deck</label>
                                                 <select class="form-select" aria-label="Default select example" name="selectDeck" id="selectDeck">
                                                     <?php
-                                                        $query = "SELECT * FROM deck";
-                                                        $sql = mysqli_query($con, $query);
+                                                    $query = "SELECT * FROM deck";
+                                                    $sql = mysqli_query($con, $query);
 
-                                                        while($row = mysqli_fetch_array($sql)) {
-                                                            echo "
+                                                    while ($row = mysqli_fetch_array($sql)) {
+                                                        echo "
                                                                 <option value='$row[0]'>
                                                                     $row[2]
                                                                 </option>
                                                             ";
-                                                        }
+                                                    }
                                                     ?>
 
                                                     <!-- <option selected>Open this select menu</option>
@@ -241,7 +220,7 @@ $row = mysqli_fetch_array($result);
 
                         <div class="w3-half">
                             <div class="w3-white w3-center w3-opacity w3-hover-opacity-off">
-                                <div class="card" style="width:w3">
+                                <div class="card" style="width:w3;">
                                     <div class="card-body">
                                         <h3 class="card-title" style="font-weight:bold;font-style:italic;">CARDS & DECKS</h3>
                                         <img class="object-fit-md-cover border rounded" src="https://img.freepik.com/free-vector/hand-drawn-container-ship-illustration_23-2149157495.jpg?size=626&ext=jpg&ga=GA1.1.1880011253.1699401600&semt=ais" alt="Admin">
@@ -377,6 +356,7 @@ $row = mysqli_fetch_array($result);
         </script>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    </div>
 </body>
 
 </html>
