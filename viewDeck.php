@@ -7,7 +7,6 @@
 <body>
     <div class="container">
         <h1>Deck</h1>
-        
         <form method="POST">
             <div class="form-group">
                 <label for="exampleInputEmail1">Choose Deck</label>
@@ -30,11 +29,23 @@
             <?php
                 $sql = "SELECT * FROM sales";
                 $result= mysqli_query($con,$sql);
+                // $sql2 = "SELECT list_card FROM deck";
+                // $result2 = mysqli_query($con, $sql2);
+                // $tmp = json_encode($result[3]);
+                // $tmp = mysqli_fetch_assoc($result2);
 
                 if ($result->num_rows > 0) {
-                    // Use Bootstrap table classes for styling
                     echo '<table class="table">';
-                    echo '<thead><tr><th>ID Sales</th><th>Priority</th><th>Origin</th><th>Destination</th><th>qty</th><th>revenue</th><th>Choose</th></tr></thead>';
+                    echo '<thead>
+                            <tr>
+                                <th>ID Sales</th><th>Priority</th>
+                                <th>Origin</th>
+                                <th>Destination</th>
+                                <th>qty</th>
+                                <th>revenue</th>
+                                <th>Choose</th>
+                            </tr>
+                        </thead>';
                     echo '<tbody>';
 
                     while ($row = $result->fetch_assoc()) {
@@ -45,6 +56,10 @@
                         echo '<td>' . $row['destination'] . '</td>';
                         echo '<td>' . $row['quantity'] . '</td>';
                         echo '<td>' . $row['revenue'] . '</td>';
+                        // if (in_array($row['id_sales'], $tmp['list_card'])) {
+                        //     echo "Sudah ada";
+                        // }
+                        
                         echo '<td><input type="checkbox" class="form-check-input" type="submit" name="'.$row['id_sales'].'"></td>';
                         echo '</tr>';
                     }
@@ -74,15 +89,13 @@
                 }
             }
             $jsonSales = json_encode($tempArr);
-            echo $jsonSales;
+            // echo $jsonSales;
             $idDeck = $_POST['idDeck'];
             $sql = "UPDATE deck SET list_card = '$jsonSales' WHERE id_deck = '$idDeck'";
             mysqli_query($con,$sql);
         }
     ?>
 
-    <!-- Add Bootstrap JS and jQuery (if needed) here -->
-    <!-- You can link to a CDN or use local files -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
 </body>

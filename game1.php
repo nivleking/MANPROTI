@@ -4,6 +4,7 @@ if (!isset($_SESSION["loginUser"])) {
     header("Location: loginUser.php");
     exit;
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -1098,17 +1099,28 @@ if (!isset($_SESSION["loginUser"])) {
                             Total Revenue
                         </h3>
                     </div>
-                    <div class="d-flex justify-content-center my-auto">                        
-                        <div class="money" data-ccy='IDR'>
+                    <div class="d-flex justify-content-center my-auto">
+                        <div class="row money" data-ccy='IDR'>
                             <?php
                             $id = $_SESSION['username'];
                             $sql = "SELECT * FROM user WHERE team_name = '$id'";
                             $result = mysqli_query($con, $sql);
                             $row = mysqli_fetch_array($result);
-        
+
                             echo $row[6];
                             ?>
                         </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <?php 
+                            echo"Round: ";
+                            $teamName = $_SESSION['username'];
+                            $sql = "SELECT * FROM user WHERE team_name = '$teamName'";
+                            $result = mysqli_query($con, $sql);
+                            $row = mysqli_fetch_array($result);
+                            
+                            echo $row[7];
+                        ?>
                     </div>
                 </div>
             </div>
