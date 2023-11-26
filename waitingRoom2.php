@@ -147,7 +147,7 @@ require 'connect.php';
                     $id = $_SESSION['roomID_admin'];
                     $sql = "SELECT * FROM user WHERE id_room = '$id'";
                     $result = mysqli_query($con,$sql);
-                    $tanggal = date("Y-m-d");
+                    $tanggal = date("Y-m-d H:i:s");
 
                     while ( $row = mysqli_fetch_array($result) ){
 
@@ -155,17 +155,17 @@ require 'connect.php';
                     $ship = $row[2];
                     $origin = $row[5];
                     $revenue = $row[6];
+                    $round = $row[7];
 
                     $sql = "INSERT INTO history VALUES ('$tanggal','$round','$team','$ship','$origin','$revenue')";
                     $result2 = mysqli_query($con,$sql);
 
                     }
-                    $round = $row[7] + 1;
-
-                    $sql = "UPDATE user SET round = '$round' WHERE id_room = '$id";
+                    $round = $round + 1;
+                    $sql = "UPDATE user SET round = '$round' WHERE id_room = '$id'";
                     $result = mysqli_query($con,$sql);
                     
-                    $sql = "SELECT * FROM user WHERE id_room = $roomID";
+                    $sql = "SELECT * FROM user WHERE id_room = $id";
                     $result = mysqli_query($con, $sql);
 
                     // Logic Swap JANGAN DIRUBAH
