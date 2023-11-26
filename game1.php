@@ -1,9 +1,9 @@
 <?php
-    require 'connect.php';
-    if (!isset($_SESSION["loginUser"])) {
-        header("Location: loginUser.php");
-        exit;
-    }
+require 'connect.php';
+if (!isset($_SESSION["loginUser"])) {
+    header("Location: loginUser.php");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -28,6 +28,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/currencyformatter.js/2.2.0/currencyFormatter.min.js" integrity="sha512-zaNuym1dVrK6sRojJ/9JJlrMIB+8f9IdXGzsBQltqTElXpBHZOKI39OP+bjr8WnrHXZKbJFdOKLpd5RnPd4fdg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <style>
+        /* POPPINS FONT */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            overflow: hidden;
+        }
+
         #div1,
         #div2 {
             float: left;
@@ -75,16 +86,20 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-dark bg-primary navbar-expand">
-        <a href="#" class="navbar-brand disabled" style="font-style: italic; font-weight:bold; font-size:26px">Cargo Master</a>
-        
-        <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarSupportedContent" style="text-align:center;display:inline-block; float:none; vertical-align:top; color:aliceblue; font-size:26px; font-weight:bold;">
-            SURABAYA - WEEK 1
+    <nav class="navbar navbar-dark bg-danger navbar-expand d-flex justify-content-between" style="width: 100%;">
+        <div>
+            <a href="#" class="navbar-brand disabled" style="font-style: italic; font-weight:bold; font-size:26px">BLC</a>
         </div>
-
-        <button class="btn btn-danger" disabled>
-            MARKET INTELLIGENCE
-        </button>
+        <div class="text-white">
+            <h3 style="font-weight: bold;">
+                SBY - WEEK 1
+            </h3>
+        </div>
+        <div class="text-white" style="font-weight: bold;">
+            <?php
+            echo $_SESSION['username'];
+            ?>
+        </div>
     </nav>
     <!-- <div style="font-weight: bold; background-color: lightgrey; padding: 15px;">
         <h1 class="text-center w3-jumbo" style="margin-top: 0PX;">CARGO MASTER</h1>
@@ -95,18 +110,9 @@
         Market Intelligence
     </button> -->
 
-    <!-- Menampilkan notifikasi -->
-    <div class="d-flex justify-content-center mt-2">
-        <p style="color:red; font-weight:bold;">
-            <?php if (isset($_GET['error'])) { ?>
-                <?php echo $_GET['error'] ?>
-            <?php } ?>
-        </p>
-    </div>
-
-    <div class="container-fluid">
+    <div class="container-fluid mt-5" style="width: 109rem;">
         <!-- <div class="row"> -->
-        <table class="flex-nowrap table table-responsive table-bordered text-center overflow-x-auto" style="margin-top: 10px; min-width: 100vw !important;">
+        <table class="flex-nowrap table table-responsive table-bordered text-center overflow-x-auto" style="margin-top: 10px;">
             <thead>
                 <tr class="flex flex-nowrap row" style="margin-left: 0;">
                     <th class="col-12">BAY 1 DRY</th>
@@ -500,10 +506,12 @@
                                 echo "<div style='color: green'>$row[0]</div>";
                             }
                             if ($row[2] == 'MDN') {
-                                echo "<div style='color: gray'>$row[0]</div>";
+                                echo "<div style='color: gray;'>$row[0]</div>";
                             }
                         }
                         ?>
+                        <!-- <hr class="bg-secondary" style="margin-top: -5px; width: 3.5rem; height: 0.1rem;"> -->
+
                     </td>
                     <td class="col-4">
                         <div class="id">012
@@ -539,6 +547,7 @@
                             }
                         }
                         ?>
+                        <!-- <hr class="" style="margin-top: -5px; width: 3.5rem; height: 0.1rem; background-color:green;"> -->
                     </td>
 
                     <td class="col-4">
@@ -1072,118 +1081,144 @@
                         }
                         ?>
                     </td>
+
                 </tr>
             </tbody>
         </table>
         <!-- </div> -->
     </div>
 
-    <!-- Menampilkan Pendapatan -->
-    <div class="text-center mb-5">
-        <div class="money" data-ccy='IDR'>
-            <?php
-                $id = $_SESSION['username'];
-                $sql = "SELECT * FROM user WHERE team_name = '$id'";
-                $result = mysqli_query($con, $sql);
-                $row = mysqli_fetch_array($result);
-
-                echo $row[6];
-                ?>
-        </div>
-
-        <div class="row">
-            <div class="card col-6" style="border: 0.35px solid">
-                <h2 style="margin-top: 10px; text-align: center">Controller</h2>
-                <form method="POST" action="bongpasLogic.php" style="margin-top : 20px;">
-                    <div class="row">
-                        <div class="col-3" style="text-align: left; margin-top: 16px; margin-left: 295px;">
-                            <h6>Bay</h6>
-                        </div>
-                        <div class="col-4">
-                            <input type="text" class="form-control" name="bay" id="bay" style="margin-left: -80px; width: 50%">
+    <div class="row d-flex justify-content-center mt-3">
+        <div class="col-3">
+            <!-- Menampilkan Pendapatan -->
+            <div class="row d-flex justify-content-center">
+                <div class="card" style="height: 7.55rem; width:28rem;">
+                    <div class="text-center card-header bg-danger text-white">
+                        <h3>
+                            Total Revenue
+                        </h3>
+                    </div>
+                    <div class="d-flex justify-content-center my-auto">                        
+                        <div class="money" data-ccy='IDR'>
+                            <?php
+                            $id = $_SESSION['username'];
+                            $sql = "SELECT * FROM user WHERE team_name = '$id'";
+                            $result = mysqli_query($con, $sql);
+                            $row = mysqli_fetch_array($result);
+        
+                            echo $row[6];
+                            ?>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-3" style="text-align: left; margin-top: 16px; margin-left: 295px">
-                            <h6>Baris</h6>
-                        </div>
-                        <div class="col-4">
-                            <input type="text" class="form-control" name="baris" id="baris" style="margin-left: -80px; width: 50%">
-                        </div>
-                    </div>
-                    <div class="row">
-
-                        <div class="col-3" style="text-align: left; margin-top: 16px; margin-left: 295px">
-                            <h6>Kolom</h6>
-                        </div>
-                        <div class="col-4">
-                            <input type="text" class="form-control" name="kolom" id="kolom" style="margin-left: -80px;width: 50%">
-                        </div>
-                    </div>
-                    <div class="row">
-
-                        <div class="col-3" style="text-align: left; margin-top: 16px; margin-left: 295px">
-                            <h6>Kontainer</h6>
-                        </div>
-                        <div class="col-4">
-                            <input type="text" class="form-control" name="kontainer" id="kontainer" style="margin-left: -80px; width: 50%">
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 20px;margin-bottom: 20px;margin-left: 280px">
-                        <div class="col-2 text-right" style="margin-left: -20px">
-                            <button class="btn btn-success" type="submit" name="pasang" id="pasang">Load</button>
-                        </div>
-                        <div class="col-2 text-center">
-                            <button class="btn btn-danger" type="submit" name="bongkar" style="margin-left: 8px" id="bongkar">Unload</button>
-                        </div>
-                        <div class="col-2 text-left">
-                            <button class="btn btn-success" type="submit" name="done" style="margin-left: 25px" id="done">Done</button>
-                        </div>
-                    </div>
-
-                </form>
+                </div>
             </div>
-            <div class="card col-6" style="border: 0.35px solid">
-                <h2 style="margin-top: 10px; text-align: center">Container Yang Tersedia</h2>
-                <div class="text-center" style="display: inline-block">
-                    <?php
-                    $id = $_SESSION['username'];
 
-                    $sql = "SELECT * FROM temp_container WHERE id_user = '$id'";
-                    $result = mysqli_query($con, $sql);
-                    // $row = mysqli_fetch_array($result);
+            <div class="card mt-3">
+                <div class="card-header text-center bg-danger">
+                    <h3 class="text-white">
+                        Controller
+                    </h3>
+                </div>
+                <div class="card-body d-flex justify-content-around">
+                    <form method="POST" action="bongpasLogic.php">
+                        <div class="row my-auto p-2">
+                            <h6 class="col-8">Bay</h6>
+                            <input type="text" class="form-control" name="bay" id="bay" style="width: 5rem">
+                        </div>
+                        <div class="row my-auto p-2">
+                            <h6 class="col-8">Baris</h6>
+                            <input type="text" class="form-control" name="baris" id="baris" style="width: 5rem;">
+                        </div>
+                        <div class="row my-auto p-2">
+                            <h6 class="col-8">Kolom</h6>
+                            <input type="text" class="form-control" name="kolom" id="kolom" style="width: 5rem;">
+                        </div>
+                        <div class="row my-auto p-2">
+                            <h6 class="col-8">Kontainer</h6>
+                            <input type="text" class="form-control" name="kontainer" id="kontainer" style="width:5rem">
+                        </div>
+                        <div class="row mx-auto p-2" style="width: 15rem;">
+                            <div class="mx-auto">
+                                <button class="btn btn-primary" type="submit" name="pasang" id="pasang">Load</button>
+                            </div>
+                            <div class="mx-auto">
+                                <button class="btn btn-danger" type="submit" name="bongkar" id="bongkar">Unload</button>
+                            </div>
+                            <div class="mx-auto">
+                                <button class="btn btn-success" type="submit" name="done" id="done">Done</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="card" style="height: 32rem;">
+                <div class="card-header text-center bg-danger">
+                    <h3 class="text-white">Container Yang Tersedia</h3>
+                </div>
+                <div class="card-body flex-nowrap overflow-y-auto" style="overflow: auto; scrollbar-gutter: stable;">
+                    <div class="row d-flex justify-content-center overflow-y-auto">
+                        <?php
+                        $id = $_SESSION['username'];
 
-                    if (mysqli_num_rows($result) > 0) {
-                        while ($row = mysqli_fetch_array($result)) {
-                            echo "
-                    <div class='card text-left' style='width: 9 rem;margin-top: 10px;display: inline-block;'>
-                        <div class='card-body'>
-                            <h5 class='card-title' style = 'border-bottom: 1px solid'> CON-$row[0]";
-                            $id = $row[0];
-                            $sql = "SELECT * FROM container where id_container = '$id'";
-                            $result2 = mysqli_query($con, $sql);
-                            $row2 = mysqli_fetch_array($result2);
+                        $sql = "SELECT * FROM temp_container WHERE id_user = '$id'";
+                        $result = mysqli_query($con, $sql);
+                        // $row = mysqli_fetch_array($result);
+
+                        if (mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_array($result)) {
+                                echo "
+                            <div class='card text-left m-3' style='width: 11rem;height:10rem;margin-top: 10px; display: inline-block;'>
+                                <div class='card-body'>
+                                    <h5 class='card-title text-center' style = 'text-decoration: underline;'> CON-$row[0]";
+                                $id = $row[0];
+                                $sql = "SELECT * FROM container where id_container = '$id'";
+                                $result2 = mysqli_query($con, $sql);
+                                $row2 = mysqli_fetch_array($result2);
 
 
-                            echo "</h5>
-                            <h6 class='card-subtitle mb-2 text-muted'>Detail</h6>
-                            <p class='card-text'>Tujuan : $row2[2] </p>
-                            <p class='card-text' style='margin-top: -15px'>Asal : $row2[1]</p>
+                                echo "</h5>
+                            <h6 class='card-subtitle mb-2 text-muted text-center'>Detail</h6>
+                            <p class='card-text'>
+                                <div class='row'>
+                                    <div class='col-7'>
+                                        Tujuan:
+                                    </div>
+
+                                    <div class='col'>
+                                        $row2[2]
+                                    </div>
+                                </div>
+                                <div class='row'>
+                                    <div class='col-7'>
+                                        Asal:
+                                    </div>
+
+                                    <div class='col-5'>
+                                        $row2[1]
+                                    </div>
+                                </div>
+                            </p>
                         </div>
                     </div>";
+                            }
+                        } else {
+                            echo "Kosong!";
                         }
-                    } else {
-                        echo "Kosong";
-                    }
-                    ?>
+                        ?>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
+
     <script>
         $(document).ready(function() {
             $("#pasang").click(function(e) {
                 e.preventDefault()
+                console.log("testing")
                 let bay = $('#bay').val()
                 let baris = $('#baris').val()
                 let kolom = $('#kolom').val()
@@ -1202,45 +1237,41 @@
                     success: function(response) {
                         if (response === "1") {
                             Swal.fire({
-                                position: "top",
+                                // position: "top",
                                 icon: "error",
                                 title: "Pemasangan kontainer melebihi koordinat!",
                                 showConfirmButton: false,
                                 timer: 1000
                             });
-                        }
-                        else if (response === "2") {
+                        } else if (response === "2") {
                             Swal.fire({
-                                position: "top",
+                                // position: "top",
                                 icon: "error",
                                 title: "Pemasangan kontainer melayang!",
                                 showConfirmButton: false,
                                 timer: 1000
                             });
-                        }
-                        else if (response === "3") {
+                        } else if (response === "3") {
                             Swal.fire({
-                                position: "top",
+                                // position: "top",
                                 icon: "error",
                                 title: "Sudah terdapat kontainer!",
                                 showConfirmButton: false,
                                 timer: 1000
                             });
-                        }
-                        else if (response === "4") {
+                        } else if (response === "4") {
                             Swal.fire({
                                 // position: "top",
                                 icon: "success",
-                                title: "Kontainer berhasil dimasukkan!",
+                                title: "Kontainer ID " + kontainer + " berhasil dimasukkan!",
                                 showConfirmButton: false,
                                 timer: 1000
                             }).then(function() {
                                 location.reload()
                             });
-                        }
-                        else if (response === "5") {
+                        } else if (response === "5") {
                             Swal.fire({
-                                position: "top",
+                                // position: "top",
                                 icon: "error",
                                 title: "Kontainer ID tidak terdaftar!",
                                 showConfirmButton: false,
@@ -1248,7 +1279,7 @@
                             });
                         }
                     },
-                    error:function(err) {
+                    error: function(err) {
                         console.log(err)
                     }
                 });
@@ -1260,7 +1291,7 @@
                 let baris = $('#baris').val()
                 let kolom = $('#kolom').val()
                 let kontainer = $('#kontainer').val()
-                
+
                 $.ajax({
                     url: "bongpasLogic.php",
                     type: 'POST',
@@ -1274,32 +1305,29 @@
                     success: function(response) {
                         if (response === "1") {
                             Swal.fire({
-                                position: "top",
+                                // position: "top",
                                 icon: "error",
                                 title: "Pembongkaran kontainer melebihi koordinat!",
                                 showConfirmButton: false,
                                 timer: 1000
                             });
-                        }
-                        else if (response === "2") {
+                        } else if (response === "2") {
                             Swal.fire({
-                                position: "top",
+                                // position: "top",
                                 icon: "error",
                                 title: "Pembongkaran kontainer menumpuk!",
                                 showConfirmButton: false,
                                 timer: 1000
                             });
-                        }
-                        else if (response === "3") {
+                        } else if (response === "3") {
                             Swal.fire({
-                                position: "top",
+                                // position: "top",
                                 icon: "error",
                                 title: "Tidak ada kontainer yang dapat dibongkar!",
                                 showConfirmButton: false,
                                 timer: 1000
                             });
-                        }
-                        else if (response === "4") {
+                        } else if (response === "4") {
                             Swal.fire({
                                 // position: "top",
                                 icon: "success",
@@ -1311,7 +1339,7 @@
                             });
                         }
                     },
-                    error:function(err) {
+                    error: function(err) {
                         console.log(err)
                     }
                 });
@@ -1323,7 +1351,7 @@
                     url: "bongpasLogic.php",
                     type: "POST",
                     data: {
-                        "done":1
+                        "done": 1
                     },
                     success: function(response) {
                         if (response === "1") {
@@ -1334,8 +1362,7 @@
                                 showConfirmButton: false,
                                 timer: 1000
                             });
-                        }
-                        else if (response === "2") {
+                        } else if (response === "2") {
                             Swal.fire({
                                 // position: "top",
                                 icon: "success",
