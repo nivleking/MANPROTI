@@ -23,9 +23,9 @@ require 'connect.php';
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                    </button>
+                    </button> -->
                 </div>
                 <form method="POST">
                     <div class="modal-body">
@@ -61,7 +61,7 @@ require 'connect.php';
                         <input type="number" class="form-control" id="roomCode" name="ronde" placeholder="Jumlah ronde">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
                         <button type="submit" class="btn btn-primary" name="adminStart">Save changes</button>
                     </div>
                 </form>
@@ -149,22 +149,23 @@ require 'connect.php';
                     $result = mysqli_query($con,$sql);
                     $tanggal = date("Y-m-d");
 
-                    while ( $row = mysqli_fetch_array($result) ){
+                    // while ( $row = mysqli_fetch_array($result) ){
 
-                    $team = $row[0];
-                    $ship = $row[2];
-                    $origin = $row[5];
-                    $revenue = $row[6];
+                    // $team = $row[0];
+                    // $ship = $row[2];
+                    // $origin = $row[5];
+                    // $revenue = $row[6];
 
-                    $sql = "INSERT INTO history VALUES ('$tanggal','$round','$team','$ship','$origin','$revenue')";
-                    $result2 = mysqli_query($con,$sql);
+                    // $sql = "INSERT INTO history VALUES ('$tanggal','$round','$team','$ship','$origin','$revenue')";
+                    // $result2 = mysqli_query($con,$sql);
 
-                    }
-                    $round = $row[7] + 1;
+                    // }
+                    // $round = $row[7] + 1;
 
-                    $sql = "UPDATE user SET round = '$round' WHERE id_room = '$id";
-                    $result = mysqli_query($con,$sql);
+                    // $sql = "UPDATE user SET round = '$round' WHERE id_room = '$id";
+                    // $result = mysqli_query($con,$sql);
                     
+                    $roomID = $_SESSION['roomID_admin'];
                     $sql = "SELECT * FROM user WHERE id_room = $roomID";
                     $result = mysqli_query($con, $sql);
 
@@ -202,6 +203,12 @@ require 'connect.php';
                         $sql = "UPDATE user SET ship = '$bay' WHERE team_name = '$name'";
                         $result = mysqli_query($con, $sql);
                     }
+
+                    // Update atribut pindah jadi YES
+                    // $id = $_SESSION['username'];
+                    // $sql = "SELECT * FROM user WHERE id_room = '$room' ";
+                    $sql = "UPDATE user SET pindah = 'YES' WHERE id_room = $room";
+                    $result = mysqli_query($con, $sql);
 
                     // Memasukan ke tabel history
 

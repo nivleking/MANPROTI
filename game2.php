@@ -1125,6 +1125,17 @@ if (!isset($_SESSION["loginUser"])) {
                             ?>
                         </div>
                     </div>
+                    <div class="d-flex justify-content-center">
+                        <?php 
+                            echo"Round: ";
+                            $teamName = $_SESSION['username'];
+                            $sql = "SELECT * FROM user WHERE team_name = '$teamName'";
+                            $result = mysqli_query($con, $sql);
+                            $row = mysqli_fetch_array($result);
+                            
+                            echo $row[7];
+                        ?>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -1279,7 +1290,7 @@ if (!isset($_SESSION["loginUser"])) {
 
                     <div class="card mx-auto" style="text-align: center; width: 18rem;height:28rem;margin-top: 10px; border-width: 0.5px; border: 0.01px solid">
                         <div style="text-align: center;margin-top: 10px; font-weight: 950; font-size: 20px">
-                            SUB - 
+                            SBY - 
                             <?php echo $rand[0];
                                     $_SESSION['rand'] = $rand[0]; ?>
                         </div>
@@ -1364,6 +1375,20 @@ if (!isset($_SESSION["loginUser"])) {
     
     <script>
         $(document).ready(function() {
+            // Ngecek stiap waktu kalau admin sudah pencet swap atau belum
+            setInterval(() => {
+                $.ajax({
+                    url: 'bongpasLogic2.php',
+                    method: 'POST',
+                    success: function(temp) {
+                        // console.log(temp)
+                        if (temp == 'YES') {
+                            window.location.href = 'game1.php';
+                        } 
+                    }
+                });
+            }, 1000);
+
             $("#pasang").click(function(e) {
                 e.preventDefault()
                 let bay = $('#bay').val()

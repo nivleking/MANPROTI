@@ -191,10 +191,8 @@
 								while ($row = mysqli_fetch_array($result)) {
 									echo "<tr>
                                     <td class='col-lg-6'>$row[0]</td>
-                                    <td class='col-lg-6'>
-										<button type='submit' name='editAdmin' class='btn btn-primary admin-edit' id='' value='$row[0]'>Edit</button>
-										|
-                                        <button type='submit' name='deleteAdmin' class='btn btn-danger admin-del' id='' value='$row[0]'>Delete</button>
+                                    <td class='col-lg-6'>	
+										<button type='submit' name='deleteAdmin' class='btn btn-danger admin-del' id='' value='$row[0]'>Delete</button>
                                     </td>
                                 </tr>";
 								}
@@ -302,8 +300,6 @@
 								`<tr>
 								<td class='col-lg-6'>` + username + `</td>
 								<td class='col-lg-6'>
-									<button type = 'submit' name='editAdmin' class='btn btn-primary admin-edit' value='` + username + `'>Edit</button>
-									|
 									<button type = 'submit' name='deleteAdmin' class='btn btn-danger admin-del' value='` + username + `'>Delete</button>
 								</td>
 								</tr>`
