@@ -1375,6 +1375,20 @@ if (!isset($_SESSION["loginUser"])) {
     
     <script>
         $(document).ready(function() {
+            // Ngecek stiap waktu kalau admin sudah pencet swap atau belum
+            setInterval(() => {
+                $.ajax({
+                    url: 'bongpasLogic2.php',
+                    method: 'POST',
+                    success: function(temp) {
+                        // console.log(temp)
+                        if (temp == 'YES') {
+                            window.location.href = 'game1.php';
+                        } 
+                    }
+                });
+            }, 1000);
+
             $("#pasang").click(function(e) {
                 e.preventDefault()
                 let bay = $('#bay').val()

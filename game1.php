@@ -1,5 +1,22 @@
 <?php
 require 'connect.php';
+
+$id = $_SESSION['username'];
+$sql = "SELECT pindah from user where team_name = '$id'";
+$result = mysqli_query($con, $sql);
+$row = mysqli_fetch_array($result);
+
+// Ini biar aman aja
+if($row['pindah'] == "YES") {
+    $roomID = $_SESSION['roomID'];
+    $sql = "UPDATE user SET pindah = 'NO' WHERE id_room = '$roomID'";
+    mysqli_query($con,$sql);
+    // $sql = "SELECT pindah from user where team_name = '$id'";
+    // $result = mysqli_query($con, $sql);
+    // $row = mysqli_fetch_array($result);
+    // var_dump($row);
+}
+
 if (!isset($_SESSION["loginUser"])) {
     header("Location: loginUser.php");
     exit;
