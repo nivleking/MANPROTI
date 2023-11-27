@@ -1383,7 +1383,15 @@ if (!isset($_SESSION["loginUser"])) {
                     success: function(temp) {
                         // console.log(temp)
                         if (temp == 'YES') {
-                            window.location.href = 'game1.php';
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Saatnya berpindah!',
+                                showConfirmButton: false,
+                                timer: 2500,
+                                timerProgressBar: true
+                            }).then(function() {
+                                window.location.href = 'game1.php';
+                            });
                         } 
                     }
                 });
