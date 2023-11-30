@@ -92,8 +92,18 @@ if (!isset($_SESSION["loginUser"])) {
             <a href="#" class="navbar-brand disabled" style="font-style: italic; font-weight:bold; font-size:26px">BLC</a>
         </div>
         <div class="text-white">
-            <h3>
-                SBY - WEEK 1
+            <h3 style="font-weight:bold;">
+                <?php 
+                    $id = $_SESSION['username'];
+                    $sql = "SELECT origin FROM user WHERE team_name='$id'";
+                    $result = mysqli_query($con,$sql);
+                    $row = mysqli_fetch_array($result);
+
+                    echo "Port ";
+                    echo $row['origin'];
+                    // echo "";
+                    // echo $row[];
+                ?>
             </h3>
         </div>
         <div class="text-white" style="font-weight: bold;">
@@ -1383,8 +1393,36 @@ if (!isset($_SESSION["loginUser"])) {
                     success: function(temp) {
                         // console.log(temp)
                         if (temp == 'YES') {
-                            window.location.href = 'game1.php';
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Saatnya berpindah!',
+                                showConfirmButton: false,
+                                timer: 2500,
+                                timerProgressBar: true
+                            }).then(function() {
+                                window.location.href = 'game1.php';
+                            });
                         } 
+                    }
+                });
+            }, 1000);
+
+            setInterval(() => {
+                $.ajax({
+                    url: 'bongpasLogic2.php',
+                    method: 'POST',
+                    success: function(temp2) {
+                        if (temp2 === "DONE") {
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Game is Finished!',
+                                showConfirmButton: false,
+                                timer: 2500,
+                                timerProgressBar: true
+                            }).then(function() {
+                                window.location.href = 'homeUser.php';
+                            });
+                        }
                     }
                 });
             }, 1000);

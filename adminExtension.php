@@ -13,6 +13,10 @@ if (isset($_POST['deleteAdmin'])) {
             $query = "DELETE FROM admin WHERE id_admin = '$id'";
             $result = mysqli_query($con, $query);
             if (mysqli_affected_rows($con) > 0) {
+                $admin = $_SESSION['usernameADM'];
+                $detail = "$admin has deleted $id from database.";
+                $sql = "INSERT INTO log_admin VALUES('','$detail')";
+                mysqli_query($con, $sql);
                 echo "1";
                 exit();
                 // echo "<script>
@@ -77,6 +81,11 @@ if (isset($_POST['register'])) {
     } else {
         $query = "INSERT INTO admin VALUES('$username', '$name','$password', '0')";
         $result = mysqli_query($con, $query);
+
+        $admin = $_SESSION['usernameADM'];
+        $detail = "$admin has added $username into database.";
+        $sql = "INSERT INTO log_admin VALUES('','$detail')";
+        mysqli_query($con, $sql);
         echo "3";
         exit();
         // echo "<script>

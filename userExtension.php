@@ -8,6 +8,10 @@
 			$query = "DELETE FROM user WHERE team_name = '$id'";
 			$result = mysqli_query($con, $query);
 			if (mysqli_affected_rows($con) > 0) {
+				$admin = $_SESSION['usernameADM'];
+                $detail = "$admin has deleted $id from database.";
+				$sql = "INSERT INTO log_admin VALUES('','$detail')";
+				mysqli_query($con, $sql);
 				echo "1";
 				exit();
 			} else {
@@ -54,7 +58,12 @@
 			];
 			$layout = json_encode($layout);
 
-			$query = "INSERT INTO user VALUES('$username','$password', '$layout',0,0,'SBY',0)";
+			$admin = $_SESSION['usernameADM'];
+			$detail = "$admin has added $username into database.";
+			$sql = "INSERT INTO log_admin VALUES('','$detail')";
+			mysqli_query($con, $sql);
+
+			$query = "INSERT INTO user VALUES('$username','$password', '$layout',0,0,'SBY',0,0,'NO')";
 			$result = mysqli_query($con, $query);
 			echo "3";
             exit();
