@@ -204,21 +204,21 @@ $row = mysqli_fetch_array($result);
                                         <button type="submit" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#moda-createcards" style="margin-top: 10px; width: 10rem;">Create Card</button>
                                     </form>
                                 </div>
-                                <div class="col-3">
+                                <!-- <div class="col-3">
                                     <form action="viewSalesCard.php">
                                         <button type="submit" class="btn btn-danger" style="margin-top: 10px; width: 10rem;">View Card</button>
                                     </form>
-                                </div>
+                                </div> -->
                                 <div class="col-3">
                                     <form action="createDeck.php">
                                         <button type="submit" class="btn btn-dark" style="margin-top: 10px; width: 10rem;">Create Deck</button>
                                     </form>
                                 </div>
-                                <div class="col-3">
+                                <!-- <div class="col-3">
                                     <form action="viewDeck.php">
                                         <button type="submit" class="btn btn-danger" style="margin-top: 10px; width: 10rem;">View Deck</button>
                                     </form>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
