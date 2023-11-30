@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2023 at 03:14 PM
+-- Generation Time: Nov 30, 2023 at 08:10 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -39,12 +39,11 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id_admin`, `name_admin`, `password`, `status`) VALUES
+('kel1', '123', '1', 0),
+('kel2', '123', '1', 0),
+('kel3', '12', '12', 0),
 ('sam1', '123', '123', 0),
-('sam2', '123', '123', 0),
-('sam3', '123', '123', 0),
-('sam4', '123', '123', 0),
-('sam5', '123', '123', 0),
-('sam6', '123', '123', 0);
+('sam2', '123', '123', 0);
 
 -- --------------------------------------------------------
 
@@ -182,7 +181,38 @@ CREATE TABLE `history` (
 
 INSERT INTO `history` (`date`, `round`, `team_name`, `ship`, `origin`, `revenue`) VALUES
 ('2023-11-26', 0, 'kelvin', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'JYP', -2000),
-('2023-11-26', 0, 'Vincentius', '[[[\"112\",0,0],[\"108\",0,0],[\"104\",\"105\",0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'SBY', -59000);
+('2023-11-26', 0, 'Vincentius', '[[[\"112\",0,0],[\"108\",0,0],[\"104\",\"105\",0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'SBY', -59000),
+('2023-11-27', 0, 'kelvin', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'SBY', -2000),
+('2023-11-27', 0, 'Vincentius', '[[[\"112\",0,0],[\"108\",0,0],[\"104\",\"105\",0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'SBY', -59000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_admin`
+--
+
+CREATE TABLE `log_admin` (
+  `id` int(11) NOT NULL,
+  `detail` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `log_admin`
+--
+
+INSERT INTO `log_admin` (`id`, `detail`) VALUES
+(1, 'Kelvin'),
+(2, 'Kelvin'),
+(3, 'Kelvin'),
+(4, 'sam1 has deleted sam6 from database.'),
+(5, 'sam1 has deleted sam5 from database.'),
+(6, 'sam1 has deleted sam4 from database.'),
+(7, 'sam1 has deleted sam3 from database.'),
+(8, 'sam1 has added  into database.'),
+(9, 'sam1 has added kel2 into database.'),
+(10, 'sam1 has added kel3 into database.'),
+(11, 'sam1 has added Aktonoi into database.'),
+(12, 'sam1 has deleted Aktonoi from database.');
 
 -- --------------------------------------------------------
 
@@ -216,6 +246,13 @@ INSERT INTO `room` (`id_room`, `id_admin`, `status`, `tanggal`, `id_deck`, `rond
 (9, 'sam1', 1, '2023-11-26', 1, 0),
 (11, 'sam1', 0, '2023-11-26', 1, 0),
 (12, 'sam1', 1, '2023-11-26', 1, 0),
+(13, 'sam1', 1, '2023-11-27', 1, 0),
+(14, 'sam1', 0, '2023-11-28', 1, 0),
+(15, 'sam1', 1, '2023-11-30', 1, 0),
+(16, 'sam1', 0, '2023-11-30', 1, 0),
+(17, 'sam1', 0, '2023-11-30', 1, 0),
+(18, 'sam1', 1, '2023-11-30', 1, 0),
+(19, 'sam1', 1, '2023-11-30', 1, 0),
 (123, 'sam1', 1, '2023-11-15', 0, 0),
 (124, 'sam1', 0, '2023-10-29', 0, 0),
 (125, 'sam1', 0, '2023-10-29', 0, 0),
@@ -271,7 +308,7 @@ CREATE TABLE `sales` (
 
 INSERT INTO `sales` (`id_sales`, `priority`, `origin`, `destination`, `quantity`, `revenue`) VALUES
 (5, 'COMMIT', 'SBY', 'MKS', 10, 5000),
-(6, 'N-COMMIT', 'SBY', 'JYP', 8, 10000),
+(6, 'N-COMMIT', 'MDN', 'JYP', 8, 10000),
 (7, 'COMMIT', 'SBY', 'MKS', 14, 20000);
 
 -- --------------------------------------------------------
@@ -345,17 +382,19 @@ CREATE TABLE `user` (
   `id_room` int(4) NOT NULL,
   `origin` text NOT NULL,
   `revenue` int(255) NOT NULL,
-  `round` int(11) NOT NULL
+  `round` int(11) NOT NULL,
+  `pindah` text NOT NULL,
+  `finish` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`team_name`, `password`, `ship`, `status`, `id_room`, `origin`, `revenue`, `round`) VALUES
-('kelvin', '123', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 1, 12, 'SUB', -2000, 0),
-('sam', '12', '[[[0,0,0],[\"120\",101,0],[\"112\",105,0]],[[0,0,0],[104,0,0],[106,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 0, 140, 'SBY', 0, 0),
-('Vincentius', '123', '[[[\"112\",0,0],[\"108\",0,0],[\"104\",\"105\",0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 1, 12, 'JYP', -59000, 0);
+INSERT INTO `user` (`team_name`, `password`, `ship`, `status`, `id_room`, `origin`, `revenue`, `round`, `pindah`, `finish`) VALUES
+('kelvin', '123', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 1, 19, 'SBY', -2000, 0, 'NO', 'NOT DONE'),
+('sam', '12', '[[[0,0,0],[\"120\",101,0],[\"112\",105,0]],[[0,0,0],[104,0,0],[106,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 0, 140, 'SBY', 0, 0, 'NO', 'NOT DONE'),
+('Vincentius', '123', '[[[\"112\",0,0],[\"108\",0,0],[\"104\",\"105\",0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 1, 19, 'SBY', -59000, 0, 'NO', 'NOT DONE');
 
 --
 -- Indexes for dumped tables
@@ -384,6 +423,12 @@ ALTER TABLE `container`
 --
 ALTER TABLE `deck`
   ADD PRIMARY KEY (`id_deck`);
+
+--
+-- Indexes for table `log_admin`
+--
+ALTER TABLE `log_admin`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `room`
@@ -424,6 +469,12 @@ ALTER TABLE `bay`
 --
 ALTER TABLE `container`
   MODIFY `id_container` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=151;
+
+--
+-- AUTO_INCREMENT for table `log_admin`
+--
+ALTER TABLE `log_admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

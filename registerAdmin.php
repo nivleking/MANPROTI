@@ -166,8 +166,9 @@
 							<input type="password" id="form2Example38" class="form-control form-control-lg" name="passwordConfirmADM" required />
 						</div>
 
-						<div class="pt-1 mb-4 d-flex justify-content-center">
-							<button class="btn btn-primary btn-lg btn-block" type="submit" name="register" id="register">Add Admin</button>
+						<div class="row d-flex justify-content-around">
+							<button class="col-3 btn btn-dark btn-lg btn-block" type="submit" name="checkLogs" id="checkLogs">Admin Logs</button>
+							<button class="col-3 btn btn-primary btn-lg btn-block" type="submit" name="register" id="register">Add Admin</button>
 						</div>
 					</form>
 				</div>
@@ -212,6 +213,12 @@
 				// scrollCollapse: true,
 				// scrollY: '430px'
 			})
+
+			let table2 = $('#logTable').DataTable({
+				info: true
+				// scrollCollapse: true,
+				// scrollY: '430px'
+			})
 			
 			$(document.body).on('click', 'admin-edit', function(e) {
 				e.preventDefault()
@@ -237,15 +244,16 @@
 							// location.reload()
 							// refreshTable();
 							table.destroy()
+							table2.destroy()
 							$("#listAdmin").find(`[value='${id_admin}']`).closest('tr').remove();
+
 							table = $("#adminTable").DataTable().draw()
+							table2 = $("#logTable").DataTable().draw()
 							Swal.fire({
 								icon: 'success',
 								title: 'Admin Deleted',
 								text: 'The admin has been successfully deleted.'
 							});
-
-
 						} else if (response === "2") {
 							// console.log("sukess")
 							Swal.fire({
@@ -256,12 +264,16 @@
 						}
 					},
 					error: function(err) {
-						console.log("sukes")
+						// console.log("sukes")
 						console.log(err)
 					}
 				});
 			});
 
+			$("#checkLogs").click(function(e) {
+				e.preventDefault()
+				window.location.href = "adminLogs.php"
+			})
 
 			$("#register").click(function(e) {
 				e.preventDefault()

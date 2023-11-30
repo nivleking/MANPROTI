@@ -2,7 +2,7 @@
 require 'connect.php';
 
 $id = $_SESSION['username'];
-$sql = "SELECT pindah from user where team_name = '$id'";
+$sql = "SELECT pindah, finish from user where team_name = '$id'";
 $result = mysqli_query($con, $sql);
 $row = mysqli_fetch_array($result);
 
@@ -16,6 +16,12 @@ if($row['pindah'] == "YES") {
     // $row = mysqli_fetch_array($result);
     // var_dump($row);
 }
+
+// if($row['finish'] == "DONE") {
+//     $roomID = $_SESSION['roomID'];
+//     $sql = "UPDATE user SET finish = 'NOT DONE' WHERE id_room = '$roomID'";
+//     mysqli_query($con,$sql);
+// }
 
 if (!isset($_SESSION["loginUser"])) {
     header("Location: loginUser.php");
@@ -110,7 +116,18 @@ if (!isset($_SESSION["loginUser"])) {
         </div>
         <div class="text-white">
             <h3 style="font-weight: bold;">
-                SBY - WEEK 1
+                <!-- SBY - WEEK 1 -->
+                <?php 
+                    $id = $_SESSION['username'];
+                    $sql = "SELECT origin FROM user WHERE team_name='$id'";
+                    $result = mysqli_query($con,$sql);
+                    $row = mysqli_fetch_array($result);
+
+                    echo "Port ";
+                    echo $row['origin'];
+                    // echo "";
+                    // echo $row[];
+                ?>
             </h3>
         </div>
         <div class="text-white" style="font-weight: bold;">

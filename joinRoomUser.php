@@ -173,6 +173,7 @@ if (!isset($_SESSION["loginUser"])) {
 			$room = $_SESSION['roomID'];
 			$name = $_SESSION['username'];
 			$sql = mysqli_query($con, "UPDATE user SET id_room = '$room' WHERE team_name = '$name'");
+			$sql = mysqli_query($con, "UPDATE user SET `status` = '1' WHERE team_name = '$name'");
 			// header("Location: waitingRoom.php");
 			echo "<script>
                 Swal.fire({
