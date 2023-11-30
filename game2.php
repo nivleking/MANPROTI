@@ -1407,25 +1407,25 @@ if (!isset($_SESSION["loginUser"])) {
                 });
             }, 1000);
 
-            setInterval(() => {
-                $.ajax({
-                    url: 'bongpasLogic2.php',
-                    method: 'POST',
-                    success: function(temp2) {
-                        if (temp2 === "DONE") {
-                            Swal.fire({
-                                icon: 'warning',
-                                title: 'Game is Finished!',
-                                showConfirmButton: false,
-                                timer: 2500,
-                                timerProgressBar: true
-                            }).then(function() {
-                                window.location.href = 'homeUser.php';
-                            });
-                        }
-                    }
-                });
-            }, 1000);
+            // setInterval(() => {
+            //     $.ajax({
+            //         url: 'bongpasLogic2.php',
+            //         method: 'POST',
+            //         success: function(temp2) {
+            //             if (temp2 === "DONE") {
+            //                 Swal.fire({
+            //                     icon: 'warning',
+            //                     title: 'Game is Finished!',
+            //                     showConfirmButton: false,
+            //                     timer: 2500,
+            //                     timerProgressBar: true
+            //                 }).then(function() {
+            //                     window.location.href = 'homeUser.php';
+            //                 });
+            //             }
+            //         }
+            //     });
+            // }, 1000);
 
             $("#pasang").click(function(e) {
                 e.preventDefault()

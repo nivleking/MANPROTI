@@ -258,11 +258,11 @@ require 'connect.php';
                                 $sql = "UPDATE user SET ship = '$bay' WHERE team_name = '$name'";
                                 $result = mysqli_query($con, $sql);
 
-                                // Pindah ke page 1 setelah swap
-                                $sql = "UPDATE user SET pindah = 'YES' WHERE id_room = $room";
-                                $result = mysqli_query($con, $sql);
                             }
-
+                            
+                            // Pindah ke page 1 setelah swap
+                            $sql = "UPDATE user SET pindah = 'YES' WHERE id_room = $room";
+                            $result = mysqli_query($con, $sql);
                             // Update atribut pindah jadi YES
                             // $id = $_SESSION['username'];
                             // $sql = "SELECT * FROM user WHERE id_room = '$room' ";
