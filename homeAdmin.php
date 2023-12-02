@@ -1,5 +1,11 @@
 <?php
 require 'connect.php';
+
+if (!isset($_SESSION["loginADM"])) {
+    header("Location: loginAdmin.php");
+    exit;
+}
+
 $admin = $_SESSION["usernameADM"];
 $sql = "SELECT * FROM admin WHERE id_admin = '$admin'";
 $result = mysqli_query($con, $sql);
@@ -10,7 +16,7 @@ $row = mysqli_fetch_array($result);
 <html>
 
 <head>
-    <title>Cargo Master</title>
+    <title>BLC Admin</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -120,13 +126,12 @@ $row = mysqli_fetch_array($result);
     <div class="w3-padding-large" id="main">
         <!-- Header/Home -->
         <div class=" w3-padding-16 w3-center" id="home">
-            <h1 class="w3-jumbo"><span class="w3-hide-small">CARGO MASTER</span></h1>
+            <h1><span style="font-weight: bold;">Business Logistics Competition</span></h1>
             <h3>Hello,
                 <?php echo $row[0]; ?>
             </h3>
         </div>
 
-        <!-- Grid for pricing tables -->
         <div class="w3-row-padding">
             <div class="w3-half w3-margin-bottom">
                 <div class="w3-white w3-center w3-opacity w3-hover-opacity-off">
@@ -199,21 +204,21 @@ $row = mysqli_fetch_array($result);
                                         <button type="submit" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#moda-createcards" style="margin-top: 10px; width: 10rem;">Create Card</button>
                                     </form>
                                 </div>
-                                <div class="col-3">
+                                <!-- <div class="col-3">
                                     <form action="viewSalesCard.php">
                                         <button type="submit" class="btn btn-danger" style="margin-top: 10px; width: 10rem;">View Card</button>
                                     </form>
-                                </div>
+                                </div> -->
                                 <div class="col-3">
                                     <form action="createDeck.php">
                                         <button type="submit" class="btn btn-dark" style="margin-top: 10px; width: 10rem;">Create Deck</button>
                                     </form>
                                 </div>
-                                <div class="col-3">
+                                <!-- <div class="col-3">
                                     <form action="viewDeck.php">
                                         <button type="submit" class="btn btn-danger" style="margin-top: 10px; width: 10rem;">View Deck</button>
                                     </form>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,27 @@
 <?php
     require 'connect.php';
+
+    $id = $_SESSION['username'];
+    $sql = "SELECT pindah, finish from user where team_name = '$id'";
+    $result = mysqli_query($con, $sql);
+    $row = mysqli_fetch_array($result);
+
+    if($row['pindah'] == 'YES') {
+        $roomID = $_SESSION['roomID'];
+        $sql = "UPDATE user SET pindah = 'NO' WHERE team_name = '$id'";
+        mysqli_query($con,$sql);
+        echo "YES";
+        // exit();
+    }
+
+    // if($row['finish'] == 'DONE') {
+    //     $roomID = $_SESSION['roomID'];
+    //     $sql = "UPDATE user SET finish = 'NOT DONE' WHERE team_name = '$id'";
+    //     mysqli_query($con,$sql);
+    //     echo "DONE";
+    // }
+    
+
     if (isset($_POST['bongkar'])) {
         $bay = $_POST['bay'];
         $baris = $_POST['baris'];
