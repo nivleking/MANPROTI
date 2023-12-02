@@ -229,7 +229,7 @@
 				e.preventDefault()
 				// console.log("test")
 				let id_admin = $(this).val();
-				console.log(id_admin)
+				// console.log(id_admin)
 
 				$.ajax({
 					url: "adminExtension.php",
