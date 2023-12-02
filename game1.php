@@ -35,7 +35,8 @@ if (!isset($_SESSION["loginUser"])) {
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <title>Section 1</title>
 
     <!-- Bootstrap -->
@@ -60,6 +61,7 @@ if (!isset($_SESSION["loginUser"])) {
         }
 
         body {
+            /* width: 1000px; */
             overflow: hidden;
         }
 
@@ -83,6 +85,13 @@ if (!isset($_SESSION["loginUser"])) {
 
         #label {
             margin-top: 10px;
+        }
+
+        @media only screen and (max-width: 768px) { 
+            table {
+                overflow: auto;
+                /* flex-wrap: nowrap; */
+            }
         }
     </style>
     <!-- <script>

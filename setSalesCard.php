@@ -163,8 +163,8 @@
             </div>
             <div class="form-group">
                 <label for="origin">Origin</label>
-                <!-- <input type="text" class="form-control" name="origin" required> -->
-                <div class="row d-flex ml-1">
+                <input type="text" class="form-control" name="origin" required>
+                <!-- <div class="row d-flex ml-1">
                     <div class="form-check col-2">
                         <input class="form-check-input" type="radio" name="origin" id="SBY" value="SBY" checked>
                         <label class="form-check-label" for="origin">
@@ -189,7 +189,7 @@
                             MKS
                         </label>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="form-group">
                 <label for="destination">Destination</label>
@@ -210,7 +210,11 @@
                 <label for="revenue">Revenue</label>
                 <input type="number" class="form-control" name="revenue" required>
             </div>
-            <button type="submit" class="btn btn-primary" name="addSales">Create</button>
+            <div class="row">
+                <button type="submit" class="btn btn-primary ml-3"  name="addSales">Create</button>
+                <!-- <div class="m-2" style="color:green">
+                </div> -->
+            </div>
         </form>
 
         <?php
@@ -230,8 +234,8 @@
             $sql = "INSERT INTO sales VALUES (?,?,?,?,?,?)";
             $stmt = $con->prepare($sql);
             $stmt->bind_param("isssii", $id, $priority, $origin, $dest, $qty, $revenue);
-            $stmt->execute();
-
+            $res = $stmt->execute();
+            
             for ($i = 0; $i < $qty; $i++) {
                 $sql = "INSERT INTO container (asal_container,tujuan_container,id_sales) VALUES (?,?,?)";
                 $stmt = $con->prepare($sql);
