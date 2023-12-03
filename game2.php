@@ -11,7 +11,8 @@ if (!isset($_SESSION["loginUser"])) {
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <title>Section 2</title>
 
     <!-- Bootstrap -->
@@ -92,9 +93,25 @@ if (!isset($_SESSION["loginUser"])) {
             <a href="#" class="navbar-brand disabled" style="font-style: italic; font-weight:bold; font-size:26px">BLC</a>
         </div>
         <div class="text-white">
-            <h3>
-                SBY - WEEK 1
-            </h3>
+            <?php
+            $id = $_SESSION['username'];
+            $sql = "SELECT origin, round FROM user WHERE team_name='$id'";
+            $result = mysqli_query($con, $sql);
+            $row = mysqli_fetch_array($result);
+            $temp=$row['round'];
+            echo "<h3 style='font-weight:bold;'>
+                        <div class='row'>
+                            Port  
+                            $row[origin]
+                        </div>";
+            echo "
+                        <div class='row d-flex justify-content-center'>
+                            <h6 class='text-center' style='font-weight:bold;'>Round $temp</h6>
+                        </div>
+                    </h3>";
+            // echo "";
+            // echo $row[];
+            ?>
         </div>
         <div class="text-white" style="font-weight: bold;">
             <?php
@@ -1078,7 +1095,6 @@ if (!isset($_SESSION["loginUser"])) {
                     </td>
                 </tr>
             </tbody>
-
         </table>
     </div>
     <!-- Menampilkan Pendapatan -->
@@ -1113,28 +1129,17 @@ if (!isset($_SESSION["loginUser"])) {
                             Total Revenue
                         </h3>
                     </div>
-                    <div class="d-flex justify-content-center my-auto">                        
+                    <div class="d-flex justify-content-center my-auto">
                         <div class="money" data-ccy='IDR'>
                             <?php
                             $id = $_SESSION['username'];
                             $sql = "SELECT * FROM user WHERE team_name = '$id'";
                             $result = mysqli_query($con, $sql);
                             $row = mysqli_fetch_array($result);
-        
+
                             echo $row[6];
                             ?>
                         </div>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        <?php 
-                            echo"Round: ";
-                            $teamName = $_SESSION['username'];
-                            $sql = "SELECT * FROM user WHERE team_name = '$teamName'";
-                            $result = mysqli_query($con, $sql);
-                            $row = mysqli_fetch_array($result);
-                            
-                            echo $row[7];
-                        ?>
                     </div>
                 </div>
             </div>
@@ -1193,7 +1198,7 @@ if (!isset($_SESSION["loginUser"])) {
 
         <!-- List Of Container -->
         <div class="col-5">
-            <div class="card" style="height:32rem; width:45.5rem;">
+            <div class="card" style="height:38rem; width:45.5rem;">
                 <div class="card-header text-center bg-primary text-white">
                     <h3 style="margin-top: 10px; text-align: center">Container Yang Tersedia</h3>
                 </div>
@@ -1201,11 +1206,11 @@ if (!isset($_SESSION["loginUser"])) {
                     <div class="row d-flex justify-content-center overflow-y-auto">
                         <?php
                         $id = $_SESSION['username'];
-    
+
                         $sql = "SELECT * FROM temp_container2 WHERE id_user = '$id'";
                         $result = mysqli_query($con, $sql);
                         // $row = mysqli_fetch_array($result);
-    
+
                         if (mysqli_num_rows($result) > 0) {
                             while ($row = mysqli_fetch_array($result)) {
                                 echo "
@@ -1216,8 +1221,8 @@ if (!isset($_SESSION["loginUser"])) {
                                 $sql = "SELECT * FROM container where id_container = '$id'";
                                 $result2 = mysqli_query($con, $sql);
                                 $row2 = mysqli_fetch_array($result2);
-    
-    
+
+
                                 echo "</h5>
                             <h6 class='card-subtitle mb-2 text-muted text-center'>Detail</h6>
                             <p class='card-text'>
@@ -1252,20 +1257,19 @@ if (!isset($_SESSION["loginUser"])) {
             </div>
         </div>
 
-        <div class="col-4">
-            <div class="card" style="width: 39rem;">
+        <div class="ml-4">
+            <div class="card" style="height: 38rem;">
                 <div class="card-header bg-primary text-white text-center">
                     <h3 style="margin-top: 10px; text-align: center">
                         Sales Card
                     </h3>
                 </div>
-                <div style="margin-top: 10px;text-align: center">
-                    <h6 style>Remaining Sales Card</h6>
+                <div class="card-body">
+                    <h6 class="text-center">Remaining Sales Card</h6>
                     <?php
                     // Isi berapa banyak sales yg blm
                     ?>
-                </div>
-                <div>
+
                     <!-- Card -->
                     <?php
                     $id = $_SESSION['username'];
@@ -1288,17 +1292,20 @@ if (!isset($_SESSION["loginUser"])) {
 
                     ?>
 
-                    <div class="card mx-auto" style="text-align: center; width: 18rem;height:28rem;margin-top: 10px; border-width: 0.5px; border: 0.01px solid">
+                    <div class="card" style="text-align: center; width: 28rem;height:26.3rem;margin-top: 10px; border-width: 0.5px; border: 0.01px solid">
                         <div style="text-align: center;margin-top: 10px; font-weight: 950; font-size: 20px">
-                            SBY - 
-                            <?php echo $rand[0];
-                                    $_SESSION['rand'] = $rand[0]; ?>
+                            <?php
+                            echo $origin;
+                            echo " - ";
+                            echo $rand[0];
+                            $_SESSION['rand'] = $rand[0];
+                            ?>
                         </div>
 
                         <hr class="mx-auto" style="border-width: 2px; border: 0.01px solid; width: 90%; margin-top: 10px">
 
                         <div class="row" style="margin-top: 0px">
-                            <div class="col-6" style="text-align: left;margin-top: 10px; margin-left: -20px; font-size: 13px;font-weight: 750;">
+                            <div class="col-6" style="text-align: left;font-size: 13px;font-weight: 750;">
                                 <ul>Priority</ul>
                                 <ul>Origin</ul>
                                 <ul>Destination</ul>
@@ -1307,7 +1314,7 @@ if (!isset($_SESSION["loginUser"])) {
                                 <ul>Total</ul>
                             </div>
 
-                            <div class="col-6" style="text-align: left;margin-top: 10px; font-size: 13px; font-weight: 400;">
+                            <div class="col-6" style="text-align: left;font-size: 13px; font-weight: 400;">
                                 <?php
                                 $t_revenue = $rand[4] * $rand[5];
                                 echo "<ul>$rand[1]</ul>
@@ -1320,32 +1327,35 @@ if (!isset($_SESSION["loginUser"])) {
                                 ?>
                             </div>
                         </div>
+
                         <hr class="mx-auto" style="border-width: 2px; border: 0.25px solid; width: 90%; margin-top: 5px">
 
-                        <div class="row" style='margin-bottom: 10px'>
+                        <div class="flex-nowrap overflow-auto" style="height:200px; overflow:scroll;">
+                            <div class="row" style='margin-bottom: 10px'>
+                                <?php
+                                $id_sales = $rand[0];
+                                $sql = "SELECT * FROM container WHERE id_sales = '5'";
+                                $result = mysqli_query($con, $sql);
+                                $count = 0;
 
-                            <?php
-                            $id_sales = $rand[0];
-                            $sql = "SELECT * FROM container WHERE id_sales = '5'";
-                            $result = mysqli_query($con, $sql);
-                            $count = 0;
-                            while ($row = mysqli_fetch_array($result)) {
-                                echo "<div class='col-4' style = 'text-decoration: underline'>$row[0]</div>";
-                                $count = $count + 1;
-                                if ($count % 3 == 0) {
-                                    echo "</div>
-                                    <div class = 'row' style = 'margin-bottom: 10px'>";
+                                while ($row = mysqli_fetch_array($result)) {
+                                    echo "<div class='col-3' style = 'text-decoration: underline'>$row[0]</div>";
+                                    $count = $count + 1;
+                                    if ($count % 4 == 0) {
+                                        echo "</div>
+                                        <div class = 'row' style = 'margin-bottom: 10px'>";
+                                    }
                                 }
-                            }
-                            echo "</div>";
+                                echo "</div>";
 
-                            ?>
+
+                                ?>
+                            </div>
                         </div>
 
                         <!-- Button -->
                         <form class="mx-auto" method="POST" action="accRef.php">
-                            <div class="row" style="margin-bottom: 20px; margin-top:10px">
-
+                            <div class="row mt-2">
                                 <?php
                                 if ($rand[1] == "N-COMMIT") {
                                     echo "
@@ -1372,9 +1382,51 @@ if (!isset($_SESSION["loginUser"])) {
             </div>
         </div>
     </div>
-    
+
     <script>
         $(document).ready(function() {
+            // Ngecek stiap waktu kalau admin sudah pencet swap atau belum
+            setInterval(() => {
+                $.ajax({
+                    url: 'bongpasLogic2.php',
+                    method: 'POST',
+                    success: function(temp) {
+                        // console.log(temp)
+                        if (temp == 'YES') {
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Saatnya berpindah!',
+                                showConfirmButton: false,
+                                timer: 2500,
+                                timerProgressBar: true
+                            }).then(function() {
+                                window.location.href = 'game1.php';
+                            });
+                        }
+                    }
+                });
+            }, 1000);
+
+            // setInterval(() => {
+            //     $.ajax({
+            //         url: 'bongpasLogic2.php',
+            //         method: 'POST',
+            //         success: function(temp2) {
+            //             if (temp2 === "DONE") {
+            //                 Swal.fire({
+            //                     icon: 'warning',
+            //                     title: 'Game is Finished!',
+            //                     showConfirmButton: false,
+            //                     timer: 2500,
+            //                     timerProgressBar: true
+            //                 }).then(function() {
+            //                     window.location.href = 'homeUser.php';
+            //                 });
+            //             }
+            //         }
+            //     });
+            // }, 1000);
+
             $("#pasang").click(function(e) {
                 e.preventDefault()
                 let bay = $('#bay').val()

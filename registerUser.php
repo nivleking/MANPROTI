@@ -89,27 +89,7 @@
 </head>
 
 <body class="w3">
-	<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
-		<div class="flex-column">
-			<a href="homeAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black">
-				<i class="fa fa-dashboard w3-xxlarge d-flex justify-content-center mt-2"></i>
-				<p>Home</p>
-			</a>
-			<a href="homeAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center">
-				<i class="fa fa-ellipsis-h w3-xxlarge d-flex justify-content-center mt-2"></i>
-				<p>Activity</p>
-			</a>
-			<a href="accounts.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center">
-				<i class="fa fa-group w3-xxlarge d-flex justify-content-center mt-2"></i>
-				<p>Accounts</p>
-			</a>
-
-			<a href="logoutAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black w3-center p-2 ml-auto">
-				<i class="fa fa-sign-out w3-xxlarge d-flex justify-content-center mt-1"></i>
-				<p>Log Out</p>
-			</a>
-		</div>
-	</nav><!-- Sidebar -->
+	<!-- Sidebar -->
 	<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
 		<div class="flex-column" style="display: flex; flex-direction: column; height: 100%;">
 			<h3 class="text-white w3-bar-item" style="font-style: italic;font-weight:bold;">BLC</h3>
@@ -162,8 +142,9 @@
 							<input type="password" id="form2Example38" class="form-control form-control-lg" name="teamPasswordConfirm" required />
 						</div>
 	
-						<div class="pt-1 mb-4 d-flex justify-content-center">
-							<button class="btn btn-primary btn-lg btn-block" type="submit" name="register" id='register'>Add User</button>
+						<div class="row d-flex justify-content-around">
+							<a href="adminLogs.php" class="col-3 btn btn-dark btn-lg btn-block" type="submit" name="checkLogs" id='checkLogs'>User Logs</a>
+							<button class="col-3 btn btn-primary btn-lg btn-block" type="submit" name="register" id='register'>Add User</button>
 						</div>
 					</form>
 				</div>
@@ -197,6 +178,8 @@
 					</div>
 				</div>
 			</div>
+
+			
 
 
 		</div>
@@ -308,6 +291,7 @@
 			});
 		});
 	</script>
+
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 

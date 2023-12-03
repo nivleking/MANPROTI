@@ -204,21 +204,21 @@ $row = mysqli_fetch_array($result);
                                         <button type="submit" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#moda-createcards" style="margin-top: 10px; width: 10rem;">Create Card</button>
                                     </form>
                                 </div>
-                                <div class="col-3">
+                                <!-- <div class="col-3">
                                     <form action="viewSalesCard.php">
                                         <button type="submit" class="btn btn-danger" style="margin-top: 10px; width: 10rem;">View Card</button>
                                     </form>
-                                </div>
+                                </div> -->
                                 <div class="col-3">
                                     <form action="createDeck.php">
                                         <button type="submit" class="btn btn-dark" style="margin-top: 10px; width: 10rem;">Create Deck</button>
                                     </form>
                                 </div>
-                                <div class="col-3">
+                                <!-- <div class="col-3">
                                     <form action="viewDeck.php">
                                         <button type="submit" class="btn btn-danger" style="margin-top: 10px; width: 10rem;">View Deck</button>
                                     </form>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -270,7 +270,7 @@ $row = mysqli_fetch_array($result);
 
             <div class=" w3-row-padding w3-center">
                 <div class="w3-padding-32">
-                    <h2 class="w3-jumbo mb-5" id="activity">Your Activity</h2>
+                    <h2 class="mb-5" id="activity" style="font-weight: bold;">Your Activity</h2>
                     <table class="table table-responsive table-bordered table-striped" id="tableRoom" style="width: 100%;">
                         <thead>
                             <tr>
@@ -307,14 +307,13 @@ $row = mysqli_fetch_array($result);
                             <input type='hidden' name='supervisor' value='$row[1]'>
                             <input type='hidden' name='statusRoom' value='$row[2]'>
                             <input type='hidden' name='dateRoom' value='$row[3]'>
-                            <button type='submit' class='btn btn-link' name='viewButton'>View</button>
+                            <button type='submit' class='btn btn-primary' name='viewButton'>View Room Details</button>
                           </form>
                         </td>
                         </tr>
                     ";
                                 $i += 1;
-                            }
-                            ?>
+                            } ?>
                         </tbody>
                     </table>
                 </div>
