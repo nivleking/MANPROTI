@@ -203,16 +203,17 @@ require 'connect.php';
                     $result = mysqli_query($con,$sql);
                     $tanggal = date("Y-m-d H:i:s");
 
-                            // while ( $row = mysqli_fetch_array($result) ){
+                    while ( $row = mysqli_fetch_array($result) ){
 
-                    $team = $row[0];
-                    $ship = $row[2];
-                    $origin = $row[5];
-                    $revenue = $row[6];
-                    $round = $row[7];
+                        $team = $row[0];
+                        $ship = $row[2];
+                        $origin = $row[5];
+                        $revenue = $row[6];
+                        $round = $row[7];
+                        $room = $row[4];
 
-                            // $sql = "INSERT INTO history VALUES ('$tanggal','$round','$team','$ship','$origin','$revenue')";
-                            // $result2 = mysqli_query($con,$sql);
+                        $sql = "INSERT INTO history VALUES ('$tanggal','$round','$team','$ship','$origin','$revenue','$room')";
+                        $result2 = mysqli_query($con,$sql);
 
                     }
                     $round = $round + 1;
@@ -225,7 +226,31 @@ require 'connect.php';
                             // Logic Swap JANGAN DIRUBAH
                             $tempBay = [];
                             $tempName = [];
-                            while ($row = mysqli_fetch_array($result)) {
+                            while ( $row = mysqli_fetch_array($result) ) {
+                                $id = $row[0];
+                                $sql = "SELECT * FROM temp_container2 WHERE id_user = '$id'";
+                                $result2 = mysqli_query($con,$sql);
+                                
+                                // Ini hitung jumlah container yang nginep
+                                $count = 0;
+                                while($row = mysqli_fetch_array($result2)){
+                                    $count = $count + 1;
+                                }
+                                // Hitung denda
+                                if($count > 0){
+                                    $pay = $count * 1500;
+
+                                    $sql = "SELECT * FROM user WHERE team_name = '$id'";
+                                    $result3 = mysqli_query($con,$sql);
+                                    $row = mysqli_fetch_array($result3);
+
+                                    $revenue = $row[6];
+                                    $revenue = $revenue - $pay;
+
+                                    $sql = "UPDATE user SET revenue = '$revenue' WHERE team_name = '$id'";
+                                    $result4 = mysqli_query($con,$sql);
+                                }
+                                $count = 0;
 
                                 array_push($tempBay, $row[2]);
                                 array_push($tempName, $row[0]);
@@ -248,6 +273,7 @@ require 'connect.php';
                             // echo "<br>";
                             // echo "$tempName[2] ====== $tempBay[2]";
                             // echo "<br>";
+                            
                             // Proses memasukan ship ke user setelah swap
                             for ($i = 0; $i <= $length; $i++) {
                                 $bay = $tempBay[$i];
