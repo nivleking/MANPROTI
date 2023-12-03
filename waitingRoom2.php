@@ -204,7 +204,6 @@ require 'connect.php';
                     $tanggal = date("Y-m-d H:i:s");
 
                     while ( $row = mysqli_fetch_array($result) ){
-
                         $team = $row[0];
                         $ship = $row[2];
                         $origin = $row[5];
@@ -214,7 +213,6 @@ require 'connect.php';
 
                         $sql = "INSERT INTO history VALUES ('$tanggal','$round','$team','$ship','$origin','$revenue','$room')";
                         $result2 = mysqli_query($con,$sql);
-
                     }
                     $round = $round + 1;
                     $sql = "UPDATE user SET round = '$round' WHERE id_room = '$id'";
@@ -233,7 +231,7 @@ require 'connect.php';
                                 
                                 // Ini hitung jumlah container yang nginep
                                 $count = 0;
-                                while($row = mysqli_fetch_array($result2)){
+                                while($row2 = mysqli_fetch_array($result2)){
                                     $count = $count + 1;
                                 }
                                 // Hitung denda
