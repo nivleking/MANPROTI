@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 30, 2023 at 08:10 AM
+-- Generation Time: Dec 03, 2023 at 12:07 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -39,9 +39,6 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id_admin`, `name_admin`, `password`, `status`) VALUES
-('kel1', '123', '1', 0),
-('kel2', '123', '1', 0),
-('kel3', '12', '12', 0),
 ('sam1', '123', '123', 0),
 ('sam2', '123', '123', 0);
 
@@ -136,7 +133,109 @@ INSERT INTO `container` (`id_container`, `asal_container`, `tujuan_container`, `
 (147, 'SBY', 'MKS', 7),
 (148, 'SBY', 'MKS', 7),
 (149, 'SBY', 'MKS', 7),
-(150, 'SBY', 'MKS', 7);
+(150, 'SBY', 'MKS', 7),
+(151, 'SBY', 'JYP', 10),
+(152, 'SBY', 'JYP', 10),
+(153, 'SBY', 'JYP', 10),
+(154, 'SBY', 'JYP', 10),
+(155, 'SBY', 'JYP', 10),
+(156, 'SBY', 'JYP', 10),
+(157, 'SBY', 'MDN', 6),
+(158, 'SBY', 'MDN', 6),
+(159, 'SBY', 'MDN', 6),
+(160, 'SBY', 'MDN', 6),
+(161, 'SBY', 'MDN', 6),
+(162, 'SBY', 'MDN', 6),
+(163, 'SBY', 'MDN', 6),
+(164, 'SBY', 'MDN', 6),
+(165, 'SBY', 'MDN', 3),
+(166, 'SBY', 'MDN', 3),
+(167, 'SBY', 'MDN', 3),
+(168, 'SBY', 'MDN', 3),
+(169, 'SBY', 'MDN', 3),
+(170, 'SBY', 'MDN', 3),
+(171, 'SBY', 'MDN', 3),
+(172, 'SBY', 'MDN', 3),
+(173, 'SBY', 'MDN', 3),
+(174, 'SBY', 'MDN', 3),
+(175, 'SBY', 'MDN', 3),
+(176, 'SBY', 'MDN', 3),
+(177, 'SBY', 'MDN', 3),
+(178, 'SBY', 'MDN', 3),
+(179, 'SBY', 'MDN', 3),
+(180, 'SBY', 'MDN', 3),
+(181, 'SBY', 'MDN', 3),
+(182, 'SBY', 'MDN', 2),
+(183, 'SBY', 'MDN', 2),
+(184, 'SBY', 'MDN', 2),
+(185, 'SBY', 'MDN', 2),
+(186, 'SBY', 'MDN', 2),
+(187, 'SBY', 'MDN', 2),
+(188, 'SBY', 'MDN', 2),
+(189, 'SBY', 'MDN', 2),
+(190, 'SBY', 'MDN', 2),
+(191, 'SBY', 'JYP', 5),
+(192, 'SBY', 'JYP', 5),
+(193, 'SBY', 'JYP', 5),
+(194, 'SBY', 'JYP', 5),
+(195, 'SBY', 'JYP', 5),
+(196, 'SBY', 'JYP', 5),
+(197, 'SBY', 'MDN', 10),
+(198, 'SBY', 'MDN', 10),
+(199, 'SBY', 'MDN', 10),
+(200, 'SBY', 'MDN', 10),
+(201, 'SBY', 'MDN', 10),
+(202, 'SBY', 'MDN', 10),
+(203, 'SBY', 'MDN', 10),
+(204, 'SBY', 'MDN', 10),
+(205, 'SBY', 'MDN', 10),
+(206, 'SBY', 'MDN', 10),
+(207, 'SBY', 'MDN', 10),
+(208, 'SBY', 'MDN', 10),
+(209, 'SBY', 'MDN', 10),
+(210, 'SBY', 'MDN', 10),
+(211, 'SBY', 'MDN', 10),
+(212, 'SBY', 'MDN', 10),
+(213, 'SBY', 'MDN', 10),
+(214, 'SBY', 'MDN', 10),
+(215, 'SBY', 'MDN', 10),
+(216, 'SBY', 'MDN', 10),
+(217, 'SBY', 'MDN', 10),
+(218, 'SBY', 'MDN', 10),
+(219, 'SBY', 'MDN', 10),
+(220, 'SBY', 'MDN', 10),
+(221, 'SBY', 'MDN', 10),
+(222, 'SBY', 'MDN', 10),
+(223, 'SBY', 'MDN', 10),
+(224, 'SBY', 'MDN', 10),
+(225, 'SBY', 'MDN', 10),
+(226, 'SBY', 'MDN', 10),
+(227, 'SBY', 'MDN', 10),
+(228, 'SBY', 'MDN', 10),
+(229, 'SBY', 'MDN', 10),
+(230, 'SBY', 'MDN', 10),
+(231, 'SBY', 'MDN', 10),
+(232, 'SBY', 'MDN', 10),
+(233, 'SBY', 'MDN', 10),
+(234, 'SBY', 'MDN', 10),
+(235, 'SBY', 'MDN', 10),
+(236, 'SBY', 'MDN', 10),
+(237, 'SBY', 'MDN', 10),
+(238, 'SBY', 'MDN', 10),
+(239, 'SBY', 'MDN', 10),
+(240, 'SBY', 'MDN', 10),
+(241, 'SBY', 'MDN', 10),
+(242, 'SBY', 'MDN', 10),
+(243, 'SBY', 'MDN', 10),
+(244, 'SBY', 'MDN', 10),
+(245, 'SBY', 'MDN', 10),
+(246, 'SBY', 'MDN', 10),
+(247, 'SBY', 'MDN', 10),
+(248, 'SBY', 'MDN', 10),
+(249, 'SBY', 'MDN', 10),
+(250, 'SBY', 'MDN', 10),
+(251, 'SBY', 'MDN', 10),
+(252, 'SBY', 'MDN', 10);
 
 -- --------------------------------------------------------
 
@@ -170,20 +269,29 @@ CREATE TABLE `history` (
   `date` date NOT NULL,
   `round` int(11) NOT NULL,
   `team_name` text NOT NULL,
-  `ship` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`ship`)),
+  `ship` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `origin` text NOT NULL,
-  `revenue` int(11) NOT NULL
+  `revenue` int(11) NOT NULL,
+  `id_room` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `history`
 --
 
-INSERT INTO `history` (`date`, `round`, `team_name`, `ship`, `origin`, `revenue`) VALUES
-('2023-11-26', 0, 'kelvin', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'JYP', -2000),
-('2023-11-26', 0, 'Vincentius', '[[[\"112\",0,0],[\"108\",0,0],[\"104\",\"105\",0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'SBY', -59000),
-('2023-11-27', 0, 'kelvin', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'SBY', -2000),
-('2023-11-27', 0, 'Vincentius', '[[[\"112\",0,0],[\"108\",0,0],[\"104\",\"105\",0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'SBY', -59000);
+INSERT INTO `history` (`date`, `round`, `team_name`, `ship`, `origin`, `revenue`, `id_room`) VALUES
+('2023-12-03', 0, 'kelvin', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'SBY', 1083000, 23),
+('2023-12-03', 0, 'Vincentius', '[[[\"112\",\"110\",0],[\"108\",\"100\",\"103\"],[\"104\",\"105\",\"120\"]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'MDN', 429000, 23),
+('2023-12-03', 1, 'kelvin', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'SBY', 1057500, 23),
+('2023-12-03', 1, 'Vincentius', '[[[\"112\",\"110\",0],[\"108\",\"100\",\"103\"],[\"104\",\"105\",\"120\"]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'MDN', 429000, 23),
+('2023-12-03', 2, 'kelvin', '[[[\"112\",\"110\",0],[\"108\",\"100\",\"103\"],[\"104\",\"105\",\"120\"]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'SBY', 1032000, 23),
+('2023-12-03', 2, 'Vincentius', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'MDN', 429000, 23),
+('2023-12-03', 3, 'kelvin', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'SBY', 1006500, 23),
+('2023-12-03', 3, 'Vincentius', '[[[\"112\",\"110\",0],[\"108\",\"100\",\"103\"],[\"104\",\"105\",\"120\"]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'MDN', 429000, 23),
+('2023-12-03', 4, 'kelvin', '[[[\"112\",\"110\",0],[\"108\",\"100\",\"103\"],[\"104\",\"105\",\"120\"]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'SBY', 981000, 23),
+('2023-12-03', 4, 'Vincentius', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'MDN', 429000, 23),
+('2023-12-03', 5, 'kelvin', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'SBY', 955500, 23),
+('2023-12-03', 5, 'Vincentius', '[[[\"112\",\"110\",0],[\"108\",\"100\",\"103\"],[\"104\",\"105\",\"120\"]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'MDN', 429000, 23);
 
 -- --------------------------------------------------------
 
@@ -212,7 +320,12 @@ INSERT INTO `log_admin` (`id`, `detail`) VALUES
 (9, 'sam1 has added kel2 into database.'),
 (10, 'sam1 has added kel3 into database.'),
 (11, 'sam1 has added Aktonoi into database.'),
-(12, 'sam1 has deleted Aktonoi from database.');
+(12, 'sam1 has deleted Aktonoi from database.'),
+(13, 'sam1 has deleted sam2 from database.'),
+(14, 'sam1 has deleted kel1 from database.'),
+(15, 'sam1 has deleted kel2 from database.'),
+(16, 'sam1 has deleted kel3 from database.'),
+(17, 'sam1 has added sam2 into database.');
 
 -- --------------------------------------------------------
 
@@ -253,6 +366,10 @@ INSERT INTO `room` (`id_room`, `id_admin`, `status`, `tanggal`, `id_deck`, `rond
 (17, 'sam1', 0, '2023-11-30', 1, 0),
 (18, 'sam1', 1, '2023-11-30', 1, 0),
 (19, 'sam1', 1, '2023-11-30', 1, 0),
+(20, 'sam1', 1, '2023-12-01', 1, 0),
+(21, 'sam1', 1, '2023-12-01', 1, 0),
+(22, 'sam1', 1, '2023-12-02', 1, 0),
+(23, 'sam1', 1, '2023-12-03', 1, 0),
 (123, 'sam1', 1, '2023-11-15', 0, 0),
 (124, 'sam1', 0, '2023-10-29', 0, 0),
 (125, 'sam1', 0, '2023-10-29', 0, 0),
@@ -307,9 +424,7 @@ CREATE TABLE `sales` (
 --
 
 INSERT INTO `sales` (`id_sales`, `priority`, `origin`, `destination`, `quantity`, `revenue`) VALUES
-(5, 'COMMIT', 'SBY', 'MKS', 10, 5000),
-(6, 'N-COMMIT', 'MDN', 'JYP', 8, 10000),
-(7, 'COMMIT', 'SBY', 'MKS', 14, 20000);
+(5, 'COMMIT', 'SBY', 'MDN', 20, 50000);
 
 -- --------------------------------------------------------
 
@@ -327,13 +442,11 @@ CREATE TABLE `temp_container` (
 --
 
 INSERT INTO `temp_container` (`id_container`, `id_user`) VALUES
-(107, 'Vincentius'),
-(103, 'Vincentius'),
 (106, 'Vincentius'),
 (101, 'Vincentius'),
 (110, 'Vincentius'),
 (102, 'Vincentius'),
-(120, 'Vincentius');
+(107, 'Vincentius');
 
 -- --------------------------------------------------------
 
@@ -351,22 +464,23 @@ CREATE TABLE `temp_container2` (
 --
 
 INSERT INTO `temp_container2` (`id_container`, `id_user`) VALUES
-(100, 'Vincentius'),
-(101, 'Vincentius'),
-(108, 'Vincentius'),
-(110, 'Vincentius'),
-(111, 'Vincentius'),
-(112, 'Vincentius'),
-(113, 'Vincentius'),
-(114, 'Vincentius'),
-(115, 'Vincentius'),
-(116, 'Vincentius'),
-(117, 'Vincentius'),
-(118, 'Vincentius'),
-(119, 'Vincentius'),
-(121, 'Vincentius'),
-(122, 'Vincentius'),
-(123, 'Vincentius');
+(108, 'kelvin'),
+(110, 'kelvin'),
+(111, 'kelvin'),
+(112, 'kelvin'),
+(113, 'kelvin'),
+(114, 'kelvin'),
+(115, 'kelvin'),
+(116, 'kelvin'),
+(117, 'kelvin'),
+(118, 'kelvin'),
+(119, 'kelvin'),
+(191, 'kelvin'),
+(192, 'kelvin'),
+(193, 'kelvin'),
+(194, 'kelvin'),
+(195, 'kelvin'),
+(196, 'kelvin');
 
 -- --------------------------------------------------------
 
@@ -392,9 +506,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`team_name`, `password`, `ship`, `status`, `id_room`, `origin`, `revenue`, `round`, `pindah`, `finish`) VALUES
-('kelvin', '123', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 1, 19, 'SBY', -2000, 0, 'NO', 'NOT DONE'),
+('kelvin', '123', '[[[\"112\",\"110\",0],[\"108\",\"100\",\"103\"],[\"104\",\"105\",\"120\"]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 1, 23, 'SBY', 930000, 6, 'NO', 'NOT DONE'),
 ('sam', '12', '[[[0,0,0],[\"120\",101,0],[\"112\",105,0]],[[0,0,0],[104,0,0],[106,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 0, 140, 'SBY', 0, 0, 'NO', 'NOT DONE'),
-('Vincentius', '123', '[[[\"112\",0,0],[\"108\",0,0],[\"104\",\"105\",0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 1, 19, 'SBY', -59000, 0, 'NO', 'NOT DONE');
+('Vincentius', '123', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 1, 23, 'MDN', 429000, 6, 'YES', 'NOT DONE');
 
 --
 -- Indexes for dumped tables
@@ -468,13 +582,13 @@ ALTER TABLE `bay`
 -- AUTO_INCREMENT for table `container`
 --
 ALTER TABLE `container`
-  MODIFY `id_container` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=151;
+  MODIFY `id_container` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=253;
 
 --
 -- AUTO_INCREMENT for table `log_admin`
 --
 ALTER TABLE `log_admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
