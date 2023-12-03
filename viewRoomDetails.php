@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Room Detail</title>
+    <title>Room Details</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
@@ -70,10 +70,6 @@
                 echo "</tbody>
                 </table>";
 
-                
-
-
-
                 // echo "
                 // <h1>Room $idRoom</h1>
                 // <h6>Supervisor: $supervisor</h6>
@@ -85,7 +81,6 @@
                 // <div class='row mx-sm-0 mt-2'>
                 //     Date:&nbsp$date
                 // </div>
-
                 // <div class='row mx-sm-0 mt-2'>
                 //     Teams:
                 // </div>
