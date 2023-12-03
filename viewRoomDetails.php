@@ -81,7 +81,6 @@
                 // <div class='row mx-sm-0 mt-2'>
                 //     Date:&nbsp$date
                 // </div>
-
                 // <div class='row mx-sm-0 mt-2'>
                 //     Teams:
                 // </div>

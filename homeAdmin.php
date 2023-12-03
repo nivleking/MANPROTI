@@ -313,8 +313,7 @@ $row = mysqli_fetch_array($result);
                         </tr>
                     ";
                                 $i += 1;
-                            }
-                            ?>
+                            } ?>
                         </tbody>
                     </table>
                 </div>
