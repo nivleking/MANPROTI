@@ -160,27 +160,26 @@ require 'connect.php';
                         //     $sql = "SELECT * FROM user WHERE id_room = $room";
                         //     $result = mysqli_query($con, $sql);
 
-                        //     //LOGIC SWAP SAM
-                        //     $tempBay = [];
-                        //     $tempName = [];
-                        //     while ($row = mysqli_fetch_array($result)) {
-                        //         array_push($tempBay, $row[2]);
-                        //         array_push($tempName, $row[0]);
-                        //     }
+                        //     // //LOGIC SWAP SAM
+                        //     // $tempBay = [];
+                        //     // $tempName = [];
+                        //     // while ($row = mysqli_fetch_array($result)) {
+                        //     //     array_push($tempBay, $row[2]);
+                        //     //     array_push($tempName, $row[0]);
+                        //     // }
 
-                        //     $length = count($tempBay) - 1;
+                        //     // $length = count($tempBay) - 1;
+                        //     $room = $_SESSION['roomID_admin'];
+                        //     $sql = "UPDATE user SET finish = 'DONE' WHERE id_room = $room";
+                        //     $result = mysqli_query($con, $sql);
+                        //     // for ($i = 0; $i <= $length; $i++) {
+                        //         // $sql = "UPDATE room SET status = 0 WHERE id_room = $room";
+                        //         // $result = mysqli_query($con, $sql);
+                                
 
-                        //     for ($i = 0; $i <= $length; $i++) {
-                        //         $room = $_SESSION['roomID_admin'];
-                        //         $sql = "UPDATE room SET status = 0 WHERE id_room = $room";
-                        //         $result = mysqli_query($con, $sql);
-
-                        //         $sql = "UPDATE user SET finish = 'DONE' WHERE id_room = $room";
-                        //         $result = mysqli_query($con, $sql);
-
-                        //         $sql = "UPDATE user SET `status` = '0' WHERE id_room = $room";
-                        //         $result = mysqli_query($con, $sql);
-                        //     }                            
+                        //         // $sql = "UPDATE user SET `status` = 0 WHERE id_room = $room";
+                        //         // $result = mysqli_query($con, $sql);
+                        //     // }                            
                         // }
                         
                         if (isset($_POST['adminStart'])) {

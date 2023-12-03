@@ -147,7 +147,7 @@
                 <select class="form-control" name="idDeck">
                     <?php
                     require 'connect.php';
-                    $sql = "SELECT id_deck, nama_deck FROM deck";
+                    $sql = "SELECT * FROM deck";
                     $deck = mysqli_query($con, $sql);
                     if ($deck->num_rows > 0) {
                         while ($row = $deck->fetch_array()) {
@@ -159,6 +159,18 @@
                     ?>
                 </select>
             </div>
+
+            <div>
+                <label>
+                    List of card:
+                    <?php 
+                        $sql = "SELECT * FROM deck";
+                        $deck = mysqli_query($con, $sql);
+                        $row = mysqli_fetch_row($deck);
+                    ?>
+                </label>
+            </div>
+
             <div class="form-group">
                 <h6>Choose cards to be put into the deck</h6>
                 <?php

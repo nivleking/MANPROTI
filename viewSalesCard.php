@@ -1,10 +1,10 @@
 <?php
-	require 'connect.php';
-	
-	if (!isset($_SESSION["loginADM"])) {
-        header("Location: loginAdmin.php");
-        exit;
-    }
+require 'connect.php';
+
+if (!isset($_SESSION["loginADM"])) {
+    header("Location: loginAdmin.php");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +35,7 @@
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
 
     <style>
-		/* POPPINS FONT */
+        /* POPPINS FONT */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
         * {
@@ -101,7 +101,7 @@
 
         /* Medium */
         @media only screen and (max-width: 991px) and (min-width: 768) {}
-	</style>
+    </style>
 </head>
 
 <body>
@@ -148,8 +148,18 @@
 
         if ($result->num_rows > 0) {
             // Use Bootstrap table classes for styling
-            echo '<table class="table table-bordered table-striped" id="cardTable">';   
-            echo '<thead><tr><th>ID Sales</th><th>Priority</th><th>Origin</th><th>Destination</th><th>Quantity</th><th>Revenue</th></tr></thead>';
+            echo '<table class="table table-bordered table-striped" id="cardTable">';
+            echo '<thead>
+                <tr>
+                    <th>ID Sales</th>
+                    <th>Priority</th>
+                    <th>Origin</th>
+                    <th>Destination</th>
+                    <th>Quantity</th>
+                    <th>Revenue</th>
+                    <th>Action</th>
+                </tr>
+            </thead>';
             echo '<tbody>';
 
             while ($row = $result->fetch_assoc()) {
@@ -160,29 +170,60 @@
                 echo '<td>' . $row['destination'] . '</td>';
                 echo '<td>' . $row['quantity'] . '</td>';
                 echo '<td>' . $row['revenue'] . '</td>';
+                echo "
+                
+                <form method='POST'>
+                    <td>
+                        <input type='hidden' name='deleteCard' value='$row[id_sales]'>
+                        <button type='submit' class='btn btn-danger' name='deleteButton'>Delete</button>
+                    </td>
+                </form>";
                 echo '</tr>';
             }
-
             echo '</tbody>';
             echo '</table>';
         } else {
             echo 'No data found in the database.';
         }
-
-        // Close the database connection
-        $con->close();
         ?>
     </div>
-    
+
     <script>
         $(document).ready(function() {
             let table = $('#cardTable').DataTable({
-                    info: true
-                    // scrollCollapse: true,
-                    // scrollY: '430px'
-                })
+                info: true
+                // scrollCollapse: true,
+                // scrollY: '430px'
+            })
         })
+
+        // table.destroy()
+        // table = $('#cardTable').DataTable().draw()
     </script>
+
+    <?php
+
+    if (isset($_POST['deleteButton'])) {
+        $idCard = $_POST['deleteCard'];
+        $sql = "DELETE FROM sales WHERE id_sales = $idCard";
+        $res = mysqli_query($con, $sql);
+
+        if (mysqli_affected_rows($con) > 0) {
+            echo "
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Card deleted!',
+            text: 'The card has been deleted.',
+            timer: 2500,
+            showConfirmButton: false
+        }).then(function() {
+            window.location.href = 'viewSalesCard.php'
+        })
+    </script>";
+        }
+    }
+    ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
 </body>
