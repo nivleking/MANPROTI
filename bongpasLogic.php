@@ -46,6 +46,10 @@
                     $sql = "UPDATE user SET revenue = '$revenue' WHERE team_name = '$id'";
                     $result = mysqli_query($con,$sql);
 
+                    $detail = "$id has unloaded container $data from $bay$baris$kolom.";
+                    $sql = "INSERT INTO log_users VALUES('','$detail')";
+                    mysqli_query($con, $sql);
+
                     // Pakai sweetalert
                     echo"4";
                     exit();
@@ -76,6 +80,11 @@
 
                     $sql = "UPDATE user SET revenue = '$revenue' WHERE team_name = '$id'";
                     $result = mysqli_query($con,$sql);
+
+                    $detail = "$id has unloaded container $data from $bay$baris$kolom.";
+                    $sql = "INSERT INTO log_users VALUES('','$detail')";
+                    mysqli_query($con, $sql);
+
                     // Pakai sweetalert
                     echo"4";
                     exit();
@@ -177,6 +186,11 @@
                         $result = mysqli_query($con,$sql);
                         
                         // Pakai sweetalert
+
+                        $detail = "$id has loaded container $kontainer into $bay$baris$kolom.";
+                        $sql = "INSERT INTO log_users VALUES('','$detail')";
+                        mysqli_query($con, $sql);
+
                         echo "4";
                         exit();
                         // header("Location: game1.php?error=Kontainer berhasil dimasukkan");
@@ -227,6 +241,10 @@
                         }
                     }
                     else {
+                        $detail = "$id has cleared Section 1.";
+                        $sql = "INSERT INTO log_users VALUES('','$detail')";
+                        mysqli_query($con,$sql);
+
                         echo "2";
                         exit();
                     }
@@ -263,7 +281,11 @@
             $sql = "DELETE FROM temp_container WHERE id_user = '$id'";
             $result = mysqli_query($con,$sql);
 
-            echo"3";
+            $detail = "$id has cleared Section 1.";
+            $sql = "INSERT INTO log_users VALUES('','$detail')";
+            mysqli_query($con,$sql);
+
+            echo"2";
             exit();
             // echo ("<script LANGUAGE='JavaScript'>
             //                     window.alert('Section 1 Selesai !');

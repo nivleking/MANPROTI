@@ -67,6 +67,10 @@
                     $sql = "UPDATE user SET revenue = '$revenue' WHERE team_name = '$id'";
                     $result = mysqli_query($con, $sql);
 
+                    $detail = "$id has unloaded container $data from $bay$baris$kolom.";
+                    $sql = "INSERT INTO log_users VALUES('','$detail')";
+                    mysqli_query($con, $sql);
+
                     echo"4";
                     exit();
                     // echo ("<script LANGUAGE='JavaScript'>
@@ -95,6 +99,10 @@
 
                     $sql = "UPDATE user SET revenue = '$revenue' WHERE team_name = '$id'";
                     $result = mysqli_query($con, $sql);
+
+                    $detail = "$id has unloaded container $data from $bay$baris$kolom.";
+                    $sql = "INSERT INTO log_users VALUES('','$detail')";
+                    mysqli_query($con, $sql);
 
                     echo"4";
                     exit();
@@ -184,6 +192,10 @@
 
                         $sql = "UPDATE user SET revenue = '$revenue' WHERE team_name = '$id'";
                         $result = mysqli_query($con, $sql);
+
+                        $detail = "$id has loaded container $kontainer into $bay$baris$kolom.";
+                        $sql = "INSERT INTO log_users VALUES('','$detail')";
+                        mysqli_query($con, $sql);
 
                         echo "4";
                         exit();
