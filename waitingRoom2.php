@@ -157,7 +157,8 @@ require 'connect.php';
                         echo '<form method = "POST">
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#SetGame">Start</button>
                             <button name="swap" id="swap" class="btn btn-danger">Swap</button>
-                            <button name="finish" id="finish" class="btn btn-dark">Finish</button>
+                            <a href="waitingRoom2.php" class="btn btn-warning text-white">Refresh</a>
+                            <a href="homeAdmin.php" class="btn btn-dark">Home Admin</a>
                             </form>';
 
                         // if (isset($_POST['finish'])) {

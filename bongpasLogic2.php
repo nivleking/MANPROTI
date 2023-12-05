@@ -5,6 +5,7 @@
     $sql = "SELECT pindah, finish from user where team_name = '$id'";
     $result = mysqli_query($con, $sql);
     $row = mysqli_fetch_array($result);
+    $roomID = $_SESSION['roomID'];
     
     if($row['pindah'] == 'YES') {
         $roomID = $_SESSION['roomID'];
@@ -29,6 +30,9 @@
         mysqli_query($con,$sql);
 
         $sql = "UPDATE user SET finish = 0 WHERE team_name = '$id'";
+        mysqli_query($con,$sql);
+
+        $sql = "UPDATE room SET status = 0 WHERE id_room = '$roomID'";
         mysqli_query($con,$sql);
         echo "1";
     }

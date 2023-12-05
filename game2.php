@@ -430,7 +430,7 @@ if (!isset($_SESSION["loginUser"])) {
                                     $result = mysqli_query($con, $sql);
                                     $row = mysqli_fetch_array($result);
 
-                                    if ($row['finish'] == $row['round']) {
+                                    if ($row['finish'] <= $row['round']) {
                                         echo "<button class='btn btn-dark' type='submit' name='finishGame' id='finishGame'>FINISH</button>";
                                     }
                                     else {
