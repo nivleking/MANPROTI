@@ -89,7 +89,7 @@
                     $result = mysqli_query($con, $sql);
 
                     $detail = "$id has unloaded container $data from $bay$baris$kolom.";
-                    $sql = "INSERT INTO log_users VALUES('','$id','$detail')";
+                    $sql = "INSERT INTO log_users VALUES('','$roomID','$detail')";
                     mysqli_query($con, $sql);
 
                     echo"4";
@@ -122,7 +122,7 @@
                     $result = mysqli_query($con, $sql);
 
                     $detail = "$id has unloaded container $data from $bay$baris$kolom.";
-                    $sql = "INSERT INTO log_users VALUES('','$id','$detail')";
+                    $sql = "INSERT INTO log_users VALUES('','$roomID','$detail')";
 
                     mysqli_query($con, $sql);
 
@@ -216,7 +216,7 @@
                         $result = mysqli_query($con, $sql);
 
                         $detail = "$id has loaded container $kontainer into $bay$baris$kolom.";
-                        $sql = "INSERT INTO log_users VALUES('','$id','$detail')";
+                        $sql = "INSERT INTO log_users VALUES('','$roomID','$detail')";
                         mysqli_query($con, $sql);
 
                         echo "4";

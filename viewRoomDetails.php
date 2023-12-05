@@ -218,7 +218,7 @@ if (!isset($_SESSION["loginADM"])) {
                     </table>";
                 
 
-                $sql = "SELECT * FROM log_users";
+                $sql = "SELECT * FROM log_users WHERE id_room = '$idRoom'";
                 $result = mysqli_query($con, $sql);
                 echo "
                     <h2 class='d-flex justify-content-center' style='font-weight:bold;'>Logs</h2>
@@ -235,7 +235,7 @@ if (!isset($_SESSION["loginADM"])) {
                     echo "
                         <tr>
                             <td>$row[0]</td>
-                            <td>$row[1]</td>
+                            <td>$row[2]</td>
                         </tr>
                     ";
                 }

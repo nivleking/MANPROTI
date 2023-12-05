@@ -1,5 +1,7 @@
 <?php
     require 'connect.php';
+    $roomID = $_SESSION['roomID'];
+
     if (isset($_POST['bongkar'])) {
         $bay = $_POST['bay'];
         $baris = $_POST['baris'];
@@ -47,7 +49,7 @@
                     $result = mysqli_query($con,$sql);
 
                     $detail = "$id has unloaded container $data from $bay$baris$kolom.";
-                    $sql = "INSERT INTO log_users VALUES('','$id','$detail')";
+                    $sql = "INSERT INTO log_users VALUES('','$roomID','$detail')";
                     mysqli_query($con, $sql);
 
                     // Pakai sweetalert
@@ -82,7 +84,7 @@
                     $result = mysqli_query($con,$sql);
 
                     $detail = "$id has unloaded container $data from $bay$baris$kolom.";
-                    $sql = "INSERT INTO log_users VALUES('','$id','$detail')";
+                    $sql = "INSERT INTO log_users VALUES('','$roomID','$detail')";
                     mysqli_query($con, $sql);
 
                     // Pakai sweetalert
@@ -188,7 +190,7 @@
                         // Pakai sweetalert
 
                         $detail = "$id has loaded container $kontainer into $bay$baris$kolom.";
-                        $sql = "INSERT INTO log_users VALUES('','$id','$detail')";
+                        $sql = "INSERT INTO log_users VALUES('','$roomID','$detail')";
                         mysqli_query($con, $sql);
 
                         echo "4";
@@ -244,7 +246,7 @@
                         }
                         else {
                             $detail = "$id has cleared Section 1.";
-                            $sql = "INSERT INTO log_users VALUES('','$id','$detail')";
+                            $sql = "INSERT INTO log_users VALUES('','$roomID','$detail')";
                             mysqli_query($con,$sql);
     
                             echo "2";
@@ -285,7 +287,7 @@
             $result = mysqli_query($con,$sql);
 
             $detail = "$id has cleared Section 1.";
-            $sql = "INSERT INTO log_users VALUES('','$id','$detail')";
+            $sql = "INSERT INTO log_users VALUES('','$roomID','$detail')";
             mysqli_query($con,$sql);
 
             echo"2";

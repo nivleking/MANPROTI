@@ -194,8 +194,8 @@ require 'connect.php';
                             $sql = "UPDATE user SET ship = '$tempShip' WHERE id_room='$room'";
                             mysqli_query($con, $sql);
 
-                            //Ngatur rondenya user dari awal 0
-                            $sql = "UPDATE user SET round = 0 WHERE id_room='$room'";
+                            //Ngatur rondenya user dari awal 1
+                            $sql = "UPDATE user SET round = 1 WHERE id_room='$room'";
                             mysqli_query($con, $sql);
 
                             // Maximum rondenya
