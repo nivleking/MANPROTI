@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 05, 2023 at 01:42 PM
+-- Generation Time: Dec 05, 2023 at 02:23 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -80,20 +80,6 @@ CREATE TABLE `container` (
   `id_sales` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `container`
---
-
-INSERT INTO `container` (`id_container`, `asal_container`, `tujuan_container`, `id_sales`) VALUES
-(301, 'SBY', 'MDN', 1),
-(302, 'SBY', 'MDN', 1),
-(307, 'MDN', 'SBY', 3),
-(308, 'MDN', 'SBY', 3),
-(309, 'MDN', 'SBY', 3),
-(310, 'MDN', 'SBY', 3),
-(311, 'MDN', 'SBY', 4),
-(312, 'MDN', 'SBY', 4);
-
 -- --------------------------------------------------------
 
 --
@@ -136,7 +122,10 @@ CREATE TABLE `history` (
 
 INSERT INTO `history` (`date`, `round`, `team_name`, `ship`, `origin`, `revenue`, `id_room`) VALUES
 ('2023-12-05', 0, 'kelvin', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'MDN', 392000, 1),
-('2023-12-05', 0, 'Vincentius', '[[[0,0,0],[0,0,0],[\"301\",\"302\",0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'SBY', 1583000, 1);
+('2023-12-05', 0, 'Vincentius', '[[[0,0,0],[0,0,0],[\"301\",\"302\",0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'SBY', 1583000, 1),
+('2023-12-05', 0, 'kelvin', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'MDN', 1023000, 2),
+('2023-12-05', 0, 'Vincentius', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'SBY', 1643000, 2),
+('2023-12-05', 1, 'Vincentius', '[[[0,0,0],[0,0,0],[0,0,0]]]', 'SBY', 1631000, 4);
 
 -- --------------------------------------------------------
 
@@ -157,7 +146,7 @@ CREATE TABLE `log_admin` (
 
 CREATE TABLE `log_users` (
   `id` int(11) NOT NULL,
-  `team_name` text NOT NULL,
+  `id_room` int(11) NOT NULL,
   `detail` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -165,14 +154,9 @@ CREATE TABLE `log_users` (
 -- Dumping data for table `log_users`
 --
 
-INSERT INTO `log_users` (`id`, `team_name`, `detail`) VALUES
-(136, 'Vincentius', 'Vincentius has cleared Section 1.'),
-(137, 'kelvin', 'kelvin has cleared Section 1.'),
-(138, 'Vincentius', 'Vincentius has loaded container 301 into 020.'),
-(139, 'Vincentius', 'Vincentius has loaded container 302 into 021.'),
-(140, 'kelvin', 'kelvin has unloaded container 301 from 020.'),
-(141, 'kelvin', 'kelvin has unloaded container 302 from 021.'),
-(142, 'Vincentius', 'Vincentius has cleared Section 1.');
+INSERT INTO `log_users` (`id`, `id_room`, `detail`) VALUES
+(149, 4, 'Vincentius has cleared Section 1.'),
+(150, 4, 'Vincentius has cleared Section 1.');
 
 -- --------------------------------------------------------
 
@@ -194,7 +178,10 @@ CREATE TABLE `room` (
 --
 
 INSERT INTO `room` (`id_room`, `id_admin`, `status`, `tanggal`, `id_deck`, `ronde`) VALUES
-(1, 'sam1', 0, '2023-12-05', 4, 0);
+(1, 'sam1', 0, '2023-12-05', 4, 0),
+(2, 'sam1', 0, '2023-12-05', 4, 0),
+(3, 'sam1', 1, '2023-12-05', 4, 0),
+(4, 'sam1', 0, '2023-12-05', 4, 0);
 
 -- --------------------------------------------------------
 
@@ -257,9 +244,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`team_name`, `password`, `ship`, `status`, `id_room`, `origin`, `revenue`, `round`, `pindah`, `finish`) VALUES
-('kelvin', '123', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 0, 1, 'MDN', 988000, 0, 'NO', 0),
+('kelvin', '123', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 1, 3, 'SBY', 1003500, 0, 'NO', 1),
 ('sam', '12', '[[[0,0,0],[\"120\",101,0],[\"112\",105,0]],[[0,0,0],[104,0,0],[106,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 0, 140, 'SBY', 0, 0, 'NO', 0),
-('Vincentius', '123', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 0, 1, 'SBY', 1583000, 0, 'NO', 0);
+('Vincentius', '123', '[[[0,0,0],[0,0,0],[0,0,0]]]', 0, 4, 'SBY', 1631000, 0, 'NO', 0);
 
 --
 -- Indexes for dumped tables
@@ -339,7 +326,7 @@ ALTER TABLE `bay`
 -- AUTO_INCREMENT for table `container`
 --
 ALTER TABLE `container`
-  MODIFY `id_container` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=317;
+  MODIFY `id_container` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=331;
 
 --
 -- AUTO_INCREMENT for table `log_admin`
@@ -351,7 +338,7 @@ ALTER TABLE `log_admin`
 -- AUTO_INCREMENT for table `log_users`
 --
 ALTER TABLE `log_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=151;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
