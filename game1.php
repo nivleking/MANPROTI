@@ -19,7 +19,7 @@ if ($row['pindah'] == "YES") {
 
 // if($row['finish'] == "DONE") {
 //     $roomID = $_SESSION['roomID'];
-//     $sql = "UPDATE user SET finish = 'NOT DONE' WHERE id_room = '$roomID'";
+//     $sql = "UPDATE user SET finish = 'NDONE' WHERE id_room = '$roomID'";
 //     mysqli_query($con,$sql);
 // }
 

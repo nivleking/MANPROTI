@@ -83,7 +83,7 @@ require 'connect.php';
                         }
                         ?>
                         <label for="jumlahRonde" class="form-label d-flex mt-2" style="font-weight: bold;">Total Round</label>
-                        <input type="number" class="form-control" id="jumlahRonde" name="ronde" placeholder="Minimum 1" style="width: 100%;">
+                        <input type="number" class="form-control" id="jumlahRonde" name="jumlahRonde" placeholder="Minimum 1" style="width: 100%;">
 
                         <label for="jumlahBay" class="form-label d-flex mt-2" style="font-weight: bold;">Total Bay</label>
                         <input type="number" class="form-control" id="jumlahBay" name="jumlahBay" placeholder="Minimum 1" style="width: 100%;">
@@ -213,12 +213,13 @@ require 'connect.php';
                             $sql = "UPDATE user SET ship = '$tempShip' WHERE id_room='$room'";
                             mysqli_query($con, $sql);
 
-                            // Maximum rondenya
-                            // $countRounds = $_POST['jumlahRonde'];
-                            // $sql = "UPDATE user SET finish = '$countRounds' WHERE id_room='$room'";
-
                             //Ngatur rondenya user dari awal 0
                             $sql = "UPDATE user SET round = 0 WHERE id_room='$room'";
+                            mysqli_query($con, $sql);
+
+                            // Maximum rondenya
+                            $countRounds = $_POST['jumlahRonde'];
+                            $sql = "UPDATE user SET finish = '$countRounds' WHERE id_room='$room'";
                             mysqli_query($con, $sql);
 
                             // Ngatur status

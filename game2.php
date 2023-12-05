@@ -424,6 +424,20 @@ if (!isset($_SESSION["loginUser"])) {
                             <div class="col-7">
                                 <button class="btn btn-danger" type="submit" name="bongkar" id="bongkar">Unload</button>
                             </div>
+                            <div class="col-7">
+                                <?php
+                                    $sql = "SELECT * FROM user";
+                                    $result = mysqli_query($con, $sql);
+                                    $row = mysqli_fetch_array($result);
+
+                                    if ($row['finish'] == $row['round']) {
+                                        echo "<button class='btn btn-dark' type='submit' name='finishGame' id='finishGame'>FINISH</button>";
+                                    }
+                                    else {
+                                        echo "<button class='btn btn-dark' type='submit' name='finishGame' id='finishGame' disabled>FINISH</button>";
+                                    }
+                                ?>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -651,7 +665,7 @@ if (!isset($_SESSION["loginUser"])) {
             //         url: 'bongpasLogic2.php',
             //         method: 'POST',
             //         success: function(temp2) {
-            //             if (temp2 === "DONE") {
+            //             if (temp2 == "DONE") {
             //                 Swal.fire({
             //                     icon: 'warning',
             //                     title: 'Game is Finished!',
@@ -664,7 +678,32 @@ if (!isset($_SESSION["loginUser"])) {
             //             }
             //         }
             //     });
-            // }, 1000);
+            // }, 1001);
+
+            $("#finishGame").click(function(e) {
+                e.preventDefault()
+
+                $.ajax({
+                    url: "bongpasLogic2.php",
+                    type: "POST",
+                    data: {
+                        "finishGame":1
+                    },
+                    success: function(response) {
+                        if (response === "1") {
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'GAME FINISHED!',
+                                showConfirmButton: false,
+                                timer: 2500,
+                                timerProgressBar: true
+                            }).then(function() {
+                                window.location.href = 'homeUser.php';
+                            });
+                        }
+                    }
+                })
+            })
 
             $("#pasang").click(function(e) {
                 e.preventDefault()
@@ -686,7 +725,7 @@ if (!isset($_SESSION["loginUser"])) {
                     success: function(response) {
                         if (response === "1") {
                             Swal.fire({
-                                position: "top-end",
+                                // position: "top-end",
                                 icon: "error",
                                 title: "Pemasangan kontainer melebihi koordinat!",
                                 showConfirmButton: false,
@@ -694,7 +733,7 @@ if (!isset($_SESSION["loginUser"])) {
                             });
                         } else if (response === "2") {
                             Swal.fire({
-                                position: "top-end",
+                                // position: "top-end",
                                 icon: "error",
                                 title: "Pemasangan kontainer melayang!",
                                 showConfirmButton: false,
@@ -702,7 +741,7 @@ if (!isset($_SESSION["loginUser"])) {
                             });
                         } else if (response === "3") {
                             Swal.fire({
-                                position: "top-end",
+                                // position: "top-end",
                                 icon: "error",
                                 title: "Sudah terdapat kontainer!",
                                 showConfirmButton: false,
@@ -720,7 +759,7 @@ if (!isset($_SESSION["loginUser"])) {
                             });
                         } else if (response === "5") {
                             Swal.fire({
-                                position: "top-end",
+                                // position: "top-end",
                                 icon: "error",
                                 title: "Kontainer ID tidak terdaftar!",
                                 showConfirmButton: false,
@@ -754,7 +793,7 @@ if (!isset($_SESSION["loginUser"])) {
                     success: function(response) {
                         if (response === "1") {
                             Swal.fire({
-                                position: "top-end",
+                                // position: "top-end",
                                 icon: "error",
                                 title: "Pembongkaran kontainer melebihi koordinat!",
                                 showConfirmButton: false,
@@ -762,7 +801,7 @@ if (!isset($_SESSION["loginUser"])) {
                             });
                         } else if (response === "2") {
                             Swal.fire({
-                                position: "top-end",
+                                // position: "top-end",
                                 icon: "error",
                                 title: "Pembongkaran kontainer menumpuk!",
                                 showConfirmButton: false,
@@ -770,7 +809,7 @@ if (!isset($_SESSION["loginUser"])) {
                             });
                         } else if (response === "3") {
                             Swal.fire({
-                                position: "top-end",
+                                // position: "top-end",
                                 icon: "error",
                                 title: "Tidak ada kontainer yang dapat dibongkar!",
                                 showConfirmButton: false,
