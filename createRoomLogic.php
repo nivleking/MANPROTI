@@ -6,6 +6,9 @@
         $id = $_SESSION["usernameADM"];
         $tanggal = date("Y-m-d");
 
+        $sql = "UPDATE bay SET id_deck = '$deck'";
+        mysqli_query($con,$sql);
+
         $sql2 = "SELECT id_room FROM room";
         $result = mysqli_query($con,$sql2);
 

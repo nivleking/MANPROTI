@@ -569,6 +569,8 @@ if (!isset($_SESSION["loginUser"])) {
                 let baris = $('#baris').val()
                 let kolom = $('#kolom').val()
                 let kontainer = $('#kontainer').val()
+                
+                // console.log(kontainer)
 
                 $.ajax({
                     url: "bongpasLogic.php",
@@ -632,6 +634,7 @@ if (!isset($_SESSION["loginUser"])) {
                         "done": 1
                     },
                     success: function(response) {
+                        // console.log(response)
                         if (response === "1") {
                             Swal.fire({
                                 // position: "top",

@@ -161,35 +161,15 @@ require 'connect.php';
                             <a href="homeAdmin.php" class="btn btn-dark">Home Admin</a>
                             </form>';
 
-                        // if (isset($_POST['finish'])) {
-                        //     $room = $_SESSION['roomID_admin'];
-                        //     $sql = "SELECT * FROM user WHERE id_room = $room";
-                        //     $result = mysqli_query($con, $sql);
-
-                        //     // //LOGIC SWAP SAM
-                        //     // $tempBay = [];
-                        //     // $tempName = [];
-                        //     // while ($row = mysqli_fetch_array($result)) {
-                        //     //     array_push($tempBay, $row[2]);
-                        //     //     array_push($tempName, $row[0]);
-                        //     // }
-
-                        //     // $length = count($tempBay) - 1;
-                        //     $room = $_SESSION['roomID_admin'];
-                        //     $sql = "UPDATE user SET finish = 'DONE' WHERE id_room = $room";
-                        //     $result = mysqli_query($con, $sql);
-                        //     // for ($i = 0; $i <= $length; $i++) {
-                        //         // $sql = "UPDATE room SET status = 0 WHERE id_room = $room";
-                        //         // $result = mysqli_query($con, $sql);
-
-
-                        //         // $sql = "UPDATE user SET `status` = 0 WHERE id_room = $room";
-                        //         // $result = mysqli_query($con, $sql);
-                        //     // }                            
-                        // }
-
                         if (isset($_POST['adminStart'])) {
                             // print_r($_POST);
+                            // Untuk ngatur origin tiap player
+                            foreach ($tempUser as $user) {
+                                $bayUser = $_POST['origin' . $user];
+                                $sql = "UPDATE user SET origin = '$bayUser' WHERE team_name = '$user'";
+                                mysqli_query($con, $sql);
+                            }
+                            
                             // Untuk set jumlah bay
                             $countBays = $_POST['jumlahBay'];
                             $layout = [];
@@ -389,7 +369,6 @@ require 'connect.php';
                                 $('#userCont').html('<h3>Waiting for Host To Start The Game</h3>');
                             }
                         }
-
                     });
                 }, 1000);
             </script>

@@ -417,25 +417,24 @@ if (!isset($_SESSION["loginUser"])) {
                                 <input type="text" class="form-control" name="kontainer" id="kontainer">
                             </div>
                         </div>
-                        <div class="row p-2 d-flex justify-content-center">
-                            <div class="col-1 mx-auto">
+                        <div class="row m-2 d-flex justify-content-around">
+                            <div class="">
                                 <button class="btn btn-info" type="submit" name="pasang" id="pasang">Load</button>
                             </div>
-                            <div class="col-7">
+                            <div class="">
                                 <button class="btn btn-danger" type="submit" name="bongkar" id="bongkar">Unload</button>
                             </div>
-                            <div class="col-7">
+                            <div class="">
                                 <?php
-                                    $sql = "SELECT * FROM user";
-                                    $result = mysqli_query($con, $sql);
-                                    $row = mysqli_fetch_array($result);
+                                $sql = "SELECT * FROM user";
+                                $result = mysqli_query($con, $sql);
+                                $row = mysqli_fetch_array($result);
 
-                                    if ($row['finish'] <= $row['round']) {
-                                        echo "<button class='btn btn-dark' type='submit' name='finishGame' id='finishGame'>FINISH</button>";
-                                    }
-                                    else {
-                                        echo "<button class='btn btn-dark' type='submit' name='finishGame' id='finishGame' disabled>FINISH</button>";
-                                    }
+                                if ($row['finish'] <= $row['round']) {
+                                    echo "<button class='btn btn-dark' type='submit' name='finishGame' id='finishGame'>FINISH</button>";
+                                } else {
+                                    echo "<button class='btn btn-dark' type='submit' name='finishGame' id='finishGame' disabled>FINISH</button>";
+                                }
                                 ?>
                             </div>
                         </div>
@@ -532,105 +531,100 @@ if (!isset($_SESSION["loginUser"])) {
                     // $row = mysqli_fetch_array($result);
                     $count = 0;
                     $rows = [];
-                    while ($row = mysqli_fetch_array($result)) {
-                        array_push($rows, $row);
-                        $count = $count + 1;
-                    }
-                    $rand = $rows[random_int(0, $count - 1)];
+                    if (mysqli_affected_rows($con) > 0) {
+                        while ($row = mysqli_fetch_array($result)) {
+                            array_push($rows, $row);
+                            $count = $count + 1;
+                        }
+                        $rand = $rows[random_int(0, $count - 1)];
+                        $_SESSION['rand'] = $rand[0];
+                        echo '
+                        <div class="d-flex justify-content-center">
+                            <div class="row d-flex justify-content-center">
+                                <div class="card" style="text-align: center;width: 20rem;height:26rem;margin-top: 10px; border-width: 0.5px; border: 0.01px solid">
+                                    <div style="text-align: center;margin-top: 10px; font-weight: 950; font-size: 20px">';
+                        echo $origin . " - " . $rand[0];
+                        $_SESSION['rand'] = $rand[0];
+                        echo '
+                                    </div>
 
-                    ?>
+                                    <hr class="mx-auto" style="border-width: 2px; border: 0.01px solid; width: 90%; margin-top: 10px">
 
-                    <div class="d-flex justify-content-center">
-                        <div class="row d-flex justify-content-center">
-                            <div class="card" style="text-align: center;width: 20rem;height:26rem;margin-top: 10px; border-width: 0.5px; border: 0.01px solid">
-                                <div style="text-align: center;margin-top: 10px; font-weight: 950; font-size: 20px">
-                                    <?php
-                                    echo $origin;
-                                    echo " - ";
-                                    echo $rand[0];
-                                    $_SESSION['rand'] = $rand[0];
-                                    ?>
+                                    <div class="row" style="margin-top: 0px">
+                                        <div class="col-6" style="text-align: left;font-size: 13px;font-weight: 750;">
+                                            <ul>Priority</ul>
+                                            <ul>Origin</ul>
+                                            <ul>Destination</ul>
+                                            <ul>Quantity</ul>
+                                            <ul>Revenue</ul>
+                                            <ul>Total</ul>
+                                        </div>
+
+                                        <div class="col-6" style="text-align: left;font-size: 13px; font-weight: 400;">';
+                        $t_revenue = $rand[4] * $rand[5];
+                        echo '<ul>' . $rand[1] . '</ul>
+                                            <ul>' . $rand[2] . '</ul>
+                                            <ul>' . $rand[3] . '</ul>
+                                            <ul>' . $rand[4] . '</ul>
+                                            <ul>' . $rand[5] . '</ul>
+                                            <ul style = "margin-top: 16px">' . $t_revenue . '</ul>
+                                        </div>
+                                    </div>
+
+                                    <hr class="mx-auto" style="border-width: 2px; border: 0.25px solid; width: 90%; margin-top: 5px">
+
+                                    <div class="flex-nowrap overflow-auto" style="height:200px; overflow:scroll;">
+                                        <div class="row" style="margin-bottom: 10px">';
+                        $id_sales = $rand[0];
+                        $sql = "SELECT * FROM container WHERE id_sales = '$id_sales'";
+                        $result = mysqli_query($con, $sql);
+                        $count = 0;
+
+                        while ($row = mysqli_fetch_array($result)) {
+                            echo '<div class="col-4" style = "text-decoration: underline">' . $row[0] . '</div>';
+                            $count = $count + 1;
+                            if ($count % 3 == 0) {
+                                echo '</div><div class = "row" style = "margin-bottom: 10px">';
+                            }
+                        }
+                        echo '</div></div>
+                                            </div>
+                                    </div>
                                 </div>
-
-                                <hr class="mx-auto" style="border-width: 2px; border: 0.01px solid; width: 90%; margin-top: 10px">
-
-                                <div class="row" style="margin-top: 0px">
-                                    <div class="col-6" style="text-align: left;font-size: 13px;font-weight: 750;">
-                                        <ul>Priority</ul>
-                                        <ul>Origin</ul>
-                                        <ul>Destination</ul>
-                                        <ul>Quantity</ul>
-                                        <ul>Revenue</ul>
-                                        <ul>Total</ul>
-                                    </div>
-
-                                    <div class="col-6" style="text-align: left;font-size: 13px; font-weight: 400;">
-                                        <?php
-                                        $t_revenue = $rand[4] * $rand[5];
-                                        echo "<ul>$rand[1]</ul>
-                                                <ul>$rand[2]</ul>
-                                                <ul>$rand[3]</ul>
-                                                <ul>$rand[4]</ul>
-                                                <ul>$rand[5]</ul>
-                                                <ul style = 'margin-top: 16px'>$t_revenue</ul>
-                                            ";
-                                        ?>
-                                    </div>
-                                </div>
-
-                                <hr class="mx-auto" style="border-width: 2px; border: 0.25px solid; width: 90%; margin-top: 5px">
-
-                                <div class="flex-nowrap overflow-auto" style="height:200px; overflow:scroll;">
-                                    <div class="row" style='margin-bottom: 10px'>
-                                        <?php
-                                        $id_sales = $rand[0];
-                                        $sql = "SELECT * FROM container WHERE id_sales = '5'";
-                                        $result = mysqli_query($con, $sql);
-                                        $count = 0;
-
-                                        while ($row = mysqli_fetch_array($result)) {
-                                            echo "<div class='col-4' style = 'text-decoration: underline'>$row[0]</div>";
-                                            $count = $count + 1;
-                                            if ($count % 3 == 0) {
-                                                echo "</div>
-                                                <div class = 'row' style = 'margin-bottom: 10px'>";
-                                            }
-                                        }
-                                        echo "</div>";
-
-
-                                        ?>
-                                    </div>
+                                <div class="row">
+                                    <!-- Button -->
+                                    <form class="mx-auto" method="POST" action="accRef.php">
+                                        <div class="row mt-2">';
+                        if ($rand[1] == "N-COMMIT") {
+                            echo '<div class="col-6" style = "text-align: right">
+                                                <button class = "btn btn-success" name = "accept">Accept</button>
+                                            </div>
+                                            <div class="col-6">
+                                                <button class = "btn btn-danger" name = "refuse">Refuse</button>
+                                            </div>';
+                        } else {
+                            echo '<div class="col-6" style = "text-align: right">
+                                                <button class = "btn btn-success" name = "accept">Accept</button>
+                                            </div>
+                                            <div class="col-6">
+                                                <button class = "btn" name = "refuse" style = "cursor: not-allowed;background-color: #ccc" disabled>Refuse</button>
+                                            </div>';
+                        }
+                        echo '</div>
+                                    </form>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <!-- Button -->
-                            <form class="mx-auto" method="POST" action="accRef.php">
-                                <div class="row mt-2">
-                                    <?php
-                                    if ($rand[1] == "N-COMMIT") {
-                                        echo "
-                                        <div class='col-6' style = 'text-align: right'>
-                                            <button class = 'btn btn-success' name = 'accept'   >Accept</button>
-                                        </div>
-                                        <div class='col-6'>
-                                            <button class = 'btn btn-danger' name = 'refuse'>Refuse</button>
-                                        </div>";
-                                    } else {
-                                        echo "
-                                        <div class='col-6' style = 'text-align: right'>
-                                            <button class = 'btn btn-success' name = 'accept'>Accept</button>
-                                        </div>
-                                        <div class='col-6'>
-                                            <button class = 'btn' name = 'refuse' style = 'cursor: not-allowed;background-color: #ccc'disabled>Refuse</button>
-                                        </div>";
-                                    }
-                                    ?>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                        ';
+                    } else {
+                        echo "
+                            <div class='d-flex justify-content-center'>
+                                There are no cards left!
+                            </div>
+                        ";
+                    }
+                    ?>
+
+
                 </div>
             </div>
         </div>
@@ -687,7 +681,7 @@ if (!isset($_SESSION["loginUser"])) {
                     url: "bongpasLogic2.php",
                     type: "POST",
                     data: {
-                        "finishGame":1
+                        "finishGame": 1
                     },
                     success: function(response) {
                         if (response === "1") {
@@ -751,7 +745,7 @@ if (!isset($_SESSION["loginUser"])) {
                             Swal.fire({
                                 // position: "top-end",
                                 icon: "success",
-                                title: "Kontainer berhasil dimasukkan!",
+                                title: "Kontainer ID " + kontainer + " berhasil dimasukkan!",
                                 showConfirmButton: false,
                                 timer: 1000
                             }).then(function() {

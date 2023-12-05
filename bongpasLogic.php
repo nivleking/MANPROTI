@@ -47,7 +47,7 @@
                     $result = mysqli_query($con,$sql);
 
                     $detail = "$id has unloaded container $data from $bay$baris$kolom.";
-                    $sql = "INSERT INTO log_users VALUES('','$detail')";
+                    $sql = "INSERT INTO log_users VALUES('','$id','$detail')";
                     mysqli_query($con, $sql);
 
                     // Pakai sweetalert
@@ -82,7 +82,7 @@
                     $result = mysqli_query($con,$sql);
 
                     $detail = "$id has unloaded container $data from $bay$baris$kolom.";
-                    $sql = "INSERT INTO log_users VALUES('','$detail')";
+                    $sql = "INSERT INTO log_users VALUES('','$id','$detail')";
                     mysqli_query($con, $sql);
 
                     // Pakai sweetalert
@@ -188,7 +188,7 @@
                         // Pakai sweetalert
 
                         $detail = "$id has loaded container $kontainer into $bay$baris$kolom.";
-                        $sql = "INSERT INTO log_users VALUES('','$detail')";
+                        $sql = "INSERT INTO log_users VALUES('','$id','$detail')";
                         mysqli_query($con, $sql);
 
                         echo "4";
@@ -216,9 +216,12 @@
 
     if (isset($_POST['done'])) {
         $id = $_SESSION['username'];
-        $sql = "SELECT ship FROM user WHERE team_name = '$id'";
+        $sql = "SELECT * FROM user WHERE team_name = '$id'";
         $result = mysqli_query($con, $sql);
         $row = mysqli_fetch_array($result);
+
+        $tempOrigin = $row['origin'];
+        // echo "$tempOrigin";
         $arr = json_decode($row['ship']);
         for ($i = 0; $i < count($arr); $i++) {
             for ($j = 0; $j < count($arr[$i]); $j++) {
@@ -230,7 +233,7 @@
                         $sql = "SELECT * FROM container where id_container = '$id_con'";
                         $result = mysqli_query($con, $sql);
                         $row = mysqli_fetch_array($result);
-                        if ($row[2] == 'SBY') {
+                        if ($row[2] == $tempOrigin) {
                             // Pakai sweetalert
                             echo"1";
                             exit();
@@ -239,14 +242,14 @@
                             //             window.location.href='game1.php';
                             //             </script>");
                         }
-                    }
-                    else {
-                        $detail = "$id has cleared Section 1.";
-                        $sql = "INSERT INTO log_users VALUES('','$detail')";
-                        mysqli_query($con,$sql);
-
-                        echo "2";
-                        exit();
+                        else {
+                            $detail = "$id has cleared Section 1.";
+                            $sql = "INSERT INTO log_users VALUES('','$id','$detail')";
+                            mysqli_query($con,$sql);
+    
+                            echo "2";
+                            exit();
+                        }
                     }
                 }
             }
@@ -282,7 +285,7 @@
             $result = mysqli_query($con,$sql);
 
             $detail = "$id has cleared Section 1.";
-            $sql = "INSERT INTO log_users VALUES('','$detail')";
+            $sql = "INSERT INTO log_users VALUES('','$id','$detail')";
             mysqli_query($con,$sql);
 
             echo"2";

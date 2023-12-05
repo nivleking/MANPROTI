@@ -224,27 +224,96 @@ require 'connect.php';
         </table>
     </div> -->
 
-    <?php
-    $i = 5; // Number of bays
-    $layout = [];
+    <div class="d-flex justify-content-center">
+                        <div class="row d-flex justify-content-center">
+                            <div class="card" style="text-align: center;width: 20rem;height:26rem;margin-top: 10px; border-width: 0.5px; border: 0.01px solid">
+                                <div style="text-align: center;margin-top: 10px; font-weight: 950; font-size: 20px">
+                                    <?php
+                                    echo $origin;
+                                    echo " - ";
+                                    echo $rand[0]
+                                    ?>
+                                </div>
 
-    for ($bay = 1; $bay <= $i; $bay++) {
-        $bayArray = [];
+                                <hr class="mx-auto" style="border-width: 2px; border: 0.01px solid; width: 90%; margin-top: 10px">
 
-        for ($row = 0; $row < 3; $row++) {
-            // Initialize each row with different values
-            $rowArray = [0, 0, 0];
+                                <div class="row" style="margin-top: 0px">
+                                    <div class="col-6" style="text-align: left;font-size: 13px;font-weight: 750;">
+                                        <ul>Priority</ul>
+                                        <ul>Origin</ul>
+                                        <ul>Destination</ul>
+                                        <ul>Quantity</ul>
+                                        <ul>Revenue</ul>
+                                        <ul>Total</ul>
+                                    </div>
 
-            // Add the row to the bay array
-            $bayArray[] = $rowArray;
-        }
+                                    <div class="col-6" style="text-align: left;font-size: 13px; font-weight: 400;">
+                                        <?php
+                                        $t_revenue = $rand[4] * $rand[5];
+                                        echo "<ul>$rand[1]</ul>
+                                                <ul>$rand[2]</ul>
+                                                <ul>$rand[3]</ul>
+                                                <ul>$rand[4]</ul>
+                                                <ul>$rand[5]</ul>
+                                                <ul style = 'margin-top: 16px'>$t_revenue</ul>
+                                            ";
+                                        ?>
+                                    </div>
+                                </div>
 
-        // Add the bay array to the layout
-        $layout[] = $bayArray;
-    }
+                                <hr class="mx-auto" style="border-width: 2px; border: 0.25px solid; width: 90%; margin-top: 5px">
 
-    print_r($layout);
-    ?>
+                                <div class="flex-nowrap overflow-auto" style="height:200px; overflow:scroll;">
+                                    <div class="row" style='margin-bottom: 10px'>
+                                        <?php
+                                        $id_sales = $rand[0];
+                                        $sql = "SELECT * FROM container WHERE id_sales = '$id_sales'";
+                                        $result = mysqli_query($con, $sql);
+                                        $count = 0;
+
+                                        while ($row = mysqli_fetch_array($result)) {
+                                            echo "<div class='col-4' style = 'text-decoration: underline'>$row[0]</div>";
+                                            $count = $count + 1;
+                                            if ($count % 3 == 0) {
+                                                echo "</div>
+                                                <div class = 'row' style = 'margin-bottom: 10px'>";
+                                            }
+                                        }
+                                        echo "</div>";
+
+
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- Button -->
+                            <form class="mx-auto" method="POST" action="accRef.php">
+                                <div class="row mt-2">
+                                    <?php
+                                    if ($rand[1] == "N-COMMIT") {
+                                        echo "
+                                        <div class='col-6' style = 'text-align: right'>
+                                            <button class = 'btn btn-success' name = 'accept'>Accept</button>
+                                        </div>
+                                        <div class='col-6'>
+                                            <button class = 'btn btn-danger' name = 'refuse'>Refuse</button>
+                                        </div>";
+                                    } else {
+                                        echo "
+                                        <div class='col-6' style = 'text-align: right'>
+                                            <button class = 'btn btn-success' name = 'accept'>Accept</button>
+                                        </div>
+                                        <div class='col-6'>
+                                            <button class = 'btn' name = 'refuse' style = 'cursor: not-allowed;background-color: #ccc'disabled>Refuse</button>
+                                        </div>";
+                                    }
+                                    ?>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
 
 
 

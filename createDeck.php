@@ -230,7 +230,7 @@ if (isset($_POST['backtoHome'])) {
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Detail Bay</h1>
+                            <h2 class="modal-title" id="exampleModalLabel" style="font-weight: bold;">Detail Bay</h2>
                         </div>
                         <div class="modal-body">
                             <p>ID Deck: <span id="modal-id-deck"></span></p>

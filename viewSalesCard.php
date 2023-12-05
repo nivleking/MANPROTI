@@ -222,6 +222,9 @@ if (!isset($_SESSION["loginADM"])) {
         })
     </script>";
         }
+
+        $sql = "DELETE FROM container WHERE id_sales = $idCard";
+        mysqli_query($con, $sql);
     }
     ?>
 

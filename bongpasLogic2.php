@@ -34,6 +34,13 @@
 
         $sql = "UPDATE room SET status = 0 WHERE id_room = '$roomID'";
         mysqli_query($con,$sql);
+
+        $sql = "DELETE FROM temp_container WHERE id_user = '$id'";
+        mysqli_query($con,$sql);
+
+        $sql = "DELETE FROM temp_container2 WHERE id_user = '$id'";
+        mysqli_query($con,$sql);
+
         echo "1";
     }
 
@@ -82,7 +89,7 @@
                     $result = mysqli_query($con, $sql);
 
                     $detail = "$id has unloaded container $data from $bay$baris$kolom.";
-                    $sql = "INSERT INTO log_users VALUES('','$detail')";
+                    $sql = "INSERT INTO log_users VALUES('','$id','$detail')";
                     mysqli_query($con, $sql);
 
                     echo"4";
@@ -115,7 +122,8 @@
                     $result = mysqli_query($con, $sql);
 
                     $detail = "$id has unloaded container $data from $bay$baris$kolom.";
-                    $sql = "INSERT INTO log_users VALUES('','$detail')";
+                    $sql = "INSERT INTO log_users VALUES('','$id','$detail')";
+
                     mysqli_query($con, $sql);
 
                     echo"4";
@@ -208,7 +216,7 @@
                         $result = mysqli_query($con, $sql);
 
                         $detail = "$id has loaded container $kontainer into $bay$baris$kolom.";
-                        $sql = "INSERT INTO log_users VALUES('','$detail')";
+                        $sql = "INSERT INTO log_users VALUES('','$id','$detail')";
                         mysqli_query($con, $sql);
 
                         echo "4";
