@@ -5,14 +5,8 @@
     $sql = "SELECT pindah, finish from user where team_name = '$id'";
     $result = mysqli_query($con, $sql);
     $row = mysqli_fetch_array($result);
+    $roomID = $_SESSION['roomID'];
     
-    // if($row['finish'] == 'DONE') {
-    //     $roomID = $_SESSION['roomID'];
-    //     $sql = "UPDATE user SET finish = 'NOT DONE' WHERE team_name = '$id'";
-    //     mysqli_query($con,$sql);
-    //     echo "DONE";
-    // }
-
     if($row['pindah'] == 'YES') {
         $roomID = $_SESSION['roomID'];
         $sql = "UPDATE user SET pindah = 'NO' WHERE team_name = '$id'";
@@ -21,7 +15,34 @@
         // exit();
     }
 
-    
+    // if($row['finish'] == 'DONE') {
+    //     $roomID = $_SESSION['roomID'];
+    //     $sql = "UPDATE user SET finish = 'NDONE' WHERE team_name = '$id'";
+    //     mysqli_query($con,$sql);
+    //     echo "DONE";
+    // }
+
+    if (isset($_POST['finishGame'])) {
+        $sql = "UPDATE user SET status = 0 WHERE team_name = '$id'";
+        mysqli_query($con,$sql);
+
+        $sql = "UPDATE user SET `round` = 0 WHERE team_name = '$id'";
+        mysqli_query($con,$sql);
+
+        $sql = "UPDATE user SET finish = 0 WHERE team_name = '$id'";
+        mysqli_query($con,$sql);
+
+        $sql = "UPDATE room SET status = 0 WHERE id_room = '$roomID'";
+        mysqli_query($con,$sql);
+
+        $sql = "DELETE FROM temp_container WHERE id_user = '$id'";
+        mysqli_query($con,$sql);
+
+        $sql = "DELETE FROM temp_container2 WHERE id_user = '$id'";
+        mysqli_query($con,$sql);
+
+        echo "1";
+    }
 
     if (isset($_POST['bongkar'])) {
         $bay = $_POST['bay'];
@@ -67,6 +88,10 @@
                     $sql = "UPDATE user SET revenue = '$revenue' WHERE team_name = '$id'";
                     $result = mysqli_query($con, $sql);
 
+                    $detail = "$id has unloaded container $data from $bay$baris$kolom.";
+                    $sql = "INSERT INTO log_users VALUES('','$roomID','$detail')";
+                    mysqli_query($con, $sql);
+
                     echo"4";
                     exit();
                     // echo ("<script LANGUAGE='JavaScript'>
@@ -95,6 +120,11 @@
 
                     $sql = "UPDATE user SET revenue = '$revenue' WHERE team_name = '$id'";
                     $result = mysqli_query($con, $sql);
+
+                    $detail = "$id has unloaded container $data from $bay$baris$kolom.";
+                    $sql = "INSERT INTO log_users VALUES('','$roomID','$detail')";
+
+                    mysqli_query($con, $sql);
 
                     echo"4";
                     exit();
@@ -184,6 +214,10 @@
 
                         $sql = "UPDATE user SET revenue = '$revenue' WHERE team_name = '$id'";
                         $result = mysqli_query($con, $sql);
+
+                        $detail = "$id has loaded container $kontainer into $bay$baris$kolom.";
+                        $sql = "INSERT INTO log_users VALUES('','$roomID','$detail')";
+                        mysqli_query($con, $sql);
 
                         echo "4";
                         exit();

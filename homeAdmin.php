@@ -289,7 +289,7 @@ $row = mysqli_fetch_array($result);
                             $result = mysqli_query($con, $sql);
 
                             while ($row = mysqli_fetch_array($result)) {
-                                if ($row[2] == 1) {
+                                if ($row[2] == 0) {
                                     $val = 'Finished';
                                 } else {
                                     $val = 'Ongoing';

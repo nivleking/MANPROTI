@@ -1,5 +1,7 @@
 <?php
     require 'connect.php';
+    $roomID = $_SESSION['roomID'];
+
     if (isset($_POST['bongkar'])) {
         $bay = $_POST['bay'];
         $baris = $_POST['baris'];
@@ -46,6 +48,10 @@
                     $sql = "UPDATE user SET revenue = '$revenue' WHERE team_name = '$id'";
                     $result = mysqli_query($con,$sql);
 
+                    $detail = "$id has unloaded container $data from $bay$baris$kolom.";
+                    $sql = "INSERT INTO log_users VALUES('','$roomID','$detail')";
+                    mysqli_query($con, $sql);
+
                     // Pakai sweetalert
                     echo"4";
                     exit();
@@ -76,6 +82,11 @@
 
                     $sql = "UPDATE user SET revenue = '$revenue' WHERE team_name = '$id'";
                     $result = mysqli_query($con,$sql);
+
+                    $detail = "$id has unloaded container $data from $bay$baris$kolom.";
+                    $sql = "INSERT INTO log_users VALUES('','$roomID','$detail')";
+                    mysqli_query($con, $sql);
+
                     // Pakai sweetalert
                     echo"4";
                     exit();
@@ -177,6 +188,11 @@
                         $result = mysqli_query($con,$sql);
                         
                         // Pakai sweetalert
+
+                        $detail = "$id has loaded container $kontainer into $bay$baris$kolom.";
+                        $sql = "INSERT INTO log_users VALUES('','$roomID','$detail')";
+                        mysqli_query($con, $sql);
+
                         echo "4";
                         exit();
                         // header("Location: game1.php?error=Kontainer berhasil dimasukkan");
@@ -202,9 +218,12 @@
 
     if (isset($_POST['done'])) {
         $id = $_SESSION['username'];
-        $sql = "SELECT ship FROM user WHERE team_name = '$id'";
+        $sql = "SELECT * FROM user WHERE team_name = '$id'";
         $result = mysqli_query($con, $sql);
         $row = mysqli_fetch_array($result);
+
+        $tempOrigin = $row['origin'];
+        // echo "$tempOrigin";
         $arr = json_decode($row['ship']);
         for ($i = 0; $i < count($arr); $i++) {
             for ($j = 0; $j < count($arr[$i]); $j++) {
@@ -216,7 +235,7 @@
                         $sql = "SELECT * FROM container where id_container = '$id_con'";
                         $result = mysqli_query($con, $sql);
                         $row = mysqli_fetch_array($result);
-                        if ($row[2] == 'SBY') {
+                        if ($row[2] == $tempOrigin) {
                             // Pakai sweetalert
                             echo"1";
                             exit();
@@ -225,10 +244,14 @@
                             //             window.location.href='game1.php';
                             //             </script>");
                         }
-                    }
-                    else {
-                        echo "2";
-                        exit();
+                        else {
+                            $detail = "$id has cleared Section 1.";
+                            $sql = "INSERT INTO log_users VALUES('','$roomID','$detail')";
+                            mysqli_query($con,$sql);
+    
+                            echo "2";
+                            exit();
+                        }
                     }
                 }
             }
@@ -263,7 +286,11 @@
             $sql = "DELETE FROM temp_container WHERE id_user = '$id'";
             $result = mysqli_query($con,$sql);
 
-            echo"3";
+            $detail = "$id has cleared Section 1.";
+            $sql = "INSERT INTO log_users VALUES('','$roomID','$detail')";
+            mysqli_query($con,$sql);
+
+            echo"2";
             exit();
             // echo ("<script LANGUAGE='JavaScript'>
             //                     window.alert('Section 1 Selesai !');

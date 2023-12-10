@@ -237,6 +237,7 @@
             $res = $stmt->execute();
             
             for ($i = 0; $i < $qty; $i++) {
+                // echo "Halo";
                 $sql = "INSERT INTO container (asal_container,tujuan_container,id_sales) VALUES (?,?,?)";
                 $stmt = $con->prepare($sql);
                 $stmt->bind_param("ssi", $origin, $dest, $id);

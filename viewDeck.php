@@ -1,3 +1,5 @@
+<?php require 'connect.php'; ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -140,35 +142,53 @@
         <div class="row d-flex justify-content-center">
             <h1 style="font-weight:bold;">Decks</h1>
         </div>
-
         <form method="POST">
+            <div>
+                <?php
+                    $sql = "SELECT * FROM deck";
+                    $result = mysqli_query($con,$sql);
+                    echo "
+                    <table class='table table-bordered table-striped' id='tableListOfCards'>
+                        <thead>
+                            <tr>
+                                <th>ID Deck</th>
+                                <th>Name</th>
+                                <th>List of Cards</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                    ";
+                    while ($row=mysqli_fetch_array($result))
+                    echo "
+                        <tr>
+                            <td>$row[0]</td>
+                            <td>$row[2]</td>
+                            <td>$row[3]</td>
+                        </tr>
+                    ";
+                    echo "
+                        </tbody>
+                    </table>
+                    ";
+
+                ?>
+            </div>
+
             <div class="form-group">
                 <label for="exampleInputEmail1">Choose a deck</label>
                 <select class="form-control" name="idDeck">
                     <?php
-                    require 'connect.php';
                     $sql = "SELECT * FROM deck";
                     $deck = mysqli_query($con, $sql);
                     if ($deck->num_rows > 0) {
                         while ($row = $deck->fetch_array()) {
-                            echo '<option value=' . $row[0] . '>' . $row[1] . '</option>';
+                            echo '<option value=' . $row[0] . '>' . $row[2] . '</option>';
                         }
                     } else {
                         echo 'No data found in the database.';
                     }
                     ?>
                 </select>
-            </div>
-
-            <div>
-                <label>
-                    List of card:
-                    <?php 
-                        $sql = "SELECT * FROM deck";
-                        $deck = mysqli_query($con, $sql);
-                        $row = mysqli_fetch_row($deck);
-                    ?>
-                </label>
             </div>
 
             <div class="form-group">
@@ -185,7 +205,7 @@
                     echo '<table class="table table-bordered table-striped" id="deckTable">';
                     echo '<thead>
                             <tr class="text">
-                                <th>ID Sales</th>
+                                <th>ID</th>
                                 <th>Priority</th>
                                 <th>Origin</th>
                                 <th>Destination</th>
@@ -220,6 +240,7 @@
                 ?>
             </div>
             <button class="btn btn-success" name="updateDeck">Submit</button>
+            <a class="btn btn-warning" href="viewDeck.php">Refresh</a>
         </form>
     </div>
     <?php

@@ -25,13 +25,15 @@ if(isset($_POST['accept'])){
     $row = mysqli_fetch_array($result);
 
     $revenue = $revenue + $row[6];
-
     
     $sql = "UPDATE user SET revenue = '$revenue' WHERE team_name = '$id'";
     $result = mysqli_query($con,$sql);
 
 
-    // $sql = "DELETE FROM sales WHERE id_sales = '$sales'";
+    $sql = "DELETE FROM sales WHERE id_sales = '$sales'";
+    $result = mysqli_query($con,$sql);
+
+    // $sql = "DELETE FROM container WHERE id_sales = '$sales'";
     // $result = mysqli_query($con,$sql);
     echo ("<script LANGUAGE='JavaScript'>
                 window.location.href='game2.php';
@@ -43,6 +45,9 @@ if(isset($_POST['refuse'])){
     $sales = $_SESSION['rand'];
     $sql = "DELETE FROM sales WHERE id_sales = '$sales'";
     $result = mysqli_query($con,$sql);
+
+    // $sql = "DELETE FROM container WHERE id_sales = '$sales'";
+    // $result = mysqli_query($con,$sql);
 
     echo ("<script LANGUAGE='JavaScript'>
                 window.location.href='game2.php';
