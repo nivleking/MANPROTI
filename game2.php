@@ -431,9 +431,15 @@ if (!isset($_SESSION["loginUser"])) {
                                 $row = mysqli_fetch_array($result);
 
                                 if ($row['finish'] <= $row['round']) {
-                                    echo "<button class='btn btn-dark' type='submit' name='finishGame' id='finishGame'>FINISH</button>";
+                                    echo "
+                                        <button class='btn btn-dark' type='submit' name='finishGames' id='finishGame'>FINISH</button>
+                                    ";
                                 } else {
-                                    echo "<button class='btn btn-dark' type='submit' name='finishGame' id='finishGame'>FINISH</button>";
+                                    // echo "
+                                    // <form method = 'POST'>
+                                    //     <button class='btn btn-dark' type='submit' name='finishGame' id='finishGame'>FINISH</button>
+                                    // </form>
+                                    // ";
                                 }
                                 ?>
                             </div>
@@ -676,7 +682,7 @@ if (!isset($_SESSION["loginUser"])) {
 
             $("#finishGame").click(function(e) {
                 e.preventDefault()
-
+                
                 $.ajax({
                     url: "bongpasLogic2.php",
                     type: "POST",

@@ -141,12 +141,38 @@
         <form method="POST">
             <div class="form-group">
                 <label for="id_sales">ID Sale</label>
-                <input type="number" class="form-control" name="id_sales" required>
+                <input type="number" class="form-control" name="id_sales" id = "sales" required>
             </div>
             <div class="form-group">
                 <label for="priority">Priority</label>
-                <!-- <input type="text" class="form-control" name="priority" required> -->
-                <div class="row d-flex ml-1">
+                    <div class="form-check col-2">
+                        <input class="form-check-input" type="radio" name="priority" id="commit" value="COMMIT" onclick="return false">
+                            <label class="form-check-label" for="commit">COMMIT
+                                </label>
+                        <br>
+                        <input class="form-check-input" type="radio" name="priority" id="ncommit" value="N-COMMIT" onclick="return false" >
+                            <label class="form-check-label" for="ncommit">
+                                    N-COMMIT
+                                </label>
+                    </div>
+            </div>
+                    <script>
+                        document.getElementById("sales").addEventListener("input", function() {
+                            var idSalesValue = parseInt(this.value);
+
+                            if (idSalesValue % 5 == 0) {
+                                document.getElementById("commit").checked = true;
+                                document.getElementById("ncommit").checked = false;
+                            } 
+                            else {
+                                document.getElementById("ncommit").checked = true;
+                                document.getElementById("commit").checked = false;
+
+                            }
+                        });
+
+                    </script>
+                <!-- <div class="row d-flex ml-1">
                     <div class="form-check col-2">
                         <input class="form-check-input" type="radio" name="priority" id="commit" value="COMMIT" checked>
                         <label class="form-check-label" for="commit">
@@ -158,9 +184,7 @@
                         <label class="form-check-label" for="ncommit">
                             N-COMMIT
                         </label>
-                    </div>
-                </div>
-            </div>
+                    </div> -->
             <div class="form-group">
                 <label for="origin">Origin</label>
                 <input type="text" class="form-control" name="origin" required>
@@ -223,7 +247,6 @@
 
             $id = $_POST['id_sales'];
             $priority = $_POST['priority'];
-            // var_dump($_POST['priority']);
             $origin = $_POST['origin'];
             // var_dump($_POST['origin']);
             $dest = $_POST['destination'];

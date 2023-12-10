@@ -29,6 +29,21 @@ if(isset($_POST['accept'])){
     $sql = "UPDATE user SET revenue = '$revenue' WHERE team_name = '$id'";
     $result = mysqli_query($con,$sql);
 
+    // Cari semua sales
+    
+    $sql = "SELECT * FROM sales WHERE id_sales = '$sales'";
+    $result = mysqli_query($con,$sql);
+    $row = mysqli_fetch_array($result);
+
+    $card = $row[0];
+    $prior = $row[1];
+    $origin = $row[2];
+    $destination = $row[3];
+    $quantity = $row[4];
+    $revenue = $row[5];
+    $id = $_SESSION['username'];
+    $sql = "INSERT INTO temp_sales VALUES ('$card','$prior','$origin','$destination','$quantity','$revenue','$id')";
+    $result = mysqli_query($con,$sql);
 
     $sql = "DELETE FROM sales WHERE id_sales = '$sales'";
     $result = mysqli_query($con,$sql);
@@ -43,11 +58,25 @@ if(isset($_POST['accept'])){
 if(isset($_POST['refuse'])){
     $id = $_SESSION['username']; 
     $sales = $_SESSION['rand'];
-    $sql = "DELETE FROM sales WHERE id_sales = '$sales'";
-    $result = mysqli_query($con,$sql);
 
     // $sql = "DELETE FROM container WHERE id_sales = '$sales'";
     // $result = mysqli_query($con,$sql);
+    $sql = "SELECT * FROM sales WHERE id_sales = '$sales'";
+    $result = mysqli_query($con,$sql);
+    $row = mysqli_fetch_array($result);
+
+    $card = $row[0];
+    $prior = $row[1];
+    $origin = $row[2];
+    $destination = $row[3];
+    $quantity = $row[4];
+    $revenue = $row[5];
+    $id = $_SESSION['username'];
+    $sql = "INSERT INTO temp_sales VALUES ('$card','$prior','$origin','$destination','$quantity','$revenue','$id')";
+    $result = mysqli_query($con,$sql);
+
+    $sql = "DELETE FROM sales WHERE id_sales = '$sales'";
+    $result = mysqli_query($con,$sql);
 
     echo ("<script LANGUAGE='JavaScript'>
                 window.location.href='game2.php';

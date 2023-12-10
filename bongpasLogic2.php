@@ -23,6 +23,29 @@
     // }
 
     if (isset($_POST['finishGame'])) {
+            // echo "babi";
+        $sql = "SELECT * FROM temp_sales WHERE id_user = '$id'";
+        $result = mysqli_query($con,$sql);
+        while($rows = mysqli_fetch_array($result)){
+            $sale = $rows[0];
+            $sql = "SELECT * FROM temp_sales WHERE id_sales = '$sale'";
+            $result2 = mysqli_query($con,$sql);
+            while($row = mysqli_fetch_array($result2)){
+                $card = $row[0];
+                $prior = $row[1];
+                $origin = $row[2];
+                $destination = $row[3];
+                $quantity = $row[4];
+                $revenue = $row[5];
+                $sql = "INSERT INTO sales VALUES ('$card','$prior','$origin','$destination','$quantity','$revenue')";
+                $result3 = mysqli_query($con,$sql);
+
+                $sql = "DELETE FROM temp_sales WHERE id_sales = '$card'";
+                $result4 = mysqli_query($con,$sql);
+            
+            }
+        }
+        
         $sql = "UPDATE user SET status = 0 WHERE team_name = '$id'";
         mysqli_query($con,$sql);
 
