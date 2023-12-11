@@ -1,10 +1,10 @@
 <?php
-	require 'connect.php';
-	
-	if (!isset($_SESSION["loginADM"])) {
-        header("Location: loginAdmin.php");
-        exit;
-    }
+require 'connect.php';
+
+if (!isset($_SESSION["loginADM"])) {
+    header("Location: loginAdmin.php");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -211,7 +211,7 @@
                 <input type="number" class="form-control" name="revenue" required>
             </div>
             <div class="row">
-                <button type="submit" class="btn btn-primary ml-3"  name="addSales">Create</button>
+                <button type="submit" class="btn btn-primary ml-3" name="addSales">Create</button>
                 <!-- <div class="m-2" style="color:green">
                 </div> -->
             </div>
@@ -235,7 +235,7 @@
             $stmt = $con->prepare($sql);
             $stmt->bind_param("isssii", $id, $priority, $origin, $dest, $qty, $revenue);
             $res = $stmt->execute();
-            
+
             for ($i = 0; $i < $qty; $i++) {
                 // echo "Halo";
                 $sql = "INSERT INTO container (asal_container,tujuan_container,id_sales) VALUES (?,?,?)";
@@ -247,5 +247,7 @@
         ?>
     </div>
 </body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
 </html>

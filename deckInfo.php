@@ -162,8 +162,8 @@
                     echo "
                         <tr>
                             <td>$row[0]</td>
+                            <td>$row[1]</td>
                             <td>$row[2]</td>
-                            <td>$row[3]</td>
                         </tr>
                     ";
                     echo "
@@ -182,7 +182,7 @@
                     $deck = mysqli_query($con, $sql);
                     if ($deck->num_rows > 0) {
                         while ($row = $deck->fetch_array()) {
-                            echo '<option value=' . $row[0] . '>' . $row[2] . '</option>';
+                            echo '<option value=' . $row[0] . '>' . $row[1] . '</option>';
                         }
                     } else {
                         echo 'No data found in the database.';
@@ -191,7 +191,7 @@
                 </select>
             </div>
             <button class="btn btn-success" name="updateDeck">Submit</button>
-            <a class="btn btn-warning" href="viewDeck.php">Refresh</a>
+            <a class="btn btn-warning" href="deckinfo.php">Refresh</a>
             
         </form>
         <div class="form-group">
@@ -273,8 +273,7 @@
     </div>
     
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 
 </html>
