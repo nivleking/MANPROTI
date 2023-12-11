@@ -180,7 +180,7 @@ if (!isset($_SESSION["loginADM"])) {
                     <h6>Supervisor: $row[0]</h6>";
                 echo "
                     <form>
-                        <button class='btn btn-danger mb-2' name='deleteRoom' type='submit' style='width:25%;'>Delete Room</button>
+                        <button class='btn btn-danger mb-2' name='deleteRoom' type='submit' style='width:10%;'>Delete Room</button>
                     </form>
                 ";
 
