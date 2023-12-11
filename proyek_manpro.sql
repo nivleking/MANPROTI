@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 05, 2023 at 02:23 PM
+-- Generation Time: Dec 11, 2023 at 10:57 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -40,7 +40,8 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`id_admin`, `name_admin`, `password`, `status`) VALUES
 ('sam1', '123', '123', 0),
-('sam2', '123', '123', 0);
+('sam2', '123', '123', 0),
+('sam3', '123', '123', 0);
 
 -- --------------------------------------------------------
 
@@ -60,12 +61,12 @@ CREATE TABLE `bay` (
 --
 
 INSERT INTO `bay` (`id_bay`, `nama_bay`, `detail_bay`, `id_deck`) VALUES
-(1, 'SBY', 'Surabaya', 4),
-(2, 'MDN', 'Medan', 4),
-(3, 'JYP', 'Jayapura', 4),
-(4, 'MKS', 'Makassar', 4),
-(5, 'BPP', 'Balikpapan', 4),
-(6, 'JKT', 'Jakarta', 4);
+(1, 'SBY', 'Surabaya', 1),
+(2, 'MDN', 'Medan', 1),
+(3, 'JYP', 'Jayapura', 0),
+(4, 'MKS', 'Makassar', 0),
+(5, 'BPP', 'Balikpapan', 0),
+(6, 'JKT', 'Jakarta', 0);
 
 -- --------------------------------------------------------
 
@@ -80,6 +81,22 @@ CREATE TABLE `container` (
   `id_sales` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `container`
+--
+
+INSERT INTO `container` (`id_container`, `asal_container`, `tujuan_container`, `id_sales`) VALUES
+(339, 'SBY', 'MDN', 10),
+(340, 'SBY', 'MDN', 10),
+(341, 'SBY', 'MDN', 10),
+(342, 'SBY', 'MDN', 11),
+(343, 'SBY', 'MDN', 11),
+(344, 'MDN', 'SBY', 15),
+(345, 'MDN', 'SBY', 15),
+(346, 'MDN', 'SBY', 15),
+(347, 'MDN', 'SBY', 16),
+(348, 'MDN', 'SBY', 16);
+
 -- --------------------------------------------------------
 
 --
@@ -88,7 +105,6 @@ CREATE TABLE `container` (
 
 CREATE TABLE `deck` (
   `id_deck` int(11) NOT NULL,
-  `qty_bay` int(11) NOT NULL,
   `nama_deck` text NOT NULL,
   `list_card` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`list_card`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -97,8 +113,9 @@ CREATE TABLE `deck` (
 -- Dumping data for table `deck`
 --
 
-INSERT INTO `deck` (`id_deck`, `qty_bay`, `nama_deck`, `list_card`) VALUES
-(4, 2, 'Trial #1', '[\"1\",\"2\",\"3\",\"4\"]');
+INSERT INTO `deck` (`id_deck`, `nama_deck`, `list_card`) VALUES
+(1, 'Trial #1', '[\"10\",\"11\",\"15\",\"16\"]'),
+(2, 'Trial #2', '[]');
 
 -- --------------------------------------------------------
 
@@ -125,7 +142,17 @@ INSERT INTO `history` (`date`, `round`, `team_name`, `ship`, `origin`, `revenue`
 ('2023-12-05', 0, 'Vincentius', '[[[0,0,0],[0,0,0],[\"301\",\"302\",0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'SBY', 1583000, 1),
 ('2023-12-05', 0, 'kelvin', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'MDN', 1023000, 2),
 ('2023-12-05', 0, 'Vincentius', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'SBY', 1643000, 2),
-('2023-12-05', 1, 'Vincentius', '[[[0,0,0],[0,0,0],[0,0,0]]]', 'SBY', 1631000, 4);
+('2023-12-05', 1, 'Vincentius', '[[[0,0,0],[0,0,0],[0,0,0]]]', 'SBY', 1631000, 4),
+('2023-12-07', 1, 'kelvin', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'SBY', 0, 5),
+('2023-12-07', 1, 'Vincentius', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'MDN', 0, 5),
+('2023-12-07', 1, 'kelvin', '[[[\"333\",0,0],[\"332\",0,0],[\"331\",\"334\",0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'SBY', 92000, 5),
+('2023-12-07', 1, 'Vincentius', '[[[0,0,0],[\"336\",0,0],[\"335\",\"337\",\"338\"]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'MDN', 92000, 5),
+('2023-12-11', 1, 'kelvin', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'SBY', 84000, 7),
+('2023-12-11', 1, 'Vincentius', '[[[\"346\",0,0],[\"345\",0,0],[\"344\",0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'MDN', 228000, 7),
+('2023-12-11', 0, 'kelvin', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'SBY', 268000, 8),
+('2023-12-11', 0, 'Vincentius', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'MDN', 458000, 8),
+('2023-12-11', 0, 'kelvin', '[[[0,0,0],[\"342\",\"343\",0],[\"339\",\"340\",\"341\"]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'SBY', 250500, 8),
+('2023-12-11', 0, 'Vincentius', '[[[\"345\",0,0],[\"348\",0,0],[\"344\",\"346\",0]],[[0,0,0],[0,0,0],[\"347\",0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 'MDN', 440500, 8);
 
 -- --------------------------------------------------------
 
@@ -137,6 +164,14 @@ CREATE TABLE `log_admin` (
   `id` int(11) NOT NULL,
   `detail` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `log_admin`
+--
+
+INSERT INTO `log_admin` (`id`, `detail`) VALUES
+(18, 'sam1 has added sam3 into database.'),
+(19, 'sam1 has added  into database.');
 
 -- --------------------------------------------------------
 
@@ -156,7 +191,62 @@ CREATE TABLE `log_users` (
 
 INSERT INTO `log_users` (`id`, `id_room`, `detail`) VALUES
 (149, 4, 'Vincentius has cleared Section 1.'),
-(150, 4, 'Vincentius has cleared Section 1.');
+(150, 4, 'Vincentius has cleared Section 1.'),
+(151, 5, 'kelvin has cleared Section 1.'),
+(152, 5, 'Vincentius has cleared Section 1.'),
+(153, 5, 'kelvin has cleared Section 1.'),
+(154, 5, 'Vincentius has cleared Section 1.'),
+(155, 5, 'kelvin has cleared Section 1.'),
+(156, 5, 'Vincentius has cleared Section 1.'),
+(157, 5, 'kelvin has cleared Section 1.'),
+(158, 5, 'Vincentius has cleared Section 1.'),
+(159, 5, 'kelvin has loaded container 331 into 020.'),
+(160, 5, 'kelvin has loaded container 332 into 010.'),
+(161, 5, 'kelvin has loaded container 333 into 000.'),
+(162, 5, 'kelvin has loaded container 334 into 021.'),
+(163, 5, 'Vincentius has loaded container 335 into 020.'),
+(164, 5, 'Vincentius has loaded container 336 into 010.'),
+(165, 5, 'Vincentius has loaded container 337 into 021.'),
+(166, 5, 'Vincentius has loaded container 338 into 022.'),
+(167, 5, 'kelvin has unloaded container 336 from 010.'),
+(168, 5, 'kelvin has unloaded container 335 from 020.'),
+(169, 5, 'kelvin has unloaded container 337 from 021.'),
+(170, 5, 'kelvin has unloaded container 338 from 022.'),
+(171, 5, 'Vincentius has unloaded container 333 from 000.'),
+(172, 5, 'Vincentius has unloaded container 332 from 010.'),
+(173, 5, 'Vincentius has unloaded container 331 from 020.'),
+(174, 5, 'Vincentius has unloaded container 334 from 021.'),
+(175, 5, 'kelvin has cleared Section 1.'),
+(176, 7, 'Vincentius has loaded container 344 into 020.'),
+(177, 7, 'Vincentius has loaded container 345 into 010.'),
+(178, 7, 'Vincentius has loaded container 346 into 000.'),
+(179, 7, 'kelvin has unloaded container 346 from 000.'),
+(180, 7, 'kelvin has unloaded container 345 from 010.'),
+(181, 7, 'kelvin has unloaded container 344 from 020.'),
+(182, 7, 'kelvin has cleared Section 1.'),
+(183, 7, 'Vincentius has cleared Section 1.'),
+(184, 8, 'kelvin has loaded container 339 into 020.'),
+(185, 8, 'kelvin has loaded container 340 into 021.'),
+(186, 8, 'kelvin has loaded container 341 into 022.'),
+(187, 8, 'kelvin has loaded container 342 into 010.'),
+(188, 8, 'kelvin has loaded container 343 into 011.'),
+(189, 8, 'Vincentius has loaded container 344 into 020.'),
+(190, 8, 'Vincentius has loaded container 348 into 010.'),
+(191, 8, 'Vincentius has loaded container 345 into 000.'),
+(192, 8, 'Vincentius has loaded container 346 into 021.'),
+(193, 8, 'Vincentius has loaded container 347 into 120.'),
+(194, 8, 'Vincentius has unloaded container 342 from 010.'),
+(195, 8, 'Vincentius has unloaded container 339 from 020.'),
+(196, 8, 'Vincentius has unloaded container 343 from 011.'),
+(197, 8, 'Vincentius has unloaded container 340 from 021.'),
+(198, 8, 'Vincentius has unloaded container 341 from 022.'),
+(199, 8, 'kelvin has unloaded container 345 from 000.'),
+(200, 8, 'kelvin has unloaded container 348 from 010.'),
+(201, 8, 'kelvin has unloaded container 344 from 020.'),
+(202, 8, 'kelvin has unloaded container 346 from 021.'),
+(203, 8, 'kelvin has unloaded container 347 from 120.'),
+(204, 8, 'kelvin has cleared Section 1.'),
+(205, 8, 'kelvin has cleared Section 1.');
 
 -- --------------------------------------------------------
 
@@ -181,7 +271,11 @@ INSERT INTO `room` (`id_room`, `id_admin`, `status`, `tanggal`, `id_deck`, `rond
 (1, 'sam1', 0, '2023-12-05', 4, 0),
 (2, 'sam1', 0, '2023-12-05', 4, 0),
 (3, 'sam1', 1, '2023-12-05', 4, 0),
-(4, 'sam1', 0, '2023-12-05', 4, 0);
+(4, 'sam1', 0, '2023-12-05', 4, 0),
+(5, 'sam1', 0, '2023-12-07', 5, 0),
+(6, 'sam1', 0, '2023-12-11', 1, 0),
+(7, 'sam1', 0, '2023-12-11', 1, 0),
+(8, 'sam1', 0, '2023-12-11', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -197,6 +291,16 @@ CREATE TABLE `sales` (
   `quantity` int(11) NOT NULL,
   `revenue` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `sales`
+--
+
+INSERT INTO `sales` (`id_sales`, `priority`, `origin`, `destination`, `quantity`, `revenue`) VALUES
+(10, 'COMMIT', 'SBY', 'MDN', 3, 30000),
+(11, 'N-COMMIT', 'SBY', 'MDN', 2, 50000),
+(15, 'COMMIT', 'MDN', 'SBY', 3, 50000),
+(16, 'N-COMMIT', 'MDN', 'SBY', 2, 40000);
 
 -- --------------------------------------------------------
 
@@ -223,6 +327,22 @@ CREATE TABLE `temp_container2` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `temp_sales`
+--
+
+CREATE TABLE `temp_sales` (
+  `id_sales` int(11) NOT NULL,
+  `priority` text NOT NULL,
+  `origin` text NOT NULL,
+  `destination` text NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `revenue` int(11) NOT NULL,
+  `id_user` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -232,7 +352,7 @@ CREATE TABLE `user` (
   `ship` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`ship`)),
   `status` int(1) DEFAULT NULL,
   `id_room` int(4) NOT NULL,
-  `origin` text NOT NULL,
+  `origin` text DEFAULT NULL,
   `revenue` int(255) NOT NULL,
   `round` int(11) NOT NULL,
   `pindah` text NOT NULL,
@@ -244,9 +364,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`team_name`, `password`, `ship`, `status`, `id_room`, `origin`, `revenue`, `round`, `pindah`, `finish`) VALUES
-('kelvin', '123', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 1, 3, 'SBY', 1003500, 0, 'NO', 1),
-('sam', '12', '[[[0,0,0],[\"120\",101,0],[\"112\",105,0]],[[0,0,0],[104,0,0],[106,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 0, 140, 'SBY', 0, 0, 'NO', 0),
-('Vincentius', '123', '[[[0,0,0],[0,0,0],[0,0,0]]]', 0, 4, 'SBY', 1631000, 0, 'NO', 0);
+('kelvin', '123', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 0, 0, NULL, 0, 0, 'NO', 0),
+('sam', '12', '[[[0,0,0],[\"120\",101,0],[\"112\",105,0]],[[0,0,0],[104,0,0],[106,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 0, 140, NULL, 0, 0, 'NO', 0),
+('Vincentius', '123', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 0, 0, NULL, 0, 0, 'NO', 0);
 
 --
 -- Indexes for dumped tables
@@ -307,6 +427,12 @@ ALTER TABLE `temp_container2`
   ADD PRIMARY KEY (`id_container`);
 
 --
+-- Indexes for table `temp_sales`
+--
+ALTER TABLE `temp_sales`
+  ADD PRIMARY KEY (`id_sales`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -326,19 +452,19 @@ ALTER TABLE `bay`
 -- AUTO_INCREMENT for table `container`
 --
 ALTER TABLE `container`
-  MODIFY `id_container` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=331;
+  MODIFY `id_container` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=349;
 
 --
 -- AUTO_INCREMENT for table `log_admin`
 --
 ALTER TABLE `log_admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `log_users`
 --
 ALTER TABLE `log_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=151;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=206;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

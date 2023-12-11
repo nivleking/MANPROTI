@@ -140,7 +140,7 @@
     <div class="container mt-5">
         <a class="btn btn-dark" href="createDeck.php">Back</a>
         <div class="row d-flex justify-content-center">
-            <h1 style="font-weight:bold;">Decks</h1>
+            <h1 style="font-weight:bold;">Deck Info</h1>
         </div>
         <form method="POST">
             <div>
@@ -190,78 +190,88 @@
                     ?>
                 </select>
             </div>
-
-            <div class="form-group">
-                <h6>Choose cards to be put into the deck</h6>
+            <button class="btn btn-success" name="updateDeck">Submit</button>
+            <a class="btn btn-warning" href="deckinfo.php">Refresh</a>
+            
+        </form>
+        <div class="form-group mt-3">
                 <?php
-                $sql = "SELECT * FROM sales";
-                $result = mysqli_query($con, $sql);
-                // $sql2 = "SELECT list_card FROM deck";
-                // $result2 = mysqli_query($con, $sql2);
-                // $tmp = json_encode($result[3]);
-                // $tmp = mysqli_fetch_assoc($result2);
+                if (isset($_POST['updateDeck'])) {
+                    $idDeck = $_POST['idDeck'];
+                    $countPort = array();
+                    $arrNamaBay = array();
+                    $sql = "SELECT * FROM bay where id_deck = '$idDeck'";
+                    $result = mysqli_query($con, $sql);
+                    while ($row = $result->fetch_array()) {
+                        $count = 0;
+                        array_push($arrNamaBay,$row[1]);
+                        $sql2 = "SELECT * FROM deck WHERE id_deck = '$idDeck'";
+                        $result2 = mysqli_query($con, $sql2);
+                        $row2 = $result2->fetch_array();
+                        $list = json_decode($row2[2]);
+                        for ($i = 0; $i  < count($list); $i++) {
+                            $tempindex = $list[$i];
+                            $sql3 = "SELECT * FROM sales where id_sales = '$tempindex'";
+                            $result3 = mysqli_query($con, $sql3);
+                            $row3 = $result3->fetch_array();
+                            if ($row3[2] == $row[1]) {
+                                $count++;
+                            }
+                        }
+                        array_push($countPort,$count);
+                    }
 
-                if ($result->num_rows > 0) {
-                    echo '<table class="table table-bordered table-striped" id="deckTable">';
+
+                    // $arrBay = array();
+                    // $arrNamaBay = array();
+                    // $idDeck = $_POST['idDeck'];
+                    // $sql = "SELECT nama_bay FROM bay WHERE id_deck='$idDeck'";
+                    // $result = mysqli_query($con, $sql);
+                    // if ($result->num_rows > 0) {
+                    //     while ($row = $result->fetch_array()) {
+                    //         array_push($arrBay,0);
+                    //         array_push($arrNamaBay,$row);
+                    //     }
+                    // }
+                    // $sql2 = "SELECT list_card FROM deck WHERE id_deck = '$idDeck'";
+                    // $result2 = mysqli_query($con, $sql2);
+                    // $tempres = $result2->fetch_array();
+                    // $listCard = json_decode($tempres[0]);
+                    // foreach ($listCard as $j) {
+                    //     $sql = "SELECT origin FROM sales WHERE id_sales = '$j'";
+                    //     $result = mysqli_query($con, $sql);
+                    //     $temp = $result->fetch_array();
+                    //     for ($i) {
+                    //         if ($temp[0] == $k) {
+                    //             $arrBay
+                    //         }
+                    //     }
+
+                    // }
+                    echo '<table class="table table-bordered table-striped mt-3" id="deckTable">';
                     echo '<thead>
                             <tr class="text">
-                                <th>ID</th>
-                                <th>Priority</th>
+                                <th>No</th>
                                 <th>Origin</th>
-                                <th>Destination</th>
-                                <th>qty</th>
-                                <th>revenue</th>
-                                <th>Choose</th>
+                                <th>Count</th>
                             </tr>
                         </thead>';
                     echo '<tbody>';
-
-                    while ($row = $result->fetch_assoc()) {
+                    for ($i = 0; $i < count($arrNamaBay); $i++) {
                         echo '<tr>';
-                        echo '<td>' . $row['id_sales'] . '</td>';
-                        echo '<td>' . $row['priority'] . '</td>';
-                        echo '<td>' . $row['origin'] . '</td>';
-                        echo '<td>' . $row['destination'] . '</td>';
-                        echo '<td>' . $row['quantity'] . '</td>';
-                        echo '<td>' . $row['revenue'] . '</td>';
-                        // if (in_array($row['id_sales'], $tmp['list_card'])) {
-                        //     echo "Sudah ada";
-                        // }
-
-                        echo '<td class=><input class="ml-2" type="checkbox" class="form-check-input" type="submit" name="' . $row['id_sales'] . '"></td>';
+                        echo '<td>' . ($i+1) . '</td>';
+                        echo '<td>' . $arrNamaBay[$i] . '</td>';
+                        echo '<td>' . $countPort[$i] . '</td>';
                         echo '</tr>';
                     }
-
                     echo '</tbody>';
                     echo '</table>';
-                } else {
-                    echo 'No data found in the database.';
                 }
                 ?>
             </div>
-            <button class="btn btn-success" name="updateDeck">Submit</button>
-            <a class="btn btn-warning" href="viewDeck.php">Refresh</a>
-        </form>
     </div>
-    <?php
-    if (isset($_POST['updateDeck'])) {
-        $tempArr = array();
-        $sql = "SELECT id_sales FROM sales";
-        $listSales = mysqli_query($con, $sql);
-        while ($row = $listSales->fetch_array()) {
-            if (isset($_POST[$row[0]])) {
-                array_push($tempArr, $row[0]);
-            }
-        }
-        $jsonSales = json_encode($tempArr);
-        // echo $jsonSales;
-        $idDeck = $_POST['idDeck'];
-        $sql = "UPDATE deck SET list_card = '$jsonSales' WHERE id_deck = '$idDeck'";
-        mysqli_query($con, $sql);
-    }
-    ?>
+    
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 

@@ -178,25 +178,7 @@ if (!isset($_SESSION["loginADM"])) {
                 $row = mysqli_fetch_array($result);
                 echo "<h1 style='font-weight:bold;'>Room $idRoom</h1>
                     <h6>Supervisor: $row[0]</h6>";
-                echo "
-                    <form>
-                        <button class='btn btn-danger mb-2' name='deleteRoom' type='submit' style='width:10%;'>Delete Room</button>
-                    </form>
-                ";
-
-                if (isset($_POST['deleteRoom'])) {
-                    $sql = "DELETE FROM room WHERE id_room='$idRoom'";
-                    $result = mysqli_query($con, $sql);
-    
-                    $sql = "DELETE FROM history WHERE id_room = '$idRoom'";
-                    $result = mysqli_query($con, $sql);
-    
-                    $sql = "DELETE FROM log_users WHERE id_room = '$idRoom'";
-                    $result = mysqli_query($con, $sql);
-    
-                    header("Location: homeAdmin.php");
-                }
-
+                
                 // echo "<button class = 'btn btn-primary'>Clear History and Logs</button>";
 
                 echo "
@@ -296,6 +278,8 @@ if (!isset($_SESSION["loginADM"])) {
             ?>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 
 </html>
