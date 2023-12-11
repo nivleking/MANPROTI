@@ -245,7 +245,7 @@
                             //             </script>");
                         }
                         else {
-                            $detail = "$id has cleared Section 1.";
+                            $detail = "$id has cleared Section 2.";
                             $sql = "INSERT INTO log_users VALUES('','$roomID','$detail')";
                             mysqli_query($con,$sql);
     
@@ -286,7 +286,7 @@
             $sql = "DELETE FROM temp_container WHERE id_user = '$id'";
             $result = mysqli_query($con,$sql);
 
-            $detail = "$id has cleared Section 1.";
+            $detail = "$id has cleared Section 2.";
             $sql = "INSERT INTO log_users VALUES('','$roomID','$detail')";
             mysqli_query($con,$sql);
 
