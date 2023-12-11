@@ -162,8 +162,8 @@
                     echo "
                         <tr>
                             <td>$row[0]</td>
+                            <td>$row[1]</td>
                             <td>$row[2]</td>
-                            <td>$row[3]</td>
                         </tr>
                     ";
                     echo "
@@ -182,7 +182,7 @@
                     $deck = mysqli_query($con, $sql);
                     if ($deck->num_rows > 0) {
                         while ($row = $deck->fetch_array()) {
-                            echo '<option value=' . $row[0] . '>' . $row[2] . '</option>';
+                            echo '<option value=' . $row[0] . '>' . $row[1] . '</option>';
                         }
                     } else {
                         echo 'No data found in the database.';

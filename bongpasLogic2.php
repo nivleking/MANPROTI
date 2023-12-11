@@ -23,7 +23,6 @@
     // }
 
     if (isset($_POST['finishGame'])) {
-            // echo "babi";
         $sql = "SELECT * FROM temp_sales WHERE id_user = '$id'";
         $result = mysqli_query($con,$sql);
         while($rows = mysqli_fetch_array($result)){
@@ -50,6 +49,15 @@
         mysqli_query($con,$sql);
 
         $sql = "UPDATE user SET `round` = 0 WHERE team_name = '$id'";
+        mysqli_query($con,$sql);
+
+        $sql = "UPDATE user SET `id_room` = 0 WHERE team_name = '$id'";
+        mysqli_query($con,$sql);
+
+        $sql = "UPDATE user SET `revenue` = 0 WHERE team_name = '$id'";
+        mysqli_query($con,$sql);
+
+        $sql = "UPDATE user SET `origin` = null WHERE team_name = '$id'";
         mysqli_query($con,$sql);
 
         $sql = "UPDATE user SET finish = 0 WHERE team_name = '$id'";

@@ -170,7 +170,7 @@ $row = mysqli_fetch_array($result);
                                                         while($row = mysqli_fetch_array($sql)) {
                                                             echo "
                                                                 <option value='$row[0]'>
-                                                                    $row[2]
+                                                                    $row[1]
                                                                 </option>
                                                             ";
                                                         }

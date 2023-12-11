@@ -74,7 +74,8 @@ require 'connect.php';
                         foreach ($tempUser as $user) {
                             // echo $user;
                             echo "<label for='origin" . $user . "' class='form-label d-flex' style='width:100%'>Team $i: " . $user . "</label>";
-                            echo "<select class='form-select' name='origin" . $user . "' style='width: 100%;'>";
+                            echo "<select class='form-select origin-select' name='origin" . $user . "' style='width: 100%;'>";
+                            echo "<option value=''></option>";
                             foreach ($tempBay as $bay) {
                                 echo "<option value='" . $bay[1] . "'>" . $bay[1] . "</option>";
                             }
@@ -177,14 +178,9 @@ require 'connect.php';
                                 $bayArray = [];
 
                                 for ($row = 0; $row < 3; $row++) {
-                                    // Initialize each row with different values
                                     $rowArray = [0, 0, 0];
-
-                                    // Add the row to the bay array
                                     $bayArray[] = $rowArray;
                                 }
-
-                                // Add the bay array to the layout
                                 $layout[] = $bayArray;
                             }
                             $room = $_SESSION['roomID_admin'];
@@ -194,8 +190,8 @@ require 'connect.php';
                             $sql = "UPDATE user SET ship = '$tempShip' WHERE id_room='$room'";
                             mysqli_query($con, $sql);
 
-                            //Ngatur rondenya user dari awal 1
-                            $sql = "UPDATE user SET round = 1 WHERE id_room='$room'";
+                            //Ngatur rondenya user dari awal 0
+                            $sql = "UPDATE user SET round = 0 WHERE id_room='$room'";
                             mysqli_query($con, $sql);
 
                             // Maximum rondenya
@@ -363,7 +359,7 @@ require 'connect.php';
                         success: function(temp) {
                             console.log(temp)
                             if (temp == 'sukses') {
-                                window.location.href = 'game1.php';
+                                window.location.href = 'game2.php';
 
                             } else {
                                 $('#userCont').html('<h3>Waiting for Host To Start The Game</h3>');
@@ -383,6 +379,17 @@ require 'connect.php';
             // scrollCollapse: true,
             // scrollY: '430px'
         })
+
+        $(document).ready(function () {
+            $('.origin-select').change(function () {
+                // Get the selected value
+                var selectedValue = $(this).val();
+
+                // Disable the selected option in all other select elements
+                $('.origin-select').not(this).find('option').prop('disabled', false);
+                $('.origin-select').not(this).find("option[value='" + selectedValue + "']").prop('disabled', true);
+            });
+        });
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
