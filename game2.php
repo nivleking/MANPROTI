@@ -432,8 +432,6 @@ if (!isset($_SESSION["loginUser"])) {
 
                                 if ($row['finish'] <= $row['round']) {
                                     echo "<button class='btn btn-dark' type='submit' name='finishGame' id='finishGame'>FINISH</button>";
-                                } else {
-                                    echo "<button class='btn btn-dark' type='submit' name='finishGame' id='finishGame'>FINISH</button>";
                                 }
                                 ?>
                             </div>
