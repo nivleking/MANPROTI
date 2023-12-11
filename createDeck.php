@@ -136,7 +136,7 @@ if (isset($_POST['backtoHome'])) {
                     // Create a new input for namaBay
                     var newInputNamaBay = $("<input>");
                     newInputNamaBay.attr({
-                        type: "number",
+                        type: "text",
                         class: "form-control",
                         name: "player" + i
                         // required: true
@@ -150,7 +150,7 @@ if (isset($_POST['backtoHome'])) {
                     // Create a new input for detailBay
                     var newInputDetailNama = $("<input>");
                     newInputDetailNama.attr({
-                        type: "number",
+                        type: "text",
                         class: "form-control",
                         name: "detailPlayer" + i
                         // required: true
@@ -202,6 +202,7 @@ if (isset($_POST['backtoHome'])) {
     <div class="container mt-5">
         <a class="btn btn-dark" name="" href="homeAdmin.php">Back</a>
         <a class="btn btn-dark" name="" href="viewDeck.php">View Decks</a>
+        <a class="btn btn-dark" name="" href="deckInfo.php">Deck Info</a>
 
         <div class="row d-flex justify-content-center">
             <h1 style="font-weight:bold;">Set Card Deck</h1>

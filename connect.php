@@ -1,4 +1,4 @@
 <?php
-$con=mysqli_connect("localhost","root","","proyek_manpro");
+$con=mysqli_connect("localhost","root","","manpro_kelvin");
 session_start();
 ?>
