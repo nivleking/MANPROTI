@@ -270,7 +270,7 @@ $row = mysqli_fetch_array($result);
 
             <div class=" w3-row-padding w3-center">
                 <div class="w3-padding-32">
-                    <h2 class="mb-5" id="activity" style="font-weight: bold;">Your Activity</h2>
+                    <h2 class="mb-5" id="activity" style="font-weight: bold;">Rooms</h2>
                     <table class="table table-responsive table-bordered table-striped" id="tableRoom" style="width: 100%;">
                         <thead>
                             <tr>

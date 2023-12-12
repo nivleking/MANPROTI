@@ -426,10 +426,9 @@ if (!isset($_SESSION["loginUser"])) {
                             </div>
                             <div class="">
                                 <?php
-                                $sql = "SELECT * FROM user";
+                                $sql = "SELECT * FROM user WHERE team_name='$id'";
                                 $result = mysqli_query($con, $sql);
                                 $row = mysqli_fetch_array($result);
-
                                 if ($row['finish'] <= $row['round']) {
                                     echo "
                                         <button class='btn btn-dark' type='submit' name='finishGames' id='finishGame'>FINISH</button>

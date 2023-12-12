@@ -245,9 +245,20 @@
                             //             </script>");
                         }
                         else {
-                            $detail = "$id has cleared Section 2.";
+                            $id = $_SESSION['username'];
+
+                            $detail = "$id has cleared Section 1.";
                             $sql = "INSERT INTO log_users VALUES('','$roomID','$detail')";
-                            mysqli_query($con,$sql);
+                            $result = mysqli_query($con,$sql);
+
+                            // $sql = "SELECT * FROM user WHERE team_name = '$id'";
+                            // $result = mysqli_query($con, $sql);
+                            // $row = mysqli_fetch_array($result);
+                            // $round = $row[7];
+
+                            // $round += 1;
+                            // $sql = "UPDATE user SET round = '$round' WHERE team_name = '$id'";
+                            // $result = mysqli_query($con,$sql);
     
                             echo "2";
                             exit();
@@ -286,7 +297,7 @@
             $sql = "DELETE FROM temp_container WHERE id_user = '$id'";
             $result = mysqli_query($con,$sql);
 
-            $detail = "$id has cleared Section 2.";
+            $detail = "$id has cleared Section 1.";
             $sql = "INSERT INTO log_users VALUES('','$roomID','$detail')";
             mysqli_query($con,$sql);
 
