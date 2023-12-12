@@ -88,6 +88,9 @@ require 'connect.php';
 
                         <label for="jumlahBay" class="form-label d-flex mt-2" style="font-weight: bold;">Total Bay</label>
                         <input type="number" class="form-control" id="jumlahBay" name="jumlahBay" placeholder="Minimum 1" style="width: 100%;">
+
+                        <label for="jumlahBay" class="form-label d-flex mt-2" style="font-weight: bold;">Chance Card For Each Round</label>
+                        <input type="number" class="form-control" id="chanceCard" name="chanceCard" placeholder="Minimum 1" style="width: 100%;">
                     </div>
                     <div class="modal-footer">
                         <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
@@ -164,6 +167,13 @@ require 'connect.php';
 
                         if (isset($_POST['adminStart'])) {
                             // print_r($_POST);
+                            
+                            // Ini buat chance Card
+                            $room = $_SESSION['roomID_admin'];
+                            $chance = $_POST['chanceCard'];
+                            $sql = "UPDATE user SET chance = '$chance' WHERE id_room = '$room'";
+                            $result = mysqli_query($con,$sql);
+                            
                             // Untuk ngatur origin tiap player
                             foreach ($tempUser as $user) {
                                 $bayUser = $_POST['origin' . $user];

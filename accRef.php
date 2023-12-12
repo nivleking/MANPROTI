@@ -48,6 +48,16 @@ if(isset($_POST['accept'])){
     $sql = "DELETE FROM sales WHERE id_sales = '$sales'";
     $result = mysqli_query($con,$sql);
 
+    $id = $_SESSION['username'];
+    $sql = "SELECT * FROM user WHERE team_name = '$id'";
+    $result = mysqli_query($con,$sql);
+    $row = mysqli_fetch_array($result);
+
+    // Mengurangi jumlah chances
+    $chance = $row[10] - 1;
+    $sql = "UPDATE user SET chance = '$chance' WHERE team_name = '$id'";
+    $result = mysqli_query($con,$sql);
+
     // $sql = "DELETE FROM container WHERE id_sales = '$sales'";
     // $result = mysqli_query($con,$sql);
     echo ("<script LANGUAGE='JavaScript'>
@@ -76,6 +86,16 @@ if(isset($_POST['refuse'])){
     $result = mysqli_query($con,$sql);
 
     $sql = "DELETE FROM sales WHERE id_sales = '$sales'";
+    $result = mysqli_query($con,$sql);
+
+    $id = $_SESSION['username'];
+    $sql = "SELECT * FROM user WHERE team_name = '$id'";
+    $result = mysqli_query($con,$sql);
+    $row = mysqli_fetch_array($result);
+
+    // Mengurangi jumlah chances
+    $chance = $row[10] - 1;
+    $sql = "UPDATE user SET chance = '$chance' WHERE team_name = '$id'";
     $result = mysqli_query($con,$sql);
 
     echo ("<script LANGUAGE='JavaScript'>

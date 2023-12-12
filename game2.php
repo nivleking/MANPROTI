@@ -519,11 +519,12 @@ if (!isset($_SESSION["loginUser"])) {
                 <div class="card-body">
                     <h6 class="text-center">Remaining Sales Card</h6>
                     <?php
-                    // Isi berapa banyak sales yg blm
-                    ?>
+                    $id = $_SESSION['username'];
+                    $sql = "SELECT * FROM user WHERE team_name = '$id'";
+                    $result = mysqli_query($con,$sql);
+                    $rowK = mysqli_fetch_array($result);
+                    echo "<div style = 'text-align: center'>$rowK[10]</div>";
 
-                    <!-- Card -->
-                    <?php
                     $id = $_SESSION['username'];
                     $sql = "SELECT origin FROM user WHERE team_name = '$id'";
                     $result = mysqli_query($con, $sql);
@@ -536,7 +537,7 @@ if (!isset($_SESSION["loginUser"])) {
                     // $row = mysqli_fetch_array($result);
                     $count = 0;
                     $rows = [];
-                    if (mysqli_affected_rows($con) > 0) {
+                    if ($rowK[10] != 0) {
                         while ($row = mysqli_fetch_array($result)) {
                             array_push($rows, $row);
                             $count = $count + 1;
@@ -607,7 +608,8 @@ if (!isset($_SESSION["loginUser"])) {
                                             <div class="col-6">
                                                 <button class = "btn btn-danger" name = "refuse">Refuse</button>
                                             </div>';
-                        } else {
+                        } 
+                        else {
                             echo '<div class="col-6" style = "text-align: right">
                                                 <button class = "btn btn-success" name = "accept">Accept</button>
                                             </div>
