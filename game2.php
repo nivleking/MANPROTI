@@ -517,13 +517,14 @@ if (!isset($_SESSION["loginUser"])) {
                     </h4>
                 </div>
                 <div class="card-body">
-                    <h6 class="text-center">Remaining Sales Card</h6>
                     <?php
                     $id = $_SESSION['username'];
                     $sql = "SELECT * FROM user WHERE team_name = '$id'";
                     $result = mysqli_query($con,$sql);
                     $rowK = mysqli_fetch_array($result);
-                    echo "<div style = 'text-align: center'>$rowK[10]</div>";
+                    echo "
+                    <h6 class='text-center'>Remaining Sales Card: $rowK[11]</h6>
+                    ";
 
                     $id = $_SESSION['username'];
                     $sql = "SELECT origin FROM user WHERE team_name = '$id'";
@@ -537,7 +538,7 @@ if (!isset($_SESSION["loginUser"])) {
                     // $row = mysqli_fetch_array($result);
                     $count = 0;
                     $rows = [];
-                    if ($rowK[10] != 0) {
+                    if ($rowK[11] != 0 && mysqli_num_rows($result) > 0) {
                         while ($row = mysqli_fetch_array($result)) {
                             array_push($rows, $row);
                             $count = $count + 1;

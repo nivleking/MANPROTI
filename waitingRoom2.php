@@ -168,12 +168,6 @@ require 'connect.php';
                         if (isset($_POST['adminStart'])) {
                             // print_r($_POST);
                             
-                            // Ini buat chance Card
-                            $room = $_SESSION['roomID_admin'];
-                            $chance = $_POST['chanceCard'];
-                            $sql = "UPDATE user SET chance = '$chance' WHERE id_room = '$room'";
-                            $result = mysqli_query($con,$sql);
-                            
                             // Untuk ngatur origin tiap player
                             foreach ($tempUser as $user) {
                                 $bayUser = $_POST['origin' . $user];
@@ -209,6 +203,17 @@ require 'connect.php';
                             $sql = "UPDATE user SET finish = '$countRounds' WHERE id_room='$room'";
                             mysqli_query($con, $sql);
 
+                            // Maximum rondenya
+                            $countRounds = $_POST['jumlahRonde'];
+                            $sql = "UPDATE user SET finish = '$countRounds' WHERE id_room='$room'";
+                            mysqli_query($con, $sql);
+
+                            // Ini buat max chance Card
+                            $room = $_SESSION['roomID_admin'];
+                            $chance = $_POST['chanceCard'];
+                            $sql = "UPDATE user SET chance = '$chance', max_chances ='$chance' WHERE id_room = '$room'";
+                            $result = mysqli_query($con,$sql);
+
                             // Ngatur status
                             $value = 1;
                             $sql = "UPDATE room SET status=? WHERE id_room =?";
@@ -230,6 +235,7 @@ require 'connect.php';
                                 $revenue = $row[6];
                                 $round = $row[7];
                                 $room = $row[4];
+                                $maxChances = $row[10];
 
                                 $sql = "INSERT INTO history VALUES ('$tanggal','$round','$team','$ship','$origin','$revenue','$room')";
                                 $result2 = mysqli_query($con, $sql);
@@ -237,6 +243,9 @@ require 'connect.php';
                             $round = $round + 1;
                             $sql = "UPDATE user SET round = '$round' WHERE id_room = '$id'";
                             $result = mysqli_query($con, $sql);
+
+                            $sql = "UPDATE user SET max_chances = '$maxChances' WHERE id_room = '$room'";
+                            $result = mysqli_query($con,$sql);
 
                             // $countRounds = $_POST['jumlahRonde'];
                             // if ($round = $countRounds) {

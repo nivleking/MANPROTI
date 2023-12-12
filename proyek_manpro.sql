@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2023 at 01:50 AM
+-- Generation Time: Dec 12, 2023 at 03:29 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -191,8 +191,6 @@ CREATE TABLE `sales` (
 --
 
 INSERT INTO `sales` (`id_sales`, `priority`, `origin`, `destination`, `quantity`, `revenue`) VALUES
-(10, 'COMMIT', 'SBY', 'MDN', 3, 30000),
-(11, 'N-COMMIT', 'SBY', 'MDN', 2, 50000),
 (15, 'COMMIT', 'MDN', 'SBY', 3, 50000),
 (16, 'N-COMMIT', 'MDN', 'SBY', 2, 40000);
 
@@ -218,6 +216,17 @@ CREATE TABLE `temp_container2` (
   `id_user` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `temp_container2`
+--
+
+INSERT INTO `temp_container2` (`id_container`, `id_user`) VALUES
+(339, 'Vincentius'),
+(340, 'Vincentius'),
+(341, 'Vincentius'),
+(342, 'Vincentius'),
+(343, 'Vincentius');
+
 -- --------------------------------------------------------
 
 --
@@ -233,6 +242,14 @@ CREATE TABLE `temp_sales` (
   `revenue` int(11) NOT NULL,
   `id_user` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `temp_sales`
+--
+
+INSERT INTO `temp_sales` (`id_sales`, `priority`, `origin`, `destination`, `quantity`, `revenue`, `id_user`) VALUES
+(10, 'COMMIT', 'SBY', 'MDN', 3, 30000, 'Vincentius'),
+(11, 'N-COMMIT', 'SBY', 'MDN', 2, 50000, 'Vincentius');
 
 -- --------------------------------------------------------
 
@@ -250,17 +267,19 @@ CREATE TABLE `user` (
   `revenue` int(255) NOT NULL,
   `round` int(11) NOT NULL,
   `pindah` text NOT NULL,
-  `finish` int(11) NOT NULL
+  `finish` int(11) NOT NULL,
+  `chance` int(11) NOT NULL,
+  `max_chances` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`team_name`, `password`, `ship`, `status`, `id_room`, `origin`, `revenue`, `round`, `pindah`, `finish`) VALUES
-('kelvin', '123', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 0, 0, NULL, 0, 0, 'NO', 0),
-('sam', '12', '[[[0,0,0],[\"120\",101,0],[\"112\",105,0]],[[0,0,0],[104,0,0],[106,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 0, 140, NULL, 0, 0, 'NO', 0),
-('Vincentius', '123', '[[[0,0,0],[0,0,0],[0,0,0]]]', 0, 0, NULL, 0, 0, 'NO', 0);
+INSERT INTO `user` (`team_name`, `password`, `ship`, `status`, `id_room`, `origin`, `revenue`, `round`, `pindah`, `finish`, `chance`, `max_chances`) VALUES
+('kelvin', '123', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 0, 0, NULL, 0, 0, 'NO', 0, 0, 0),
+('sam', '12', '[[[0,0,0],[\"120\",101,0],[\"112\",105,0]],[[0,0,0],[104,0,0],[106,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 0, 140, NULL, 0, 0, 'NO', 0, 0, 0),
+('Vincentius', '123', '[[[0,0,0],[0,0,0],[0,0,0]]]', 1, 3, 'SBY', 182500, 1, 'NO', 1, 2, 2);
 
 --
 -- Indexes for dumped tables
@@ -358,7 +377,7 @@ ALTER TABLE `log_admin`
 -- AUTO_INCREMENT for table `log_users`
 --
 ALTER TABLE `log_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=219;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=227;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

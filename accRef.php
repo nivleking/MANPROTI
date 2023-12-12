@@ -13,7 +13,6 @@ if(isset($_POST['accept'])){
         $result2 = mysqli_query($con,$sql);    
     }
 
-    
     $sql = "SELECT * FROM sales WHERE id_sales = '$sales'";
     $result = mysqli_query($con,$sql);
     $row = mysqli_fetch_array($result);
@@ -54,8 +53,8 @@ if(isset($_POST['accept'])){
     $row = mysqli_fetch_array($result);
 
     // Mengurangi jumlah chances
-    $chance = $row[10] - 1;
-    $sql = "UPDATE user SET chance = '$chance' WHERE team_name = '$id'";
+    $chance = $row[11] - 1;
+    $sql = "UPDATE user SET max_chances = '$chance' WHERE team_name = '$id'";
     $result = mysqli_query($con,$sql);
 
     // $sql = "DELETE FROM container WHERE id_sales = '$sales'";
