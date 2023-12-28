@@ -40,8 +40,9 @@ if(isset($_POST['accept'])){
     $destination = $row[3];
     $quantity = $row[4];
     $revenue = $row[5];
+    $types = $row[6];
     $id = $_SESSION['username'];
-    $sql = "INSERT INTO temp_sales VALUES ('$card','$prior','$origin','$destination','$quantity','$revenue','$id')";
+    $sql = "INSERT INTO temp_sales VALUES ('$card','$prior','$origin','$destination','$quantity','$revenue','$id','$types)";
     $result = mysqli_query($con,$sql);
 
     $sql = "DELETE FROM sales WHERE id_sales = '$sales'";

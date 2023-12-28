@@ -146,13 +146,26 @@ if (!isset($_SESSION["loginADM"])) {
             <div class="form-group">
                 <label for="priority">Priority</label>
                     <div class="form-check col-2">
-                        <input class="form-check-input" type="radio" name="priority" id="commit" value="COMMIT" onclick="return false">
+                        <input class="form-check-input" type="radio" name="priority" id="commit" value="COMMIT" >
                             <label class="form-check-label" for="commit">COMMIT
                                 </label>
                         <br>
-                        <input class="form-check-input" type="radio" name="priority" id="ncommit" value="N-COMMIT" onclick="return false" >
+                        <input class="form-check-input" type="radio" name="priority" id="ncommit" value="N-COMMIT" >
                             <label class="form-check-label" for="ncommit">
                                     N-COMMIT
+                                </label>
+                    </div>
+            </div>
+            <div class="form-group">
+                <label for="type">Container Type</label>
+                    <div class="form-check col-2">
+                        <input class="form-check-input" type="radio" name="type" id="refer" value="REFEER" onclick="return false">
+                            <label class="form-check-label" for="refer">Refer
+                                </label>
+                        <br>
+                        <input class="form-check-input" type="radio" name="type" id="dry" value="DRY" onclick="return false" >
+                            <label class="form-check-label" for="dry">
+                                    Dry
                                 </label>
                     </div>
             </div>
@@ -161,17 +174,17 @@ if (!isset($_SESSION["loginADM"])) {
                             var idSalesValue = parseInt(this.value);
 
                             if (idSalesValue % 5 == 0) {
-                                document.getElementById("commit").checked = true;
-                                document.getElementById("ncommit").checked = false;
+                                document.getElementById("refer").checked = true;
+                                document.getElementById("dry").checked = false;
                             } 
                             else {
-                                document.getElementById("ncommit").checked = true;
-                                document.getElementById("commit").checked = false;
+                                document.getElementById("dry").checked = true;
+                                document.getElementById("refer").checked = false;
 
                             }
                         });
 
-                    </script>
+                </script>
                 <!-- <div class="row d-flex ml-1">
                     <div class="form-check col-2">
                         <input class="form-check-input" type="radio" name="priority" id="commit" value="COMMIT" checked>
@@ -244,26 +257,26 @@ if (!isset($_SESSION["loginADM"])) {
         <?php
         if (isset($_POST['addSales'])) {
             // $deck = $_POST['id_deck'];
-
             $id = $_POST['id_sales'];
             $priority = $_POST['priority'];
             $origin = $_POST['origin'];
+            $types = $_POST['type'];
             // var_dump($_POST['origin']);
             $dest = $_POST['destination'];
             // var_dump($_POST['destination']);
             $qty = random_int($_POST['quantity_lower'], $_POST['quantity_upper']);
             $revenue = $_POST['revenue'];
 
-            $sql = "INSERT INTO sales VALUES (?,?,?,?,?,?)";
+            $sql = "INSERT INTO sales VALUES (?,?,?,?,?,?,?)";
             $stmt = $con->prepare($sql);
-            $stmt->bind_param("isssii", $id, $priority, $origin, $dest, $qty, $revenue);
+            $stmt->bind_param("isssiis", $id, $priority, $origin, $dest, $qty, $revenue, $types);
             $res = $stmt->execute();
 
             for ($i = 0; $i < $qty; $i++) {
                 // echo "Halo";
-                $sql = "INSERT INTO container (asal_container,tujuan_container,id_sales) VALUES (?,?,?)";
+                $sql = "INSERT INTO container (asal_container,tujuan_container,id_sales,types) VALUES (?,?,?,?)";
                 $stmt = $con->prepare($sql);
-                $stmt->bind_param("ssi", $origin, $dest, $id);
+                $stmt->bind_param("ssis", $origin, $dest, $id, $types);
                 $stmt->execute();
             }
         }

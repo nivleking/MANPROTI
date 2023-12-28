@@ -36,14 +36,27 @@
                 $destination = $row[3];
                 $quantity = $row[4];
                 $revenue = $row[5];
-                $sql = "INSERT INTO sales VALUES ('$card','$prior','$origin','$destination','$quantity','$revenue')";
+                $type = $row[7];        
+                $sql = "INSERT INTO sales VALUES ('$card','$prior','$origin','$destination','$quantity','$revenue','$type')";
                 $result3 = mysqli_query($con,$sql);
 
                 $sql = "DELETE FROM temp_sales WHERE id_sales = '$card'";
                 $result4 = mysqli_query($con,$sql);
             
             }
-        }
+        }   
+        // echo "tai";
+        $id = $_SESSION['username'];
+        $roomID = $_SESSION['roomID'];
+        $sql = "SELECT * FROM user WHERE team_name = '$id'";
+        $result = mysqli_query($con,$sql);
+        $row = mysqli_fetch_array($result);
+
+        $revenue = $row[6];
+        $room = $row[4];
+
+        $sql = "INSERT INTO temp_user VALUES ('$id','$roomID','$revenue')";
+        $result = mysqli_query($con,$sql);  
         
         $sql = "UPDATE user SET status = 0 WHERE team_name = '$id'";
         mysqli_query($con,$sql);
