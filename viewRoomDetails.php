@@ -38,18 +38,18 @@ if (!isset($_SESSION["loginADM"])) {
     <script>
         $(document).ready(function() {
             let table = $('#tableHistory').DataTable({
-                    info: true
-                    // scrollCollapse: true,
-                    // scrollY: '430px'
-                })
+                info: true
+                // scrollCollapse: true,
+                // scrollY: '430px'
+            })
         })
 
         $(document).ready(function() {
             let table = $('#tableLogs').DataTable({
-                    info: true
-                    // scrollCollapse: true,
-                    // scrollY: '430px'
-                })
+                info: true
+                // scrollCollapse: true,
+                // scrollY: '430px'
+            })
         })
     </script>
 
@@ -178,19 +178,19 @@ if (!isset($_SESSION["loginADM"])) {
                 $row = mysqli_fetch_array($result);
                 echo "<h1 style='font-weight:bold;'>Room $idRoom</h1>
                     <h6>Supervisor: $row[0]</h6>";
-                
+
                 // echo "<button class = 'btn btn-primary'>Clear History and Logs</button>";
                 $sql = "SELECT * from temp_user WHERE id_room = '$idRoom'";
-                $result = mysqli_query($con,$sql);
+                $result = mysqli_query($con, $sql);
                 $winner = "";
                 $score = 0;
-                while ($row = mysqli_fetch_array($result)){
-                    if($row[2] > $score){
-                        $score = $row[2];
-                        $winner = $row[0];
+                while ($row = mysqli_fetch_array($result)) {
+                    if ($row[3] > $score) {
+                        $score = $row[3];
+                        $winner = $row[1];
                     }
                 }
-                echo "<h6>Winner: $winner</h6>";
+                echo "<h6 style='color:red;font-weight:bold;'>Winner: $winner</h6>";
                 echo "
                         <h2 class='d-flex justify-content-center' style='font-weight:bold;'>History</h2>
                         <table class='table table-responsive table-bordered table-striped' id='tableHistory' style = 'width:100%'>
@@ -227,7 +227,7 @@ if (!isset($_SESSION["loginADM"])) {
 
                 echo "</tbody>
                     </table>";
-                
+
 
                 $sql = "SELECT * FROM log_users WHERE id_room = '$idRoom'";
                 $result = mysqli_query($con, $sql);
@@ -251,7 +251,7 @@ if (!isset($_SESSION["loginADM"])) {
                     ";
                 }
 
-                
+
                 echo "
                     </tbody>
                         </table>  

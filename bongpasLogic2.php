@@ -45,18 +45,15 @@
             
             }
         }   
-        // echo "tai";
-        $id = $_SESSION['username'];
-        $roomID = $_SESSION['roomID'];
+        
         $sql = "SELECT * FROM user WHERE team_name = '$id'";
         $result = mysqli_query($con,$sql);
+
         $row = mysqli_fetch_array($result);
-
         $revenue = $row[6];
-        $room = $row[4];
 
-        $sql = "INSERT INTO temp_user VALUES ('$id','$roomID','$revenue')";
-        $result = mysqli_query($con,$sql);  
+        $sql = "INSERT INTO temp_user VALUES('','$id', '$roomID', '$revenue')";
+        mysqli_query($con,$sql);
         
         $sql = "UPDATE user SET status = 0 WHERE team_name = '$id'";
         mysqli_query($con,$sql);

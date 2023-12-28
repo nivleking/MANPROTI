@@ -520,7 +520,7 @@ if (!isset($_SESSION["loginUser"])) {
                     <?php
                     $id = $_SESSION['username'];
                     $sql = "SELECT * FROM user WHERE team_name = '$id'";
-                    $result = mysqli_query($con,$sql);
+                    $result = mysqli_query($con, $sql);
                     $rowK = mysqli_fetch_array($result);
                     echo "
                     <h6 class='text-center'>Remaining Sales Card: $rowK[11]</h6>
@@ -609,8 +609,7 @@ if (!isset($_SESSION["loginUser"])) {
                                             <div class="col-6">
                                                 <button class = "btn btn-danger" name = "refuse">Refuse</button>
                                             </div>';
-                        } 
-                        else {
+                        } else {
                             echo '<div class="col-6" style = "text-align: right">
                                                 <button class = "btn btn-success" name = "accept">Accept</button>
                                             </div>
@@ -684,7 +683,7 @@ if (!isset($_SESSION["loginUser"])) {
 
             $("#finishGame").click(function(e) {
                 e.preventDefault()
-                
+
                 $.ajax({
                     url: "bongpasLogic2.php",
                     type: "POST",
