@@ -431,7 +431,7 @@ if (!isset($_SESSION["loginUser"])) {
                                 $row = mysqli_fetch_array($result);
                                 if ($row['finish'] <= $row['round']) {
                                     echo "
-                                        <button class='btn btn-dark' type='submit' name='finishGames' id='finishGame'>FINISH</button>
+                                        <button class='btn btn-dark' type='submit' name='finishGame' id='finishGame'>FINISH</button>
                                     ";
                                 } else {
                                     // echo "
@@ -660,26 +660,6 @@ if (!isset($_SESSION["loginUser"])) {
                     }
                 });
             }, 1000);
-
-            // setInterval(() => {
-            //     $.ajax({
-            //         url: 'bongpasLogic2.php',
-            //         method: 'POST',
-            //         success: function(temp2) {
-            //             if (temp2 == "DONE") {
-            //                 Swal.fire({
-            //                     icon: 'warning',
-            //                     title: 'Game is Finished!',
-            //                     showConfirmButton: false,
-            //                     timer: 2500,
-            //                     timerProgressBar: true
-            //                 }).then(function() {
-            //                     window.location.href = 'homeUser.php';
-            //                 });
-            //             }
-            //         }
-            //     });
-            // }, 1001);
 
             $("#finishGame").click(function(e) {
                 e.preventDefault()

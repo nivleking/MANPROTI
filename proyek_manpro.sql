@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 08, 2024 at 09:21 AM
+-- Generation Time: Jan 08, 2024 at 02:05 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -243,17 +243,6 @@ CREATE TABLE `temp_container2` (
   `id_user` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `temp_container2`
---
-
-INSERT INTO `temp_container2` (`id_container`, `id_user`) VALUES
-(339, 'Vincentius'),
-(340, 'Vincentius'),
-(341, 'Vincentius'),
-(342, 'Vincentius'),
-(343, 'Vincentius');
-
 -- --------------------------------------------------------
 
 --
@@ -267,16 +256,9 @@ CREATE TABLE `temp_sales` (
   `destination` text NOT NULL,
   `quantity` int(11) NOT NULL,
   `revenue` int(11) NOT NULL,
-  `id_user` text NOT NULL
+  `id_user` text NOT NULL,
+  `types` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `temp_sales`
---
-
-INSERT INTO `temp_sales` (`id_sales`, `priority`, `origin`, `destination`, `quantity`, `revenue`, `id_user`) VALUES
-(10, 'COMMIT', 'SBY', 'MDN', 3, 30000, 'Vincentius'),
-(11, 'N-COMMIT', 'SBY', 'MDN', 2, 50000, 'Vincentius');
 
 -- --------------------------------------------------------
 
@@ -316,10 +298,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`team_name`, `password`, `ship`, `status`, `id_room`, `origin`, `revenue`, `round`, `pindah`, `finish`, `chance`, `max_chances`) VALUES
-('kelvin', '123', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 1, 1, NULL, 0, 0, 'NO', 0, 0, 0),
-('nivlek', '123', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 1, 1, NULL, 0, 0, 'NO', 0, 0, 0),
-('sam', '12', '[[[0,0,0],[\"120\",101,0],[\"112\",105,0]],[[0,0,0],[104,0,0],[106,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 1, 1, NULL, 0, 0, 'NO', 0, 0, 0),
-('Vincentius', '123', '[[[0,0,0],[0,0,0],[0,0,0]]]', 1, 1, NULL, 0, 1, 'NO', 1, 2, 2);
+('kelvin', '123', '[[[0,0,0],[0,0,0],[0,0,0]]]', 0, 0, NULL, 0, 0, 'NO', 1, 1, 1),
+('nivlek', '123', '[[[0,0,0],[0,0,0],[0,0,0]]]', 0, 0, NULL, 0, 0, 'NO', 1, 1, 1),
+('sam', '12', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 0, 0, NULL, 0, 0, 'NO', 0, 1, 0),
+('Vincentius', '123', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 0, 0, NULL, 0, 0, 'NO', 0, 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -423,7 +405,7 @@ ALTER TABLE `log_admin`
 -- AUTO_INCREMENT for table `log_users`
 --
 ALTER TABLE `log_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=227;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=245;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

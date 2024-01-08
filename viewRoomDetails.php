@@ -179,15 +179,16 @@ if (!isset($_SESSION["loginADM"])) {
                 echo "<h1 style='font-weight:bold;'>Room $idRoom</h1>
                     <h6>Supervisor: $row[0]</h6>";
 
-                // echo "<button class = 'btn btn-primary'>Clear History and Logs</button>";
                 $sql = "SELECT * from temp_user WHERE id_room = '$idRoom'";
                 $result = mysqli_query($con, $sql);
                 $winner = "";
                 $score = 0;
                 while ($row = mysqli_fetch_array($result)) {
-                    if ($row[3] > $score) {
-                        $score = $row[3];
-                        $winner = $row[1];
+                    // echo "$row[2] <br>";
+
+                    if ($row[2] > $score) {
+                        $score = $row[2];
+                        $winner = $row[0];
                     }
                 }
                 echo "<h6 style='color:red;font-weight:bold;'>Winner: $winner</h6>";

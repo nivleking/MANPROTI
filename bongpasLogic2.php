@@ -23,6 +23,22 @@
     // }
 
     if (isset($_POST['finishGame'])) {
+        $sql = "SELECT * FROM user WHERE id_room = '$roomID' AND team_name='$id'";
+        $result = mysqli_query($con, $sql);
+        $tanggal = date("Y-m-d H:i:s");
+
+        while ($row = mysqli_fetch_array($result)) {
+            $team = $row[0];
+            $ship = $row[2];
+            $origin = $row[5];
+            $revenue = $row[6];
+            $round = $row[7];
+            $room = $row[4];
+            
+            $sql = "INSERT INTO history VALUES ('$tanggal','$round','$team','$ship','$origin','$revenue','$room')";
+            $result2 = mysqli_query($con, $sql);
+        }
+
         $sql = "SELECT * FROM temp_sales WHERE id_user = '$id'";
         $result = mysqli_query($con,$sql);
         while($rows = mysqli_fetch_array($result)){
@@ -52,10 +68,10 @@
         $row = mysqli_fetch_array($result);
         $revenue = $row[6];
 
-        $sql = "INSERT INTO temp_user VALUES('','$id', '$roomID', '$revenue')";
+        $sql = "INSERT INTO temp_user VALUES('$id', '$roomID', '$revenue')";
         mysqli_query($con,$sql);
         
-        $sql = "UPDATE user SET status = 0 WHERE team_name = '$id'";
+        $sql = "UPDATE user SET `status` = 0 WHERE team_name = '$id'";
         mysqli_query($con,$sql);
 
         $sql = "UPDATE user SET `round` = 0 WHERE team_name = '$id'";
@@ -70,10 +86,10 @@
         $sql = "UPDATE user SET `origin` = null WHERE team_name = '$id'";
         mysqli_query($con,$sql);
 
-        $sql = "UPDATE user SET finish = 0 WHERE team_name = '$id'";
+        $sql = "UPDATE user SET `finish` = 0 WHERE team_name = '$id'";
         mysqli_query($con,$sql);
 
-        $sql = "UPDATE room SET status = 0 WHERE id_room = '$roomID'";
+        $sql = "UPDATE room SET `status` = 0 WHERE id_room = '$roomID'";
         mysqli_query($con,$sql);
 
         $sql = "DELETE FROM temp_container WHERE id_user = '$id'";
