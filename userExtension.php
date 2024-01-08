@@ -63,7 +63,7 @@
 			$sql = "INSERT INTO log_admin VALUES('','$detail')";
 			mysqli_query($con, $sql);
 
-			$query = "INSERT INTO user VALUES('$username','$password', '$layout',0,0,'SBY',0,0,'NO')";
+			$query = "INSERT INTO user VALUES('$username','$password', '$layout',0,0,null,0,0,'NO',0,0,0)";
 			$result = mysqli_query($con, $query);
 			echo "3";
             exit();
