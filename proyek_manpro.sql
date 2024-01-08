@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2023 at 03:29 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Jan 08, 2024 at 09:21 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,7 +32,7 @@ CREATE TABLE `admin` (
   `name_admin` text NOT NULL,
   `password` varchar(7) NOT NULL,
   `status` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admin`
@@ -54,17 +54,17 @@ CREATE TABLE `bay` (
   `nama_bay` text NOT NULL,
   `detail_bay` text NOT NULL,
   `id_deck` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `bay`
 --
 
 INSERT INTO `bay` (`id_bay`, `nama_bay`, `detail_bay`, `id_deck`) VALUES
-(1, 'SBY', 'Surabaya', 1),
-(2, 'MDN', 'Medan', 1),
-(3, 'JYP', 'Jayapura', 0),
-(4, 'MKS', 'Makassar', 0),
+(1, 'SBY', 'Surabaya', 2),
+(2, 'MDN', 'Medan', 2),
+(3, 'JYP', 'Jayapura', 2),
+(4, 'MKS', 'Makassar', 2),
 (5, 'BPP', 'Balikpapan', 0),
 (6, 'JKT', 'Jakarta', 0);
 
@@ -78,24 +78,29 @@ CREATE TABLE `container` (
   `id_container` int(10) NOT NULL,
   `asal_container` text NOT NULL,
   `tujuan_container` text NOT NULL,
-  `id_sales` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `id_sales` int(10) NOT NULL,
+  `types` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `container`
 --
 
-INSERT INTO `container` (`id_container`, `asal_container`, `tujuan_container`, `id_sales`) VALUES
-(339, 'SBY', 'MDN', 10),
-(340, 'SBY', 'MDN', 10),
-(341, 'SBY', 'MDN', 10),
-(342, 'SBY', 'MDN', 11),
-(343, 'SBY', 'MDN', 11),
-(344, 'MDN', 'SBY', 15),
-(345, 'MDN', 'SBY', 15),
-(346, 'MDN', 'SBY', 15),
-(347, 'MDN', 'SBY', 16),
-(348, 'MDN', 'SBY', 16);
+INSERT INTO `container` (`id_container`, `asal_container`, `tujuan_container`, `id_sales`, `types`) VALUES
+(354, 'SBY', 'MDN', 11, 'DRY'),
+(355, 'SBY', 'MDN', 11, 'DRY'),
+(356, 'SBY', 'MDN', 11, 'DRY'),
+(357, 'SBY', 'MDN', 10, 'REFEER'),
+(358, 'SBY', 'MDN', 10, 'REFEER'),
+(359, 'MDN', 'JYP', 12, 'DRY'),
+(360, 'MDN', 'JYP', 12, 'DRY'),
+(361, 'MDN', 'JYP', 13, 'DRY'),
+(362, 'JYP', 'MKS', 14, 'DRY'),
+(363, 'JYP', 'MKS', 14, 'DRY'),
+(364, 'JYP', 'MKS', 15, 'REFEER'),
+(365, 'MKS', 'SBY', 16, 'DRY'),
+(366, 'MKS', 'SBY', 17, 'DRY'),
+(367, 'MKS', 'SBY', 17, 'DRY');
 
 -- --------------------------------------------------------
 
@@ -107,7 +112,7 @@ CREATE TABLE `deck` (
   `id_deck` int(11) NOT NULL,
   `nama_deck` text NOT NULL,
   `list_card` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`list_card`))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `deck`
@@ -115,7 +120,7 @@ CREATE TABLE `deck` (
 
 INSERT INTO `deck` (`id_deck`, `nama_deck`, `list_card`) VALUES
 (1, 'Trial #1', '[\"10\",\"11\",\"15\",\"16\"]'),
-(2, 'Trial #2', '[]');
+(2, 'Trial #2', '[\"10\",\"11\",\"12\",\"13\",\"14\",\"15\",\"16\",\"17\"]');
 
 -- --------------------------------------------------------
 
@@ -131,7 +136,7 @@ CREATE TABLE `history` (
   `origin` text NOT NULL,
   `revenue` int(11) NOT NULL,
   `id_room` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -142,7 +147,22 @@ CREATE TABLE `history` (
 CREATE TABLE `log_admin` (
   `id` int(11) NOT NULL,
   `detail` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `log_admin`
+--
+
+INSERT INTO `log_admin` (`id`, `detail`) VALUES
+(20, 'sam1 has added nivlek into database.'),
+(21, 'sam1 has added nivlek into database.'),
+(22, 'sam1 has added nivlek into database.'),
+(23, 'sam1 has added nivlek into database.'),
+(24, 'sam1 has added nivlek into database.'),
+(25, 'sam1 has added nivlek into database.'),
+(26, 'sam1 has added nivlek into database.'),
+(27, 'sam1 has added nivlek into database.'),
+(28, 'sam1 has added nivlek into database.');
 
 -- --------------------------------------------------------
 
@@ -154,7 +174,7 @@ CREATE TABLE `log_users` (
   `id` int(11) NOT NULL,
   `id_room` int(11) NOT NULL,
   `detail` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -169,7 +189,7 @@ CREATE TABLE `room` (
   `tanggal` date DEFAULT NULL,
   `id_deck` int(11) NOT NULL,
   `ronde` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -183,16 +203,23 @@ CREATE TABLE `sales` (
   `origin` text NOT NULL,
   `destination` text NOT NULL,
   `quantity` int(11) NOT NULL,
-  `revenue` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `revenue` int(11) NOT NULL,
+  `types` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `sales`
 --
 
-INSERT INTO `sales` (`id_sales`, `priority`, `origin`, `destination`, `quantity`, `revenue`) VALUES
-(15, 'COMMIT', 'MDN', 'SBY', 3, 50000),
-(16, 'N-COMMIT', 'MDN', 'SBY', 2, 40000);
+INSERT INTO `sales` (`id_sales`, `priority`, `origin`, `destination`, `quantity`, `revenue`, `types`) VALUES
+(10, 'N-COMMIT', 'SBY', 'MDN', 2, 10000, 'REFEER'),
+(11, 'COMMIT', 'SBY', 'MDN', 3, 20000, 'DRY'),
+(12, 'COMMIT', 'MDN', 'JYP', 2, 20000, 'DRY'),
+(13, 'COMMIT', 'MDN', 'JYP', 1, 10000, 'DRY'),
+(14, 'COMMIT', 'JYP', 'MKS', 2, 30000, 'DRY'),
+(15, 'N-COMMIT', 'JYP', 'MKS', 1, 20000, 'REFEER'),
+(16, 'COMMIT', 'MKS', 'SBY', 1, 15000, 'DRY'),
+(17, 'COMMIT', 'MKS', 'SBY', 2, 20000, 'DRY');
 
 -- --------------------------------------------------------
 
@@ -203,7 +230,7 @@ INSERT INTO `sales` (`id_sales`, `priority`, `origin`, `destination`, `quantity`
 CREATE TABLE `temp_container` (
   `id_container` int(11) NOT NULL,
   `id_user` varchar(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -214,7 +241,7 @@ CREATE TABLE `temp_container` (
 CREATE TABLE `temp_container2` (
   `id_container` int(11) NOT NULL,
   `id_user` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `temp_container2`
@@ -241,7 +268,7 @@ CREATE TABLE `temp_sales` (
   `quantity` int(11) NOT NULL,
   `revenue` int(11) NOT NULL,
   `id_user` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `temp_sales`
@@ -250,6 +277,18 @@ CREATE TABLE `temp_sales` (
 INSERT INTO `temp_sales` (`id_sales`, `priority`, `origin`, `destination`, `quantity`, `revenue`, `id_user`) VALUES
 (10, 'COMMIT', 'SBY', 'MDN', 3, 30000, 'Vincentius'),
 (11, 'N-COMMIT', 'SBY', 'MDN', 2, 50000, 'Vincentius');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `temp_user`
+--
+
+CREATE TABLE `temp_user` (
+  `team_name` varchar(10) NOT NULL,
+  `id_room` int(11) NOT NULL,
+  `revenue` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -270,16 +309,17 @@ CREATE TABLE `user` (
   `finish` int(11) NOT NULL,
   `chance` int(11) NOT NULL,
   `max_chances` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`team_name`, `password`, `ship`, `status`, `id_room`, `origin`, `revenue`, `round`, `pindah`, `finish`, `chance`, `max_chances`) VALUES
-('kelvin', '123', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 0, 0, NULL, 0, 0, 'NO', 0, 0, 0),
-('sam', '12', '[[[0,0,0],[\"120\",101,0],[\"112\",105,0]],[[0,0,0],[104,0,0],[106,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 0, 140, NULL, 0, 0, 'NO', 0, 0, 0),
-('Vincentius', '123', '[[[0,0,0],[0,0,0],[0,0,0]]]', 1, 3, 'SBY', 182500, 1, 'NO', 1, 2, 2);
+('kelvin', '123', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 1, 1, NULL, 0, 0, 'NO', 0, 0, 0),
+('nivlek', '123', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 1, 1, NULL, 0, 0, 'NO', 0, 0, 0),
+('sam', '12', '[[[0,0,0],[\"120\",101,0],[\"112\",105,0]],[[0,0,0],[104,0,0],[106,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 1, 1, NULL, 0, 0, 'NO', 0, 0, 0),
+('Vincentius', '123', '[[[0,0,0],[0,0,0],[0,0,0]]]', 1, 1, NULL, 0, 1, 'NO', 1, 2, 2);
 
 --
 -- Indexes for dumped tables
@@ -346,6 +386,12 @@ ALTER TABLE `temp_sales`
   ADD PRIMARY KEY (`id_sales`);
 
 --
+-- Indexes for table `temp_user`
+--
+ALTER TABLE `temp_user`
+  ADD PRIMARY KEY (`team_name`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -365,13 +411,13 @@ ALTER TABLE `bay`
 -- AUTO_INCREMENT for table `container`
 --
 ALTER TABLE `container`
-  MODIFY `id_container` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=349;
+  MODIFY `id_container` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=368;
 
 --
 -- AUTO_INCREMENT for table `log_admin`
 --
 ALTER TABLE `log_admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `log_users`
