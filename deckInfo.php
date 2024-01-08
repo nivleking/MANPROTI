@@ -29,10 +29,8 @@
     <script>
         $(document).ready(function() {
             let table = $('#deckTable').DataTable({
-                    info: true
-                    // scrollCollapse: true,
-                    // scrollY: '430px'
-                })
+                info: true
+            })
         })
     </script>
 
@@ -145,9 +143,9 @@
         <form method="POST">
             <div>
                 <?php
-                    $sql = "SELECT * FROM deck";
-                    $result = mysqli_query($con,$sql);
-                    echo "
+                $sql = "SELECT * FROM deck";
+                $result = mysqli_query($con, $sql);
+                echo "
                     <table class='table table-bordered table-striped' id='tableListOfCards'>
                         <thead>
                             <tr>
@@ -158,7 +156,7 @@
                         </thead>
                         <tbody>
                     ";
-                    while ($row=mysqli_fetch_array($result))
+                while ($row = mysqli_fetch_array($result))
                     echo "
                         <tr>
                             <td>$row[0]</td>
@@ -166,7 +164,7 @@
                             <td>$row[2]</td>
                         </tr>
                     ";
-                    echo "
+                echo "
                         </tbody>
                     </table>
                     ";
@@ -192,85 +190,58 @@
             </div>
             <button class="btn btn-success" name="updateDeck">Submit</button>
             <a class="btn btn-warning" href="deckinfo.php">Refresh</a>
-            
+
         </form>
         <div class="form-group mt-3">
-                <?php
-                if (isset($_POST['updateDeck'])) {
-                    $idDeck = $_POST['idDeck'];
-                    $countPort = array();
-                    $arrNamaBay = array();
-                    $sql = "SELECT * FROM bay where id_deck = '$idDeck'";
-                    $result = mysqli_query($con, $sql);
-                    while ($row = $result->fetch_array()) {
-                        $count = 0;
-                        array_push($arrNamaBay,$row[1]);
-                        $sql2 = "SELECT * FROM deck WHERE id_deck = '$idDeck'";
-                        $result2 = mysqli_query($con, $sql2);
-                        $row2 = $result2->fetch_array();
-                        $list = json_decode($row2[2]);
-                        for ($i = 0; $i  < count($list); $i++) {
-                            $tempindex = $list[$i];
-                            $sql3 = "SELECT * FROM sales where id_sales = '$tempindex'";
-                            $result3 = mysqli_query($con, $sql3);
-                            $row3 = $result3->fetch_array();
-                            if ($row3[2] == $row[1]) {
-                                $count++;
-                            }
+            <?php
+            if (isset($_POST['updateDeck'])) {
+                $idDeck = $_POST['idDeck'];
+                $countPort = array();
+                $arrNamaBay = array();
+                $sql = "SELECT * FROM bay where id_deck = '$idDeck'";
+                $result = mysqli_query($con, $sql);
+                while ($row = $result->fetch_array()) {
+                    $count = 0;
+                    array_push($arrNamaBay, $row[1]);
+                    $sql2 = "SELECT * FROM deck WHERE id_deck = '$idDeck'";
+                    $result2 = mysqli_query($con, $sql2);
+                    $row2 = $result2->fetch_array();
+                    $list = json_decode($row2[2]);
+                    for ($i = 0; $i  < count($list); $i++) {
+                        $tempindex = $list[$i];
+                        $sql3 = "SELECT * FROM sales where id_sales = '$tempindex'";
+                        $result3 = mysqli_query($con, $sql3);
+                        $row3 = $result3->fetch_array();
+                        if ($row3[2] == $row[1]) {
+                            $count++;
                         }
-                        array_push($countPort,$count);
                     }
+                    array_push($countPort, $count);
+                }
 
-
-                    // $arrBay = array();
-                    // $arrNamaBay = array();
-                    // $idDeck = $_POST['idDeck'];
-                    // $sql = "SELECT nama_bay FROM bay WHERE id_deck='$idDeck'";
-                    // $result = mysqli_query($con, $sql);
-                    // if ($result->num_rows > 0) {
-                    //     while ($row = $result->fetch_array()) {
-                    //         array_push($arrBay,0);
-                    //         array_push($arrNamaBay,$row);
-                    //     }
-                    // }
-                    // $sql2 = "SELECT list_card FROM deck WHERE id_deck = '$idDeck'";
-                    // $result2 = mysqli_query($con, $sql2);
-                    // $tempres = $result2->fetch_array();
-                    // $listCard = json_decode($tempres[0]);
-                    // foreach ($listCard as $j) {
-                    //     $sql = "SELECT origin FROM sales WHERE id_sales = '$j'";
-                    //     $result = mysqli_query($con, $sql);
-                    //     $temp = $result->fetch_array();
-                    //     for ($i) {
-                    //         if ($temp[0] == $k) {
-                    //             $arrBay
-                    //         }
-                    //     }
-
-                    // }
-                    echo '<table class="table table-bordered table-striped mt-3" id="deckTable">';
-                    echo '<thead>
+                echo '<table class="table table-bordered table-striped mt-3" id="deckTable">';
+                echo '<thead>
                             <tr class="text">
                                 <th>No</th>
                                 <th>Origin</th>
                                 <th>Count</th>
                             </tr>
                         </thead>';
-                    echo '<tbody>';
-                    for ($i = 0; $i < count($arrNamaBay); $i++) {
-                        echo '<tr>';
-                        echo '<td>' . ($i+1) . '</td>';
-                        echo '<td>' . $arrNamaBay[$i] . '</td>';
-                        echo '<td>' . $countPort[$i] . '</td>';
-                        echo '</tr>';
-                    }
-                    echo '</tbody>';
-                    echo '</table>';
+                echo '<tbody>';
+                for ($i = 0; $i < count($arrNamaBay); $i++) {
+                    echo '<tr>';
+                    echo '<td>' . ($i + 1) . '</td>';
+                    echo '<td>' . $arrNamaBay[$i] . '</td>';
+                    echo '<td>' . $countPort[$i] . '</td>';
+                    echo '</tr>';
                 }
-                ?>
-            </div>
+                echo '</tbody>';
+                echo '</table>';
+            }
+            ?>
+        </div>
     </div>
-    
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>

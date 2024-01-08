@@ -116,7 +116,6 @@ $row = mysqli_fetch_array($result);
                     Profile
                 </a>
                 <ul class="dropdown-menu text-small shadow" aria-labelledby="dropDownUser" style="width:25px">
-                    <!-- <li class="dropdown-item"><a href="#">Profile</a></li> -->
                     <li class="dropdown-item"><a href="logoutAdmin.php">Log Out</a></li>
                 </ul>
             </div>
@@ -209,49 +208,6 @@ $row = mysqli_fetch_array($result);
                     </div>
                 </div>
             </div>
-
-            <!-- <div class="modal fade" id="modal-createcards">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-3" style="font-weight:bold;" id="exampleModalLabel">Input Data Penjualan</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form>
-                                <div class="mb-3">
-                                    <label for="deck-id" class="col-form-label">ID Deck</label>
-                                    <input type="text" class="form-control" id="deck-id">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="deck-id-sales" class="col-form-label">ID Sales</label>
-                                    <input type="text" class="form-control" id="deck-id-sales">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="priority" class="col-form-label">Priority</label>
-                                    <input type="text" class="form-control" id="priority">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="origin" class="col-form-label">Origin</label>
-                                    <input type="text" class="form-control" id="origin">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="destination" class="col-form-label">Destination</label>
-                                    <input type="text" class="form-control" id="destination">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="revenue" class="col-form-label">Revenue</label>
-                                    <input type="text" class="form-control" id="revenue">
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Finish</button>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
 
             <div class=" w3-row-padding w3-center">
                 <div class="w3-padding-32">

@@ -257,33 +257,6 @@ if (!isset($_SESSION["loginADM"])) {
                     </tbody>
                         </table>  
                 ";
-
-                // echo "
-                // <h1>Room $idRoom</h1>
-                // <h6>Supervisor: $supervisor</h6>
-
-                // <div class='row mx-sm-0 mt-2'>
-                //     Status:&nbsp$val
-                // </div>
-
-                // <div class='row mx-sm-0 mt-2'>
-                //     Date:&nbsp$date
-                // </div>
-                // <div class='row mx-sm-0 mt-2'>
-                //     Teams:
-                // </div>
-
-                // <div class='row mx-sm-0'>
-                //     - Vincentius1: $1500
-                // </div>
-
-                // <div class='row mx-sm-0' style='color:red;'>
-                //     - Vincentius1: $2500
-                // </div>
-
-                // <a href='activity.php' class='btn btn-secondary mt-3'>Back to home</a>
-                // <a href='#' class='btn btn-danger mt-3'>Delete Room</a>
-                // ";
             }
 
             ?>

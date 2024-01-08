@@ -141,92 +141,51 @@ if (!isset($_SESSION["loginADM"])) {
         <form method="POST">
             <div class="form-group">
                 <label for="id_sales">ID Sale</label>
-                <input type="number" class="form-control" name="id_sales" id = "sales" required>
+                <input type="number" class="form-control" name="id_sales" id="sales" required>
             </div>
             <div class="form-group">
                 <label for="priority">Priority</label>
-                    <div class="form-check col-2">
-                        <input class="form-check-input" type="radio" name="priority" id="commit" value="COMMIT" >
-                            <label class="form-check-label" for="commit">COMMIT
-                                </label>
-                        <br>
-                        <input class="form-check-input" type="radio" name="priority" id="ncommit" value="N-COMMIT" >
-                            <label class="form-check-label" for="ncommit">
-                                    N-COMMIT
-                                </label>
-                    </div>
+                <div class="form-check col-2">
+                    <input class="form-check-input" type="radio" name="priority" id="commit" value="COMMIT">
+                    <label class="form-check-label" for="commit">COMMIT
+                    </label>
+                    <br>
+                    <input class="form-check-input" type="radio" name="priority" id="ncommit" value="N-COMMIT">
+                    <label class="form-check-label" for="ncommit">
+                        N-COMMIT
+                    </label>
+                </div>
             </div>
             <div class="form-group">
                 <label for="type">Container Type</label>
-                    <div class="form-check col-2">
-                        <input class="form-check-input" type="radio" name="type" id="refer" value="REFEER" onclick="return false">
-                            <label class="form-check-label" for="refer">Refer
-                                </label>
-                        <br>
-                        <input class="form-check-input" type="radio" name="type" id="dry" value="DRY" onclick="return false" >
-                            <label class="form-check-label" for="dry">
-                                    Dry
-                                </label>
-                    </div>
+                <div class="form-check col-2">
+                    <input class="form-check-input" type="radio" name="type" id="refer" value="REFEER" onclick="return false">
+                    <label class="form-check-label" for="refer">Refer
+                    </label>
+                    <br>
+                    <input class="form-check-input" type="radio" name="type" id="dry" value="DRY" onclick="return false">
+                    <label class="form-check-label" for="dry">
+                        Dry
+                    </label>
+                </div>
             </div>
-                    <script>
-                        document.getElementById("sales").addEventListener("input", function() {
-                            var idSalesValue = parseInt(this.value);
+            <script>
+                document.getElementById("sales").addEventListener("input", function() {
+                    var idSalesValue = parseInt(this.value);
 
-                            if (idSalesValue % 5 == 0) {
-                                document.getElementById("refer").checked = true;
-                                document.getElementById("dry").checked = false;
-                            } 
-                            else {
-                                document.getElementById("dry").checked = true;
-                                document.getElementById("refer").checked = false;
+                    if (idSalesValue % 5 == 0) {
+                        document.getElementById("refer").checked = true;
+                        document.getElementById("dry").checked = false;
+                    } else {
+                        document.getElementById("dry").checked = true;
+                        document.getElementById("refer").checked = false;
 
-                            }
-                        });
-
-                </script>
-                <!-- <div class="row d-flex ml-1">
-                    <div class="form-check col-2">
-                        <input class="form-check-input" type="radio" name="priority" id="commit" value="COMMIT" checked>
-                        <label class="form-check-label" for="commit">
-                            COMMIT
-                        </label>
-                    </div>
-                    <div class="form-check col-2">
-                        <input class="form-check-input" type="radio" name="priority" id="ncommit" value="N-COMMIT">
-                        <label class="form-check-label" for="ncommit">
-                            N-COMMIT
-                        </label>
-                    </div> -->
+                    }
+                });
+            </script>
             <div class="form-group">
                 <label for="origin">Origin</label>
                 <input type="text" class="form-control" name="origin" required>
-                <!-- <div class="row d-flex ml-1">
-                    <div class="form-check col-2">
-                        <input class="form-check-input" type="radio" name="origin" id="SBY" value="SBY" checked>
-                        <label class="form-check-label" for="origin">
-                            SBY
-                        </label>
-                    </div>
-                    <div class="form-check col-2">
-                        <input class="form-check-input" type="radio" name="origin" id="MDN" value="MDN">
-                        <label class="form-check-label" for="origin">
-                            MDN
-                        </label>
-                    </div>
-                    <div class="form-check col-2">
-                        <input class="form-check-input" type="radio" name="origin" id="JYP" value="JYP">
-                        <label class="form-check-label" for="origin">
-                            JYP
-                        </label>
-                    </div>
-                    <div class="form-check col-2">
-                        <input class="form-check-input" type="radio" name="origin" id="MKS" value="MKS">
-                        <label class="form-check-label" for="origin">
-                            MKS
-                        </label>
-                    </div>
-                </div> -->
             </div>
             <div class="form-group">
                 <label for="destination">Destination</label>
@@ -256,14 +215,11 @@ if (!isset($_SESSION["loginADM"])) {
 
         <?php
         if (isset($_POST['addSales'])) {
-            // $deck = $_POST['id_deck'];
             $id = $_POST['id_sales'];
             $priority = $_POST['priority'];
             $origin = $_POST['origin'];
             $types = $_POST['type'];
-            // var_dump($_POST['origin']);
             $dest = $_POST['destination'];
-            // var_dump($_POST['destination']);
             $qty = random_int($_POST['quantity_lower'], $_POST['quantity_upper']);
             $revenue = $_POST['revenue'];
 
@@ -273,7 +229,6 @@ if (!isset($_SESSION["loginADM"])) {
             $res = $stmt->execute();
 
             for ($i = 0; $i < $qty; $i++) {
-                // echo "Halo";
                 $sql = "INSERT INTO container (asal_container,tujuan_container,id_sales,types) VALUES (?,?,?,?)";
                 $stmt = $con->prepare($sql);
                 $stmt->bind_param("ssis", $origin, $dest, $id, $types);

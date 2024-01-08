@@ -13,18 +13,13 @@
         $arr = json_decode($row['ship']);
 
         if ($bay < 0 || $baris < 0 || $kolom < 0 || count($arr) <= $bay || count($arr[$bay]) <= $baris || count($arr[$bay][$baris]) <= $kolom) {
-            // Pakai sweetalert
             echo "1";
             exit();
-            // header("Location: game1.php?error=Pembongkaran Kontainer melebihi koordinat");
-            // echo ("<script LANGUAGE='JavaScript'>
-            //                 window.alert('Melebihi koordinat');
-            //                 window.location.href='game1.php';
-            //                 </script>");
         } else {
             if ($arr[$bay][$baris][$kolom] != 0) {
                 if ($baris - 1 == -1) {
                     $id = $_SESSION['username'];
+
                     // Memasukan Kontainer Ke Temp
                     $data = $arr[$bay][$baris][$kolom];
                     $sql = "INSERT INTO temp_container VALUES ('$data','$id')";
@@ -52,14 +47,8 @@
                     $sql = "INSERT INTO log_users VALUES('','$roomID','$detail')";
                     mysqli_query($con, $sql);
 
-                    // Pakai sweetalert
                     echo"4";
                     exit();
-                    // header("Location: game1.php?error=Berhasil dibongkar");
-                    // echo ("<script LANGUAGE='JavaScript'>
-                    //                 window.alert('Berhasil Dibongkar');
-                    //                 window.location.href='game1.php';
-                    //                 </script>");
                 } elseif ($arr[$bay][$baris - 1][$kolom] == 0) {
                     $id = $_SESSION['username'];
                     $data = $arr[$bay][$baris][$kolom];
@@ -87,33 +76,16 @@
                     $sql = "INSERT INTO log_users VALUES('','$roomID','$detail')";
                     mysqli_query($con, $sql);
 
-                    // Pakai sweetalert
                     echo"4";
                     exit();
-                    // header("Location: game1.php?error=Berhasil dibongkar");
-                    // echo ("<script LANGUAGE='JavaScript'>
-                    //                 window.alert('Berhasil Dibongkar');
-                    //                 window.location.href='game1.php';
-                    //                 </script>");
                 } else {
                     echo "2";
                     exit();
-                    // header("Location: game1.php?error=ERROR! Ada kontainer di atasnya");
-                    // echo ("<script LANGUAGE='JavaScript'>
-                    //                     window.alert('Ada Kontainer Diatasnya');
-                    //                     window.location.href='game1.php';
-                    //                     </script>");
                 }
             }
             elseif ($arr[$bay][$baris][$kolom] == 0) {
-                // Pakai sweetalert
                 echo "3";
                 exit();
-                // header("Location: game1.php?error=Tidak ada kontainer yang dapat dibongkar");
-                // echo ("<script LANGUAGE='JavaScript'>
-                //                         window.alert('Tidak ada kontainer yang dibongkar');
-                //                         window.location.href='game1.php';
-                //                         </script>");
             }
             exit();
         }
@@ -131,40 +103,22 @@
         $arr = json_decode($row['ship']);
 
         if ($bay < 0 || $baris < 0 || $kolom < 0 || count($arr) <= $bay || count($arr[$bay]) <= $baris || count($arr[$bay][$baris]) <= $kolom) {
-            // Pakai sweetalert
             echo "1";
             exit();
-            // header("Location: game1.php?error=Pemasangan Kontainer melebihi koordinat");
-            // echo ("<script LANGUAGE='JavaScript'>
-            //                         window.alert('Melebihi Koordinat');
-            //                         window.location.href='game1.php';
-            //                         </script>");
         } else {
             // Mengecek apakah koordinat tersebut masih kosong
             if ($arr[$bay][$baris][$kolom] == 0) {
                 if (($baris < count($arr[$bay]) - 1) && $arr[$bay][$baris + 1][$kolom] == 0) {
-                    // Pakai sweetalert
                     echo "2";
                     exit();
-                    // header("Location: game1.php?error=Pemasangan Kontainer melayang (tidak ada kontainer di bawahnya)");
-                    // echo ("<script LANGUAGE='JavaScript'>
-                    //                 window.alert('Melayang, coba di cek kembali');
-                    //                 window.location.href='game1.php';
-                    //                 </script>");
                 } 
                 else {
                     $sql = "SELECT * FROM temp_container WHERE id_container = '$kontainer'";
                     $result = mysqli_query($con, $sql);
                     // Tidak ada kontainer pada stack
                     if (mysqli_num_rows($result) == 0) {
-                        // Pakai sweetalert
                         echo "5";
                         exit();
-                        // header("Location: game1.php?error=Kontainer ID tidak terdaftar");
-                        // echo ("<script LANGUAGE='JavaScript'>
-                        //                     window.alert('Kontainer ID tidak terdaftar');
-                        //                     window.location.href='game1.php';
-                        //                     </script>");
                     } else {
                         $sql = "DELETE FROM temp_container WHERE id_container = '$kontainer'";
                         $result = mysqli_query($con, $sql);
@@ -187,30 +141,17 @@
                         $sql = "UPDATE user SET revenue = '$revenue' WHERE team_name = '$id'";
                         $result = mysqli_query($con,$sql);
                         
-                        // Pakai sweetalert
-
                         $detail = "$id has loaded container $kontainer into $bay$baris$kolom.";
                         $sql = "INSERT INTO log_users VALUES('','$roomID','$detail')";
                         mysqli_query($con, $sql);
 
                         echo "4";
                         exit();
-                        // header("Location: game1.php?error=Kontainer berhasil dimasukkan");
-                        // echo ("<script LANGUAGE='JavaScript'>
-                        //                 window.alert('Kontainer Berhasil Dimasukan !');
-                        //                 window.location.href='game1.php';
-                        //                 </script>");
                     }
                 }
             } else {
-                // Pakai sweetalert
                 echo "3";
                 exit();
-                // header("Location: game1.php?error=Sudah terdapat kontainer");
-                // echo ("<script LANGUAGE='JavaScript'>
-                //                         window.alert('Sudah ada kontainer !');
-                //                         window.location.href='game1.php';
-                //                         </script>");
             }
             exit();
         }
@@ -236,13 +177,8 @@
                         $result = mysqli_query($con, $sql);
                         $row = mysqli_fetch_array($result);
                         if ($row[2] == $tempOrigin) {
-                            // Pakai sweetalert
                             echo"1";
                             exit();
-                            // echo ("<script LANGUAGE='JavaScript'>
-                            //             window.alert('Masih ada kontainer yang perlu dibongkar !');
-                            //             window.location.href='game1.php';
-                            //             </script>");
                         }
                         else {
                             $id = $_SESSION['username'];
@@ -250,15 +186,6 @@
                             $detail = "$id has cleared Section 1.";
                             $sql = "INSERT INTO log_users VALUES('','$roomID','$detail')";
                             $result = mysqli_query($con,$sql);
-
-                            // $sql = "SELECT * FROM user WHERE team_name = '$id'";
-                            // $result = mysqli_query($con, $sql);
-                            // $row = mysqli_fetch_array($result);
-                            // $round = $row[7];
-
-                            // $round += 1;
-                            // $sql = "UPDATE user SET round = '$round' WHERE team_name = '$id'";
-                            // $result = mysqli_query($con,$sql);
     
                             echo "2";
                             exit();
@@ -282,17 +209,11 @@
             }
         }
         if ($fatal > 0){
-            // Pakai sweetalert
             echo"2";
             exit();
-            // echo ("<script LANGUAGE='JavaScript'>
-            //                 window.alert('$fatal Check lagi apakah Container yang diturunkan sudah sesuai semua !');
-            //                 window.location.href='game1.php';
-            //                 </script>");
         }
         else{
             // Clearing Container
-            // Pakai sweetalert
             $id = $_SESSION['username'];
             $sql = "DELETE FROM temp_container WHERE id_user = '$id'";
             $result = mysqli_query($con,$sql);
@@ -302,12 +223,7 @@
             mysqli_query($con,$sql);
 
             echo"2";
-            exit();
-            // echo ("<script LANGUAGE='JavaScript'>
-            //                     window.alert('Section 1 Selesai !');
-            //                     window.location.href='game2.php';
-            //                     </script>");
-
+            exit();    
         }
         exit();
     }

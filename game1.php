@@ -11,17 +11,7 @@ if ($row['pindah'] == "YES") {
     $roomID = $_SESSION['roomID'];
     $sql = "UPDATE user SET pindah = 'NO' WHERE id_room = '$roomID'";
     mysqli_query($con, $sql);
-    // $sql = "SELECT pindah from user where team_name = '$id'";
-    // $result = mysqli_query($con, $sql);
-    // $row = mysqli_fetch_array($result);
-    // var_dump($row);
 }
-
-// if($row['finish'] == "DONE") {
-//     $roomID = $_SESSION['roomID'];
-//     $sql = "UPDATE user SET finish = 'NDONE' WHERE id_room = '$roomID'";
-//     mysqli_query($con,$sql);
-// }
 
 if (!isset($_SESSION["loginUser"])) {
     header("Location: loginUser.php");
@@ -36,7 +26,6 @@ if (!isset($_SESSION["loginUser"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <title>Section 1</title>
 
     <!-- Bootstrap -->
@@ -95,28 +84,6 @@ if (!isset($_SESSION["loginUser"])) {
             }
         }
     </style>
-    <!-- <script>
-        function allowDrop(ev) {
-            ev.preventDefault();
-        }
-
-        function drag(ev) {
-            ev.dataTransfer.setData("text", ev.target.id);
-        }
-
-        function drop(ev) {
-            ev.preventDefault();
-            var data = ev.dataTransfer.getData("text");
-            ev.target.appendChild(document.getElementById(data));
-        }
-
-        var myModal = document.getElementById('myModal')
-        var myInput = document.getElementById('myInput')
-
-        myModal.addEventListener('shown.bs.modal', function () {
-            myInput.focus()
-            })
-    </script> -->
 </head>
 
 <body>
@@ -141,8 +108,6 @@ if (!isset($_SESSION["loginUser"])) {
                             <h6 class='text-center' style='font-weight:bold;'>Round $temp</h6>
                         </div>
                     </h3>";
-            // echo "";
-            // echo $row[];
             ?>
         </div>
         <div class="text-white" style="font-weight: bold;">
@@ -151,17 +116,8 @@ if (!isset($_SESSION["loginUser"])) {
             ?>
         </div>
     </nav>
-    <!-- <div style="font-weight: bold; background-color: lightgrey; padding: 15px;">
-        <h1 class="text-center w3-jumbo" style="margin-top: 0PX;">CARGO MASTER</h1>
-        <h2 class="text-center" style="font-weight: 550;">SURABAYA - WEEK 1</h2>
-    </div> -->
-
-    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="position: absolute; top: 10px;right: 10px; background-color: black; color: lightgrey;">
-        Market Intelligence
-    </button> -->
 
     <div class="container-fluid mt-5" style="width: 109rem;">
-        <!-- <div class="row"> -->
         <table class="flex-nowrap table table-responsive table-bordered text-center overflow-x-auto" style="margin-top: 10px; background-color: #fff;">
             <thead>
                 <?php
@@ -363,7 +319,6 @@ if (!isset($_SESSION["loginUser"])) {
                 </tr>
             </tbody>
         </table>
-        <!-- </div> -->
     </div>
 
     <div class="row d-flex justify-content-center mt-3">

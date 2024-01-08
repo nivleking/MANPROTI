@@ -12,7 +12,6 @@ if (!isset($_SESSION["loginUser"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <title>Section 2</title>
 
     <!-- Bootstrap -->
@@ -68,28 +67,6 @@ if (!isset($_SESSION["loginUser"])) {
             background-color: #fff;
         }
     </style>
-    <!-- <script>
-        function allowDrop(ev) {
-            ev.preventDefault();
-        }
-
-        function drag(ev) {
-            ev.dataTransfer.setData("text", ev.target.id);
-        }
-
-        function drop(ev) {
-            ev.preventDefault();
-            var data = ev.dataTransfer.getData("text");
-            ev.target.appendChild(document.getElementById(data));
-        }
-
-        var myModal = document.getElementById('myModal')
-        var myInput = document.getElementById('myInput')
-
-        myModal.addEventListener('shown.bs.modal', function () {
-            myInput.focus()
-            })
-    </script> -->
 </head>
 
 <body>
@@ -114,8 +91,6 @@ if (!isset($_SESSION["loginUser"])) {
                             <h6 class='text-center' style='font-weight:bold;'>Round $temp</h6>
                         </div>
                     </h3>";
-            // echo "";
-            // echo $row[];
             ?>
         </div>
         <div class="text-white" style="font-weight: bold;">
@@ -123,9 +98,6 @@ if (!isset($_SESSION["loginUser"])) {
             echo $_SESSION['username'];
             ?>
         </div>
-        <!-- <button class="btn btn-danger" disabled>
-            MARKET INTELLIGENCE
-        </button> -->
     </nav>
 
     <div class="container-fluid mt-3" style="width: 109rem;">
@@ -331,29 +303,8 @@ if (!isset($_SESSION["loginUser"])) {
             </tbody>
         </table>
     </div>
-    <!-- Menampilkan Pendapatan -->
-    <!-- <div class="card" style="height: 7.55rem; width:28rem;">
-        <div class="text-center card-header bg-primary text-white">
-            <h3>
-                Total Revenue
-            </h3>
-        </div>
-        <div class="d-flex justify-content-center my-auto">
-            <div class="money" data-ccy='IDR'>
-                <?php
-                // $id = $_SESSION['username'];
-                // $sql = "SELECT * FROM user WHERE team_name = '$id'";
-                // $result = mysqli_query($con, $sql);
-                // $row = mysqli_fetch_array($result);
-
-                // echo $row[6];
-                ?>
-            </div>
-        </div>
-    </div> -->
 
     <div class="row d-flex justify-content-center">
-        <!-- Controller -->
         <div class="col-2">
             <!-- Menampilkan Pendapatan -->
             <div class="row">

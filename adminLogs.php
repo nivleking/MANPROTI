@@ -124,14 +124,12 @@
 				<p>Accounts</p>
 			</a>
 
-			<!-- Profile Dropdown -->
 			<div class="dropdown mt-auto">
 				<a class="btn w3-black dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="margin-top: auto;" id="dropDownUser">
 					<i class="fa fa-user w3-xxlarge d-flex justify-content-center mt-1"></i>
 					Profile
 				</a>
 				<ul class="dropdown-menu text-small shadow" aria-labelledby="dropDownUser" style="width:25px">
-					<!-- <li class="dropdown-item"><a href="#">Profile</a></li> -->
 					<li class="dropdown-item"><a href="logoutAdmin.php">Log Out</a></li>
 				</ul>
 			</div>

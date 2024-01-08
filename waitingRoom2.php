@@ -247,11 +247,6 @@ require 'connect.php';
                             $sql = "UPDATE user SET max_chances = '$maxChances' WHERE id_room = '$room'";
                             $result = mysqli_query($con,$sql);
 
-                            // $countRounds = $_POST['jumlahRonde'];
-                            // if ($round = $countRounds) {
-
-                            // }
-
                             $sql = "SELECT * FROM user WHERE id_room = $id";
                             $result = mysqli_query($con, $sql);
 
@@ -296,17 +291,6 @@ require 'connect.php';
                             }
                             $tempBay[$length] = $temp;
 
-                            //
-
-                            // Testing 
-                            // echo "$tempName[0] ====== $tempBay[0]";
-                            // echo "<br>";
-                            // echo "$tempName[1] ====== $tempBay[1]";
-                            // echo "<br>";
-                            // echo "$tempName[2] ====== $tempBay[2]";
-                            // echo "<br>";
-
-                            // Proses memasukan ship ke user setelah swap
                             for ($i = 0; $i <= $length; $i++) {
                                 $bay = $tempBay[$i];
                                 $name = $tempName[$i];
@@ -392,11 +376,8 @@ require 'connect.php';
 
     <script>
         let table = $('#userTable').DataTable({
-            // info: true,
             ordering: false,
             paging: false
-            // scrollCollapse: true,
-            // scrollY: '430px'
         })
 
         $(document).ready(function () {
