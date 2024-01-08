@@ -56,6 +56,7 @@ require 'connect.php';
                         $roomAdmin = $_SESSION['roomID_admin'];
                         $sql = "SELECT bay.id_bay, bay.nama_bay, bay.detail_bay FROM bay INNER JOIN room ON bay.id_deck=room.id_deck WHERE id_room = '$roomAdmin'";
                         $listBay = mysqli_query($con, $sql);
+                        var_dump($listBay);
                         $tempBay = array();
                         while ($bay = $listBay->fetch_array()) {
                             $tempBay[$bay[0]] = array($bay[0], $bay[1]);
@@ -70,9 +71,9 @@ require 'connect.php';
                         if ($listUser->num_rows <= 0) {
                             echo 'Tidak ada user';
                         }
+                        // var_dump($tempBay);
                         $i = 1;
                         foreach ($tempUser as $user) {
-                            // echo $user;
                             echo "<label for='origin" . $user . "' class='form-label d-flex' style='width:100%'>Team $i: " . $user . "</label>";
                             echo "<select class='form-select origin-select' name='origin" . $user . "' style='width: 100%;'>";
                             echo "<option value=''></option>";
@@ -401,10 +402,8 @@ require 'connect.php';
 
         $(document).ready(function () {
             $('.origin-select').change(function () {
-                // Get the selected value
                 var selectedValue = $(this).val();
 
-                // Disable the selected option in all other select elements
                 $('.origin-select').not(this).find('option').prop('disabled', false);
                 $('.origin-select').not(this).find("option[value='" + selectedValue + "']").prop('disabled', true);
             });

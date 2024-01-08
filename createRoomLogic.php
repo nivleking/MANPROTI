@@ -7,7 +7,7 @@
         $tanggal = date("Y-m-d");
 
         if ($code != 0) {
-            $sql = "SELECT list_card FROM deck WHERE id_deck = '1'";
+            $sql = "SELECT list_card FROM deck WHERE id_deck = '$deck'";
             $result = mysqli_query($con, $sql);
             $row = mysqli_fetch_array($result);
             

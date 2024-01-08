@@ -163,24 +163,19 @@ $row = mysqli_fetch_array($result);
                                     <input type="text" class="form-control" id="roomCode" name="roomCode">
                                     <label for="selectDeck" class="col-form-label">Deck</label>
                                     <select class="form-select" aria-label="Default select example" name="selectDeck" id="selectDeck">
-                                                    <?php
-                                                        $query = "SELECT * FROM deck";
-                                                        $sql = mysqli_query($con, $query);
+                                        <?php
+                                        $query = "SELECT * FROM deck";
+                                        $sql = mysqli_query($con, $query);
 
-                                                        while($row = mysqli_fetch_array($sql)) {
-                                                            echo "
+                                        while ($row = mysqli_fetch_array($sql)) {
+                                            echo "
                                                                 <option value='$row[0]'>
                                                                     $row[1]
                                                                 </option>
                                                             ";
-                                                        }
-                                                    ?>
-
-                                                    <!-- <option selected>Open this select menu</option>
-                                                    <option value="">One</option>
-                                                    <option value="">Two</option>
-                                                    <option value="">Three</option> -->
-                                                </select>
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -204,28 +199,18 @@ $row = mysqli_fetch_array($result);
                                         <button type="submit" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#moda-createcards" style="margin-top: 10px; width: 10rem;">Create Card</button>
                                     </form>
                                 </div>
-                                <!-- <div class="col-3">
-                                    <form action="viewSalesCard.php">
-                                        <button type="submit" class="btn btn-danger" style="margin-top: 10px; width: 10rem;">View Card</button>
-                                    </form>
-                                </div> -->
                                 <div class="col-3">
                                     <form action="createDeck.php">
                                         <button type="submit" class="btn btn-dark" style="margin-top: 10px; width: 10rem;">Create Deck</button>
                                     </form>
                                 </div>
-                                <!-- <div class="col-3">
-                                    <form action="viewDeck.php">
-                                        <button type="submit" class="btn btn-danger" style="margin-top: 10px; width: 10rem;">View Deck</button>
-                                    </form>
-                                </div> -->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="modal fade" id="modal-createcards">
+            <!-- <div class="modal fade" id="modal-createcards">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -266,7 +251,7 @@ $row = mysqli_fetch_array($result);
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <div class=" w3-row-padding w3-center">
                 <div class="w3-padding-32">
@@ -302,13 +287,17 @@ $row = mysqli_fetch_array($result);
                         <td class='col-lg-2 text-start'>$val</td>
                         <td class='col-lg-2 text-start'>$row[3]</td>
                         <td class='col-lg-2'>
-                          <form method='post' action='viewRoomDetails.php'>
-                            <input type='hidden' name='roomID' value='$row[0]'>
-                            <input type='hidden' name='supervisor' value='$row[1]'>
-                            <input type='hidden' name='statusRoom' value='$row[2]'>
-                            <input type='hidden' name='dateRoom' value='$row[3]'>
-                            <button type='submit' class='btn btn-primary' name='viewButton'>View Room Details</button>
-                          </form>
+                            <form method='post' action='viewRoomDetails.php'>
+                                <input type='hidden' name='roomID' value='$row[0]'>
+                                <input type='hidden' name='supervisor' value='$row[1]'>
+                                <input type='hidden' name='statusRoom' value='$row[2]'>
+                                <input type='hidden' name='dateRoom' value='$row[3]'>
+                                <button type='submit' class='btn btn-primary' name='viewButton'>View Room Details</button>
+                            </form>
+                            <form method='post' action='deleteRoom.php'>
+                                <input type='hidden' name='roomID' value='$row[0]'>
+                                <button type='submit' class='mt-1 btn btn-danger' name='deleteButton'>Delete Room</button>
+                            </form>
                         </td>
                         </tr>
                     ";
