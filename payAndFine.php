@@ -1,20 +1,9 @@
 <?php
 require 'connect.php';
 
-if (isset($_POST['addDeck'])) {
-    $id = $_POST['id_deck'];
-    $qty = 2;
-    $nama = $_POST['nama_deck'];
-    $list_card = [];
-    $tmp = json_encode($list_card);
-
-    $sql = "INSERT INTO deck VALUES (?,?,?)";
-    $stmt = $con->prepare($sql);
-    $stmt->bind_param("iss", $id, $nama, $tmp);
-    $stmt->execute();
-}
-if (isset($_POST['backtoHome'])) {
-    header('Location:homeAdmin.php');
+if (!isset($_SESSION["loginADM"])) {
+    header("Location: loginAdmin.php");
+    exit;
 }
 ?>
 
@@ -24,9 +13,7 @@ if (isset($_POST['backtoHome'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Set Card Deck</title>
-
-    <!-- Bootstrap -->
+    <title>Set Sales Card</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <!-- FA W3 -->
@@ -145,33 +132,70 @@ if (isset($_POST['backtoHome'])) {
     </nav>
 
     <div class="container mt-5">
-        <a class="btn btn-dark" name="" href="homeAdmin.php">Back</a>
-        <a class="btn btn-dark" name="" href="viewDeck.php">View Decks</a>
-        <a class="btn btn-dark" name="" href="deckInfo.php">Info Decks</a>
-        <a class="btn btn-dark" name="" href="payAndFine.php">Pay and Fine</a>
+        <a class="btn btn-dark" name="" href="createDeck.php">Back</a>
 
         <div class="row d-flex justify-content-center">
-            <h1 style="font-weight:bold;">Set Card Deck</h1>
+            <h1 style="font-weight:bold;">Pay and Fine</h1>
         </div>
 
+        <div class="row">
+            <?php
+            $sql = "SELECT * FROM settings";
+            $result = mysqli_query($con, $sql);
+            $row = mysqli_fetch_array($result);
+
+            if (mysqli_affected_rows($con) > 0) {
+                $pay = $row[1];
+                $fine = $row[0];
+            } else {
+                $pay = 0;
+                $fine = 0;
+            }
+            ?>
+        </div>
+
+        <div class="row">
+        </div>
         <form method="POST">
-            <div class="form-group mt-4">
-                <label for="id_sales">ID Deck </label>
-                <input type="number" class="form-control" name="id_deck" id="id_deck" required>
-            </div>
-            <div class="form-group mt-4">
-                <label for="priority">Nama Deck</label>
-                <input type="text" class="form-control" name="nama_deck" id="nama_deck" required>
+            <div class="form-group">
+                <h4>
+                    Current Pay: <?php echo $pay ?>
+                </h4>
+
+                <input type="number" class="form-control" name="pay" id="pay" placeholder="Pay" required>
             </div>
 
-            <button type="submit" name="addDeck" class="btn btn-primary mt-4" data-bs-toggle="modal" data-bs-target="#isiDataBay" id="btnSubmit">
-                Create
-            </button>
+            <div class="form-group">
+                <h4>
+                    Current Fine: <?php echo $fine ?>
+                </h4>
+
+                <input type="number" class="form-control" name="fine" id="fine" placeholder="Fine" required>
+            </div>
+
+            <div class="row">
+                <button type="submit" class="btn btn-primary ml-3" name="change">Change</button>
+                <a href="payAndFine.php" class="btn btn-warning ml-3">Refresh</a>
+            </div>
         </form>
+
+        <?php
+        if (isset($_POST['change'])) {
+            $newPay = $_POST['pay'];
+            $newFine = $_POST['fine'];
+
+            $sql = "DELETE FROM settings";
+            $result = mysqli_query($con, $sql);
+
+            $sql = "INSERT INTO settings VALUES ('$newPay', '$newFine')";
+            $result = mysqli_query($con, $sql);
+        }
+        ?>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
 </html>

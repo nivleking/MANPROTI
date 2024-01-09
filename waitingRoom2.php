@@ -265,7 +265,12 @@ require 'connect.php';
                                 }
                                 // Hitung denda
                                 if ($count > 0) {
-                                    $pay = $count * 1500;
+                                    $sql = "SELECT fine FROM settings";
+                                    $result2 = mysqli_query($con, $sql);
+                                    $row2 = mysqli_fetch_array($result2);
+                                    $fine = $row2[0];
+
+                                    $pay = $count * $fine;
 
                                     $sql = "SELECT * FROM user WHERE team_name = '$id'";
                                     $result3 = mysqli_query($con, $sql);

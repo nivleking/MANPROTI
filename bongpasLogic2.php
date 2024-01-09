@@ -121,7 +121,11 @@
                     $sql = "UPDATE user SET ship = '$arr_enc' WHERE team_name = '$id'";
                     $result = mysqli_query($con, $sql);
 
-                    $pay = 2000;
+                    $sql = "SELECT pay FROM settings";
+                    $result = mysqli_query($con, $sql);
+                    $row = mysqli_fetch_array($result);
+                    
+                    $pay = $row[0];
 
                     $sql = "SELECT * FROM user WHERE team_name = '$id'";
                     $result = mysqli_query($con, $sql);
@@ -150,7 +154,11 @@
                     $sql = "UPDATE user SET ship = '$arr_enc' WHERE team_name = '$id'";
                     $result = mysqli_query($con, $sql);
 
-                    $pay = 2000;
+                    $sql = "SELECT pay FROM settings";
+                    $result = mysqli_query($con, $sql);
+                    $row = mysqli_fetch_array($result);
+                    
+                    $pay = $row[0];
 
                     $sql = "SELECT * FROM user WHERE team_name = '$id'";
                     $result = mysqli_query($con, $sql);
@@ -220,7 +228,11 @@
                         $sql = "UPDATE user SET ship = '$arr_enc' WHERE team_name = '$id'";
                         $result = mysqli_query($con, $sql);
 
-                        $pay = 2000;
+                        $sql = "SELECT pay FROM settings";
+                        $result = mysqli_query($con, $sql);
+                        $row = mysqli_fetch_array($result);
+                        
+                        $pay = $row[0];
 
                         $sql = "SELECT * FROM user WHERE team_name = '$id'";
                         $result = mysqli_query($con, $sql);
