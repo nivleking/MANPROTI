@@ -148,6 +148,7 @@ if (isset($_POST['backtoHome'])) {
         <a class="btn btn-dark" name="" href="homeAdmin.php">Back</a>
         <a class="btn btn-dark" name="" href="viewDeck.php">View Decks</a>
         <a class="btn btn-dark" name="" href="deckInfo.php">Info Decks</a>
+        <a class="btn btn-dark" name="" href="payAndFine.php">Pay and Fine</a>
 
         <div class="row d-flex justify-content-center">
             <h1 style="font-weight:bold;">Set Card Deck</h1>

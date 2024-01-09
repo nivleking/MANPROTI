@@ -8,14 +8,13 @@ if (!isset($_SESSION["loginADM"])) {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Cards</title>
-
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Set Sales Card</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <!-- FA W3 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -28,11 +27,6 @@ if (!isset($_SESSION["loginADM"])) {
 
     <!-- JQUERY -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-    <!-- DATATABLES -->
-    <link rel="stylesheet" type="" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
-    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
 
     <style>
         /* POPPINS FONT */
@@ -105,6 +99,7 @@ if (!isset($_SESSION["loginADM"])) {
 </head>
 
 <body>
+    <!-- Sidebar -->
     <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
         <div class="flex-column" style="display: flex; flex-direction: column; height: 100%;">
             <h3 class="text-white w3-bar-item" style="font-style: italic;font-weight:bold;">BLC</h3>
@@ -137,100 +132,70 @@ if (!isset($_SESSION["loginADM"])) {
     </nav>
 
     <div class="container mt-5">
-        <a class="btn btn-dark" href="setSalesCard.php">Back</a>
+        <a class="btn btn-dark" name="" href="createDeck.php">Back</a>
+
         <div class="row d-flex justify-content-center">
-            <h1 style="font-weight:bold;">Sales Card</h1>
+            <h1 style="font-weight:bold;">Pay and Fine</h1>
         </div>
 
-        <?php
-        $sql = "SELECT * FROM sales";
-        $result = mysqli_query($con, $sql);
+        <div class="row">
+            <?php
+            $sql = "SELECT * FROM settings";
+            $result = mysqli_query($con, $sql);
+            $row = mysqli_fetch_array($result);
 
-        if ($result->num_rows > 0) {
-            // Use Bootstrap table classes for styling
-            echo '<table class="table table-bordered table-striped" id="cardTable">';
-            echo '<thead>
-                <tr>
-                    <th>ID Sales</th>
-                    <th>Priority</th>
-                    <th>Origin</th>
-                    <th>Destination</th>
-                    <th>Quantity</th>
-                    <th>Revenue</th>
-                    <th>Type</th>
-                    <th>Action</th>
-                </tr>
-            </thead>';
-            echo '<tbody>';
-
-            while ($row = $result->fetch_assoc()) {
-                echo '<tr>';
-                echo '<td>' . $row['id_sales'] . '</td>';
-                echo '<td>' . $row['priority'] . '</td>';
-                echo '<td>' . $row['origin'] . '</td>';
-                echo '<td>' . $row['destination'] . '</td>';
-                echo '<td>' . $row['quantity'] . '</td>';
-                echo '<td>' . $row['revenue'] . '</td>';
-                echo '<td>' . $row['types'] . '</td>';
-                echo "
-                
-                <form method='POST'>
-                    <td>
-                        <input type='hidden' name='deleteCard' value='$row[id_sales]'>
-                        <button type='submit' class='btn btn-danger' name='deleteButton'>Delete</button>
-                    </td>
-                </form>";
-                echo '</tr>';
+            if (mysqli_affected_rows($con) > 0) {
+                $pay = $row[1];
+                $fine = $row[0];
+            } else {
+                $pay = 0;
+                $fine = 0;
             }
-            echo '</tbody>';
-            echo '</table>';
-        } else {
-            echo 'No data found in the database.';
+            ?>
+        </div>
+
+        <div class="row">
+        </div>
+        <form method="POST">
+            <div class="form-group">
+                <h4>
+                    Current Pay: <?php echo $pay ?>
+                </h4>
+
+                <input type="number" class="form-control" name="pay" id="pay" placeholder="Pay" required>
+            </div>
+
+            <div class="form-group">
+                <h4>
+                    Current Fine: <?php echo $fine ?>
+                </h4>
+
+                <input type="number" class="form-control" name="fine" id="fine" placeholder="Fine" required>
+            </div>
+
+            <div class="row">
+                <button type="submit" class="btn btn-primary ml-3" name="change">Change</button>
+                <a href="payAndFine.php" class="btn btn-warning ml-3">Refresh</a>
+            </div>
+        </form>
+
+        <?php
+        if (isset($_POST['change'])) {
+            $newPay = $_POST['pay'];
+            $newFine = $_POST['fine'];
+
+            $sql = "DELETE FROM settings";
+            $result = mysqli_query($con, $sql);
+
+            $sql = "INSERT INTO settings VALUES ('$newPay', '$newFine')";
+            $result = mysqli_query($con, $sql);
         }
         ?>
     </div>
 
-    <script>
-        $(document).ready(function() {
-            let table = $('#cardTable').DataTable({
-                info: true
-                // scrollCollapse: true,
-                // scrollY: '430px'
-            })
-        })
-
-        // table.destroy()
-        // table = $('#cardTable').DataTable().draw()
-    </script>
-
-    <?php
-
-    if (isset($_POST['deleteButton'])) {
-        $idCard = $_POST['deleteCard'];
-        $sql = "DELETE FROM sales WHERE id_sales = $idCard";
-        $res = mysqli_query($con, $sql);
-
-        if (mysqli_affected_rows($con) > 0) {
-            echo "
-    <script>
-        Swal.fire({
-            icon: 'success',
-            title: 'Card deleted!',
-            text: 'The card has been deleted.',
-            timer: 2500,
-            showConfirmButton: false
-        }).then(function() {
-            window.location.href = 'viewSalesCard.php'
-        })
-    </script>";
-        }
-
-        $sql = "DELETE FROM container WHERE id_sales = $idCard";
-        mysqli_query($con, $sql);
-    }
-    ?>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
 </html>

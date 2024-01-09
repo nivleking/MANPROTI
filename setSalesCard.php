@@ -146,11 +146,11 @@ if (!isset($_SESSION["loginADM"])) {
             <div class="form-group">
                 <label for="priority">Priority</label>
                 <div class="form-check col-2">
-                    <input class="form-check-input" type="radio" name="priority" id="commit" value="COMMIT">
+                    <input class="form-check-input" type="radio" name="priority" id="commit" value="COMMIT" required>
                     <label class="form-check-label" for="commit">COMMIT
                     </label>
                     <br>
-                    <input class="form-check-input" type="radio" name="priority" id="ncommit" value="N-COMMIT">
+                    <input class="form-check-input" type="radio" name="priority" id="ncommit" value="N-COMMIT" required>
                     <label class="form-check-label" for="ncommit">
                         N-COMMIT
                     </label>
@@ -185,12 +185,71 @@ if (!isset($_SESSION["loginADM"])) {
             </script>
             <div class="form-group">
                 <label for="origin">Origin</label>
-                <input type="text" class="form-control" name="origin" required>
+                <div class="row ml-1">
+                    <div class="col-1">
+                        <input class="form-check-input" type="radio" name="origin" id="sby" value="SBY" required>
+                        <label class="form-check-label" for="sby">SBY</label>
+                    </div>
+                    <div class="col-1">
+                        <input class="form-check-input" type="radio" name="origin" id="mdn" value="MDN" required>
+                        <label class="form-check-label" for="mdn">MDN</label>
+                    </div>
+                    <div class="col-1">
+                        <input class="form-check-input" type="radio" name="origin" id="jyp" value="JYP" required>
+                        <label class="form-check-label" for="jyp">JYP</label>
+                    </div>
+                    <div class="col">
+                        <input class="form-check-input" type="radio" name="origin" id="MKS" value="MKS" required>
+                        <label class="form-check-label" for="mks">MKS</label>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <label for="destination">Destination</label>
-                <input type="text" class="form-control" name="destination" required>
+                <div class="row ml-1    ">
+                    <div class="col-1">
+                        <input class="form-check-input" type="radio" name="destination" id="sby1" value="SBY" required>
+                        <label class="form-check-label" for="sby1">SBY</label>
+                    </div>
+                    <div class="col-1">
+                        <input class="form-check-input" type="radio" name="destination" id="mdn1" value="MDN" required>
+                        <label class="form-check-label" for="mdn1">MDN</label>
+                    </div>
+                    <div class="col-1">
+                        <input class="form-check-input" type="radio" name="destination" id="jyp1" value="JYP" required>
+                        <label class="form-check-label" for="jyp1">JYP</label>
+                    </div>
+                    <div class="col-1">
+                        <input class="form-check-input" type="radio" name="destination" id="mks1" value="MKS" required>
+                        <label class="form-check-label" for="mks1">MKS</label>
+                    </div>
+                </div>
             </div>
+            <script>
+                $(document).ready(function() {
+                    $('input[name="origin"]').change(function() {
+                        var sby = $("#sby1");
+                        var mks = $("#mks1");
+                        var jyp = $("#jyp1");
+                        var mdn = $("#mdn1");
+
+                        sby.prop('disabled', true);
+                        mks.prop('disabled', true);
+                        jyp.prop('disabled', true);
+                        mdn.prop('disabled', true);
+
+                        if (this.value == "SBY") {
+                            mks.prop('disabled', false);
+                        } else if (this.value == "MKS") {
+                            jyp.prop('disabled', false);
+                        } else if (this.value == "JYP") {
+                            mdn.prop('disabled', false);
+                        } else if (this.value == "MDN") {
+                            sby.prop('disabled', false);
+                        }
+                    });
+                });
+            </script>
             <div class="form-group d-flex justify-content-between">
                 <div class="col-6">
                     <label for="quantity_lower">Quantity (Lower)</label>
