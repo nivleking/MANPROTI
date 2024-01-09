@@ -157,6 +157,7 @@ if (!isset($_SESSION["loginADM"])) {
                     <th>Destination</th>
                     <th>Quantity</th>
                     <th>Revenue</th>
+                    <th>Type</th>
                     <th>Action</th>
                 </tr>
             </thead>';
@@ -170,6 +171,7 @@ if (!isset($_SESSION["loginADM"])) {
                 echo '<td>' . $row['destination'] . '</td>';
                 echo '<td>' . $row['quantity'] . '</td>';
                 echo '<td>' . $row['revenue'] . '</td>';
+                echo '<td>' . $row['types'] . '</td>';
                 echo "
                 
                 <form method='POST'>

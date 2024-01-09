@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 08, 2024 at 02:05 PM
+-- Generation Time: Jan 09, 2024 at 02:05 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -61,10 +61,10 @@ CREATE TABLE `bay` (
 --
 
 INSERT INTO `bay` (`id_bay`, `nama_bay`, `detail_bay`, `id_deck`) VALUES
-(1, 'SBY', 'Surabaya', 2),
-(2, 'MDN', 'Medan', 2),
-(3, 'JYP', 'Jayapura', 2),
-(4, 'MKS', 'Makassar', 2),
+(1, 'SBY', 'Surabaya', 1),
+(2, 'MDN', 'Medan', 1),
+(3, 'JYP', 'Jayapura', 1),
+(4, 'MKS', 'Makassar', 1),
 (5, 'BPP', 'Balikpapan', 0),
 (6, 'JKT', 'Jakarta', 0);
 
@@ -87,20 +87,24 @@ CREATE TABLE `container` (
 --
 
 INSERT INTO `container` (`id_container`, `asal_container`, `tujuan_container`, `id_sales`, `types`) VALUES
-(354, 'SBY', 'MDN', 11, 'DRY'),
-(355, 'SBY', 'MDN', 11, 'DRY'),
-(356, 'SBY', 'MDN', 11, 'DRY'),
-(357, 'SBY', 'MDN', 10, 'REFEER'),
-(358, 'SBY', 'MDN', 10, 'REFEER'),
-(359, 'MDN', 'JYP', 12, 'DRY'),
-(360, 'MDN', 'JYP', 12, 'DRY'),
-(361, 'MDN', 'JYP', 13, 'DRY'),
-(362, 'JYP', 'MKS', 14, 'DRY'),
-(363, 'JYP', 'MKS', 14, 'DRY'),
-(364, 'JYP', 'MKS', 15, 'REFEER'),
-(365, 'MKS', 'SBY', 16, 'DRY'),
-(366, 'MKS', 'SBY', 17, 'DRY'),
-(367, 'MKS', 'SBY', 17, 'DRY');
+(374, 'SBY', 'MKS', 1, 'DRY'),
+(375, 'SBY', 'MKS', 1, 'DRY'),
+(376, 'SBY', 'MKS', 1, 'DRY'),
+(377, 'SBY', 'MKS', 5, 'REFEER'),
+(378, 'SBY', 'MKS', 5, 'REFEER'),
+(379, 'MDN', 'SBY', 11, 'DRY'),
+(380, 'MDN', 'SBY', 11, 'DRY'),
+(381, 'MDN', 'SBY', 15, 'REFEER'),
+(382, 'MDN', 'SBY', 15, 'REFEER'),
+(383, 'MDN', 'SBY', 15, 'REFEER'),
+(384, 'JYP', 'MDN', 21, 'DRY'),
+(385, 'JYP', 'MDN', 21, 'DRY'),
+(386, 'JYP', 'MDN', 25, 'REFEER'),
+(387, 'JYP', 'MDN', 25, 'REFEER'),
+(388, 'MKS', 'JYP', 31, 'DRY'),
+(389, 'MKS', 'JYP', 31, 'DRY'),
+(390, 'MKS', 'JYP', 31, 'DRY'),
+(391, 'MKS', 'JYP', 35, 'REFEER');
 
 -- --------------------------------------------------------
 
@@ -119,8 +123,8 @@ CREATE TABLE `deck` (
 --
 
 INSERT INTO `deck` (`id_deck`, `nama_deck`, `list_card`) VALUES
-(1, 'Trial #1', '[\"10\",\"11\",\"15\",\"16\"]'),
-(2, 'Trial #2', '[\"10\",\"11\",\"12\",\"13\",\"14\",\"15\",\"16\",\"17\"]');
+(1, 'Trial #1', '[\"1\",\"5\",\"11\",\"15\",\"21\",\"25\",\"31\",\"35\"]'),
+(2, 'Trial #2', '[]');
 
 -- --------------------------------------------------------
 
@@ -212,14 +216,32 @@ CREATE TABLE `sales` (
 --
 
 INSERT INTO `sales` (`id_sales`, `priority`, `origin`, `destination`, `quantity`, `revenue`, `types`) VALUES
-(10, 'N-COMMIT', 'SBY', 'MDN', 2, 10000, 'REFEER'),
-(11, 'COMMIT', 'SBY', 'MDN', 3, 20000, 'DRY'),
-(12, 'COMMIT', 'MDN', 'JYP', 2, 20000, 'DRY'),
-(13, 'COMMIT', 'MDN', 'JYP', 1, 10000, 'DRY'),
-(14, 'COMMIT', 'JYP', 'MKS', 2, 30000, 'DRY'),
-(15, 'N-COMMIT', 'JYP', 'MKS', 1, 20000, 'REFEER'),
-(16, 'COMMIT', 'MKS', 'SBY', 1, 15000, 'DRY'),
-(17, 'COMMIT', 'MKS', 'SBY', 2, 20000, 'DRY');
+(1, 'COMMIT', 'SBY', 'MKS', 3, 30000, 'DRY'),
+(5, 'COMMIT', 'SBY', 'MKS', 2, 25000, 'REFEER'),
+(11, 'COMMIT', 'MDN', 'SBY', 2, 10000, 'DRY'),
+(15, 'COMMIT', 'MDN', 'SBY', 3, 10000, 'REFEER'),
+(21, 'COMMIT', 'JYP', 'MDN', 2, 20000, 'DRY'),
+(25, 'COMMIT', 'JYP', 'MDN', 2, 20000, 'REFEER'),
+(31, 'COMMIT', 'MKS', 'JYP', 3, 25000, 'DRY'),
+(35, 'COMMIT', 'MKS', 'JYP', 1, 15000, 'REFEER');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `settings`
+--
+
+CREATE TABLE `settings` (
+  `fine` int(11) NOT NULL,
+  `pay` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `settings`
+--
+
+INSERT INTO `settings` (`fine`, `pay`) VALUES
+(10000, 10000);
 
 -- --------------------------------------------------------
 
@@ -300,8 +322,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`team_name`, `password`, `ship`, `status`, `id_room`, `origin`, `revenue`, `round`, `pindah`, `finish`, `chance`, `max_chances`) VALUES
 ('kelvin', '123', '[[[0,0,0],[0,0,0],[0,0,0]]]', 0, 0, NULL, 0, 0, 'NO', 1, 1, 1),
 ('nivlek', '123', '[[[0,0,0],[0,0,0],[0,0,0]]]', 0, 0, NULL, 0, 0, 'NO', 1, 1, 1),
-('sam', '12', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 0, 0, NULL, 0, 0, 'NO', 0, 1, 0),
-('Vincentius', '123', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 0, 0, NULL, 0, 0, 'NO', 0, 1, 1);
+('sam', '12', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 0, 0, NULL, 0, 0, 'NO', 0, 1, 1),
+('Vincentius', '123', '[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]', 0, 0, NULL, 0, 0, 'NO', 0, 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -393,7 +415,7 @@ ALTER TABLE `bay`
 -- AUTO_INCREMENT for table `container`
 --
 ALTER TABLE `container`
-  MODIFY `id_container` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=368;
+  MODIFY `id_container` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=392;
 
 --
 -- AUTO_INCREMENT for table `log_admin`
@@ -405,7 +427,7 @@ ALTER TABLE `log_admin`
 -- AUTO_INCREMENT for table `log_users`
 --
 ALTER TABLE `log_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=245;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=260;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
