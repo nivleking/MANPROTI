@@ -170,7 +170,7 @@ if (!isset($_SESSION["loginUser"])) {
                             if ($row[2] == 'BPP') {
                                 echo "<div style='color: brown'>$row[0]</div>";
                             }
-                            if ($row[2] == 'JKT') {
+                            if ($row[2] == 'JYP') {
                                 echo "<div style='color: green'>$row[0]</div>";
                             }
                             if ($row[2] == 'MDN') {
@@ -226,7 +226,7 @@ if (!isset($_SESSION["loginUser"])) {
                             if ($row[2] == 'BPP') {
                                 echo "<div style='color: brown'>$row[0]</div>";
                             }
-                            if ($row[2] == 'JKT') {
+                            if ($row[2] == 'JYP') {
                                 echo "<div style='color: green'>$row[0]</div>";
                             }
                             if ($row[2] == 'MDN') {
@@ -282,7 +282,7 @@ if (!isset($_SESSION["loginUser"])) {
                             if ($row[2] == 'BPP') {
                                 echo "<div style='color: brown'>$row[0]</div>";
                             }
-                            if ($row[2] == 'JKT') {
+                            if ($row[2] == 'JYP') {
                                 echo "<div style='color: green'>$row[0]</div>";
                             }
                             if ($row[2] == 'MDN') {
