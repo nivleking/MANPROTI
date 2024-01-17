@@ -1,10 +1,10 @@
-<?php 
-    require 'connect.php';
+<?php
+require 'connect.php';
 
-    if (isset($_SESSION["loginUser"])) {
-        header("Location: joinRoomUser.php");
-        exit;
-    }
+if (isset($_SESSION["loginUser"])) {
+    header("Location: joinRoomUser.php");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -275,8 +275,12 @@
                                 <button type="submit" class="submit" name="submit">Log In</button>
                             </div>
                             <div class="forgotPassword">
-                                <span>Forgot your password? <span  style="font-weight:bold;">Contact BLC Admin</span>                                
+                                <span>Forgot your password? <span style="font-weight:bold;">Contact BLC Admin</span>
                                 </span>
+                            </div>
+                            <!-- Not an user? Login as admin -->
+                            <div class="forgotPassword">
+                                <span>Not an user? <a href="loginAdmin.php">Login as Admin</a></span>
                             </div>
                         </form>
                     </div>
@@ -293,7 +297,7 @@
         $username = htmlspecialchars($_POST['username']);
         $password = htmlspecialchars($_POST['password']);
         $sql = mysqli_query($con, "SELECT * FROM user WHERE team_name ='$username' AND password='$password'");
-		$row  = mysqli_fetch_array($sql);
+        $row  = mysqli_fetch_array($sql);
 
         // echo ($_POST['username'.$password]);
 
@@ -301,12 +305,12 @@
             $_SESSION["username"] = $row['team_name'];
             $_SESSION["loginUser"] = true;
 
-			$name = $_SESSION['username'];
+            $name = $_SESSION['username'];
 
-			$_SESSION["password"] = $row['password'];
-			$sql = mysqli_query($con, "UPDATE user SET status = '1' WHERE team_name = '$name'");
+            $_SESSION["password"] = $row['password'];
+            $sql = mysqli_query($con, "UPDATE user SET status = '1' WHERE team_name = '$name'");
 
-			echo "
+            echo "
 				<script>
 					Swal.fire({
 						icon: 'success',

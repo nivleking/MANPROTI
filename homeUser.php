@@ -2,7 +2,7 @@
 require 'connect.php';
 
 if (!isset($_SESSION["loginUser"])) {
-    header("Location: loginUser.php");
+    header("Location: index.php");
     exit;
 }
 
