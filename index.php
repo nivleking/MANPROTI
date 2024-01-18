@@ -245,7 +245,7 @@ if (isset($_SESSION["loginUser"])) {
 
                     <div class="text">
                         <p>
-                            Business Logistics Competition
+                            Shipping Logistics Game
                         </p>
                     </div>
 
@@ -253,7 +253,7 @@ if (isset($_SESSION["loginUser"])) {
 
                 <div class="col-md-6 right flex-column">
                     <div class="row mt-auto">
-                        <h1>Welcome to BLC!</h1>
+                        <h1>Welcome to SLG!</h1>
                     </div>
                     <div class="row mt-auto" style="margin-bottom: 140px;">
                         <form class="input-box" action="#" method="post">
@@ -275,7 +275,7 @@ if (isset($_SESSION["loginUser"])) {
                                 <button type="submit" class="submit" name="submit">Log In</button>
                             </div>
                             <div class="forgotPassword">
-                                <span>Forgot your password? <span style="font-weight:bold;">Contact BLC Admin</span>
+                                <span>Forgot your password? <span style="font-weight:bold;">Contact SLG Admin</span>
                                 </span>
                             </div>
                             <!-- Not an user? Login as admin -->
@@ -293,35 +293,35 @@ if (isset($_SESSION["loginUser"])) {
     </div>
 
     <?php
-    if (isset($_POST['submit'])) {
-        $username = htmlspecialchars($_POST['username']);
-        $password = htmlspecialchars($_POST['password']);
-        $sql = mysqli_query($con, "SELECT * FROM user WHERE team_name ='$username' AND password='$password'");
-        $row  = mysqli_fetch_array($sql);
+        if (isset($_POST['submit'])) {
+        $username = mysqli_real_escape_string($con, $_POST['username']);
+        $password = mysqli_real_escape_string($con, $_POST['password']);
 
-        // echo ($_POST['username'.$password]);
+        $sql = "SELECT * FROM user WHERE team_name ='$username'";
+        $result = mysqli_query($con, $sql);
+        $row  = mysqli_fetch_array($result);
 
-        if (is_array($row)) {
+        if ($row && password_verify($password, $row['password'])) {
             $_SESSION["username"] = $row['team_name'];
             $_SESSION["loginUser"] = true;
 
             $name = $_SESSION['username'];
 
-            $_SESSION["password"] = $row['password'];
-            $sql = mysqli_query($con, "UPDATE user SET status = '1' WHERE team_name = '$name'");
+            $updateSql = "UPDATE user SET status = '1' WHERE team_name = '$name'";
+            mysqli_query($con, $updateSql);
 
             echo "
-				<script>
-					Swal.fire({
-						icon: 'success',
-						title: 'Login Successful',
-						text: 'Welcome, {$name}',
-						showConfirmButton: false,
-						timer: 2500
-					}).then(function() {
-						window.location.href = 'joinRoomUser.php'
-					});
-				</script>";
+                <script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Login Successful',
+                        text: 'Welcome, {$name}',
+                        showConfirmButton: false,
+                        timer: 2500
+                    }).then(function() {
+                        window.location.href = 'joinRoomUser.php';
+                    });
+                </script>";
         } else {
             echo "
                 <script>

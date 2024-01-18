@@ -244,7 +244,7 @@
 
                     <div class="text">
                         <p>
-                            Business Logistics Competition
+                            Shipping Logistics Game
                         </p>
                     </div>
 
@@ -252,7 +252,7 @@
 
                 <div class="col-md-6 right flex-column">
                     <div class="row mt-auto">
-                        <h1>Welcome to BLC!</h1>
+                        <h1>Welcome to SLG!</h1>
                     </div>
                     <div class="row mt-auto" style="margin-bottom: 140px;">
                         <form class="input-box" action="#" method="post">
@@ -290,19 +290,25 @@
     if (isset($_POST['submit'])) {
         $username = htmlspecialchars($_POST['usernameADM']);
         $password = htmlspecialchars($_POST['passwordADM']);
-        $sql = mysqli_query($con, "SELECT * FROM admin where id_admin='$username' and password='$password'");
-        $row  = mysqli_fetch_array($sql);
-
-        if (is_array($row)) {
-            $_SESSION["usernameADM"] = $row['id_admin'];
-            $_SESSION["passwordADM"] = $row['password'];
+    
+        // Fetch the hashed password from the database
+        $stmt = mysqli_prepare($con, "SELECT password FROM admin WHERE id_admin = ?");
+        mysqli_stmt_bind_param($stmt, 's', $username);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $row = mysqli_fetch_assoc($result);
+    
+        // Verify the entered password against the hashed password
+        if ($row && password_verify($password, $row['password'])) {
+            $_SESSION["usernameADM"] = $username;
             $_SESSION["loginADM"] = true;
-
+    
+            // Redirect to homeAdmin.php with a success message
             echo "<script>
                     Swal.fire({
                         icon: 'success',
                         title: 'Login Successful',
-                        text: 'Welcome back, {$row['id_admin']}!',
+                        text: 'Welcome back, {$username}!',
                         showConfirmButton: false,
                         timer: 2500
                     }).then(function() {
@@ -310,6 +316,7 @@
                     });
                 </script>";
         } else {
+            // Display an error message for invalid credentials
             echo "<script>
                     Swal.fire({
                         icon: 'error',
@@ -318,7 +325,7 @@
                     });
                 </script>";
         }
-    }
+    }    
     ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

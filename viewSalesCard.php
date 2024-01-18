@@ -107,7 +107,7 @@ if (!isset($_SESSION["loginADM"])) {
 <body>
     <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
         <div class="flex-column" style="display: flex; flex-direction: column; height: 100%;">
-            <h3 class="text-white w3-bar-item" style="font-style: italic;font-weight:bold;">BLC</h3>
+            <h3 class="text-white w3-bar-item" style="font-style: italic;font-weight:bold;">SLG</h3>
 
             <a href="homeAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black">
                 <i class="fa fa-dashboard w3-xxlarge d-flex justify-content-center mt-2"></i>

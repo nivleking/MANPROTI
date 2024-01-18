@@ -89,7 +89,7 @@ if (!isset($_SESSION["loginUser"])) {
 <body>
     <nav class="navbar navbar-dark bg-danger navbar-expand d-flex justify-content-between" style="width: 100%;">
         <div>
-            <a href="#" class="navbar-brand disabled" style="font-style: italic; font-weight:bold; font-size:26px">BLC</a>
+            <a href="#" class="navbar-brand disabled" style="font-style: italic; font-weight:bold; font-size:26px">SLG</a>
         </div>
         <div class="text-white">
             <?php

@@ -29,7 +29,7 @@ require 'connect.php';
 <body>
     <nav class="navbar navbar-dark bg-warning navbar-expand d-flex justify-content-around" style="width: 100%;">
         <div>
-            <a href="#" class="navbar-brand disabled" style="font-style: italic; font-weight:bold; font-size:26px">BLC</a>
+            <a href="#" class="navbar-brand disabled" style="font-style: italic; font-weight:bold; font-size:26px">SLG</a>
         </div>
         <div class="text-white" style="font-weight: bold;">
             <?php
