@@ -3,7 +3,8 @@
 **SLG** is a simulation container game that helps people to know the basic of managing containers in ship. 
 
 Visit the official website at:
-_**slg.petra.ac.id**_
+
+_**slg.petra.ac.id **_
 
 We made this project as to fulfill the project assignment of Project Management course.
 
