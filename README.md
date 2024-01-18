@@ -4,7 +4,7 @@
 
 Visit the official website at:
 
-_**slg.petra.ac.id **_
+_**slg.petra.ac.id**_
 
 We made this project as to fulfill the project assignment of Project Management course.
 
