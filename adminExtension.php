@@ -8,8 +8,7 @@ if (isset($_POST['deleteAdmin'])) {
         if ($_SESSION['usernameADM'] === $id || $id === "sam1") {
             echo "2";
             exit();
-        }
-        else {
+        } else {
             $query = "DELETE FROM admin WHERE id_admin = '$id'";
             $result = mysqli_query($con, $query);
             if (mysqli_affected_rows($con) > 0) {
@@ -45,6 +44,7 @@ if (isset($_POST['register'])) {
         echo "2";
         exit();
     } else {
+        $password = password_hash($password, PASSWORD_DEFAULT);
         $query = "INSERT INTO admin VALUES('$username', '$name','$password', '0')";
         $result = mysqli_query($con, $query);
 
@@ -57,4 +57,3 @@ if (isset($_POST['register'])) {
     }
     exit();
 }
-?>

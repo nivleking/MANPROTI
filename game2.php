@@ -1,7 +1,7 @@
 <?php
 require 'connect.php';
 if (!isset($_SESSION["loginUser"])) {
-    header("Location: loginUser.php");
+    header("Location: user.php");
     exit;
 }
 ?>
@@ -72,7 +72,7 @@ if (!isset($_SESSION["loginUser"])) {
 <body>
     <nav class="navbar navbar-dark bg-primary navbar-expand d-flex justify-content-between" style="width:100vw;">
         <div>
-            <a href="#" class="navbar-brand disabled" style="font-style: italic; font-weight:bold; font-size:26px">BLC</a>
+            <a href="#" class="navbar-brand disabled" style="font-style: italic; font-weight:bold; font-size:26px">SLG</a>
         </div>
         <div class="text-white">
             <?php

@@ -16,7 +16,7 @@ $row = mysqli_fetch_array($result);
 <html>
 
 <head>
-    <title>BLC Accounts</title>
+    <title>SLG Accounts</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap -->
@@ -110,7 +110,7 @@ $row = mysqli_fetch_array($result);
             <!-- Sidebar -->
             <div class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center" id="mySidebar">
                 <div class="flex-column" style="display: flex; flex-direction: column; height: 100%;">
-                    <h3 class="w3-bar-item text-white" onclick="closeNav()" style="font-style: italic;font-weight:bold;">BLC</h3>
+                    <h3 class="w3-bar-item text-white" onclick="closeNav()" style="font-style: italic;font-weight:bold;">SLG</h3>
 
                     <a href="homeAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black">
                         <i class="fa fa-dashboard w3-xxlarge d-flex justify-content-center mt-2"></i>
