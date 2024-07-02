@@ -7,24 +7,14 @@ $result = mysqli_query($con, $sql);
 $row = mysqli_fetch_array($result);
 
 // Ini biar aman aja
-if($row['pindah'] == "YES") {
+if ($row['pindah'] == "YES") {
     $roomID = $_SESSION['roomID'];
     $sql = "UPDATE user SET pindah = 'NO' WHERE id_room = '$roomID'";
-    mysqli_query($con,$sql);
-    // $sql = "SELECT pindah from user where team_name = '$id'";
-    // $result = mysqli_query($con, $sql);
-    // $row = mysqli_fetch_array($result);
-    // var_dump($row);
+    mysqli_query($con, $sql);
 }
 
-// if($row['finish'] == "DONE") {
-//     $roomID = $_SESSION['roomID'];
-//     $sql = "UPDATE user SET finish = 'NOT DONE' WHERE id_room = '$roomID'";
-//     mysqli_query($con,$sql);
-// }
-
 if (!isset($_SESSION["loginUser"])) {
-    header("Location: loginUser.php");
+    header("Location: index.php");
     exit;
 }
 
@@ -36,7 +26,6 @@ if (!isset($_SESSION["loginUser"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <title>Section 1</title>
 
     <!-- Bootstrap -->
@@ -88,41 +77,19 @@ if (!isset($_SESSION["loginUser"])) {
             margin-top: 10px;
         }
 
-        @media only screen and (max-width: 768px) { 
+        @media only screen and (max-width: 768px) {
             table {
                 overflow: auto;
                 /* flex-wrap: nowrap; */
             }
         }
     </style>
-    <!-- <script>
-        function allowDrop(ev) {
-            ev.preventDefault();
-        }
-
-        function drag(ev) {
-            ev.dataTransfer.setData("text", ev.target.id);
-        }
-
-        function drop(ev) {
-            ev.preventDefault();
-            var data = ev.dataTransfer.getData("text");
-            ev.target.appendChild(document.getElementById(data));
-        }
-
-        var myModal = document.getElementById('myModal')
-        var myInput = document.getElementById('myInput')
-
-        myModal.addEventListener('shown.bs.modal', function () {
-            myInput.focus()
-            })
-    </script> -->
 </head>
 
 <body>
     <nav class="navbar navbar-dark bg-danger navbar-expand d-flex justify-content-between" style="width: 100%;">
         <div>
-            <a href="#" class="navbar-brand disabled" style="font-style: italic; font-weight:bold; font-size:26px">BLC</a>
+            <a href="#" class="navbar-brand disabled" style="font-style: italic; font-weight:bold; font-size:26px">SLG</a>
         </div>
         <div class="text-white">
             <?php
@@ -130,7 +97,7 @@ if (!isset($_SESSION["loginUser"])) {
             $sql = "SELECT origin, round FROM user WHERE team_name='$id'";
             $result = mysqli_query($con, $sql);
             $row = mysqli_fetch_array($result);
-            $temp=$row['round'];
+            $temp = $row['round'];
             echo "<h3 style='font-weight:bold;'>
                         <div class='row'>
                             Port  
@@ -141,8 +108,6 @@ if (!isset($_SESSION["loginUser"])) {
                             <h6 class='text-center' style='font-weight:bold;'>Round $temp</h6>
                         </div>
                     </h3>";
-            // echo "";
-            // echo $row[];
             ?>
         </div>
         <div class="text-white" style="font-weight: bold;">
@@ -151,212 +116,209 @@ if (!isset($_SESSION["loginUser"])) {
             ?>
         </div>
     </nav>
-    <!-- <div style="font-weight: bold; background-color: lightgrey; padding: 15px;">
-        <h1 class="text-center w3-jumbo" style="margin-top: 0PX;">CARGO MASTER</h1>
-        <h2 class="text-center" style="font-weight: 550;">SURABAYA - WEEK 1</h2>
-    </div> -->
-
-    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="position: absolute; top: 10px;right: 10px; background-color: black; color: lightgrey;">
-        Market Intelligence
-    </button> -->
 
     <div class="container-fluid mt-5" style="width: 109rem;">
-        <!-- <div class="row"> -->
         <table class="flex-nowrap table table-responsive table-bordered text-center overflow-x-auto" style="margin-top: 10px; background-color: #fff;">
             <thead>
-                <?php $temp = 3; $id = $_SESSION['username']?>
+                <?php
+                $id = $_SESSION['username'];
+                $sql = "SELECT ship FROM user WHERE team_name='$id'";
+                $result = mysqli_query($con, $sql);
+                $resShip = mysqli_fetch_array($result);
+                $shipLayout = json_decode($resShip['ship']);
+
+                $temp = count($shipLayout);
+                ?>
                 <tr class="flex flex-nowrap row" style="margin-left: 0;">
-                    <?php 
-                        // $i = 5;
-                        for ($i = 0; $i < $temp; $i++) {
-                            if ($i == 2 || $i == 3) {
-                                echo 
-                                    "
+                    <?php
+                    // $i = 5;
+                    for ($i = 0; $i < $temp; $i++) {
+                        if ($i == 1 || $i == 2) {
+                            echo
+                            "
                                         <th class='col-12'>BAY $i REEF</th>
-                                    ";    
-                            } 
-                            else {
-                                echo 
-                                "
+                                    ";
+                        } else {
+                            echo
+                            "
                                     <th class='col-12'>BAY $i DRY</th>
                                 ";
-                            }
                         }
+                    }
                     ?>
                 </tr>
             </thead>
             <tbody class="overflow-auto">
                 <tr class="flex flex-nowrap row" style="margin-left: 0;">
-                    <?php 
-                        $a = 0;
-                        $b = 0;
-                        $c = 0;
-                        $counter = 0;
+                    <?php
+                    $a = 0;
+                    $b = 0;
+                    $c = 0;
+                    $counter = 0;
                     ?>
-                    <?php 
-                        for ($i = 0; $i < 3 * $temp; $i++) {
-                            $sql = "SELECT ship FROM user WHERE team_name ='$id'";
-                            $result = mysqli_query($con, $sql);
-                            $row = mysqli_fetch_array($result);
-                            $rowDeck = json_decode($row['ship']);
+                    <?php
+                    for ($i = 0; $i < 3 * $temp; $i++) {
+                        $sql = "SELECT ship FROM user WHERE team_name ='$id'";
+                        $result = mysqli_query($con, $sql);
+                        $row = mysqli_fetch_array($result);
+                        $rowDeck = json_decode($row['ship']);
 
-                            echo 
-                            "
+                        echo
+                        "
                                 <td class='col-4'>
                                     <div class='id'>
                                         $a$b$c
                                     </div>
                             ";
 
-                            if ($rowDeck[$a][$b][$c] == 0) {
-                                echo "-";
-                            } else {
-                                $container = $rowDeck[$a][$b][$c];
-                                $sql = "SELECT * FROM container WHERE id_container='$container'";
-                                $result = mysqli_query($con, $sql);
-                                $row = mysqli_fetch_array($result); 
-                                if ($row[2] == 'SBY') {
-                                    echo "<div style='color: red'>$row[0]</div>";
-                                }
-                                if ($row[2] == 'MKS') {
-                                    echo "<div style='color: blue'>$row[0]</div>";
-                                }
-                                if ($row[2] == 'BPP') {
-                                    echo "<div style='color: brown'>$row[0]</div>";
-                                }
-                                if ($row[2] == 'JKT') {
-                                    echo "<div style='color: green'>$row[0]</div>";
-                                }
-                                if ($row[2] == 'MDN') {
-                                    echo "<div style='color: gray'>$row[0]</div>";
-                                }
+                        if ($rowDeck[$a][$b][$c] == 0) {
+                            echo "-";
+                        } else {
+                            $container = $rowDeck[$a][$b][$c];
+                            $sql = "SELECT * FROM container WHERE id_container='$container'";
+                            $result = mysqli_query($con, $sql);
+                            $row = mysqli_fetch_array($result);
+                            if ($row[2] == 'SBY') {
+                                echo "<div style='color: red'>$row[0]</div>";
                             }
-                            echo "</td>";
-
-                            $c += 1;
-                            $counter += 1;
-                            if ($counter % 3 == 0) {
-                                $a += 1;
+                            if ($row[2] == 'MKS') {
+                                echo "<div style='color: blue'>$row[0]</div>";
                             }
-                            if ($c == 3) $c = 0;
+                            if ($row[2] == 'BPP') {
+                                echo "<div style='color: brown'>$row[0]</div>";
+                            }
+                            if ($row[2] == 'JYP') {
+                                echo "<div style='color: green'>$row[0]</div>";
+                            }
+                            if ($row[2] == 'MDN') {
+                                echo "<div style='color: gray'>$row[0]</div>";
+                            }
                         }
-                    ?>   
+                        echo "</td>";
+
+                        $c += 1;
+                        $counter += 1;
+                        if ($counter % 3 == 0) {
+                            $a += 1;
+                        }
+                        if ($c == 3) $c = 0;
+                    }
+                    ?>
                 </tr>
                 <tr class="flex flex-nowrap row" style="margin-left: 0;">
-                    <?php 
-                        $a = 0;
-                        $b = 1;
-                        $c = 0;
-                        $counter = 0;
+                    <?php
+                    $a = 0;
+                    $b = 1;
+                    $c = 0;
+                    $counter = 0;
                     ?>
-                    <?php 
-                        for ($i = 0; $i < 3 * $temp; $i++) {
-                            $sql = "SELECT ship FROM user WHERE team_name ='$id'";
-                            $result = mysqli_query($con, $sql);
-                            $row = mysqli_fetch_array($result);
-                            $rowDeck = json_decode($row['ship']);
+                    <?php
+                    for ($i = 0; $i < 3 * $temp; $i++) {
+                        $sql = "SELECT ship FROM user WHERE team_name ='$id'";
+                        $result = mysqli_query($con, $sql);
+                        $row = mysqli_fetch_array($result);
+                        $rowDeck = json_decode($row['ship']);
 
-                            echo 
-                            "
+                        echo
+                        "
                                 <td class='col-4'>
                                     <div class='id'>
                                         $a$b$c
                                     </div>
                             ";
 
-                            if ($rowDeck[$a][$b][$c] == 0) {
-                                echo "-";
-                            } else {
-                                $container = $rowDeck[$a][$b][$c];
-                                $sql = "SELECT * FROM container WHERE id_container='$container'";
-                                $result = mysqli_query($con, $sql);
-                                $row = mysqli_fetch_array($result); 
-                                if ($row[2] == 'SBY') {
-                                    echo "<div style='color: red'>$row[0]</div>";
-                                }
-                                if ($row[2] == 'MKS') {
-                                    echo "<div style='color: blue'>$row[0]</div>";
-                                }
-                                if ($row[2] == 'BPP') {
-                                    echo "<div style='color: brown'>$row[0]</div>";
-                                }
-                                if ($row[2] == 'JKT') {
-                                    echo "<div style='color: green'>$row[0]</div>";
-                                }
-                                if ($row[2] == 'MDN') {
-                                    echo "<div style='color: gray'>$row[0]</div>";
-                                }
+                        if ($rowDeck[$a][$b][$c] == 0) {
+                            echo "-";
+                        } else {
+                            $container = $rowDeck[$a][$b][$c];
+                            $sql = "SELECT * FROM container WHERE id_container='$container'";
+                            $result = mysqli_query($con, $sql);
+                            $row = mysqli_fetch_array($result);
+                            if ($row[2] == 'SBY') {
+                                echo "<div style='color: red'>$row[0]</div>";
                             }
-                            echo "</td>";
-
-                            $c += 1;
-                            $counter += 1;
-                            if ($counter % 3 == 0) {
-                                $a += 1;
+                            if ($row[2] == 'MKS') {
+                                echo "<div style='color: blue'>$row[0]</div>";
                             }
-                            if ($c == 3) $c = 0;
+                            if ($row[2] == 'BPP') {
+                                echo "<div style='color: brown'>$row[0]</div>";
+                            }
+                            if ($row[2] == 'JYP') {
+                                echo "<div style='color: green'>$row[0]</div>";
+                            }
+                            if ($row[2] == 'MDN') {
+                                echo "<div style='color: gray'>$row[0]</div>";
+                            }
                         }
-                    ?>   
+                        echo "</td>";
+
+                        $c += 1;
+                        $counter += 1;
+                        if ($counter % 3 == 0) {
+                            $a += 1;
+                        }
+                        if ($c == 3) $c = 0;
+                    }
+                    ?>
                 </tr>
                 <tr class="flex flex-nowrap row" style="margin-left: 0;">
-                <?php 
-                        $a = 0;
-                        $b = 2;
-                        $c = 0;
-                        $counter = 0;
+                    <?php
+                    $a = 0;
+                    $b = 2;
+                    $c = 0;
+                    $counter = 0;
                     ?>
-                    <?php 
-                        for ($i = 0; $i < 3 * $temp; $i++) {
-                            $sql = "SELECT ship FROM user WHERE team_name ='$id'";
-                            $result = mysqli_query($con, $sql);
-                            $row = mysqli_fetch_array($result);
-                            $rowDeck = json_decode($row['ship']);
+                    <?php
+                    for ($i = 0; $i < 3 * $temp; $i++) {
+                        $sql = "SELECT ship FROM user WHERE team_name ='$id'";
+                        $result = mysqli_query($con, $sql);
+                        $row = mysqli_fetch_array($result);
+                        $rowDeck = json_decode($row['ship']);
 
-                            echo 
-                            "
+                        echo
+                        "
                                 <td class='col-4'>
                                     <div class='id'>
                                         $a$b$c
                                     </div>
                             ";
 
-                            if ($rowDeck[$a][$b][$c] == 0) {
-                                echo "-";
-                            } else {
-                                $container = $rowDeck[$a][$b][$c];
-                                $sql = "SELECT * FROM container WHERE id_container='$container'";
-                                $result = mysqli_query($con, $sql);
-                                $row = mysqli_fetch_array($result); 
-                                if ($row[2] == 'SBY') {
-                                    echo "<div style='color: red'>$row[0]</div>";
-                                }
-                                if ($row[2] == 'MKS') {
-                                    echo "<div style='color: blue'>$row[0]</div>";
-                                }
-                                if ($row[2] == 'BPP') {
-                                    echo "<div style='color: brown'>$row[0]</div>";
-                                }
-                                if ($row[2] == 'JKT') {
-                                    echo "<div style='color: green'>$row[0]</div>";
-                                }
-                                if ($row[2] == 'MDN') {
-                                    echo "<div style='color: gray'>$row[0]</div>";
-                                }
+                        if ($rowDeck[$a][$b][$c] == 0) {
+                            echo "-";
+                        } else {
+                            $container = $rowDeck[$a][$b][$c];
+                            $sql = "SELECT * FROM container WHERE id_container='$container'";
+                            $result = mysqli_query($con, $sql);
+                            $row = mysqli_fetch_array($result);
+                            if ($row[2] == 'SBY') {
+                                echo "<div style='color: red'>$row[0]</div>";
                             }
-                            echo "</td>";
-                            
-                            $c += 1;
-                            $counter += 1;
-                            if ($counter % 3 == 0) {
-                                $a += 1;
+                            if ($row[2] == 'MKS') {
+                                echo "<div style='color: blue'>$row[0]</div>";
                             }
-                            if ($c == 3) $c = 0;
+                            if ($row[2] == 'BPP') {
+                                echo "<div style='color: brown'>$row[0]</div>";
+                            }
+                            if ($row[2] == 'JYP') {
+                                echo "<div style='color: green'>$row[0]</div>";
+                            }
+                            if ($row[2] == 'MDN') {
+                                echo "<div style='color: gray'>$row[0]</div>";
+                            }
                         }
-                    ?>   
+                        echo "</td>";
+
+                        $c += 1;
+                        $counter += 1;
+                        if ($counter % 3 == 0) {
+                            $a += 1;
+                        }
+                        if ($c == 3) $c = 0;
+                    }
+                    ?>
                 </tr>
             </tbody>
-            </table>
-        <!-- </div> -->
+        </table>
     </div>
 
     <div class="row d-flex justify-content-center mt-3">
@@ -562,6 +524,8 @@ if (!isset($_SESSION["loginUser"])) {
                 let baris = $('#baris').val()
                 let kolom = $('#kolom').val()
                 let kontainer = $('#kontainer').val()
+                
+                // console.log(kontainer)
 
                 $.ajax({
                     url: "bongpasLogic.php",
@@ -625,6 +589,7 @@ if (!isset($_SESSION["loginUser"])) {
                         "done": 1
                     },
                     success: function(response) {
+                        // console.log(response)
                         if (response === "1") {
                             Swal.fire({
                                 // position: "top",

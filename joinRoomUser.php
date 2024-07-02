@@ -1,7 +1,7 @@
 <?php
 require 'connect.php';
 if (!isset($_SESSION["loginUser"])) {
-	header("Location: loginUser.php");
+	header("Location: index.php");
 	exit;
 }
 ?>
@@ -103,7 +103,7 @@ if (!isset($_SESSION["loginUser"])) {
 	<!-- SIDEBAR -->
 	<div class="w3-sidebar w3-bar-block w3-small w3-hide-small text-white w3-center" style="width:150px">
 		<div class="flex-column" style="display: flex; flex-direction: column; height:100%;">
-			<h3 class="w3-bar-item" style="font-weight: bold; font-style:italic;">BLC</h3>
+			<h3 class="w3-bar-item" style="font-weight: bold; font-style:italic;">SLG</h3>
 			<a href="homeUser.php" class="w3-bar-item w3-indigo  w3-button w3-padding-large">
 				<i class="fa fa-dashboard w3-xxlarge d-flex justify-content-center mt-2"></i>
 				<p>Home</p>

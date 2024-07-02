@@ -2,7 +2,7 @@
 require 'connect.php';
 
 if (!isset($_SESSION["loginUser"])) {
-    header("Location: loginUser.php");
+    header("Location: index.php");
     exit;
 }
 
@@ -16,7 +16,7 @@ $row = mysqli_fetch_array($result);
 <html>
 
 <head>
-    <title>BLC - Home</title>
+    <title>SLG - Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap -->
@@ -109,7 +109,7 @@ $row = mysqli_fetch_array($result);
     <!-- Sidebar -->
     <div class="w3-sidebar w3-bar-block w3-small w3-hide-small text-white w3-center" style="width:150px">
         <div class="flex-column" style="display: flex; flex-direction: column; height:100%;">
-            <h3 class="w3-bar-item" style="font-weight: bold; font-style:italic;">BLC</h3>
+            <h3 class="w3-bar-item" style="font-weight: bold; font-style:italic;">SLG</h3>
             <a href="homeUser.php" class="w3-bar-item w3-indigo  w3-button w3-padding-large">
                 <i class="fa fa-dashboard w3-xxlarge d-flex justify-content-center mt-2"></i>
                 <p>Home</p>
@@ -139,7 +139,7 @@ $row = mysqli_fetch_array($result);
         </div>
 
         <div class="w3-container w3-center">
-            <h1 class="my-3" style="font-weight: bold;">Welcome to Business Logistics Competition,</h1>
+            <h1 class="my-3" style="font-weight: bold;">Welcome to Shipping Logistics Game,</h1>
             <h3 class="my-0" style="font-weight: bold;"><?php echo $row[0]; ?>!</h3>
             <p class="mt-5">To join a game, click the "Join Game" menu on the left!</p>
         </div>

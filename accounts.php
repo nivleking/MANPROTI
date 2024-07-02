@@ -16,7 +16,7 @@ $row = mysqli_fetch_array($result);
 <html>
 
 <head>
-    <title>BLC Accounts</title>
+    <title>SLG Accounts</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap -->
@@ -110,7 +110,7 @@ $row = mysqli_fetch_array($result);
             <!-- Sidebar -->
             <div class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center" id="mySidebar">
                 <div class="flex-column" style="display: flex; flex-direction: column; height: 100%;">
-                    <h3 class="w3-bar-item text-white" onclick="closeNav()" style="font-style: italic;font-weight:bold;">BLC</h3>
+                    <h3 class="w3-bar-item text-white" onclick="closeNav()" style="font-style: italic;font-weight:bold;">SLG</h3>
 
                     <a href="homeAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black">
                         <i class="fa fa-dashboard w3-xxlarge d-flex justify-content-center mt-2"></i>
@@ -141,30 +141,8 @@ $row = mysqli_fetch_array($result);
         </div>
 
         <div class="col-11 mx-auto" id="main">
-            <!-- <div class="row my-auto" id="navbarUpper">
-                <div class="w3-container navbar-boots min-vw-100 text-white">
-                    <h1 class="">
-                        Halo
-                    </h1>
-                    <a class="navbar-brand text-white" href="#">
-                            <?php //echo $_SESSION['usernameADM']
-                            ?>
-                        </a>
-                    <div class="collapse" id="navbarToggleExternalContent" data-bs-theme="dark">
-                            <div class="bg-dark p-4">
-                                <h5 class="text-body-emphasis h4">Collapsed content</h5>
-                                <span class="text-body-secondary">Toggleable via the navbar brand.</span>
-                            </div>
-                        </div>
-                    <button class="navbar-toggler navbar-brand bg-white" onclick="openNav()" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-
-                </div>
-            </div> -->
             <div class="row">
                 <div class="w3-padding-large" id="main">
-                    <!-- Header/Home -->
                     <div class=" w3-padding-16 w3-center" id="home">
                         <h1 class="" style="font-weight:bold;"><span class="">Accounts</span></h1>
                         <h4>Hello,
@@ -172,14 +150,12 @@ $row = mysqli_fetch_array($result);
                         </h4>
                     </div>
 
-                    <!-- Grid for pricing tables -->
                     <div class="w3-row-padding">
                         <div class="w3-half w3-margin-bottom">
                             <div class="w3-white w3-center w3-opacity w3-hover-opacity-off">
                                 <div class="card" style="width:w3">
                                     <div class="card-body">
                                         <h3 class="card-title" style="font-weight:bold;">Edit Admin Accounts</h3>
-                                        <!-- <img class="object-fit-md-cover border rounded" src="" alt="Admin"> -->
                                         <div class="row d-flex justify-content-center ">
                                             <a type="submit" class="btn btn-dark" href="registerAdmin.php" style="margin-top: 10px; width: 10rem;">Edit Admins</a>
                                         </div>
@@ -193,7 +169,6 @@ $row = mysqli_fetch_array($result);
                                 <div class="card" style="width:w3">
                                     <div class="card-body">
                                         <h3 class="card-title" style="font-weight:bold;">Edit User Accounts</h3>
-                                        <!-- <image src="" alt="User"></image> -->
                                         <form action="registerUser.php">
                                             <button type="submit" class="btn btn-dark" style="margin-top: 10px; width: 10rem;">Edit Users</button>
                                         </form>
@@ -204,27 +179,10 @@ $row = mysqli_fetch_array($result);
                             </div>
                         </div>
                     </div>
-
-                    <!-- <div class="row mx-auto ms-3">
-                        Halo
-                    </div> -->
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- <script>
-        function openNav() {
-            document.getElementById("mySidebar").style.width = "0px";
-            document.getElementById("main").style.marginLeft = "-150px";
-        }
-
-        /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
-        function closeNav() {
-            document.getElementById("mySidebar").style.width = "150px";
-            document.getElementById("main").style.marginLeft = "150px";
-        }
-    </script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 

@@ -109,7 +109,7 @@
 	<!-- Sidebar -->
 	<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
 		<div class="flex-column" style="display: flex; flex-direction: column; height: 100%;">
-			<h3 class="text-white w3-bar-item" style="font-style: italic;font-weight:bold;">BLC</h3>
+			<h3 class="text-white w3-bar-item" style="font-style: italic;font-weight:bold;">SLG</h3>
 		
 			<a href="homeAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black">
 				<i class="fa fa-dashboard w3-xxlarge d-flex justify-content-center mt-2"></i>
@@ -124,14 +124,12 @@
 				<p>Accounts</p>
 			</a>
 
-			<!-- Profile Dropdown -->
 			<div class="dropdown mt-auto">
 				<a class="btn w3-black dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="margin-top: auto;" id="dropDownUser">
 					<i class="fa fa-user w3-xxlarge d-flex justify-content-center mt-1"></i>
 					Profile
 				</a>
 				<ul class="dropdown-menu text-small shadow" aria-labelledby="dropDownUser" style="width:25px">
-					<!-- <li class="dropdown-item"><a href="#">Profile</a></li> -->
 					<li class="dropdown-item"><a href="logoutAdmin.php">Log Out</a></li>
 				</ul>
 			</div>

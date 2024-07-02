@@ -1,7 +1,7 @@
 <?php
 require 'connect.php';
 if (!isset($_SESSION["loginUser"])) {
-    header("Location: loginUser.php");
+    header("Location: user.php");
     exit;
 }
 ?>
@@ -12,7 +12,6 @@ if (!isset($_SESSION["loginUser"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <title>Section 2</title>
 
     <!-- Bootstrap -->
@@ -38,6 +37,7 @@ if (!isset($_SESSION["loginUser"])) {
 
         body {
             /* overflow: hidden; */
+            background-color: #f1f1f1;
             margin: 0;
         }
 
@@ -62,35 +62,17 @@ if (!isset($_SESSION["loginUser"])) {
         input {
             margin-top: 10px;
         }
+
+        .table {
+            background-color: #fff;
+        }
     </style>
-    <!-- <script>
-        function allowDrop(ev) {
-            ev.preventDefault();
-        }
-
-        function drag(ev) {
-            ev.dataTransfer.setData("text", ev.target.id);
-        }
-
-        function drop(ev) {
-            ev.preventDefault();
-            var data = ev.dataTransfer.getData("text");
-            ev.target.appendChild(document.getElementById(data));
-        }
-
-        var myModal = document.getElementById('myModal')
-        var myInput = document.getElementById('myInput')
-
-        myModal.addEventListener('shown.bs.modal', function () {
-            myInput.focus()
-            })
-    </script> -->
 </head>
 
 <body>
     <nav class="navbar navbar-dark bg-primary navbar-expand d-flex justify-content-between" style="width:100vw;">
         <div>
-            <a href="#" class="navbar-brand disabled" style="font-style: italic; font-weight:bold; font-size:26px">BLC</a>
+            <a href="#" class="navbar-brand disabled" style="font-style: italic; font-weight:bold; font-size:26px">SLG</a>
         </div>
         <div class="text-white">
             <?php
@@ -98,7 +80,7 @@ if (!isset($_SESSION["loginUser"])) {
             $sql = "SELECT origin, round FROM user WHERE team_name='$id'";
             $result = mysqli_query($con, $sql);
             $row = mysqli_fetch_array($result);
-            $temp=$row['round'];
+            $temp = $row['round'];
             echo "<h3 style='font-weight:bold;'>
                         <div class='row'>
                             Port  
@@ -109,8 +91,6 @@ if (!isset($_SESSION["loginUser"])) {
                             <h6 class='text-center' style='font-weight:bold;'>Round $temp</h6>
                         </div>
                     </h3>";
-            // echo "";
-            // echo $row[];
             ?>
         </div>
         <div class="text-white" style="font-weight: bold;">
@@ -118,36 +98,66 @@ if (!isset($_SESSION["loginUser"])) {
             echo $_SESSION['username'];
             ?>
         </div>
-        <!-- <button class="btn btn-danger" disabled>
-            MARKET INTELLIGENCE
-        </button> -->
     </nav>
 
     <div class="container-fluid mt-3" style="width: 109rem;">
         <table class="flex-nowrap table table-responsive table-bordered text-center overflow-x-auto" style="margin-top: 10px;">
             <thead>
-                <tr class="flex flex-nowrap row" style="margin-left:0;">
-                    <th class="col-12">BAY 1 DRY</th>
-                    <th class="col-12">BAY 2 REEF</th>
-                    <th class="col-12">BAY 3 REEF</th>
+                <?php
+                $id = $_SESSION['username'];
+                $sql = "SELECT ship FROM user WHERE team_name='$id'";
+                $result = mysqli_query($con, $sql);
+                $resShip = mysqli_fetch_array($result);
+                $shipLayout = json_decode($resShip['ship']);
+
+                $temp = count($shipLayout);
+                ?>
+                <tr class="flex flex-nowrap row" style="margin-left: 0;">
+                    <?php
+                    // $i = 5;
+                    for ($i = 0; $i < $temp; $i++) {
+                        if ($i == 1 || $i == 2) {
+                            echo
+                            "
+                                        <th class='col-12'>BAY $i REEF</th>
+                                    ";
+                        } else {
+                            echo
+                            "
+                                    <th class='col-12'>BAY $i DRY</th>
+                                ";
+                        }
+                    }
+                    ?>
                 </tr>
             </thead>
-            <tbody class="overflow-x-auto">
+            <tbody class="overflow-auto">
                 <tr class="flex flex-nowrap row" style="margin-left: 0;">
-                    <td class="col-4">
-                        <div class="id">000
-
-                        </div>
-                        <?php
-                        $id = $_SESSION['username'];
-                        $sql = "SELECT ship FROM user WHERE team_name = '$id'";
+                    <?php
+                    $a = 0;
+                    $b = 0;
+                    $c = 0;
+                    $counter = 0;
+                    ?>
+                    <?php
+                    for ($i = 0; $i < 3 * $temp; $i++) {
+                        $sql = "SELECT ship FROM user WHERE team_name ='$id'";
                         $result = mysqli_query($con, $sql);
                         $row = mysqli_fetch_array($result);
-                        $row_dec = json_decode($row['ship']);
-                        if ($row_dec[0][0][0] == 0) {
-                            echo '-';
+                        $rowDeck = json_decode($row['ship']);
+
+                        echo
+                        "
+                                <td class='col-4'>
+                                    <div class='id'>
+                                        $a$b$c
+                                    </div>
+                            ";
+
+                        if ($rowDeck[$a][$b][$c] == 0) {
+                            echo "-";
                         } else {
-                            $container = $row_dec[0][0][0];
+                            $container = $rowDeck[$a][$b][$c];
                             $sql = "SELECT * FROM container WHERE id_container='$container'";
                             $result = mysqli_query($con, $sql);
                             $row = mysqli_fetch_array($result);
@@ -160,313 +170,50 @@ if (!isset($_SESSION["loginUser"])) {
                             if ($row[2] == 'BPP') {
                                 echo "<div style='color: brown'>$row[0]</div>";
                             }
-                            if ($row[2] == 'JKT') {
+                            if ($row[2] == 'JYP') {
                                 echo "<div style='color: green'>$row[0]</div>";
                             }
                             if ($row[2] == 'MDN') {
                                 echo "<div style='color: gray'>$row[0]</div>";
                             }
                         }
-                        ?>
-                    </td>
-                    <td class="col-4">
-                        <div class="id">001
+                        echo "</td>";
 
-                        </div>
-                        <?php
-                        $id = $_SESSION['username'];
-                        $sql = "SELECT ship FROM user WHERE team_name = '$id'";
-                        $result = mysqli_query($con, $sql);
-                        $row = mysqli_fetch_array($result);
-                        $row_dec = json_decode($row['ship']);
-                        if ($row_dec[0][0][1] == 0) {
-                            echo '-';
-                        } else {
-                            $container = $row_dec[0][0][1];
-                            $sql = "SELECT * FROM container WHERE id_container='$container'";
-                            $result = mysqli_query($con, $sql);
-                            $row = mysqli_fetch_array($result);
-                            if ($row[2] == 'SBY') {
-                                echo "<div style='color: red'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MKS') {
-                                echo "<div style='color: blue'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'BPP') {
-                                echo "<div style='color: brown'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'JKT') {
-                                echo "<div style='color: green'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MDN') {
-                                echo "<div style='color: gray'>$row[0]</div>";
-                            }
+                        $c += 1;
+                        $counter += 1;
+                        if ($counter % 3 == 0) {
+                            $a += 1;
                         }
-                        ?>
-                    </td>
-                    <td class="col-4">
-                        <div class="id">002
-
-                        </div>
-                        <?php
-                        $id = $_SESSION['username'];
-                        $sql = "SELECT ship FROM user WHERE team_name = '$id'";
-                        $result = mysqli_query($con, $sql);
-                        $row = mysqli_fetch_array($result);
-                        $row_dec = json_decode($row['ship']);
-                        if ($row_dec[0][0][2] == 0) {
-                            echo '-';
-                        } else {
-                            $container = $row_dec[0][0][2];
-                            $sql = "SELECT * FROM container WHERE id_container='$container'";
-                            $result = mysqli_query($con, $sql);
-                            $row = mysqli_fetch_array($result);
-                            if ($row[2] == 'SBY') {
-                                echo "<div style='color: red'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MKS') {
-                                echo "<div style='color: blue'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'BPP') {
-                                echo "<div style='color: brown'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'JKT') {
-                                echo "<div style='color: green'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MDN') {
-                                echo "<div style='color: gray'>$row[0]</div>";
-                            }
-                        }
-                        ?>
-                    </td>
-
-                    <td class="col-4">
-                        <div class="id">100
-
-                        </div>
-                        <?php
-                        $id = $_SESSION['username'];
-                        $sql = "SELECT ship FROM user WHERE team_name = '$id'";
-                        $result = mysqli_query($con, $sql);
-                        $row = mysqli_fetch_array($result);
-                        $row_dec = json_decode($row['ship']);
-                        if ($row_dec[1][0][0] == 0) {
-                            echo '-';
-                        } else {
-                            $container = $row_dec[1][0][0];
-                            $sql = "SELECT * FROM container WHERE id_container='$container'";
-                            $result = mysqli_query($con, $sql);
-                            $row = mysqli_fetch_array($result);
-                            if ($row[2] == 'SBY') {
-                                echo "<div style='color: red'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MKS') {
-                                echo "<div style='color: blue'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'BPP') {
-                                echo "<div style='color: brown'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'JKT') {
-                                echo "<div style='color: green'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MDN') {
-                                echo "<div style='color: gray'>$row[0]</div>";
-                            }
-                        }
-                        ?>
-                    </td>
-                    <td class="col-4">
-                        <div class="id">101
-
-                        </div>
-                        <?php
-                        $id = $_SESSION['username'];
-                        $sql = "SELECT ship FROM user WHERE team_name = '$id'";
-                        $result = mysqli_query($con, $sql);
-                        $row = mysqli_fetch_array($result);
-                        $row_dec = json_decode($row['ship']);
-                        if ($row_dec[1][0][1] == 0) {
-                            echo '-';
-                        } else {
-                            $container = $row_dec[1][0][1];
-                            $sql = "SELECT * FROM container WHERE id_container='$container'";
-                            $result = mysqli_query($con, $sql);
-                            $row = mysqli_fetch_array($result);
-                            if ($row[2] == 'SBY') {
-                                echo "<div style='color: red'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MKS') {
-                                echo "<div style='color: blue'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'BPP') {
-                                echo "<div style='color: brown'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'JKT') {
-                                echo "<div style='color: green'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MDN') {
-                                echo "<div style='color: gray'>$row[0]</div>";
-                            }
-                        }
-                        ?>
-                    </td>
-                    <td class="col-4">
-                        <div class="id">102
-
-                        </div>
-                        <?php
-                        $id = $_SESSION['username'];
-                        $sql = "SELECT ship FROM user WHERE team_name = '$id'";
-                        $result = mysqli_query($con, $sql);
-                        $row = mysqli_fetch_array($result);
-                        $row_dec = json_decode($row['ship']);
-                        if ($row_dec[1][0][2] == 0) {
-                            echo '-';
-                        } else {
-                            $container = $row_dec[1][0][2];
-                            $sql = "SELECT * FROM container WHERE id_container='$container'";
-                            $result = mysqli_query($con, $sql);
-                            $row = mysqli_fetch_array($result);
-                            if ($row[2] == 'SBY') {
-                                echo "<div style='color: red'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MKS') {
-                                echo "<div style='color: blue'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'BPP') {
-                                echo "<div style='color: brown'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'JKT') {
-                                echo "<div style='color: green'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MDN') {
-                                echo "<div style='color: gray'>$row[0]</div>";
-                            }
-                        }
-                        ?>
-                    </td>
-
-                    <td class="col-4">
-                        <div class="id">200
-
-                        </div>
-                        <?php
-                        $id = $_SESSION['username'];
-                        $sql = "SELECT ship FROM user WHERE team_name = '$id'";
-                        $result = mysqli_query($con, $sql);
-                        $row = mysqli_fetch_array($result);
-                        $row_dec = json_decode($row['ship']);
-                        if ($row_dec[2][0][0] == 0) {
-                            echo '-';
-                        } else {
-                            $container = $row_dec[2][0][0];
-                            $sql = "SELECT * FROM container WHERE id_container='$container'";
-                            $result = mysqli_query($con, $sql);
-                            $row = mysqli_fetch_array($result);
-                            if ($row[2] == 'SBY') {
-                                echo "<div style='color: red'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MKS') {
-                                echo "<div style='color: blue'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'BPP') {
-                                echo "<div style='color: brown'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'JKT') {
-                                echo "<div style='color: green'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MDN') {
-                                echo "<div style='color: gray'>$row[0]</div>";
-                            }
-                        }
-                        ?>
-                    </td>
-                    <td class="col-4">
-                        <div class="id">201
-
-                        </div>
-                        <?php
-                        $id = $_SESSION['username'];
-                        $sql = "SELECT ship FROM user WHERE team_name = '$id'";
-                        $result = mysqli_query($con, $sql);
-                        $row = mysqli_fetch_array($result);
-                        $row_dec = json_decode($row['ship']);
-                        if ($row_dec[2][0][1] == 0) {
-                            echo '-';
-                        } else {
-                            $container = $row_dec[2][0][1];
-                            $sql = "SELECT * FROM container WHERE id_container='$container'";
-                            $result = mysqli_query($con, $sql);
-                            $row = mysqli_fetch_array($result);
-                            if ($row[2] == 'SBY') {
-                                echo "<div style='color: red'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MKS') {
-                                echo "<div style='color: blue'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'BPP') {
-                                echo "<div style='color: brown'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'JKT') {
-                                echo "<div style='color: green'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MDN') {
-                                echo "<div style='color: gray'>$row[0]</div>";
-                            }
-                        }
-                        ?>
-                    </td>
-                    <td class="col-4">
-                        <div class="id">202
-
-                        </div>
-                        <?php
-                        $id = $_SESSION['username'];
-                        $sql = "SELECT ship FROM user WHERE team_name = '$id'";
-                        $result = mysqli_query($con, $sql);
-                        $row = mysqli_fetch_array($result);
-                        $row_dec = json_decode($row['ship']);
-                        if ($row_dec[2][0][2] == 0) {
-                            echo '-';
-                        } else {
-                            $container = $row_dec[2][0][2];
-                            $sql = "SELECT * FROM container WHERE id_container='$container'";
-                            $result = mysqli_query($con, $sql);
-                            $row = mysqli_fetch_array($result);
-                            if ($row[2] == 'SBY') {
-                                echo "<div style='color: red'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MKS') {
-                                echo "<div style='color: blue'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'BPP') {
-                                echo "<div style='color: brown'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'JKT') {
-                                echo "<div style='color: green'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MDN') {
-                                echo "<div style='color: gray'>$row[0]</div>";
-                            }
-                        }
-                        ?>
-                    </td>
+                        if ($c == 3) $c = 0;
+                    }
+                    ?>
                 </tr>
                 <tr class="flex flex-nowrap row" style="margin-left: 0;">
-                    <td class="col-4">
-                        <div class="id">010
-
-                        </div>
-                        <?php
-                        $id = $_SESSION['username'];
-                        $sql = "SELECT ship FROM user WHERE team_name = '$id'";
+                    <?php
+                    $a = 0;
+                    $b = 1;
+                    $c = 0;
+                    $counter = 0;
+                    ?>
+                    <?php
+                    for ($i = 0; $i < 3 * $temp; $i++) {
+                        $sql = "SELECT ship FROM user WHERE team_name ='$id'";
                         $result = mysqli_query($con, $sql);
                         $row = mysqli_fetch_array($result);
-                        $row_dec = json_decode($row['ship']);
-                        if ($row_dec[0][1][0] == 0) {
-                            echo '-';
+                        $rowDeck = json_decode($row['ship']);
+
+                        echo
+                        "
+                                <td class='col-4'>
+                                    <div class='id'>
+                                        $a$b$c
+                                    </div>
+                            ";
+
+                        if ($rowDeck[$a][$b][$c] == 0) {
+                            echo "-";
                         } else {
-                            $container = $row_dec[0][1][0];
+                            $container = $rowDeck[$a][$b][$c];
                             $sql = "SELECT * FROM container WHERE id_container='$container'";
                             $result = mysqli_query($con, $sql);
                             $row = mysqli_fetch_array($result);
@@ -479,314 +226,50 @@ if (!isset($_SESSION["loginUser"])) {
                             if ($row[2] == 'BPP') {
                                 echo "<div style='color: brown'>$row[0]</div>";
                             }
-                            if ($row[2] == 'JKT') {
+                            if ($row[2] == 'JYP') {
                                 echo "<div style='color: green'>$row[0]</div>";
                             }
                             if ($row[2] == 'MDN') {
                                 echo "<div style='color: gray'>$row[0]</div>";
                             }
                         }
-                        ?>
-                    </td>
-                    <td class="col-4">
-                        <div class="id">011
+                        echo "</td>";
 
-                        </div>
-                        <?php
-                        $id = $_SESSION['username'];
-                        $sql = "SELECT ship FROM user WHERE team_name = '$id'";
-                        $result = mysqli_query($con, $sql);
-                        $row = mysqli_fetch_array($result);
-                        $row_dec = json_decode($row['ship']);
-                        if ($row_dec[0][1][1] == 0) {
-                            echo '-';
-                        } else {
-                            $container = $row_dec[0][1][1];
-                            $sql = "SELECT * FROM container WHERE id_container='$container'";
-                            $result = mysqli_query($con, $sql);
-                            $row = mysqli_fetch_array($result);
-                            if ($row[2] == 'SBY') {
-                                echo "<div style='color: red'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MKS') {
-                                echo "<div style='color: blue'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'BPP') {
-                                echo "<div style='color: brown'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'JKT') {
-                                echo "<div style='color: green'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MDN') {
-                                echo "<div style='color: gray'>$row[0]</div>";
-                            }
+                        $c += 1;
+                        $counter += 1;
+                        if ($counter % 3 == 0) {
+                            $a += 1;
                         }
-                        ?>
-                    </td>
-                    <td class="col-4">
-                        <div class="id">012
-
-                        </div>
-                        <?php
-                        $id = $_SESSION['username'];
-                        $sql = "SELECT ship FROM user WHERE team_name = '$id'";
-                        $result = mysqli_query($con, $sql);
-                        $row = mysqli_fetch_array($result);
-                        $row_dec = json_decode($row['ship']);
-                        if ($row_dec[0][1][2] == 0) {
-                            echo '-';
-                        } else {
-                            $container = $row_dec[0][1][2];
-                            $sql = "SELECT * FROM container WHERE id_container='$container'";
-                            $result = mysqli_query($con, $sql);
-                            $row = mysqli_fetch_array($result);
-                            if ($row[2] == 'SBY') {
-                                echo "<div style='color: red'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MKS') {
-                                echo "<div style='color: blue'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'BPP') {
-                                echo "<div style='color: brown'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'JKT') {
-                                echo "<div style='color: green'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MDN') {
-                                echo "<div style='color: gray'>$row[0]</div>";
-                            }
-                        }
-                        ?>
-                    </td>
-
-                    <td class="col-4">
-                        <div class="id">110
-
-                        </div>
-                        <?php
-                        $id = $_SESSION['username'];
-                        $sql = "SELECT ship FROM user WHERE team_name = '$id'";
-                        $result = mysqli_query($con, $sql);
-                        $row = mysqli_fetch_array($result);
-                        $row_dec = json_decode($row['ship']);
-                        if ($row_dec[1][1][0] == 0) {
-                            echo '-';
-                        } else {
-                            $container = $row_dec[1][1][0];
-                            $sql = "SELECT * FROM container WHERE id_container='$container'";
-                            $result = mysqli_query($con, $sql);
-                            $row = mysqli_fetch_array($result);
-                            if ($row[2] == 'SBY') {
-                                echo "<div style='color: red'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MKS') {
-                                echo "<div style='color: blue'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'BPP') {
-                                echo "<div style='color: brown'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'JKT') {
-                                echo "<div style='color: green'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MDN') {
-                                echo "<div style='color: gray'>$row[0]</div>";
-                            }
-                        }
-                        ?>
-                    </td>
-                    <td class="col-4">
-                        <div class="id">111
-
-                        </div>
-                        <?php
-                        $id = $_SESSION['username'];
-                        $sql = "SELECT ship FROM user WHERE team_name = '$id'";
-                        $result = mysqli_query($con, $sql);
-                        $row = mysqli_fetch_array($result);
-                        $row_dec = json_decode($row['ship']);
-                        if ($row_dec[1][1][1] == 0) {
-                            echo '-';
-                        } else {
-                            $container = $row_dec[1][1][1];
-                            $sql = "SELECT * FROM container WHERE id_container='$container'";
-                            $result = mysqli_query($con, $sql);
-                            $row = mysqli_fetch_array($result);
-                            if ($row[2] == 'SBY') {
-                                echo "<div style='color: red'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MKS') {
-                                echo "<div style='color: blue'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'BPP') {
-                                echo "<div style='color: brown'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'JKT') {
-                                echo "<div style='color: green'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MDN') {
-                                echo "<div style='color: gray'>$row[0]</div>";
-                            }
-                        }
-                        ?>
-                    </td>
-                    <td class="col-4">
-                        <div class="id">112
-
-                        </div>
-                        <?php
-                        $id = $_SESSION['username'];
-                        $sql = "SELECT ship FROM user WHERE team_name = '$id'";
-                        $result = mysqli_query($con, $sql);
-                        $row = mysqli_fetch_array($result);
-                        $row_dec = json_decode($row['ship']);
-                        if ($row_dec[1][1][2] == 0) {
-                            echo '-';
-                        } else {
-                            $container = $row_dec[1][1][2];
-                            $sql = "SELECT * FROM container WHERE id_container='$container'";
-                            $result = mysqli_query($con, $sql);
-                            $row = mysqli_fetch_array($result);
-                            if ($row[2] == 'SBY') {
-                                echo "<div style='color: red'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MKS') {
-                                echo "<div style='color: blue'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'BPP') {
-                                echo "<div style='color: brown'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'JKT') {
-                                echo "<div style='color: green'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MDN') {
-                                echo "<div style='color: gray'>$row[0]</div>";
-                            }
-                        }
-                        ?>
-                    </td>
-
-                    <td class="col-4">
-                        <div class="id">210
-
-                        </div>
-                        <?php
-                        $id = $_SESSION['username'];
-                        $sql = "SELECT ship FROM user WHERE team_name = '$id'";
-                        $result = mysqli_query($con, $sql);
-                        $row = mysqli_fetch_array($result);
-                        $row_dec = json_decode($row['ship']);
-                        if ($row_dec[2][1][0] == 0) {
-                            echo '-';
-                        } else {
-                            $container = $row_dec[2][1][0];
-                            $sql = "SELECT * FROM container WHERE id_container='$container'";
-                            $result = mysqli_query($con, $sql);
-                            $row = mysqli_fetch_array($result);
-                            if ($row[2] == 'SBY') {
-                                echo "<div style='color: red'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MKS') {
-                                echo "<div style='color: blue'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'BPP') {
-                                echo "<div style='color: brown'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'JKT') {
-                                echo "<div style='color: green'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MDN') {
-                                echo "<div style='color: gray'>$row[0]</div>";
-                            }
-                        }
-                        ?>
-                    </td>
-                    <td class="col-4">
-                        <div class="id">211
-
-                        </div>
-                        <?php
-                        $id = $_SESSION['username'];
-                        $sql = "SELECT ship FROM user WHERE team_name = '$id'";
-                        $result = mysqli_query($con, $sql);
-                        $row = mysqli_fetch_array($result);
-                        $row_dec = json_decode($row['ship']);
-                        if ($row_dec[2][1][1] == 0) {
-                            echo '-';
-                        } else {
-                            $container = $row_dec[2][1][1];
-                            $sql = "SELECT * FROM container WHERE id_container='$container'";
-                            $result = mysqli_query($con, $sql);
-                            $row = mysqli_fetch_array($result);
-                            if ($row[2] == 'SBY') {
-                                echo "<div style='color: red'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MKS') {
-                                echo "<div style='color: blue'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'BPP') {
-                                echo "<div style='color: brown'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'JKT') {
-                                echo "<div style='color: green'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MDN') {
-                                echo "<div style='color: gray'>$row[0]</div>";
-                            }
-                        }
-                        ?>
-                    </td>
-                    <td class="col-4">
-                        <div class="id">212
-
-                        </div>
-                        <?php
-                        $id = $_SESSION['username'];
-                        $sql = "SELECT ship FROM user WHERE team_name = '$id'";
-                        $result = mysqli_query($con, $sql);
-                        $row = mysqli_fetch_array($result);
-                        $row_dec = json_decode($row['ship']);
-                        if ($row_dec[2][1][2] == 0) {
-                            echo '-';
-                        } else {
-                            $container = $row_dec[2][1][2];
-                            $sql = "SELECT * FROM container WHERE id_container='$container'";
-                            $result = mysqli_query($con, $sql);
-                            $row = mysqli_fetch_array($result);
-                            if ($row[2] == 'SBY') {
-                                echo "<div style='color: red'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MKS') {
-                                echo "<div style='color: blue'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'BPP') {
-                                echo "<div style='color: brown'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'JKT') {
-                                echo "<div style='color: green'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MDN') {
-                                echo "<div style='color: gray'>$row[0]</div>";
-                            }
-                        }
-                        ?>
-                    </td>
-
+                        if ($c == 3) $c = 0;
+                    }
+                    ?>
                 </tr>
                 <tr class="flex flex-nowrap row" style="margin-left: 0;">
-                    <td class="col-4">
-                        <div class="id">020
-
-                        </div>
-                        <?php
-                        $id = $_SESSION['username'];
-                        $sql = "SELECT ship FROM user WHERE team_name = '$id'";
+                    <?php
+                    $a = 0;
+                    $b = 2;
+                    $c = 0;
+                    $counter = 0;
+                    ?>
+                    <?php
+                    for ($i = 0; $i < 3 * $temp; $i++) {
+                        $sql = "SELECT ship FROM user WHERE team_name ='$id'";
                         $result = mysqli_query($con, $sql);
                         $row = mysqli_fetch_array($result);
-                        $row_dec = json_decode($row['ship']);
-                        if ($row_dec[0][2][0] == 0) {
-                            echo '-';
+                        $rowDeck = json_decode($row['ship']);
+
+                        echo
+                        "
+                                <td class='col-4'>
+                                    <div class='id'>
+                                        $a$b$c
+                                    </div>
+                            ";
+
+                        if ($rowDeck[$a][$b][$c] == 0) {
+                            echo "-";
                         } else {
-                            $container = $row_dec[0][2][0];
+                            $container = $rowDeck[$a][$b][$c];
                             $sql = "SELECT * FROM container WHERE id_container='$container'";
                             $result = mysqli_query($con, $sql);
                             $row = mysqli_fetch_array($result);
@@ -799,335 +282,37 @@ if (!isset($_SESSION["loginUser"])) {
                             if ($row[2] == 'BPP') {
                                 echo "<div style='color: brown'>$row[0]</div>";
                             }
-                            if ($row[2] == 'JKT') {
+                            if ($row[2] == 'JYP') {
                                 echo "<div style='color: green'>$row[0]</div>";
                             }
                             if ($row[2] == 'MDN') {
                                 echo "<div style='color: gray'>$row[0]</div>";
                             }
                         }
-                        ?>
-                    </td>
-                    <td class="col-4">
-                        <div class="id">021
+                        echo "</td>";
 
-                        </div>
-                        <?php
-                        $id = $_SESSION['username'];
-                        $sql = "SELECT ship FROM user WHERE team_name = '$id'";
-                        $result = mysqli_query($con, $sql);
-                        $row = mysqli_fetch_array($result);
-                        $row_dec = json_decode($row['ship']);
-                        if ($row_dec[0][2][1] == 0) {
-                            echo '-';
-                        } else {
-                            $container = $row_dec[0][2][1];
-                            $sql = "SELECT * FROM container WHERE id_container='$container'";
-                            $result = mysqli_query($con, $sql);
-                            $row = mysqli_fetch_array($result);
-                            if ($row[2] == 'SBY') {
-                                echo "<div style='color: red'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MKS') {
-                                echo "<div style='color: blue'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'BPP') {
-                                echo "<div style='color: brown'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'JKT') {
-                                echo "<div style='color: green'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MDN') {
-                                echo "<div style='color: gray'>$row[0]</div>";
-                            }
+                        $c += 1;
+                        $counter += 1;
+                        if ($counter % 3 == 0) {
+                            $a += 1;
                         }
-                        ?>
-                    </td>
-                    <td class="col-4">
-                        <div class="id">022
-
-                        </div>
-                        <?php
-                        $id = $_SESSION['username'];
-                        $sql = "SELECT ship FROM user WHERE team_name = '$id'";
-                        $result = mysqli_query($con, $sql);
-                        $row = mysqli_fetch_array($result);
-                        $row_dec = json_decode($row['ship']);
-                        if ($row_dec[0][2][2] == 0) {
-                            echo '-';
-                        } else {
-                            $container = $row_dec[0][2][2];
-                            $sql = "SELECT * FROM container WHERE id_container='$container'";
-                            $result = mysqli_query($con, $sql);
-                            $row = mysqli_fetch_array($result);
-                            if ($row[2] == 'SBY') {
-                                echo "<div style='color: red'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MKS') {
-                                echo "<div style='color: blue'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'BPP') {
-                                echo "<div style='color: brown'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'JKT') {
-                                echo "<div style='color: green'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MDN') {
-                                echo "<div style='color: gray'>$row[0]</div>";
-                            }
-                        }
-                        ?>
-                    </td>
-
-                    <td class="col-4">
-                        <div class="id">120
-
-                        </div>
-                        <?php
-                        $id = $_SESSION['username'];
-                        $sql = "SELECT ship FROM user WHERE team_name = '$id'";
-                        $result = mysqli_query($con, $sql);
-                        $row = mysqli_fetch_array($result);
-                        $row_dec = json_decode($row['ship']);
-                        if ($row_dec[1][2][0] == 0) {
-                            echo '-';
-                        } else {
-                            $container = $row_dec[1][2][0];
-                            $sql = "SELECT * FROM container WHERE id_container='$container'";
-                            $result = mysqli_query($con, $sql);
-                            $row = mysqli_fetch_array($result);
-                            if ($row[2] == 'SBY') {
-                                echo "<div style='color: red'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MKS') {
-                                echo "<div style='color: blue'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'BPP') {
-                                echo "<div style='color: brown'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'JKT') {
-                                echo "<div style='color: green'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MDN') {
-                                echo "<div style='color: gray'>$row[0]</div>";
-                            }
-                        }
-                        ?>
-                    </td>
-                    <td class="col-4">
-                        <div class="id">121
-
-                        </div>
-                        <?php
-                        $id = $_SESSION['username'];
-                        $sql = "SELECT ship FROM user WHERE team_name = '$id'";
-                        $result = mysqli_query($con, $sql);
-                        $row = mysqli_fetch_array($result);
-                        $row_dec = json_decode($row['ship']);
-                        if ($row_dec[1][2][1] == 0) {
-                            echo '-';
-                        } else {
-                            $container = $row_dec[1][2][1];
-                            $sql = "SELECT * FROM container WHERE id_container='$container'";
-                            $result = mysqli_query($con, $sql);
-                            $row = mysqli_fetch_array($result);
-                            if ($row[2] == 'SBY') {
-                                echo "<div style='color: red'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MKS') {
-                                echo "<div style='color: blue'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'BPP') {
-                                echo "<div style='color: brown'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'JKT') {
-                                echo "<div style='color: green'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MDN') {
-                                echo "<div style='color: gray'>$row[0]</div>";
-                            }
-                        }
-                        ?>
-                    </td>
-                    <td class="col-4">
-                        <div class="id">122
-
-                        </div>
-                        <?php
-                        $id = $_SESSION['username'];
-                        $sql = "SELECT ship FROM user WHERE team_name = '$id'";
-                        $result = mysqli_query($con, $sql);
-                        $row = mysqli_fetch_array($result);
-                        $row_dec = json_decode($row['ship']);
-                        if ($row_dec[1][2][2] == 0) {
-                            echo '-';
-                        } else {
-                            $container = $row_dec[1][2][2];
-                            $sql = "SELECT * FROM container WHERE id_container='$container'";
-                            $result = mysqli_query($con, $sql);
-                            $row = mysqli_fetch_array($result);
-                            if ($row[2] == 'SBY') {
-                                echo "<div style='color: red'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MKS') {
-                                echo "<div style='color: blue'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'BPP') {
-                                echo "<div style='color: brown'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'JKT') {
-                                echo "<div style='color: green'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MDN') {
-                                echo "<div style='color: gray'>$row[0]</div>";
-                            }
-                        }
-                        ?>
-                    </td>
-
-                    <td class="col-4">
-                        <div class="id">220
-
-                        </div>
-                        <?php
-                        $id = $_SESSION['username'];
-                        $sql = "SELECT ship FROM user WHERE team_name = '$id'";
-                        $result = mysqli_query($con, $sql);
-                        $row = mysqli_fetch_array($result);
-                        $row_dec = json_decode($row['ship']);
-                        if ($row_dec[2][2][0] == 0) {
-                            echo '-';
-                        } else {
-                            $container = $row_dec[2][2][0];
-                            $sql = "SELECT * FROM container WHERE id_container='$container'";
-                            $result = mysqli_query($con, $sql);
-                            $row = mysqli_fetch_array($result);
-                            if ($row[2] == 'SBY') {
-                                echo "<div style='color: red'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MKS') {
-                                echo "<div style='color: blue'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'BPP') {
-                                echo "<div style='color: brown'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'JKT') {
-                                echo "<div style='color: green'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MDN') {
-                                echo "<div style='color: gray'>$row[0]</div>";
-                            }
-                        }
-                        ?>
-                    </td>
-                    <td class="col-4">
-                        <div class="id">221
-
-                        </div>
-                        <?php
-                        $id = $_SESSION['username'];
-                        $sql = "SELECT ship FROM user WHERE team_name = '$id'";
-                        $result = mysqli_query($con, $sql);
-                        $row = mysqli_fetch_array($result);
-                        $row_dec = json_decode($row['ship']);
-                        if ($row_dec[2][2][1] == 0) {
-                            echo '-';
-                        } else {
-                            $container = $row_dec[2][2][1];
-                            $sql = "SELECT * FROM container WHERE id_container='$container'";
-                            $result = mysqli_query($con, $sql);
-                            $row = mysqli_fetch_array($result);
-                            if ($row[2] == 'SBY') {
-                                echo "<div style='color: red'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MKS') {
-                                echo "<div style='color: blue'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'BPP') {
-                                echo "<div style='color: brown'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'JKT') {
-                                echo "<div style='color: green'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MDN') {
-                                echo "<div style='color: gray'>$row[0]</div>";
-                            }
-                        }
-                        ?>
-                    </td>
-                    <td class="col-4">
-                        <div class="id">222
-
-                        </div>
-                        <?php
-                        $id = $_SESSION['username'];
-                        $sql = "SELECT ship FROM user WHERE team_name = '$id'";
-                        $result = mysqli_query($con, $sql);
-                        $row = mysqli_fetch_array($result);
-                        $row_dec = json_decode($row['ship']);
-                        if ($row_dec[2][2][2] == 0) {
-                            echo '-';
-                        } else {
-                            $container = $row_dec[2][2][2];
-                            $sql = "SELECT * FROM container WHERE id_container='$container'";
-                            $result = mysqli_query($con, $sql);
-                            $row = mysqli_fetch_array($result);
-                            if ($row[2] == 'SBY') {
-                                echo "<div style='color: red'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MKS') {
-                                echo "<div style='color: blue'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'BPP') {
-                                echo "<div style='color: brown'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'JKT') {
-                                echo "<div style='color: green'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MDN') {
-                                echo "<div style='color: gray'>$row[0]</div>";
-                            }
-                            if ($row[2] == 'MDN') {
-                                echo "<div style='color: green'>$row[0]</div>";
-                            }
-                        }
-                        ?>
-                    </td>
+                        if ($c == 3) $c = 0;
+                    }
+                    ?>
                 </tr>
             </tbody>
         </table>
     </div>
-    <!-- Menampilkan Pendapatan -->
-    <!-- <div class="card" style="height: 7.55rem; width:28rem;">
-        <div class="text-center card-header bg-primary text-white">
-            <h3>
-                Total Revenue
-            </h3>
-        </div>
-        <div class="d-flex justify-content-center my-auto">
-            <div class="money" data-ccy='IDR'>
-                <?php
-                // $id = $_SESSION['username'];
-                // $sql = "SELECT * FROM user WHERE team_name = '$id'";
-                // $result = mysqli_query($con, $sql);
-                // $row = mysqli_fetch_array($result);
 
-                // echo $row[6];
-                ?>
-            </div>
-        </div>
-    </div> -->
-
-    <div class="row mt-3 d-flex justify-content-center mx-5">
-        <!-- Controller -->
+    <div class="row d-flex justify-content-center">
         <div class="col-2">
             <!-- Menampilkan Pendapatan -->
             <div class="row">
                 <div class="card mb-3" style="height: 7.55rem; width:18rem;">
                     <div class="text-center card-header bg-primary text-white">
-                        <h3>
+                        <h4>
                             Total Revenue
-                        </h3>
+                        </h4>
                     </div>
                     <div class="d-flex justify-content-center my-auto">
                         <div class="money" data-ccy='IDR'>
@@ -1146,9 +331,9 @@ if (!isset($_SESSION["loginUser"])) {
             <div class="row">
                 <div class="card" style="border: 0.px solid;width:18rem;">
                     <div class="card-header text-center text-white bg-primary">
-                        <h3 style="margin-top: 10px; text-align: center">
+                        <h4 style="margin-top: 10px; text-align: center">
                             Controller
-                        </h3>
+                        </h4>
                     </div>
                     <form method="POST" action="bongpasLogic2.php">
                         <div class="row d-flex justify-content-center">
@@ -1183,12 +368,30 @@ if (!isset($_SESSION["loginUser"])) {
                                 <input type="text" class="form-control" name="kontainer" id="kontainer">
                             </div>
                         </div>
-                        <div class="row p-2 d-flex justify-content-center">
-                            <div class="col-1 mx-auto">
+                        <div class="row m-2 d-flex justify-content-around">
+                            <div class="">
                                 <button class="btn btn-info" type="submit" name="pasang" id="pasang">Load</button>
                             </div>
-                            <div class="col-7">
+                            <div class="">
                                 <button class="btn btn-danger" type="submit" name="bongkar" id="bongkar">Unload</button>
+                            </div>
+                            <div class="">
+                                <?php
+                                $sql = "SELECT * FROM user WHERE team_name='$id'";
+                                $result = mysqli_query($con, $sql);
+                                $row = mysqli_fetch_array($result);
+                                if ($row['finish'] <= $row['round']) {
+                                    echo "
+                                        <button class='btn btn-dark' type='submit' name='finishGame' id='finishGame'>FINISH</button>
+                                    ";
+                                } else {
+                                    // echo "
+                                    // <form method = 'POST'>
+                                    //     <button class='btn btn-dark' type='submit' name='finishGame' id='finishGame'>FINISH</button>
+                                    // </form>
+                                    // ";
+                                }
+                                ?>
                             </div>
                         </div>
                     </form>
@@ -1198,9 +401,9 @@ if (!isset($_SESSION["loginUser"])) {
 
         <!-- List Of Container -->
         <div class="col-5">
-            <div class="card" style="height:38rem; width:45.5rem;">
+            <div class="card" style="height:35rem; width:45.5rem;">
                 <div class="card-header text-center bg-primary text-white">
-                    <h3 style="margin-top: 10px; text-align: center">Container Yang Tersedia</h3>
+                    <h4 style="text-align: center">Container Yang Tersedia</h4>
                 </div>
                 <div class="card-body flex-nowrap overflow-y-auto" style="overflow:auto;">
                     <div class="row d-flex justify-content-center overflow-y-auto">
@@ -1257,21 +460,23 @@ if (!isset($_SESSION["loginUser"])) {
             </div>
         </div>
 
-        <div class="ml-4">
-            <div class="card" style="height: 38rem;">
+        <div class="">
+            <div class="card" style="height: 36.5rem; width:25rem">
                 <div class="card-header bg-primary text-white text-center">
-                    <h3 style="margin-top: 10px; text-align: center">
+                    <h4 style="text-align: center">
                         Sales Card
-                    </h3>
+                    </h4>
                 </div>
                 <div class="card-body">
-                    <h6 class="text-center">Remaining Sales Card</h6>
                     <?php
-                    // Isi berapa banyak sales yg blm
-                    ?>
+                    $id = $_SESSION['username'];
+                    $sql = "SELECT * FROM user WHERE team_name = '$id'";
+                    $result = mysqli_query($con, $sql);
+                    $rowK = mysqli_fetch_array($result);
+                    echo "
+                    <h6 class='text-center'>Remaining Sales Card: $rowK[11]</h6>
+                    ";
 
-                    <!-- Card -->
-                    <?php
                     $id = $_SESSION['username'];
                     $sql = "SELECT origin FROM user WHERE team_name = '$id'";
                     $result = mysqli_query($con, $sql);
@@ -1284,100 +489,100 @@ if (!isset($_SESSION["loginUser"])) {
                     // $row = mysqli_fetch_array($result);
                     $count = 0;
                     $rows = [];
-                    while ($row = mysqli_fetch_array($result)) {
-                        array_push($rows, $row);
-                        $count = $count + 1;
-                    }
-                    $rand = $rows[random_int(0, $count - 1)];
+                    if ($rowK[11] != 0 && mysqli_num_rows($result) > 0) {
+                        while ($row = mysqli_fetch_array($result)) {
+                            array_push($rows, $row);
+                            $count = $count + 1;
+                        }
+                        $rand = $rows[random_int(0, $count - 1)];
+                        $_SESSION['rand'] = $rand[0];
+                        echo '
+                        <div class="d-flex justify-content-center">
+                            <div class="row d-flex justify-content-center">
+                                <div class="card" style="text-align: center;width: 20rem;height:26rem;margin-top: 10px; border-width: 0.5px; border: 0.01px solid">
+                                    <div style="text-align: center;margin-top: 10px; font-weight: 950; font-size: 20px">';
+                        echo $origin . " - " . $rand[0];
+                        $_SESSION['rand'] = $rand[0];
+                        echo '
+                                    </div>
 
+                                    <hr class="mx-auto" style="border-width: 2px; border: 0.01px solid; width: 90%; margin-top: 10px">
+
+                                    <div class="row" style="margin-top: 0px">
+                                        <div class="col-6" style="text-align: left;font-size: 13px;font-weight: 750;">
+                                            <ul>Priority</ul>
+                                            <ul>Origin</ul>
+                                            <ul>Destination</ul>
+                                            <ul>Quantity</ul>
+                                            <ul>Revenue</ul>
+                                            <ul>Total</ul>
+                                        </div>
+
+                                        <div class="col-6" style="text-align: left;font-size: 13px; font-weight: 400;">';
+                        $t_revenue = $rand[4] * $rand[5];
+                        echo '<ul>' . $rand[1] . '</ul>
+                                            <ul>' . $rand[2] . '</ul>
+                                            <ul>' . $rand[3] . '</ul>
+                                            <ul>' . $rand[4] . '</ul>
+                                            <ul>' . $rand[5] . '</ul>
+                                            <ul style = "margin-top: 16px">' . $t_revenue . '</ul>
+                                        </div>
+                                    </div>
+
+                                    <hr class="mx-auto" style="border-width: 2px; border: 0.25px solid; width: 90%; margin-top: 5px">
+
+                                    <div class="flex-nowrap overflow-auto" style="height:200px; overflow:scroll;">
+                                        <div class="row" style="margin-bottom: 10px">';
+                        $id_sales = $rand[0];
+                        $sql = "SELECT * FROM container WHERE id_sales = '$id_sales'";
+                        $result = mysqli_query($con, $sql);
+                        $count = 0;
+
+                        while ($row = mysqli_fetch_array($result)) {
+                            echo '<div class="col-4" style = "text-decoration: underline">' . $row[0] . '</div>';
+                            $count = $count + 1;
+                            if ($count % 3 == 0) {
+                                echo '</div><div class = "row" style = "margin-bottom: 10px">';
+                            }
+                        }
+                        echo '</div></div>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!-- Button -->
+                                    <form class="mx-auto" method="POST" action="accRef.php">
+                                        <div class="row mt-2">';
+                        if ($rand[1] == "N-COMMIT") {
+                            echo '<div class="col-6" style = "text-align: right">
+                                                <button class = "btn btn-success" name = "accept">Accept</button>
+                                            </div>
+                                            <div class="col-6">
+                                                <button class = "btn btn-danger" name = "refuse">Refuse</button>
+                                            </div>';
+                        } else {
+                            echo '<div class="col-6" style = "text-align: right">
+                                                <button class = "btn btn-success" name = "accept">Accept</button>
+                                            </div>
+                                            <div class="col-6">
+                                                <button class = "btn" name = "refuse" style = "cursor: not-allowed;background-color: #ccc" disabled>Refuse</button>
+                                            </div>';
+                        }
+                        echo '</div>
+                                    </form>
+                                </div>
+                            </div>
+                        ';
+                    } else {
+                        echo "
+                            <div class='d-flex justify-content-center'>
+                                There are no cards left!
+                            </div>
+                        ";
+                    }
                     ?>
 
-                    <div class="card" style="text-align: center; width: 28rem;height:26.3rem;margin-top: 10px; border-width: 0.5px; border: 0.01px solid">
-                        <div style="text-align: center;margin-top: 10px; font-weight: 950; font-size: 20px">
-                            <?php
-                            echo $origin;
-                            echo " - ";
-                            echo $rand[0];
-                            $_SESSION['rand'] = $rand[0];
-                            ?>
-                        </div>
 
-                        <hr class="mx-auto" style="border-width: 2px; border: 0.01px solid; width: 90%; margin-top: 10px">
-
-                        <div class="row" style="margin-top: 0px">
-                            <div class="col-6" style="text-align: left;font-size: 13px;font-weight: 750;">
-                                <ul>Priority</ul>
-                                <ul>Origin</ul>
-                                <ul>Destination</ul>
-                                <ul>Quantity</ul>
-                                <ul>Revenue</ul>
-                                <ul>Total</ul>
-                            </div>
-
-                            <div class="col-6" style="text-align: left;font-size: 13px; font-weight: 400;">
-                                <?php
-                                $t_revenue = $rand[4] * $rand[5];
-                                echo "<ul>$rand[1]</ul>
-                                        <ul>$rand[2]</ul>
-                                        <ul>$rand[3]</ul>
-                                        <ul>$rand[4]</ul>
-                                        <ul>$rand[5]</ul>
-                                        <ul style = 'margin-top: 16px'>$t_revenue</ul>
-                                    ";
-                                ?>
-                            </div>
-                        </div>
-
-                        <hr class="mx-auto" style="border-width: 2px; border: 0.25px solid; width: 90%; margin-top: 5px">
-
-                        <div class="flex-nowrap overflow-auto" style="height:200px; overflow:scroll;">
-                            <div class="row" style='margin-bottom: 10px'>
-                                <?php
-                                $id_sales = $rand[0];
-                                $sql = "SELECT * FROM container WHERE id_sales = '5'";
-                                $result = mysqli_query($con, $sql);
-                                $count = 0;
-
-                                while ($row = mysqli_fetch_array($result)) {
-                                    echo "<div class='col-3' style = 'text-decoration: underline'>$row[0]</div>";
-                                    $count = $count + 1;
-                                    if ($count % 4 == 0) {
-                                        echo "</div>
-                                        <div class = 'row' style = 'margin-bottom: 10px'>";
-                                    }
-                                }
-                                echo "</div>";
-
-
-                                ?>
-                            </div>
-                        </div>
-
-                        <!-- Button -->
-                        <form class="mx-auto" method="POST" action="accRef.php">
-                            <div class="row mt-2">
-                                <?php
-                                if ($rand[1] == "N-COMMIT") {
-                                    echo "
-                                <div class='col-6' style = 'text-align: right'>
-                                    <button class = 'btn btn-success' name = 'accept'   >Accept</button>
-                                </div>
-                                <div class='col-6'>
-                                    <button class = 'btn btn-danger' name = 'refuse'>Refuse</button>
-                                </div>";
-                                } else {
-                                    echo "
-                                <div class='col-6' style = 'text-align: right'>
-                                    <button class = 'btn btn-success' name = 'accept'>Accept</button>
-                                </div>
-                                <div class='col-6'>
-                                    <button class = 'btn' name = 'refuse' style = 'cursor: not-allowed;background-color: #ccc'disabled>Refuse</button>
-                                </div>";
-                                }
-                                ?>
-                            </div>
-                        </form>
-                    </div>
                 </div>
             </div>
         </div>
@@ -1407,25 +612,30 @@ if (!isset($_SESSION["loginUser"])) {
                 });
             }, 1000);
 
-            // setInterval(() => {
-            //     $.ajax({
-            //         url: 'bongpasLogic2.php',
-            //         method: 'POST',
-            //         success: function(temp2) {
-            //             if (temp2 === "DONE") {
-            //                 Swal.fire({
-            //                     icon: 'warning',
-            //                     title: 'Game is Finished!',
-            //                     showConfirmButton: false,
-            //                     timer: 2500,
-            //                     timerProgressBar: true
-            //                 }).then(function() {
-            //                     window.location.href = 'homeUser.php';
-            //                 });
-            //             }
-            //         }
-            //     });
-            // }, 1000);
+            $("#finishGame").click(function(e) {
+                e.preventDefault()
+
+                $.ajax({
+                    url: "bongpasLogic2.php",
+                    type: "POST",
+                    data: {
+                        "finishGame": 1
+                    },
+                    success: function(response) {
+                        if (response === "1") {
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'GAME FINISHED!',
+                                showConfirmButton: false,
+                                timer: 2500,
+                                timerProgressBar: true
+                            }).then(function() {
+                                window.location.href = 'homeUser.php';
+                            });
+                        }
+                    }
+                })
+            })
 
             $("#pasang").click(function(e) {
                 e.preventDefault()
@@ -1447,7 +657,7 @@ if (!isset($_SESSION["loginUser"])) {
                     success: function(response) {
                         if (response === "1") {
                             Swal.fire({
-                                position: "top-end",
+                                // position: "top-end",
                                 icon: "error",
                                 title: "Pemasangan kontainer melebihi koordinat!",
                                 showConfirmButton: false,
@@ -1455,7 +665,7 @@ if (!isset($_SESSION["loginUser"])) {
                             });
                         } else if (response === "2") {
                             Swal.fire({
-                                position: "top-end",
+                                // position: "top-end",
                                 icon: "error",
                                 title: "Pemasangan kontainer melayang!",
                                 showConfirmButton: false,
@@ -1463,7 +673,7 @@ if (!isset($_SESSION["loginUser"])) {
                             });
                         } else if (response === "3") {
                             Swal.fire({
-                                position: "top-end",
+                                // position: "top-end",
                                 icon: "error",
                                 title: "Sudah terdapat kontainer!",
                                 showConfirmButton: false,
@@ -1473,7 +683,7 @@ if (!isset($_SESSION["loginUser"])) {
                             Swal.fire({
                                 // position: "top-end",
                                 icon: "success",
-                                title: "Kontainer berhasil dimasukkan!",
+                                title: "Kontainer ID " + kontainer + " berhasil dimasukkan!",
                                 showConfirmButton: false,
                                 timer: 1000
                             }).then(function() {
@@ -1481,7 +691,7 @@ if (!isset($_SESSION["loginUser"])) {
                             });
                         } else if (response === "5") {
                             Swal.fire({
-                                position: "top-end",
+                                // position: "top-end",
                                 icon: "error",
                                 title: "Kontainer ID tidak terdaftar!",
                                 showConfirmButton: false,
@@ -1515,7 +725,7 @@ if (!isset($_SESSION["loginUser"])) {
                     success: function(response) {
                         if (response === "1") {
                             Swal.fire({
-                                position: "top-end",
+                                // position: "top-end",
                                 icon: "error",
                                 title: "Pembongkaran kontainer melebihi koordinat!",
                                 showConfirmButton: false,
@@ -1523,7 +733,7 @@ if (!isset($_SESSION["loginUser"])) {
                             });
                         } else if (response === "2") {
                             Swal.fire({
-                                position: "top-end",
+                                // position: "top-end",
                                 icon: "error",
                                 title: "Pembongkaran kontainer menumpuk!",
                                 showConfirmButton: false,
@@ -1531,7 +741,7 @@ if (!isset($_SESSION["loginUser"])) {
                             });
                         } else if (response === "3") {
                             Swal.fire({
-                                position: "top-end",
+                                // position: "top-end",
                                 icon: "error",
                                 title: "Tidak ada kontainer yang dapat dibongkar!",
                                 showConfirmButton: false,

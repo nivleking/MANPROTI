@@ -16,7 +16,7 @@ $row = mysqli_fetch_array($result);
 <html>
 
 <head>
-    <title>BLC Admin</title>
+    <title>SLG Admin</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -94,7 +94,7 @@ $row = mysqli_fetch_array($result);
     <!-- Sidebar -->
     <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
         <div class="flex-column" style="display: flex; flex-direction: column; height: 100%;">
-            <h3 class="text-white w3-bar-item" style="font-style: italic;font-weight:bold;">BLC</h3>
+            <h3 class="text-white w3-bar-item" style="font-style: italic;font-weight:bold;">SLG</h3>
 
             <a href="homeAdmin.php" class="w3-bar-item w3-button w3-padding-large w3-black">
                 <i class="fa fa-dashboard w3-xxlarge d-flex justify-content-center mt-2"></i>
@@ -116,7 +116,6 @@ $row = mysqli_fetch_array($result);
                     Profile
                 </a>
                 <ul class="dropdown-menu text-small shadow" aria-labelledby="dropDownUser" style="width:25px">
-                    <!-- <li class="dropdown-item"><a href="#">Profile</a></li> -->
                     <li class="dropdown-item"><a href="logoutAdmin.php">Log Out</a></li>
                 </ul>
             </div>
@@ -126,7 +125,7 @@ $row = mysqli_fetch_array($result);
     <div class="w3-padding-large" id="main">
         <!-- Header/Home -->
         <div class=" w3-padding-16 w3-center" id="home">
-            <h1><span style="font-weight: bold;">Business Logistics Competition</span></h1>
+            <h1><span style="font-weight: bold;">Shipping Logistics Game</span></h1>
             <h3>Hello,
                 <?php echo $row[0]; ?>
             </h3>
@@ -163,24 +162,19 @@ $row = mysqli_fetch_array($result);
                                     <input type="text" class="form-control" id="roomCode" name="roomCode">
                                     <label for="selectDeck" class="col-form-label">Deck</label>
                                     <select class="form-select" aria-label="Default select example" name="selectDeck" id="selectDeck">
-                                                    <?php
-                                                        $query = "SELECT * FROM deck";
-                                                        $sql = mysqli_query($con, $query);
+                                        <?php
+                                        $query = "SELECT * FROM deck";
+                                        $sql = mysqli_query($con, $query);
 
-                                                        while($row = mysqli_fetch_array($sql)) {
-                                                            echo "
+                                        while ($row = mysqli_fetch_array($sql)) {
+                                            echo "
                                                                 <option value='$row[0]'>
-                                                                    $row[2]
+                                                                    $row[1]
                                                                 </option>
                                                             ";
-                                                        }
-                                                    ?>
-
-                                                    <!-- <option selected>Open this select menu</option>
-                                                    <option value="">One</option>
-                                                    <option value="">Two</option>
-                                                    <option value="">Three</option> -->
-                                                </select>
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -204,65 +198,12 @@ $row = mysqli_fetch_array($result);
                                         <button type="submit" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#moda-createcards" style="margin-top: 10px; width: 10rem;">Create Card</button>
                                     </form>
                                 </div>
-                                <!-- <div class="col-3">
-                                    <form action="viewSalesCard.php">
-                                        <button type="submit" class="btn btn-danger" style="margin-top: 10px; width: 10rem;">View Card</button>
-                                    </form>
-                                </div> -->
                                 <div class="col-3">
                                     <form action="createDeck.php">
                                         <button type="submit" class="btn btn-dark" style="margin-top: 10px; width: 10rem;">Create Deck</button>
                                     </form>
                                 </div>
-                                <!-- <div class="col-3">
-                                    <form action="viewDeck.php">
-                                        <button type="submit" class="btn btn-danger" style="margin-top: 10px; width: 10rem;">View Deck</button>
-                                    </form>
-                                </div> -->
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal fade" id="modal-createcards">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-3" style="font-weight:bold;" id="exampleModalLabel">Input Data Penjualan</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form>
-                                <div class="mb-3">
-                                    <label for="deck-id" class="col-form-label">ID Deck</label>
-                                    <input type="text" class="form-control" id="deck-id">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="deck-id-sales" class="col-form-label">ID Sales</label>
-                                    <input type="text" class="form-control" id="deck-id-sales">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="priority" class="col-form-label">Priority</label>
-                                    <input type="text" class="form-control" id="priority">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="origin" class="col-form-label">Origin</label>
-                                    <input type="text" class="form-control" id="origin">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="destination" class="col-form-label">Destination</label>
-                                    <input type="text" class="form-control" id="destination">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="revenue" class="col-form-label">Revenue</label>
-                                    <input type="text" class="form-control" id="revenue">
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Finish</button>
                         </div>
                     </div>
                 </div>
@@ -270,7 +211,7 @@ $row = mysqli_fetch_array($result);
 
             <div class=" w3-row-padding w3-center">
                 <div class="w3-padding-32">
-                    <h2 class="mb-5" id="activity" style="font-weight: bold;">Your Activity</h2>
+                    <h2 class="mb-5" id="activity" style="font-weight: bold;">Rooms</h2>
                     <table class="table table-responsive table-bordered table-striped" id="tableRoom" style="width: 100%;">
                         <thead>
                             <tr>
@@ -289,7 +230,7 @@ $row = mysqli_fetch_array($result);
                             $result = mysqli_query($con, $sql);
 
                             while ($row = mysqli_fetch_array($result)) {
-                                if ($row[2] == 1) {
+                                if ($row[2] == 0) {
                                     $val = 'Finished';
                                 } else {
                                     $val = 'Ongoing';
@@ -302,13 +243,17 @@ $row = mysqli_fetch_array($result);
                         <td class='col-lg-2 text-start'>$val</td>
                         <td class='col-lg-2 text-start'>$row[3]</td>
                         <td class='col-lg-2'>
-                          <form method='post' action='viewRoomDetails.php'>
-                            <input type='hidden' name='roomID' value='$row[0]'>
-                            <input type='hidden' name='supervisor' value='$row[1]'>
-                            <input type='hidden' name='statusRoom' value='$row[2]'>
-                            <input type='hidden' name='dateRoom' value='$row[3]'>
-                            <button type='submit' class='btn btn-primary' name='viewButton'>View Room Details</button>
-                          </form>
+                            <form method='post' action='viewRoomDetails.php'>
+                                <input type='hidden' name='roomID' value='$row[0]'>
+                                <input type='hidden' name='supervisor' value='$row[1]'>
+                                <input type='hidden' name='statusRoom' value='$row[2]'>
+                                <input type='hidden' name='dateRoom' value='$row[3]'>
+                                <button type='submit' class='btn btn-primary' name='viewButton'>View Room Details</button>
+                            </form>
+                            <form method='post' action='deleteRoom.php'>
+                                <input type='hidden' name='roomID' value='$row[0]'>
+                                <button type='submit' class='mt-1 btn btn-danger' name='deleteButton'>Delete Room</button>
+                            </form>
                         </td>
                         </tr>
                     ";
