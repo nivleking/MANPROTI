@@ -10,8 +10,12 @@ SLG is a game that teaches you about shipping container management. The objectiv
 * [MySQL](https://www.mysql.com/)
 * [Bootstrap4](https://getbootstrap.com/docs/4.0/getting-started/introduction/)
 
-## Authors
-* **Kelvin Sidharta Sie** - *Initial work* - [nivleking](https://github.com/nivleking)
+## Authors *Initial work*
+* **Kelvin Sidharta Sie** - [nivleking](https://github.com/nivleking)
+* **Samuel Sutjipto Soesanto**
+* **Vincentius Actonio**
+* **Cahyadi Sandhy**
+* **Jeremy Andrea Soesanto**
 
 ## Getting Started
 
